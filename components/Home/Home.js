@@ -9,7 +9,7 @@ const Home = () => {
     return (
         <SafeAreaView style={tw`bg-white h-full`}>
             <View
-                style={tw`flex flex-row justify-between items-center my-2 px-4`}
+                style={tw`flex flex-row justify-between items-center mb-1 mt-2 px-4`}
             >
                 <TouchableOpacity
                     style={tw`flex flex-row bg-indigo-100 px-2 py-1 rounded-full items-center`}
@@ -30,6 +30,7 @@ const Home = () => {
                 </TouchableOpacity>
             </View>
             <ScrollView contentContainerStyle={tw`py-2 px-4`}>
+                <Post/>
                 <Post/>
             </ScrollView>
         </SafeAreaView>

@@ -1,15 +1,15 @@
 import React from 'react'
-import { View, Text, ImageBackground, TouchableOpacity } from 'react-native'
+import { View, Text, ImageBackground, TouchableOpacity, Image } from 'react-native'
 import tw from 'twrnc'
 import { Ionicons, FontAwesome } from '@expo/vector-icons'; 
-import LinearGradient from 'react-native-linear-gradient';
+import { LinearGradient } from 'expo-linear-gradient';
 
 
 const Post = () => {
     return (
         <ImageBackground
             source={require('../../assets/images/post_1.png')}
-            style={tw`w-full h-130 my-2 rounded-xl overflow-hidden flex flex-col justify-end`}
+            style={tw`w-full h-130 mb-2 rounded-xl overflow-hidden flex flex-col justify-end`}
         >
             <View style={tw`flex-1 flex flex-row items-center justify-end`}>
                 <View style={tw`bg-white bg-opacity-50 rounded-md mr-2 px-3 py-1 flex flex-col items-center`}>
@@ -36,11 +36,20 @@ const Post = () => {
                     </TouchableOpacity>
                 </View>
             </View>
-            
-            <LinearGradient colors={['#fff', '#000']} 
-                style={tw`w-full h-40 bg-gradient-to-t from-black to-white p-3`}
-            >
-               
+            <LinearGradient
+                colors={['rgba(0, 0, 0, 0.0003)', 'rgba(0, 0, 0, 0.55)']}
+                style={tw`w-full h-50 p-3 flex flex-col px-4 justify-end`}
+            >   
+                <View style={tw`flex flex-row items-center`}>
+                    <Image source={require('../../assets/images/avt_3.png')} 
+                        style={tw`w-9 h-9 rounded-full mr-1`}
+                    />
+                    <Text style={tw`font-bold text-white`}>Michelle Jonas</Text>
+                </View>
+                <Text style={tw`text-white mt-3 ml-2`}>
+                    This is bruh bruh...
+                    Am so lmao
+                </Text>
             </LinearGradient>
         </ImageBackground>
     )
