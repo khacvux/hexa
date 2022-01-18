@@ -2,20 +2,22 @@ import React from 'react'
 import { View, Text, SafeAreaView, Image, TouchableOpacity, ScrollView } from 'react-native'
 import tw from 'twrnc'
 import { Ionicons, Entypo } from '@expo/vector-icons'; 
-import Post from './Post';
 
 
-const Home = () => {
+import Post from '../components/Home/Post';
+
+
+const HomeScreen = () => {
     return (
         <SafeAreaView style={tw`bg-white h-full`}>
             <View
                 style={tw`flex flex-row justify-between items-center mb-1 mt-2 px-4`}
             >
                 <TouchableOpacity
-                    style={tw`flex flex-row bg-indigo-100 px-2 py-1 rounded-full items-center`}
+                    style={tw`flex flex-row bg-[#F5F7FA] px-2 py-1 rounded-full items-center`}
                 >
                     <Image 
-                        source={require('../../assets/images/avt.jpeg')}
+                        source={require('../assets/images/avt.jpeg')}
                         style={tw`w-6 h-6 rounded-full mr-1`}
                     />
                     <Text style={tw`text-xs font-light`}>@Vũ Lặng Thin</Text>
@@ -37,4 +39,4 @@ const Home = () => {
     )
 }
 
-export default Home
+export default HomeScreen
