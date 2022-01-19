@@ -3,6 +3,8 @@ import React from 'react'
 
 
 import HomeScreen from '../screens/HomeScreen';
+import MenuScreen from '../screens/MenuScreen';
+import MyProfileScreen from '../screens/MyProfileScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 
 
@@ -17,6 +19,16 @@ const StackNavigator = () => {
                 }}
             />
             <Stack.Screen name="ProfileStack" component={ProfileScreen} 
+                options={{
+                    headerShown: false,
+                }}
+            />
+            <Stack.Screen name="MenuStack" component={MenuScreen} 
+                options={{
+                    headerShown: false,
+                }}
+            />
+            <Stack.Screen name="MyProfileStack" component={MyProfileScreen} 
                 options={{
                     headerShown: false,
                 }}

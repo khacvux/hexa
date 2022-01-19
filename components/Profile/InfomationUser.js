@@ -1,12 +1,13 @@
 import React from 'react'
 import { View, Text, Image, TouchableOpacity } from 'react-native'
 import tw from 'twrnc'
+import Contact from './Contact'
 const InfomationUser = () => {
     return (
         <View style={tw`pt-5 px-7`}>
            <View style={tw`flex flex-row items-center justify-between`}>
                 <Image 
-                    source={require('../../assets/images/avt.jpeg')}
+                    source={require('../../assets/images/avt_3.png')}
                     style={tw`w-17 h-17 rounded-full mr-4`}
                 />
                 <View style={tw`flex-1 flex flex-row items-center`}>
@@ -34,21 +35,6 @@ const InfomationUser = () => {
                <Text style={tw`mt-5`}>
                    loading 99%.......error
                </Text>
-           </View>
-           <View style={tw`flex flex-row items-center mt-4`}>
-                <TouchableOpacity 
-                    style={tw`flex-1 bg-[#56C4F4] py-3 mr-1 flex items-center  border border-2 border-[#56C4F4] rounded-md`}
-                    activeOpacity={.8}    
-                >
-                   <Text style={tw`text-white font-bold`}>Follow</Text>
-                </TouchableOpacity>
-                <TouchableOpacity 
-                    style={tw`flex-1 bg-white py-3 ml-1 flex items-center border border-2 border-[#56C4F4] rounded-md`}
-                    activeOpacity={.8}    
-                >
-                   <Text style={tw`text-[#56C4F4] font-bold`}>Message</Text>
-                </TouchableOpacity>
-
            </View>
         </View>
     )

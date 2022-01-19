@@ -6,15 +6,17 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { BlurView } from 'expo-blur';
 import RBSheet from "react-native-raw-bottom-sheet";
 import Comments from '../Comments/Comments';
+import { useNavigation } from '@react-navigation/native';
 
 
 const Post = () => {
     const refRBSheet = useRef();
+    const navigation = useNavigation();
 
     return (
         <ImageBackground
             source={require('../../assets/images/post_1.png')}
-            style={tw`w-full h-135 mb-2 rounded-xl overflow-hidden flex flex-col justify-end`}
+            style={tw`w-full h-145 mb-2 rounded-md overflow-hidden flex flex-col justify-end`}
         >
             <View style={tw`flex-1 flex flex-row items-center justify-end`}>
                 <BlurView 
@@ -48,12 +50,16 @@ const Post = () => {
                 colors={['rgba(0, 0, 0, 0.0003)', 'rgba(0, 0, 0, 0.55)']}
                 style={tw`w-full h-50 p-3 flex flex-col px-4 justify-end`}
             >   
-                <View style={tw`flex flex-row items-center`}>
+                <TouchableOpacity
+                    onPress={() => navigation.navigate('ProfileStack')}
+                    style={tw`flex flex-row items-center`}
+                >
                     <Image source={require('../../assets/images/avt_3.png')} 
                         style={tw`w-9 h-9 rounded-full mr-1`}
                     />
-                    <Text style={tw`font-bold text-white`}>Michelle Jonas</Text>
-                </View>
+                <Text style={tw`font-bold text-white`}>Michelle Jonas</Text>
+                </TouchableOpacity>
+
                 <Text style={tw`text-white mt-3 ml-2`}>
                     This is bruh bruh...
                     Am so lmao
