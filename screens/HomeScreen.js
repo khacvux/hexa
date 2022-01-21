@@ -1,13 +1,28 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { View, Text, SafeAreaView, Image, TouchableOpacity, ScrollView } from 'react-native'
 import tw from 'twrnc'
 import { Ionicons, Entypo } from '@expo/vector-icons'; 
-
+import { posts } from '../data';
 
 import Post from '../components/Home/Post';
+// import axios from 'axios';
 
 const user = undefined;
+
 const HomeScreen = () => {
+
+    // const [posts, setPosts] = useState([]);
+
+    // useEffect(() => {
+    //     async function getData(){
+    //         const res = axios.get('http://localhost:3000/posts')
+    //         return res;
+    //     }
+
+    //     // getData().then((res) => setPosts(res.data));
+    //     // getData().catch((err) => console.log(err));
+    // }, [])
+
     return (
         <SafeAreaView style={tw`bg-white h-full`}>
             <View
@@ -46,9 +61,26 @@ const HomeScreen = () => {
                     </>
                 )}
             </View>
-            <ScrollView contentContainerStyle={tw`py-2 px-4`}>
-                <Post/>
-                <Post/>
+            <ScrollView 
+                contentContainerStyle={tw`py-2 px-4`}
+                showsHorizontalScrollIndicator={false}
+                showsVerticalScrollIndicator={false}
+            >
+                    {/* {posts.map((post) => {
+                        return (
+                            <Post key={post.id} id={post.id} userId={post.userId} title={post.title} body={post.body} />   
+                    )
+
+                        // {console.log(post.body)}
+                        // <Text> id: {post.id}</Text>
+                    })} */}
+                    {posts.map((post) =>{
+                        return (
+                            <Post key={post.postIdd} image={post.image} heart={post.heart} name={post.name} postId={post.postId} userName={post.userName} body={post.body} avtUser={post.avt} comments={post.comments}/>
+                        )
+                    })}
+                    {/* <Post /> */}
+
             </ScrollView>
         </SafeAreaView>
     )

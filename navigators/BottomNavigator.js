@@ -2,7 +2,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import React from 'react'
 import { View, Text } from 'react-native'
 import StackNavigator from './StackNavigator';
-import { Ionicons, Feather, MaterialIcons } from '@expo/vector-icons'; 
+import { Ionicons, Feather, MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons'; 
 import tw from 'twrnc'
 import Post from '../components/Home/Post';
 import ProfileScreen from '../screens/ProfileScreen';
@@ -25,9 +25,9 @@ const BottomNavigator = () => {
                     tabBarIcon: (({focused}) => 
                         <>
                             {focused ? (
-                                <SvgHome width={28} fill={"#5EC2EA"} />
+                                <SvgHome width={26} fill={"#5EC2EA"} />
                             ) : (
-                                <SvgHomeOutline width={28} />
+                                <SvgHomeOutline width={26} />
                             )}
                         </>
 
@@ -50,14 +50,14 @@ const BottomNavigator = () => {
                     tabBarStyle: tw`bg-[#F5F7FA]`,
                 }}
             />
-            <Tab.Screen name="MenuTab" component={MenuScreen}
+            <Tab.Screen name="MusicTab" component={MenuScreen}
                 options={{
                     headerShown: false,
                     tabBarShowLabel: false,
                     tabBarIcon: (({focused}) => 
-                        <MaterialIcons
-                            name='library-music'
-                            style={focused ? (tw`text-3xl text-[#5EC2EA]`) : (tw`text-3xl`)}
+                        <MaterialCommunityIcons
+                            name={focused ? 'music-box-multiple' : 'music-box-multiple-outline'}
+                            style={focused ? (tw`text-2xl text-[#5EC2EA]`) : (tw`text-2xl`)}
                         />
                     ),
                     tabBarStyle: tw`bg-[#F5F7FA]`,
