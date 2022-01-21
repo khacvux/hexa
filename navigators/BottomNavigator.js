@@ -37,7 +37,7 @@ const BottomNavigator = () => {
 
                 }}
             />
-            <Tab.Screen name="FriendTab" component={Post}
+            <Tab.Screen name="FriendTab" component={StackNavigator}
                 options={{
                     headerShown: false,
                     tabBarShowLabel: false,
