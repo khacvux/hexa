@@ -5,6 +5,7 @@ import React from 'react'
 import HomeScreen from '../screens/HomeScreen';
 import MenuScreen from '../screens/MenuScreen';
 import MyProfileScreen from '../screens/MyProfileScreen';
+import NotificationScreen from '../screens/NotificationScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 
 
@@ -29,6 +30,11 @@ const StackNavigator = () => {
                 }}
             />
             <Stack.Screen name="MyProfileStack" component={MyProfileScreen} 
+                options={{
+                    headerShown: false,
+                }}
+            />
+            <Stack.Screen name="NotificationStack" component={NotificationScreen} 
                 options={{
                     headerShown: false,
                 }}

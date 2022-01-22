@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { View, Text, SafeAreaView, Image, TouchableOpacity, ScrollView } from 'react-native'
 import tw from 'twrnc'
-import { Ionicons, Entypo } from '@expo/vector-icons'; 
+import { Ionicons, Entypo, AntDesign } from '@expo/vector-icons'; 
 import { posts } from '../data';
 
 import Post from '../components/Home/Post';
 // import axios from 'axios';
 
-const user = undefined;
+const user = 1;
 
 const HomeScreen = () => {
 
@@ -49,11 +49,11 @@ const HomeScreen = () => {
                     <TouchableOpacity 
                         style={tw`mx-1`}
                     >
-                        <Ionicons name="ios-notifications-outline"
+                        <AntDesign name="message1"
                             style={tw`text-xl`}
                         />
                         <Entypo name="dot-single"
-                            style={tw`absolute -top-2 right-0 text-3xl text-red-500`}
+                            style={tw`absolute  -right-[0.8] text-3xl text-red-500`}
                         />
                     </TouchableOpacity>
                 ) : (

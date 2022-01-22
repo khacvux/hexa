@@ -80,9 +80,7 @@ const Post = (post) => {
                 height={520}
                 openDuration={150}
                 customStyles={{
-                    wrapper: {
-                        backgroundColor: "transparent"
-                    },
+                    wrapper: tw`bg-black bg-opacity-30`,
                     container: tw`bg-gray-100 pt-3 rounded-t-lg flex flex-col justify-between`
                 }}
             >   
@@ -91,7 +89,14 @@ const Post = (post) => {
                 >
                     {comments.map((comment) => {
                         return (
-                            <Comments key={comment.idComment} userName={comment.userName} name={comment.name} comment={comment.comment} date={comment.date} avt={comment.avt} />
+                            <Comments 
+                                key={comment.idComment} 
+                                userName={comment.userName} 
+                                name={comment.name} 
+                                comment={comment.comment} 
+                                date={comment.date} 
+                                avt={comment.avt} 
+                            />
                         )
                     })}
                 </ScrollView>
