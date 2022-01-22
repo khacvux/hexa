@@ -21,20 +21,27 @@ const Post = (post) => {
     const [isHeart, setHeart] = useState(false);
     const [sound, setSound] = React.useState();
     
-    async function playLikeSound() {
-        //loading sound
+    async function playSound() {
+        // console.log('Loading Sound');
         const { sound } = await Audio.Sound.createAsync(
            require('../../assets/soundEffects/likeSound.mp3')
         );
         setSound(sound);
     
-        //play sound
-        await sound.playAsync(); 
-    }
+        // console.log('Playing Sound');
+        await sound.playAsync(); }
+    
+      React.useEffect(() => {
+        return sound
+          ? () => {
+            //   console.log('Unloading Sound');
+              sound.unloadAsync(); }
+          : undefined;
+      }, [sound]);
     
     const handlePressHeart = () => {
         setHeart(!isHeart);
-        playLikeSound();
+        playSound()
     }
       
 
@@ -42,12 +49,12 @@ const Post = (post) => {
      
         <ImageBackground
             source={{uri: image}}
-            style={tw`w-full h-145 mb-2 rounded-lg overflow-hidden flex flex-col justify-end`}
+            style={tw`w-full h-145 mb-1 overflow-hidden flex flex-col justify-end`}
         >
                {/* {data ? console.log(data.reset) : console.log('no')} */}
             <View style={tw`flex-1 flex flex-row items-center justify-end`}>
                 <BlurView 
-                    intensity={55} tint="light"
+                    intensity={30} tint="light"
                     style={tw`mr-2 px-3 py-1 flex flex-col items-center overflow-hidden rounded-lg overflow-hidden` }>
                     <TouchableOpacity
                         activeOpacity={.7}
