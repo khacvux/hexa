@@ -62,7 +62,7 @@ const HomeScreen = () => {
                 )}
             </View>
             <ScrollView 
-                contentContainerStyle={tw`py-2 px-4`}
+                contentContainerStyle={tw`py-2 px-3`}
                 showsHorizontalScrollIndicator={false}
                 showsVerticalScrollIndicator={false}
             >
@@ -76,10 +76,19 @@ const HomeScreen = () => {
                     })} */}
                     {posts.map((post) =>{
                         return (
-                            <Post key={post.postIdd} image={post.image} heart={post.heart} name={post.name} postId={post.postId} userName={post.userName} body={post.body} avtUser={post.avt} comments={post.comments}/>
+                            <Post 
+                                key={post.postId} 
+                                image={post.image} 
+                                heart={post.heart} 
+                                name={post.name} 
+                                postId={post.postId} 
+                                userName={post.userName} 
+                                body={post.body} 
+                                avtUser={post.avt} 
+                                comments={post.comments}/>
                         )
                     })}
-                    {/* <Post /> */}
+
 
             </ScrollView>
         </SafeAreaView>

@@ -1,31 +1,5 @@
 export const posts = [
-    {
-        avt: 'https://lh3.googleusercontent.com/sI1Q4655nYTRH7ZudY3jV6eha1muMnI6au2LPHjBcKHysPysVC5OtkEzlx9w0wgM_5WEQK0RnlyJbF7IGs88Zswrkv-O8AIXvNXhCpvwLBzb42MjY71-Zqy8PeOOhlVpT1qQ9EjU',
-        image: 'https://i.pinimg.com/564x/90/0a/72/900a72eecf1a737b476955fc759c6010.jpg',
-        name: 'Khoa pug',
-        userName: 'user_1',
-        heart: 32,
-        postId: '001',
-        body: 'thanh bu liem!! 35 ty doi voi tao la rac...',
-        comments: [
-            {
-                avt: 'https://mir-s3-cdn-cf.behance.net/project_modules/2800_opt_1/541c1c101650903.5f2369bc9b544.jpg',
-                idComment: '123',
-                userName: 'noname_1',
-                name: 'NONAME 1',
-                comment: 'aloo 123',
-                date: '1 day ago',
-            },
-            {
-                avt: 'https://mir-s3-cdn-cf.behance.net/project_modules/2800_opt_1/541c1c101650903.5f2369bc9b544.jpg',
-                idComment: '124',
-                userName: 'noname_3',
-                name: 'NONAME 3',
-                comment: 'aloo 1233',
-                date: '1 day ago',
-            },
-        ]
-    },
+    
     {
         avt: 'https://i.pinimg.com/736x/18/78/5d/18785dd07c09465d01beef679baf1846.jpg',
         image: 'https://i.pinimg.com/564x/32/cb/4a/32cb4a25d29f49588a5a48acbda03a50.jpg',
@@ -78,6 +52,60 @@ export const posts = [
                 comment: 'aloo23das',
                 date: '1 day ago',
             }
+        ]
+    },
+    {
+        avt: 'https://lh3.googleusercontent.com/sI1Q4655nYTRH7ZudY3jV6eha1muMnI6au2LPHjBcKHysPysVC5OtkEzlx9w0wgM_5WEQK0RnlyJbF7IGs88Zswrkv-O8AIXvNXhCpvwLBzb42MjY71-Zqy8PeOOhlVpT1qQ9EjU',
+        image: 'https://anhhungxadieu.vn/jun-vu-dota-2/imager_1_21325_100.jpg',
+        name: 'Khoa pug',
+        userName: 'user_1',
+        heart: 32,
+        postId: '001',
+        body: 'thanh bu liem!! 35 ty doi voi tao la rac...',
+        comments: [
+            {
+                avt: 'https://mir-s3-cdn-cf.behance.net/project_modules/2800_opt_1/541c1c101650903.5f2369bc9b544.jpg',
+                idComment: '123',
+                userName: 'noname_1',
+                name: 'NONAME 1',
+                comment: 'aloo 123',
+                date: '1 day ago',
+            },
+            {
+                avt: 'https://mir-s3-cdn-cf.behance.net/project_modules/2800_opt_1/541c1c101650903.5f2369bc9b544.jpg',
+                idComment: '124',
+                userName: 'noname_3',
+                name: 'NONAME 3',
+                comment: 'aloo 1233',
+                date: '1 day ago',
+            },
+        ]
+    },
+    {
+        avt: 'https://lh3.googleusercontent.com/sI1Q4655nYTRH7ZudY3jV6eha1muMnI6au2LPHjBcKHysPysVC5OtkEzlx9w0wgM_5WEQK0RnlyJbF7IGs88Zswrkv-O8AIXvNXhCpvwLBzb42MjY71-Zqy8PeOOhlVpT1qQ9EjU',
+        image: 'https://cdn.wallpapersafari.com/45/65/hVidsj.jpg',
+        name: 'Zero Two',
+        userName: 'user_1',
+        heart: 32,
+        postId: '004',
+        body: '..... :>',
+        comments: [
+            {
+                avt: 'https://mir-s3-cdn-cf.behance.net/project_modules/2800_opt_1/541c1c101650903.5f2369bc9b544.jpg',
+                idComment: '123',
+                userName: 'noname_1',
+                name: 'NONAME 1',
+                comment: 'aloo 123',
+                date: '1 day ago',
+            },
+            {
+                avt: 'https://mir-s3-cdn-cf.behance.net/project_modules/2800_opt_1/541c1c101650903.5f2369bc9b544.jpg',
+                idComment: '124',
+                userName: 'noname_3',
+                name: 'NONAME 3',
+                comment: 'aloo 1233',
+                date: '1 day ago',
+            },
         ]
     },
 ]

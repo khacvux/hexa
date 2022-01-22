@@ -6,7 +6,7 @@ import SortByTime from '../components/Notifications/SortByTime';
 
 const NotificationScreen = () => {
   return (
-    <SafeAreaView style={tw`h-full`}>
+    <SafeAreaView style={tw`h-full bg-white`}>
         <View style={tw`flex flex-row items-center my-1 px-4`}>
             <Text style={tw`text-xl font-bold `}>Notifications</Text>        
         </View>

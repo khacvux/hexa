@@ -5,9 +5,13 @@ import { Ionicons, FontAwesome } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { BlurView } from 'expo-blur';
 import RBSheet from "react-native-raw-bottom-sheet";
-import Comments from '../Comments/Comments';
 import { useNavigation } from '@react-navigation/native';
+import { Audio } from 'expo-av';
+
+
+import Comments from '../Comments/Comments';
 import WriteComment from '../Comments/WriteComment';
+
 
 
 const Post = (post) => {
@@ -15,7 +19,24 @@ const Post = (post) => {
     const navigation = useNavigation();
     const {image, heart, name, postId, userName, body, avtUser, comments} = post;
     const [isHeart, setHeart] = useState(false);
-
+    const [sound, setSound] = React.useState();
+    
+    async function playLikeSound() {
+        //loading sound
+        const { sound } = await Audio.Sound.createAsync(
+           require('../../assets/soundEffects/likeSound.mp3')
+        );
+        setSound(sound);
+    
+        //play sound
+        await sound.playAsync(); 
+    }
+    
+    const handlePressHeart = () => {
+        setHeart(!isHeart);
+        playLikeSound();
+    }
+      
 
     return (
      
@@ -31,12 +52,12 @@ const Post = (post) => {
                     <TouchableOpacity
                         activeOpacity={.7}
                         style={tw`my-1 items-center`}
-                        onPress={() => setHeart(!isHeart)}
+                        onPress={handlePressHeart}
                     >
                         <Ionicons name="heart"
                             style={isHeart ? tw`text-2xl text-[#ED4366]` : tw`text-2xl text-white` }
                         />
-                        <Text style={isHeart ? tw`text-[#56C4F4]` : tw`text-white`}>{heart}</Text>
+                        <Text style={isHeart ? tw`text-white` : tw`text-white`}>{heart}</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                         activeOpacity={.7}
@@ -64,7 +85,7 @@ const Post = (post) => {
                     style={tw`flex flex-row items-center`}
                 >
                     <Image source={{uri: avtUser}} 
-                        style={tw`w-9 h-9 rounded-full mr-1`}
+                        style={tw`w-9 h-9 rounded-full mr-2`}
                     />
                 <Text style={tw`font-bold text-white`}>{name}</Text>
                 </TouchableOpacity>
