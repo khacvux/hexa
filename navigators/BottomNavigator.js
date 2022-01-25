@@ -37,13 +37,26 @@ const BottomNavigator = () => {
 
                 }}
             />
+            <Tab.Screen name="SearchTab" component={MenuScreen}
+                options={{
+                    headerShown: false,
+                    tabBarShowLabel: false,
+                    tabBarIcon: (({focused}) => 
+                        <Ionicons
+                            name={focused ? 'search' : 'search-outline'}
+                            style={focused ? (tw`text-2xl text-[#5EC2EA]`) : (tw`text-2xl`)}
+                        />
+                    ),
+                    tabBarStyle: tw`bg-[#F5F7FA]`,
+                }}
+            />
             <Tab.Screen name="MusicTab" component={MenuScreen}
                 options={{
                     headerShown: false,
                     tabBarShowLabel: false,
                     tabBarIcon: (({focused}) => 
-                        <MaterialCommunityIcons
-                            name={focused ? 'music-box-multiple' : 'music-box-multiple-outline'}
+                        <Ionicons
+                            name={focused ? 'md-musical-notes' : 'md-musical-notes-outline'}
                             style={focused ? (tw`text-2xl text-[#5EC2EA]`) : (tw`text-2xl`)}
                         />
                     ),

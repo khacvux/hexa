@@ -1,5 +1,5 @@
-import React, { useRef, useState } from 'react'
-import { View, Text, ImageBackground, TouchableOpacity, Image, ScrollView } from 'react-native'
+import React, { useEffect, useRef, useState } from 'react'
+import { View, Text, ImageBackground, TouchableOpacity, Image, ScrollView, Dimensions, PixelRatio, StyleSheet } from 'react-native'
 import tw from 'twrnc'
 import { Ionicons, FontAwesome } from '@expo/vector-icons'; 
 import { LinearGradient } from 'expo-linear-gradient';
@@ -11,16 +11,23 @@ import { Audio } from 'expo-av';
 
 import Comments from '../Comments/Comments';
 import WriteComment from '../Comments/WriteComment';
+import Carousel from './Carousel';
+import { TapGestureHandler } from 'react-native-gesture-handler';
+
+const { width, height } = Dimensions.get('window')
 
 
-
-const Post = (post) => {
+const Feed = (props) => {
     const refRBSheet = useRef();
     const navigation = useNavigation();
-    const {image, heart, name, postId, userName, body, avtUser, comments} = post;
-    const [isHeart, setHeart] = useState(false);
-    const [sound, setSound] = React.useState();
-    
+    const {images, heart, name, postId, userName, body, avtUser, comments, liked} = props;
+    const [isHeart, setHeart] = useState(liked);
+    const [sound, setSound] = useState();
+
+    const { width, height } = Dimensions.get('window');
+    PixelRatio.getPixelSizeForLayoutSize(width);
+
+
     async function playSound() {
         // console.log('Loading Sound');
         const { sound } = await Audio.Sound.createAsync(
@@ -31,7 +38,7 @@ const Post = (post) => {
         // console.log('Playing Sound');
         await sound.playAsync(); }
     
-      React.useEffect(() => {
+      useEffect(() => {
         return sound
           ? () => {
             //   console.log('Unloading Sound');
@@ -43,16 +50,46 @@ const Post = (post) => {
         setHeart(!isHeart);
         playSound()
     }
-      
+
+    // onchange = (nativeEvent) => {
+
+    // }
+    
 
     return (
      
-        <ImageBackground
-            source={{uri: image}}
-            style={tw`w-full h-145 mb-1 overflow-hidden flex flex-col justify-end`}
+        <View
+            style={tw`w-screen h-150 mb-1 overflow-hidden flex`}
         >
-               {/* {data ? console.log(data.reset) : console.log('no')} */}
-            <View style={tw`flex-1 flex flex-row items-center justify-end`}>
+
+            <View style={tw`w-full h-150 `}>
+                <ScrollView
+                    style={tw`w-full h-150`}
+                    // onScroll={({nativeEvent}) => onchange(nativeEvent)}
+                    showsHorizontalScrollIndicator={false}
+                    pagingEnabled
+                    horizontal
+                >
+                    {
+                        images.map((image, index) => {
+                            return(
+                                <TapGestureHandler
+                                    key={index} 
+                                    style={tw`flex-1 w-full h-150 mb-5`}
+                                    numberOfTaps={2}
+                                    onActivated={ handlePressHeart }    
+                                >
+                                    <Image style={styles.image} source={{ uri: image }} resizeMode='cover' />
+                                </TapGestureHandler>
+                            )
+                        })
+                            
+                    }
+                </ScrollView>
+            </View>
+
+
+            <View style={tw`absolute right-2 top-40 flex  items-center justify-end`}>
                 <BlurView 
                     intensity={30} tint="light"
                     style={tw`mr-2 px-3 py-1 flex flex-col items-center overflow-hidden rounded-lg overflow-hidden` }>
@@ -82,10 +119,19 @@ const Post = (post) => {
                         />
                     </TouchableOpacity>
                 </BlurView>
+
+                <BlurView 
+                    intensity={30} tint="light"
+                    style={tw`mr-2 px-3 w-12 mt-1 flex items-center py-1 rounded-lg overflow-hidden` }
+                >
+                    <Text style={tw`text-white text-xs`}>2/2</Text>
+                </BlurView>
             </View>
+            
+            
             <LinearGradient
                 colors={['rgba(0, 0, 0, 0.0003)', 'rgba(0, 0, 0, 0.55)']}
-                style={tw`w-full h-50 p-3 flex flex-col px-4 justify-end`}
+                style={tw`w-full h-50 p-3 absolute bottom-0 right-0 left-0 flex flex-col px-4 justify-end`}
             >   
                 <TouchableOpacity
                     onPress={() => navigation.navigate('ProfileStack')}
@@ -130,8 +176,15 @@ const Post = (post) => {
                 </ScrollView>
                 <WriteComment />
             </RBSheet>
-        </ImageBackground>
+        </View>
     )
 }
 
-export default Post
+export default Feed
+
+const styles = StyleSheet.create({
+    image: {
+        width: width,
+        height: height,
+    },
+})

@@ -4,7 +4,7 @@ import tw from 'twrnc'
 import Contact from './Contact'
 const InfomationUser = () => {
     return (
-        <View style={tw`pt-5 px-7`}>
+        <View style={tw`pt-5 px-5`}>
            <View style={tw`flex flex-row items-center justify-between`}>
                 <Image 
                     source={require('../../assets/images/avt_3.png')}

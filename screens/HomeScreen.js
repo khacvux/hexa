@@ -5,6 +5,7 @@ import { Ionicons, Entypo, AntDesign } from '@expo/vector-icons';
 import { posts } from '../data';
 
 import Post from '../components/Home/Post';
+import Feed from '../components/Home/Feed';
 // import axios from 'axios';
 
 const user = 1;
@@ -26,7 +27,7 @@ const HomeScreen = () => {
     return (
         <SafeAreaView style={tw`bg-white h-full`}>
             <View
-                style={tw`flex flex-row justify-between items-center mb-1 mt-2 px-4`}
+                style={tw`flex flex-row justify-between items-center mb-1 mt-2 px-2`}
             >
                 {user ? (
                     <TouchableOpacity
@@ -36,7 +37,7 @@ const HomeScreen = () => {
                             source={require('../assets/images/avt.jpeg')}
                             style={tw`w-6 h-6 rounded-full mr-1`}
                         />
-                        <Text style={tw`text-xs font-light`}>@Vũ Lặng Thin</Text>
+                        <Text style={tw`text-xs font-light`}>@Username</Text>
                     </TouchableOpacity>
                 ) : (
                     <TouchableOpacity
@@ -62,7 +63,7 @@ const HomeScreen = () => {
                 )}
             </View>
             <ScrollView 
-                contentContainerStyle={tw`py-2 px-3`}
+                contentContainerStyle={tw`py-2`}
                 showsHorizontalScrollIndicator={false}
                 showsVerticalScrollIndicator={false}
             >
@@ -76,16 +77,18 @@ const HomeScreen = () => {
                     })} */}
                     {posts.map((post) =>{
                         return (
-                            <Post 
+                            <Feed
                                 key={post.postId} 
-                                image={post.image} 
+                                images={post.images} 
                                 heart={post.heart} 
                                 name={post.name} 
                                 postId={post.postId} 
                                 userName={post.userName} 
                                 body={post.body} 
                                 avtUser={post.avt} 
-                                comments={post.comments}/>
+                                comments={post.comments}
+                                liked={post.liked}    
+                            />
                         )
                     })}
 

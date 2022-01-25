@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Text, SafeAreaView, ScrollView } from 'react-native'
 import InfomationUser from '../components/Profile/InfomationUser'
 import tw from 'twrnc'
-import ListPost from '../components/Profile/ListPost'
+import ListPost from '../components/Profile/ListPosts'
 import Navbar from '../components/Profile/Navbar'
 import EditProfile from '../components/Profile/EditProfile'
 

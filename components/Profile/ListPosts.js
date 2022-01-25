@@ -6,8 +6,8 @@ import tw from 'twrnc'
 
 const ListPost = () => {
     return (
-        <View style={tw`mt-5`}>
-            <View style={tw`px-7 flex flex-row mb-[4]`}>
+        <View style={tw`my-5`}>
+            <View style={tw`px-5 flex flex-row mb-[4]`}>
                 <Image
                     source={require('../../assets/images/post_1.png')}
                     style={tw`flex-1 w-full h-70 mr-[2] rounded-sm`}
@@ -20,7 +20,7 @@ const ListPost = () => {
                     resizeMode='cover'
                 />
             </View>
-            <View style={tw`px-7 flex flex-row`}>
+            <View style={tw`px-5 flex flex-row`}>
                 <Image
                     source={require('../../assets/images/post_1.png')}
                     style={tw`flex-1 w-full h-70 mr-[2] rounded-sm`}
