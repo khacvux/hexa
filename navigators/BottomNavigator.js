@@ -4,7 +4,6 @@ import { View, Text } from 'react-native'
 import StackNavigator from './StackNavigator';
 import { Ionicons, Feather, MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons'; 
 import tw from 'twrnc'
-import Post from '../components/Home/Post';
 import MenuScreen from '../screens/MenuScreen';
 
 import SvgHome from '../icons/home.svg'

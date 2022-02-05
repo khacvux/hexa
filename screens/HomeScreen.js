@@ -4,7 +4,6 @@ import tw from 'twrnc'
 import { Ionicons, Entypo, AntDesign } from '@expo/vector-icons'; 
 import { posts } from '../data';
 
-import Post from '../components/Home/Post';
 import Feed from '../components/Home/Feed';
 // import axios from 'axios';
 

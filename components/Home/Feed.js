@@ -11,7 +11,6 @@ import { Audio } from 'expo-av';
 
 import Comments from '../Comments/Comments';
 import WriteComment from '../Comments/WriteComment';
-import Carousel from './Carousel';
 import { TapGestureHandler } from 'react-native-gesture-handler';
 
 const { width, height } = Dimensions.get('window')
@@ -59,9 +58,8 @@ const Feed = (props) => {
     return (
      
         <View
-            style={tw`w-screen h-150 mb-1 overflow-hidden flex`}
+            style={tw`w-full h-150 mb-2 overflow-hidden flex`}
         >
-
             <View style={tw`w-full h-150 `}>
                 <ScrollView
                     style={tw`w-full h-150`}
@@ -87,12 +85,17 @@ const Feed = (props) => {
                     }
                 </ScrollView>
             </View>
-
+            <BlurView 
+                intensity={30} tint="light"
+                style={tw`absolute top-2 left-2 px-3 w-12 mt-1 flex items-center py-1 rounded-lg overflow-hidden` }
+            >
+                <Text style={tw`text-white text-xs`}>2/2</Text>
+            </BlurView>
 
             <View style={tw`absolute right-2 top-40 flex  items-center justify-end`}>
                 <BlurView 
                     intensity={30} tint="light"
-                    style={tw`mr-2 px-3 py-1 flex flex-col items-center overflow-hidden rounded-lg overflow-hidden` }>
+                    style={tw`mr-1 w-12 py-1 flex flex-col items-center overflow-hidden rounded-lg overflow-hidden` }>
                     <TouchableOpacity
                         activeOpacity={.7}
                         style={tw`my-1 items-center`}
@@ -118,13 +121,6 @@ const Feed = (props) => {
                             style={tw`text-xl text-[#FEFEFD] my-2`}
                         />
                     </TouchableOpacity>
-                </BlurView>
-
-                <BlurView 
-                    intensity={30} tint="light"
-                    style={tw`mr-2 px-3 w-12 mt-1 flex items-center py-1 rounded-lg overflow-hidden` }
-                >
-                    <Text style={tw`text-white text-xs`}>2/2</Text>
                 </BlurView>
             </View>
             
