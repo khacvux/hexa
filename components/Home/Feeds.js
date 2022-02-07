@@ -95,32 +95,6 @@ const Feeds = (props) => {
                         ref={slidesRef}
                     />
                 </TapGestureHandler>
-                {/* <ScrollView
-                    style={tw`w-full h-150`}
-                    showsHorizontalScrollIndicator={false}
-                    pagingEnabled
-                    horizontal
-                    onScroll={Animated.event([{nativeEvent: {contentOffset: {x: scrollX}}}],{
-                        useNativeDriver: false,
-                    })}
-                >
-                    {
-                        images.map((image, index) => {
-                            return(
-                                <TapGestureHandler
-                                    key={index} 
-                                    style={tw`flex-1 w-full h-150 mb-5`}
-                                    numberOfTaps={2}
-                                    onActivated={ handlePressHeart }   
-                                    bounces={false} 
-                                >
-                                    <Image style={styles.image} source={{ uri: image }} resizeMode='cover' />
-                                </TapGestureHandler>
-                            )
-                        })
-                            
-                    }
-                </ScrollView> */}
             </View>
             
             <View style={tw`absolute right-2 top-40 flex  items-center justify-end`}>
@@ -172,7 +146,12 @@ const Feeds = (props) => {
                 <Text style={tw`text-white my-3 px-5`}>
                     {post.item.body}
                 </Text>
-                <Paginator data={post.item.images} scrollX={scrollX} />
+
+                {(post.item.images.length > 1) ? (
+                    <Paginator data={post.item.images} scrollX={scrollX} />
+                ) : (
+                    <Text style={tw`absolute`}/>
+                )}
                
             </LinearGradient>
 

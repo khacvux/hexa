@@ -4,8 +4,6 @@ import tw from 'twrnc'
 
 const Comments = (props) => {
     const { comment } = props;
-    console.log('//////////////')
-    console.log(comment )
     return (
         <View style={tw`flex flex-row mb-3`}>
             <Image

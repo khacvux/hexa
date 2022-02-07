@@ -3,8 +3,6 @@ export const posts = [
         avt: 'https://scontent.fhan4-1.fna.fbcdn.net/v/t1.6435-9/138942420_3637554842989105_1051982539511837554_n.jpg?_nc_cat=105&ccb=1-5&_nc_sid=730e14&_nc_ohc=DqMWhFlmHmsAX9EtyLH&tn=nF7so50A4ykpaBCE&_nc_ht=scontent.fhan4-1.fna&oh=00_AT8pDgjCOvxWY4zO_oSLw7qUr0hmUah7pYWD75MaNJHh_Q&oe=6216F1BC',
         images: [
             'https://scontent.fhan3-2.fna.fbcdn.net/v/t1.6435-9/140039138_3637555242989065_7327100778297121831_n.jpg?_nc_cat=101&ccb=1-5&_nc_sid=730e14&_nc_ohc=2SJ0HJCaS7QAX_DzgAb&tn=nF7so50A4ykpaBCE&_nc_ht=scontent.fhan3-2.fna&oh=00_AT-CcGIC9lFCAgIl3nFWqSaXfJla2HXXQWEVIsH4KvLu3g&oe=6217DD64',
-            'https://scontent.fhan4-1.fna.fbcdn.net/v/t1.6435-9/138942420_3637554842989105_1051982539511837554_n.jpg?_nc_cat=105&ccb=1-5&_nc_sid=730e14&_nc_ohc=DqMWhFlmHmsAX9EtyLH&tn=nF7so50A4ykpaBCE&_nc_ht=scontent.fhan4-1.fna&oh=00_AT8pDgjCOvxWY4zO_oSLw7qUr0hmUah7pYWD75MaNJHh_Q&oe=6216F1BC',
-
         ],
         name: 'u s e r  n a m e423423',
         userName: 'user_1',
@@ -58,7 +56,7 @@ export const posts = [
             {
                 avt: 'https://mir-s3-cdn-cf.behance.net/project_modules/2800_opt_1/541c1c101650903.5f2369bc9b544.jpg',
                 idComment: '124',
-                userName: 'noname_3',
+                userName: 'noname_2',
                 name: 'NONAME 3',
                 comment: 'aloo 1233',
                 date: '1 day ago',

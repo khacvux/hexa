@@ -16,7 +16,11 @@ const Tab = createBottomTabNavigator();
 
 const BottomNavigator = () => {
     return (
-        <Tab.Navigator>
+        <Tab.Navigator
+            screenOptions={{
+
+            }}
+        >
             <Tab.Screen name="HomeTab" component={StackNavigator} 
                 options={{
                     headerShown: false,
@@ -24,15 +28,15 @@ const BottomNavigator = () => {
                     tabBarIcon: (({focused}) => 
                         <>
                             {focused ? (
-                                <SvgHome width={26} fill={"#5EC2EA"} />
+                                <SvgHome width={22} fill={"#5EC2EA"} />
                             ) : (
-                                <SvgHomeOutline width={26} />
+                                <SvgHomeOutline width={22} />
                             )}
                         </>
 
 
                     ),
-                    tabBarStyle: tw`bg-[#F5F7FA]`,
+                    tabBarStyle: tw`bg-[#F5F7FA] h-11`,
 
                 }}
             />
@@ -43,10 +47,10 @@ const BottomNavigator = () => {
                     tabBarIcon: (({focused}) => 
                         <Ionicons
                             name={focused ? 'search' : 'search-outline'}
-                            style={focused ? (tw`text-2xl text-[#5EC2EA]`) : (tw`text-2xl`)}
+                            style={focused ? (tw`text-xl text-[#5EC2EA]`) : (tw`text-xl`)}
                         />
                     ),
-                    tabBarStyle: tw`bg-[#F5F7FA]`,
+                    tabBarStyle: tw`bg-[#F5F7FA] h-11`,
                 }}
             />
             <Tab.Screen name="MusicTab" component={MenuScreen}
@@ -56,10 +60,10 @@ const BottomNavigator = () => {
                     tabBarIcon: (({focused}) => 
                         <Ionicons
                             name={focused ? 'md-musical-notes' : 'md-musical-notes-outline'}
-                            style={focused ? (tw`text-2xl text-[#5EC2EA]`) : (tw`text-2xl`)}
+                            style={focused ? (tw`text-xl text-[#5EC2EA]`) : (tw`text-xl`)}
                         />
                     ),
-                    tabBarStyle: tw`bg-[#F5F7FA]`,
+                    tabBarStyle: tw`bg-[#F5F7FA] h-11`,
                 }}
             />
             <Tab.Screen name="NotificationTab" component={NotificationScreen}
@@ -69,10 +73,10 @@ const BottomNavigator = () => {
                     tabBarIcon: (({focused}) => 
                         <Ionicons 
                             name={focused ? 'ios-notifications-sharp' : 'ios-notifications-outline'} 
-                            style={focused ? tw`text-2xl text-[#5EC2EA]` : tw`text-2xl text-black` }
+                            style={focused ? tw`text-xl text-[#5EC2EA]` : tw`text-xl text-black` }
                         />
                     ),
-                    tabBarStyle: tw`bg-[#F5F7FA]`,
+                    tabBarStyle: tw`bg-[#F5F7FA] h-11`,
                 }}
             />
             <Tab.Screen name="ProfileTab" component={MyProfileScreen}
@@ -82,10 +86,10 @@ const BottomNavigator = () => {
                     tabBarIcon: (({focused}) => 
                         <Feather
                             name={'user'} 
-                            style={focused ? (tw`text-2xl text-[#5EC2EA]`) : (tw`text-2xl`)}
+                            style={focused ? (tw`text-xl text-[#5EC2EA]`) : (tw`text-xl`)}
                         />
                     ),
-                    tabBarStyle: tw`bg-[#F5F7FA]`,
+                    tabBarStyle: tw`bg-[#F5F7FA] h-11`,
                 }}
             />
             
