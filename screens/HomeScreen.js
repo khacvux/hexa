@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, SafeAreaView, Image, TouchableOpacity, ScrollView } from 'react-native'
+import { View, Text, SafeAreaView, Image, TouchableOpacity, ScrollView, FlatList } from 'react-native'
 import tw from 'twrnc'
 import { Ionicons, Entypo, AntDesign } from '@expo/vector-icons'; 
 import { posts } from '../data';
 
-import Feed from '../components/Home/Feed';
+import Feeds from '../components/Home/Feeds';
 // import axios from 'axios';
 
 const user = 1;
@@ -61,38 +61,20 @@ const HomeScreen = () => {
                     </>
                 )}
             </View>
-            <ScrollView 
+            <FlatList
+                data={posts}
+                renderItem={(post) => {
+                    return <Feeds 
+                       post={post} 
+                    />
+                }}
+                keyExtractor={post => post.postId}
                 contentContainerStyle={tw`py-2`}
                 showsHorizontalScrollIndicator={false}
                 showsVerticalScrollIndicator={false}
-            >
-                    {/* {posts.map((post) => {
-                        return (
-                            <Post key={post.id} id={post.id} userId={post.userId} title={post.title} body={post.body} />   
-                    )
 
-                        // {console.log(post.body)}
-                        // <Text> id: {post.id}</Text>
-                    })} */}
-                    {posts.map((post) =>{
-                        return (
-                            <Feed
-                                key={post.postId} 
-                                images={post.images} 
-                                heart={post.heart} 
-                                name={post.name} 
-                                postId={post.postId} 
-                                userName={post.userName} 
-                                body={post.body} 
-                                avtUser={post.avt} 
-                                comments={post.comments}
-                                liked={post.liked}    
-                            />
-                        )
-                    })}
-
-
-            </ScrollView>
+            />
+           
         </SafeAreaView>
     )
 }

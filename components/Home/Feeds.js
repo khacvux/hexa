@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { View, Text, ImageBackground, TouchableOpacity, Image, ScrollView, Dimensions, PixelRatio, StyleSheet } from 'react-native'
+import { View, Text, TouchableOpacity, Image, Animated, FlatList } from 'react-native'
 import tw from 'twrnc'
 import { Ionicons, FontAwesome } from '@expo/vector-icons'; 
 import { LinearGradient } from 'expo-linear-gradient';
@@ -7,26 +7,36 @@ import { BlurView } from 'expo-blur';
 import RBSheet from "react-native-raw-bottom-sheet";
 import { useNavigation } from '@react-navigation/native';
 import { Audio } from 'expo-av';
+import { TapGestureHandler } from 'react-native-gesture-handler';
 
 
 import Comments from '../Comments/Comments';
 import WriteComment from '../Comments/WriteComment';
-import { TapGestureHandler } from 'react-native-gesture-handler';
+import ImageItem from './ImageItem';
+import Paginator from './Paginator';
 
-const { width, height } = Dimensions.get('window')
 
 
-const Feed = (props) => {
+
+const Feeds = (props) => {
     const refRBSheet = useRef();
     const navigation = useNavigation();
-    const {images, heart, name, postId, userName, body, avtUser, comments, liked} = props;
-    const [isHeart, setHeart] = useState(liked);
+    const { post } = props;
+    const [isHeart, setHeart] = useState(post.item.liked);
     const [sound, setSound] = useState();
 
-    const { width, height } = Dimensions.get('window');
-    PixelRatio.getPixelSizeForLayoutSize(width);
+    const scrollX = useRef(new Animated.Value(0)).current;
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const slidesRef = useRef(null);
+
+    const viewableItemsChanged = useRef(({viewableItems}) => {
+        setCurrentIndex(viewableItems[0].index);
+    }).current;
+    const viewConfig = useRef({ viewAreaCoveragePercentThreshold: 50 }).current;
 
 
+
+    // console.log(post.item.comments)
     async function playSound() {
         // console.log('Loading Sound');
         const { sound } = await Audio.Sound.createAsync(
@@ -50,9 +60,9 @@ const Feed = (props) => {
         playSound()
     }
 
-    // onchange = (nativeEvent) => {
+    
 
-    // }
+
     
 
     return (
@@ -61,12 +71,38 @@ const Feed = (props) => {
             style={tw`w-full h-150 mb-2 overflow-hidden flex`}
         >
             <View style={tw`w-full h-150 `}>
-                <ScrollView
+                <TapGestureHandler 
+                    style={tw`flex-1 w-full h-150 mb-5`}
+                    numberOfTaps={2}
+                    onActivated={ handlePressHeart }   
+                >
+                    <FlatList
+                        data={post.item.images}
+                        renderItem={ ({item}) => {
+                            return <ImageItem image={item} />
+                        }}
+                        keyExtractor={item => item}
+                        pagingEnabled
+                        horizontal
+                        showsHorizontalScrollIndicator={false}
+                        bounces={false} 
+                        onScroll={Animated.event([{nativeEvent: {contentOffset: {x: scrollX}}}],{
+                            useNativeDriver: false,
+                        })}
+                        scrollEventThrottle={32}
+                        onViewableItemsChanged={viewableItemsChanged}
+                        viewabilityConfig={viewConfig}
+                        ref={slidesRef}
+                    />
+                </TapGestureHandler>
+                {/* <ScrollView
                     style={tw`w-full h-150`}
-                    // onScroll={({nativeEvent}) => onchange(nativeEvent)}
                     showsHorizontalScrollIndicator={false}
                     pagingEnabled
                     horizontal
+                    onScroll={Animated.event([{nativeEvent: {contentOffset: {x: scrollX}}}],{
+                        useNativeDriver: false,
+                    })}
                 >
                     {
                         images.map((image, index) => {
@@ -75,7 +111,8 @@ const Feed = (props) => {
                                     key={index} 
                                     style={tw`flex-1 w-full h-150 mb-5`}
                                     numberOfTaps={2}
-                                    onActivated={ handlePressHeart }    
+                                    onActivated={ handlePressHeart }   
+                                    bounces={false} 
                                 >
                                     <Image style={styles.image} source={{ uri: image }} resizeMode='cover' />
                                 </TapGestureHandler>
@@ -83,15 +120,9 @@ const Feed = (props) => {
                         })
                             
                     }
-                </ScrollView>
+                </ScrollView> */}
             </View>
-            <BlurView 
-                intensity={30} tint="light"
-                style={tw`absolute top-2 left-2 px-3 w-12 mt-1 flex items-center py-1 rounded-lg overflow-hidden` }
-            >
-                <Text style={tw`text-white text-xs`}>2/2</Text>
-            </BlurView>
-
+            
             <View style={tw`absolute right-2 top-40 flex  items-center justify-end`}>
                 <BlurView 
                     intensity={30} tint="light"
@@ -104,7 +135,7 @@ const Feed = (props) => {
                         <Ionicons name="heart"
                             style={isHeart ? tw`text-2xl text-[#ED4366]` : tw`text-2xl text-white` }
                         />
-                        <Text style={isHeart ? tw`text-white` : tw`text-white`}>{heart}</Text>
+                        <Text style={isHeart ? tw`text-white` : tw`text-white`}>{post.item.heart}</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                         activeOpacity={.7}
@@ -124,25 +155,27 @@ const Feed = (props) => {
                 </BlurView>
             </View>
             
-            
             <LinearGradient
                 colors={['rgba(0, 0, 0, 0.0003)', 'rgba(0, 0, 0, 0.55)']}
-                style={tw`w-full h-50 p-3 absolute bottom-0 right-0 left-0 flex flex-col px-4 justify-end`}
+                style={tw`w-full h-45 py-3 absolute bottom-0 right-0 left-0 flex flex-col justify-end z-0`}
             >   
                 <TouchableOpacity
                     onPress={() => navigation.navigate('ProfileStack')}
-                    style={tw`flex flex-row items-center`}
+                    style={tw`flex flex-row items-center px-4`}
                 >
-                    <Image source={{uri: avtUser}} 
+                    <Image source={{uri: post.item.avt}} 
                         style={tw`w-9 h-9 rounded-full mr-2`}
                     />
-                <Text style={tw`font-bold text-white`}>{name}</Text>
+                <Text style={tw`font-bold text-white`}>{post.item.name}</Text>
                 </TouchableOpacity>
 
-                <Text style={tw`text-white my-3`}>
-                    {body}
+                <Text style={tw`text-white my-3 px-5`}>
+                    {post.item.body}
                 </Text>
+                <Paginator data={post.item.images} scrollX={scrollX} />
+               
             </LinearGradient>
+
             <RBSheet
                 ref={refRBSheet}
                 // closeOnDragDown={true}
@@ -154,33 +187,20 @@ const Feed = (props) => {
                     container: tw`bg-gray-100 pt-3 rounded-t-lg flex flex-col justify-between`
                 }}
             >   
-                <ScrollView 
+                <FlatList 
                     contentContainerStyle={tw`flex-1 pt-3 flex flex-col px-4`}
-                >
-                    {comments.map((comment) => {
-                        return (
-                            <Comments 
-                                key={comment.idComment} 
-                                userName={comment.userName} 
-                                name={comment.name} 
-                                comment={comment.comment} 
-                                date={comment.date} 
-                                avt={comment.avt} 
-                            />
-                        )
-                    })}
-                </ScrollView>
+                    data={post.item.comments}
+                    renderItem={(comment) => {
+                        return <Comments
+                            comment={comment}
+                        />
+                    }}
+                    keyExtractor={comment => comment.idComment}
+                />
                 <WriteComment />
             </RBSheet>
         </View>
     )
 }
 
-export default Feed
-
-const styles = StyleSheet.create({
-    image: {
-        width: width,
-        height: height,
-    },
-})
+export default Feeds
