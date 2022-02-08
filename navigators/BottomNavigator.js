@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import React from 'react'
 import StackNavigator from './StackNavigator';
-import { Ionicons, Feather } from '@expo/vector-icons'; 
+import { Ionicons, Feather, MaterialIcons } from '@expo/vector-icons'; 
 import tw from 'twrnc'
 import MenuScreen from '../screens/MenuScreen';
 
@@ -53,8 +53,8 @@ const BottomNavigator = () => {
                     headerShown: false,
                     tabBarShowLabel: false,
                     tabBarIcon: (({focused}) => 
-                        <Ionicons
-                            name={focused ? 'md-musical-notes' : 'md-musical-notes-outline'}
+                        <MaterialIcons
+                            name='multitrack-audio'
                             style={focused ? (tw`text-xl text-[#5EC2EA]`) : (tw`text-xl`)}
                         />
                     ),

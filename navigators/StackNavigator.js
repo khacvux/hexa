@@ -2,6 +2,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import React from 'react'
 
 
+import tw from 'twrnc';
 import ChatboxScreen from '../screens/ChatboxScreen';
 import ChatsScreen from '../screens/ChatsScreen';
 import HomeScreen from '../screens/HomeScreen';
@@ -9,8 +10,7 @@ import MenuScreen from '../screens/MenuScreen';
 import MyProfileScreen from '../screens/MyProfileScreen';
 import NotificationScreen from '../screens/NotificationScreen';
 import ProfileScreen from '../screens/ProfileScreen';
-import TopTabNavigatior from './TopTabNavigatior';
-import tw from 'twrnc';
+import UpLoadScreen from '../screens/UpLoadScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -52,7 +52,7 @@ const StackNavigator = () => {
                     headerShown: false,
                 }}
             />
-            <Stack.Screen name="UpLoadStack" component={TopTabNavigatior} 
+            <Stack.Screen name="UpLoadStack" component={UpLoadScreen} 
                 options={{
                     headerShown: false,
                 }}

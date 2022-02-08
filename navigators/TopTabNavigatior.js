@@ -1,8 +1,8 @@
 import { View, Text, SafeAreaView } from 'react-native';
 import React from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import PostImage from '../components/UpLoad/PostImage';
-import PostAudio from '../components/UpLoad/PostAudio';
+import PostImage from '../components/Upload/PostImage';
+import PostAudio from '../components/Upload/PostAudio';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import tw from 'twrnc';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
