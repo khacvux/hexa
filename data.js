@@ -57,7 +57,7 @@ export const posts = [
                 avt: 'https://mir-s3-cdn-cf.behance.net/project_modules/2800_opt_1/541c1c101650903.5f2369bc9b544.jpg',
                 idComment: '124',
                 userName: 'noname_2',
-                name: 'NONAME 3',
+                name: 'NONAME 2',
                 comment: 'aloo 1233',
                 date: '1 day ago',
             },

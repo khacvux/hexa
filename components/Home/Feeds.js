@@ -58,12 +58,7 @@ const Feeds = (props) => {
     const handlePressHeart = () => {
         setHeart(!isHeart);
         playSound()
-    }
-
-    
-
-
-    
+    }    
 
     return (
      

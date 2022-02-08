@@ -1,8 +1,7 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import React from 'react'
-import { View, Text } from 'react-native'
 import StackNavigator from './StackNavigator';
-import { Ionicons, Feather, MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons'; 
+import { Ionicons, Feather } from '@expo/vector-icons'; 
 import tw from 'twrnc'
 import MenuScreen from '../screens/MenuScreen';
 
@@ -16,11 +15,7 @@ const Tab = createBottomTabNavigator();
 
 const BottomNavigator = () => {
     return (
-        <Tab.Navigator
-            screenOptions={{
-
-            }}
-        >
+        <Tab.Navigator>
             <Tab.Screen name="HomeTab" component={StackNavigator} 
                 options={{
                     headerShown: false,
@@ -36,7 +31,7 @@ const BottomNavigator = () => {
 
 
                     ),
-                    tabBarStyle: tw`bg-[#F5F7FA] h-11`,
+                    tabBarStyle: tw`bg-[#F5F7FA]`,
 
                 }}
             />
@@ -50,7 +45,7 @@ const BottomNavigator = () => {
                             style={focused ? (tw`text-xl text-[#5EC2EA]`) : (tw`text-xl`)}
                         />
                     ),
-                    tabBarStyle: tw`bg-[#F5F7FA] h-11`,
+                    tabBarStyle: tw`bg-[#F5F7FA]`,
                 }}
             />
             <Tab.Screen name="MusicTab" component={MenuScreen}
@@ -63,7 +58,7 @@ const BottomNavigator = () => {
                             style={focused ? (tw`text-xl text-[#5EC2EA]`) : (tw`text-xl`)}
                         />
                     ),
-                    tabBarStyle: tw`bg-[#F5F7FA] h-11`,
+                    tabBarStyle: tw`bg-[#F5F7FA]`,
                 }}
             />
             <Tab.Screen name="NotificationTab" component={NotificationScreen}
@@ -76,7 +71,7 @@ const BottomNavigator = () => {
                             style={focused ? tw`text-xl text-[#5EC2EA]` : tw`text-xl text-black` }
                         />
                     ),
-                    tabBarStyle: tw`bg-[#F5F7FA] h-11`,
+                    tabBarStyle: tw`bg-[#F5F7FA]`,
                 }}
             />
             <Tab.Screen name="ProfileTab" component={MyProfileScreen}
@@ -89,7 +84,7 @@ const BottomNavigator = () => {
                             style={focused ? (tw`text-xl text-[#5EC2EA]`) : (tw`text-xl`)}
                         />
                     ),
-                    tabBarStyle: tw`bg-[#F5F7FA] h-11`,
+                    tabBarStyle: tw`bg-[#F5F7FA]`,
                 }}
             />
             
