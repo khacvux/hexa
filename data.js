@@ -2,7 +2,7 @@ export const posts = [
     {
         avt: 'https://scontent.fhan4-1.fna.fbcdn.net/v/t1.6435-9/138942420_3637554842989105_1051982539511837554_n.jpg?_nc_cat=105&ccb=1-5&_nc_sid=730e14&_nc_ohc=DqMWhFlmHmsAX9EtyLH&tn=nF7so50A4ykpaBCE&_nc_ht=scontent.fhan4-1.fna&oh=00_AT8pDgjCOvxWY4zO_oSLw7qUr0hmUah7pYWD75MaNJHh_Q&oe=6216F1BC',
         images: [
-            'https://scontent.fhan3-2.fna.fbcdn.net/v/t1.6435-9/140039138_3637555242989065_7327100778297121831_n.jpg?_nc_cat=101&ccb=1-5&_nc_sid=730e14&_nc_ohc=2SJ0HJCaS7QAX_DzgAb&tn=nF7so50A4ykpaBCE&_nc_ht=scontent.fhan3-2.fna&oh=00_AT-CcGIC9lFCAgIl3nFWqSaXfJla2HXXQWEVIsH4KvLu3g&oe=6217DD64',
+            'https://64.media.tumblr.com/c78a2d4759e6bf300e6be724f67e0022/tumblr_inline_p4d68oMOpD1rrs0sb_540.png',
         ],
         name: 'u s e r  n a m e423423',
         userName: 'user_1',

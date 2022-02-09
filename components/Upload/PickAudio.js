@@ -1,9 +1,9 @@
-import { View, Text, SafeAreaView, TouchableOpacity, Image } from 'react-native';
+import { View, Text, SafeAreaView, TouchableOpacity, Image, TextInput } from 'react-native';
 import React from 'react';
 import { EvilIcons } from '@expo/vector-icons';
 import tw from 'twrnc';
 
-const PostAudio = () => {
+const PickAudio = () => {
   return (
     <SafeAreaView style={tw`bg-white h-full flex-1 flex items-center`}>
       <View style={tw`flex items-center justify-center flex-1`}>
@@ -14,10 +14,21 @@ const PostAudio = () => {
         </View>
         <Text style={tw`text-lg tracking-[.3] text-[#5EC2EA]`}>Tracks & albums will be displayed here</Text>
       </View>
-      <View style={tw`w-full bg-[#5EC2EA] my-3`}>
+      <View style={tw`w-full border border-l-0 border-r-0 border-t-[#5EC2EA] border-b-[#5EC2EA] my-2`}>
+        <TouchableOpacity style={tw`w-full items-center`}
+          activeOpacity={.8}
+        >
+          <Text style={tw`py-3 text-[#5EC2EA] text-xs`}>
+            Next
+          </Text>
+        </TouchableOpacity>
+      </View>
+      <View style={tw`w-full bg-[#5EC2EA] mb-2`}>
         <TouchableOpacity style={tw`w-full bg-[#5EC2EA] items-center`}>
-          <Text style={tw`py-3 text-white text-xs font-bold`}>
-            Choose your tracks
+          <Text style={tw`py-3 text-white text-xs font-bold`}
+            onPress={() => console.log('asd')}
+          >
+            Choose some pictures
           </Text>
         </TouchableOpacity>
       </View>
@@ -25,4 +36,4 @@ const PostAudio = () => {
   );
 };
 
-export default PostAudio;
+export default PickAudio;

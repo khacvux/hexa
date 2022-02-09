@@ -1,11 +1,13 @@
 import { View, Text, SafeAreaView } from 'react-native';
 import React from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import PostImage from '../components/Upload/PostImage';
-import PostAudio from '../components/Upload/PostAudio';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import tw from 'twrnc';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
+
+import CropPickImage from '../components/Upload/CropPickImage';
+import PickAudio from '../components/Upload/PickAudio';
+
 const TopTab = createMaterialTopTabNavigator();
 
 const TopTabNavigatior = () => {
@@ -26,8 +28,8 @@ const TopTabNavigatior = () => {
               }}
         >
             <TopTab.Screen 
-                name='PostImageTopTap' 
-                component={PostImage} 
+                name='CropPickImageTopTap' 
+                component={CropPickImage} 
                 options={{ 
                     tabBarIcon: (({focused}) => 
                         <>
@@ -48,8 +50,8 @@ const TopTabNavigatior = () => {
 
             />
             <TopTab.Screen 
-                name='PostAudioTopTap' 
-                component={PostAudio} 
+                name='PickAudioTopTap' 
+                component={PickAudio} 
                 options={{ 
                     tabBarIcon: (({focused}) => 
                         <>
