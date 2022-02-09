@@ -10,7 +10,8 @@ import MenuScreen from '../screens/MenuScreen';
 import MyProfileScreen from '../screens/MyProfileScreen';
 import NotificationScreen from '../screens/NotificationScreen';
 import ProfileScreen from '../screens/ProfileScreen';
-import UpLoadScreen from '../screens/UpLoadScreen';
+import CreateNewScreen from '../screens/CreateNewScreen';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -52,7 +53,7 @@ const StackNavigator = () => {
                     headerShown: false,
                 }}
             />
-            <Stack.Screen name="UpLoadStack" component={UpLoadScreen} 
+            <Stack.Screen name="CreateNewStack" component={CreateNewScreen} 
                 options={{
                     headerShown: false,
                 }}

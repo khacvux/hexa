@@ -5,7 +5,7 @@ import { EvilIcons } from '@expo/vector-icons';
 import Textarea from 'react-native-textarea';
 
 
-const CropPickImage = () => {
+const CreateNewFeeds = () => {
 
   const [status, setStatus] = useState('');
   const DismissKeyboard = ({children}) => (
@@ -45,4 +45,4 @@ const CropPickImage = () => {
   );
 };
 
-export default CropPickImage;
+export default CreateNewFeeds;

@@ -5,17 +5,17 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import tw from 'twrnc';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 
-import CropPickImage from '../components/Upload/CropPickImage';
-import PickAudio from '../components/Upload/PickAudio';
+import CreateNewFeeds from '../components/Upload/CreateNewFeeds';
+import CreateNewTrack from '../components/Upload/CreateNewTrack';
 
-const TopTab = createMaterialTopTabNavigator();
+const TopBar = createMaterialTopTabNavigator();
 
 const TopTabNavigatior = () => {
 
     const insets = useSafeAreaInsets();
 
     return (
-        <TopTab.Navigator
+        <TopBar.Navigator
             style={[tw`bg-white`, { paddingTop: insets.top }]}
             screenOptions={{
                 // tabBarItemStyle: tw`w-35`,
@@ -27,9 +27,9 @@ const TopTabNavigatior = () => {
                 tabBarShowIcon: true,
               }}
         >
-            <TopTab.Screen 
-                name='CropPickImageTopTap' 
-                component={CropPickImage} 
+            <TopBar.Screen 
+                name='CreateNewFeedTopBar' 
+                component={CreateNewFeeds} 
                 options={{ 
                     tabBarIcon: (({focused}) => 
                         <>
@@ -49,9 +49,9 @@ const TopTabNavigatior = () => {
                 }}
 
             />
-            <TopTab.Screen 
-                name='PickAudioTopTap' 
-                component={PickAudio} 
+            <TopBar.Screen 
+                name='CreateNewTrackTopBar' 
+                component={CreateNewTrack} 
                 options={{ 
                     tabBarIcon: (({focused}) => 
                         <>
@@ -70,7 +70,7 @@ const TopTabNavigatior = () => {
                     ),
                 }}
             />
-        </TopTab.Navigator>
+        </TopBar.Navigator>
     );
 };
 

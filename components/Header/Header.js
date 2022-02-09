@@ -35,7 +35,7 @@ const Header = () => {
                 {user ? (
                     <TouchableOpacity
                         style={tw`bg-[#5EC2EA] py-1 px-3  rounded-full items-center mr-1`}
-                        onPress={() => navigation.navigate('UpLoadStack')}
+                        onPress={() => navigation.navigate('CreateNewStack')}
                     >
                         <AntDesign 
                             name='plus' 

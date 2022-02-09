@@ -3,7 +3,7 @@ import React from 'react';
 import { EvilIcons } from '@expo/vector-icons';
 import tw from 'twrnc';
 
-const PickAudio = () => {
+const CreateNewTrack = () => {
   return (
     <SafeAreaView style={tw`bg-white h-full flex-1 flex items-center`}>
       <View style={tw`flex items-center justify-center flex-1`}>
@@ -36,4 +36,4 @@ const PickAudio = () => {
   );
 };
 
-export default PickAudio;
+export default CreateNewTrack;
