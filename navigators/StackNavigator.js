@@ -2,15 +2,17 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import React from 'react'
 
 
-import tw from 'twrnc';
 import ChatboxScreen from '../screens/ChatboxScreen';
 import ChatsScreen from '../screens/ChatsScreen';
-import HomeScreen from '../screens/HomeScreen';
+
 import MenuScreen from '../screens/MenuScreen';
 import MyProfileScreen from '../screens/MyProfileScreen';
 import NotificationScreen from '../screens/NotificationScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import CreateNewScreen from '../screens/CreateNewScreen';
+import MediaSelectorScreen from '../screens/MediaSelectorScreen';
+import DetailFeedsScreen from '../screens/DetailFeedsScreen';
+import BottomNavigator from './BottomNavigator';
 
 
 const Stack = createNativeStackNavigator();
@@ -18,7 +20,12 @@ const Stack = createNativeStackNavigator();
 const StackNavigator = () => {
     return (
         <Stack.Navigator>
-            <Stack.Screen name="HomeStack" component={HomeScreen} 
+            <Stack.Screen name="HomeStack" component={BottomNavigator} 
+                options={{
+                    headerShown: false,
+                }}
+            />
+            <Stack.Screen name="DetailFeedsStack" component={DetailFeedsScreen} 
                 options={{
                     headerShown: false,
                 }}
@@ -54,6 +61,11 @@ const StackNavigator = () => {
                 }}
             />
             <Stack.Screen name="CreateNewStack" component={CreateNewScreen} 
+                options={{
+                    headerShown: false,
+                }}
+            />
+            <Stack.Screen name="MediaSelectorStack" component={MediaSelectorScreen} 
                 options={{
                     headerShown: false,
                 }}

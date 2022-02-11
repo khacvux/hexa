@@ -10,7 +10,7 @@ import CreateNewTrack from '../components/Upload/CreateNewTrack';
 
 const TopBar = createMaterialTopTabNavigator();
 
-const TopTabNavigatior = () => {
+export const UpLoadNavigatior = () => {
 
     const insets = useSafeAreaInsets();
 
@@ -74,4 +74,4 @@ const TopTabNavigatior = () => {
     );
 };
 
-export default TopTabNavigatior;
+// export default TopTabNavigatior;

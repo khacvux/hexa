@@ -128,24 +128,34 @@ const Feeds = (props) => {
                 colors={['rgba(0, 0, 0, 0.0003)', 'rgba(0, 0, 0, 0.55)']}
                 style={tw`w-full h-45 py-3 absolute bottom-0 right-0 left-0 flex flex-col justify-end z-0`}
             >   
+                <View style={tw`flex flex-row`}>
+                    <TouchableOpacity
+                        onPress={() => navigation.navigate('ProfileStack')}
+                        style={tw`flex flex-row items-center px-4`}
+                    >
+                        <Image source={{uri: post.item.avt}} 
+                            style={tw`w-9 h-9 rounded-full mr-2`}
+                        />
+                        <View>
+                            <Text style={tw`font-bold text-white text-base`}>{post.item.name}</Text>  
+                            <Text style={[{fontSize: 11 }, tw`text-white mb-1 font-light`]}>3 munites ago</Text>
+                        </View>
+                    </TouchableOpacity>
+                </View>
                 <TouchableOpacity
-                    onPress={() => navigation.navigate('ProfileStack')}
-                    style={tw`flex flex-row items-center px-4`}
+                    onPress={() => navigation.navigate('DetailFeedsStack')}
                 >
-                    <Image source={{uri: post.item.avt}} 
-                        style={tw`w-9 h-9 rounded-full mr-2`}
-                    />
-                <Text style={tw`font-bold text-white`}>{post.item.name}</Text>
+                    <Text style={tw`text-white my-3 px-5 w-95/100`}
+                        numberOfLines={3}
+                    >
+                        {post.item.body}
+                    </Text>
                 </TouchableOpacity>
-
-                <Text style={tw`text-white my-3 px-5`}>
-                    {post.item.body}
-                </Text>
 
                 {(post.item.images.length > 1) ? (
                     <Paginator data={post.item.images} scrollX={scrollX} />
                 ) : (
-                    <Text style={tw`absolute`}/>
+                    <></>
                 )}
                
             </LinearGradient>

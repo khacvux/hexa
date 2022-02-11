@@ -1,6 +1,5 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import React from 'react'
-import StackNavigator from './StackNavigator';
 import { Ionicons, Feather, MaterialIcons } from '@expo/vector-icons'; 
 import tw from 'twrnc'
 import MenuScreen from '../screens/MenuScreen';
@@ -9,6 +8,7 @@ import SvgHome from '../icons/home.svg'
 import SvgHomeOutline from '../icons/home-outline.svg'
 import MyProfileScreen from '../screens/MyProfileScreen';
 import NotificationScreen from '../screens/NotificationScreen';
+import HomeScreen from '../screens/HomeScreen';
 
 
 const Tab = createBottomTabNavigator();
@@ -16,7 +16,7 @@ const Tab = createBottomTabNavigator();
 const BottomNavigator = () => {
     return (
         <Tab.Navigator>
-            <Tab.Screen name="HomeTab" component={StackNavigator} 
+            <Tab.Screen name="HomeTab" component={HomeScreen} 
                 options={{
                     headerShown: false,
                     tabBarShowLabel: false,

@@ -5,6 +5,7 @@ import { posts } from '../data';
 
 import Feeds from '../components/Home/Feeds';
 import Header from '../components/Header/Header';
+import SkeletonFeeds from '../components/Home/SkeletonFeeds';
 // import axios from 'axios';
 
 
@@ -106,7 +107,7 @@ const HomeScreen = () => {
                     onScrollEndDrag={onScrollEndDrag}
                     scrollEventThrottle={1}
                 />
-
+                {/* <SkeletonFeeds /> */}
             </View>
 
            

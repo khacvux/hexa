@@ -14,18 +14,23 @@ const CreateNewTrack = () => {
         </View>
         <Text style={tw`text-lg tracking-[.3] text-[#5EC2EA]`}>Tracks & albums will be displayed here</Text>
       </View>
-      <View style={tw`w-full border border-l-0 border-r-0 border-t-[#5EC2EA] border-b-[#5EC2EA] my-2`}>
-        <TouchableOpacity style={tw`w-full items-center`}
+      <View style={tw`w-full my-2 flex flex-row`}>
+        <TouchableOpacity style={tw`flex-3 items-center border border-[#5EC2EA] mx-1 rounded-md`}
+          onPress={() => navigation.goBack()}
+        >
+          <Text style={tw`py-3 text-[#5EC2EA] text-xs`}>Cancel</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={tw`flex-7 items-center border border-[#5EC2EA] mr-1 rounded-md bg-[#5EC2EA] `}
           activeOpacity={.8}
         >
-          <Text style={tw`py-3 text-[#5EC2EA] text-xs`}>
+          <Text style={tw`py-3 text-white text-xs`}>
             Next
           </Text>
         </TouchableOpacity>
       </View>
       <View style={tw`w-full bg-[#5EC2EA] mb-2`}>
-        <TouchableOpacity style={tw`w-full bg-[#5EC2EA] items-center`}>
-          <Text style={tw`py-3 text-white text-xs font-bold`}
+        <TouchableOpacity style={tw`w-full bg-white items-center border border-t-[#5EC2EA] border-b-[#5EC2EA] border-l-0 border-r-0`}>
+          <Text style={tw`py-3 text-[#5EC2EA] text-xs font-bold`}
             onPress={() => console.log('asd')}
           >
             Choose some pictures

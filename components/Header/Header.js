@@ -34,7 +34,7 @@ const Header = () => {
             <View style={tw`flex flex-row items-center`}>
                 {user ? (
                     <TouchableOpacity
-                        style={tw`bg-[#5EC2EA] py-1 px-3  rounded-full items-center mr-1`}
+                        style={tw`bg-[#5EC2EA] py-1 px-2  rounded-lg items-center mr-1`}
                         onPress={() => navigation.navigate('CreateNewStack')}
                     >
                         <AntDesign 
