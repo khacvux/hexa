@@ -3,17 +3,32 @@ import React from 'react';
 import tw from 'twrnc'
 import { Entypo } from '@expo/vector-icons';
 import SortByTime from '../components/Notifications/SortByTime';
+import { notifications } from '../data';
 
 const NotificationScreen = () => {
+
   return (
-    <SafeAreaView style={tw`h-full bg-white`}>
-        <View style={tw`flex flex-row items-center my-1 px-4`}>
-            <Text style={tw`text-xl font-bold `}>Notifications</Text>        
-        </View>
-        <ScrollView style={tw`px-4 mt-1`}>
-            <SortByTime type={'Today'} />
+    <SafeAreaView style={tw`bg-white h-full`}>
+        <ScrollView>
+          <View style={tw`flex my-1 px-4`}>
+              <Text style={tw`text-xl font-bold `}>Notifications</Text>        
+              <Text style={tw`tracking-[1]`}>Today</Text>
+          </View>
+          <ScrollView
+            contentContainerStyle={tw`mt-1`}
+          >
+            {
+              notifications.map((notification) => (
+                <SortByTime notification={notification} 
+                  key={notification.id} 
+                  
+                />
+              ))
+            }
+          </ScrollView>
 
         </ScrollView>
+       
     </SafeAreaView>
   );
 };

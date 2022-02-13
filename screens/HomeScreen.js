@@ -86,7 +86,7 @@ const HomeScreen = () => {
     return (
         <SafeAreaView style={tw`bg-white h-full`}>
             <View style={tw`h-full overflow-hidden flex`}>
-                <Animated.View style={[tw`absolute top-0 left-0 right-0 z-50`,{height: CONTAINER_HEIGHT}, {transform: [{translateY: headerTranslate}]}]}>
+                {/* <Animated.View style={[tw`absolute top-0 left-0 right-0 z-50`,{height: CONTAINER_HEIGHT}, {transform: [{translateY: headerTranslate}]}]}>
                     <Header />
                 </Animated.View>
                 <Animated.FlatList
@@ -106,8 +106,8 @@ const HomeScreen = () => {
                     onMomentumScrollEnd={onMomentumScrollEnd}
                     onScrollEndDrag={onScrollEndDrag}
                     scrollEventThrottle={1}
-                />
-                {/* <SkeletonFeeds /> */}
+                /> */}
+                <SkeletonFeeds />
             </View>
 
            

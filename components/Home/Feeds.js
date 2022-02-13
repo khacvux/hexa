@@ -63,7 +63,7 @@ const Feeds = (props) => {
     return (
      
         <View
-            style={tw`w-full h-150 mb-2 overflow-hidden flex`}
+            style={tw`w-full h-150 mb-2 overflow-hidden flex bg-gray-100`}
         >
             <View style={tw`w-full h-150 `}>
                 <TapGestureHandler 
@@ -143,7 +143,9 @@ const Feeds = (props) => {
                     </TouchableOpacity>
                 </View>
                 <TouchableOpacity
-                    onPress={() => navigation.navigate('DetailFeedsStack')}
+                    onPress={() => navigation.navigate('DetailFeedsStack', {
+                        post: post.item
+                    })}
                 >
                     <Text style={tw`text-white my-3 px-5 w-95/100`}
                         numberOfLines={3}
@@ -164,15 +166,15 @@ const Feeds = (props) => {
                 ref={refRBSheet}
                 // closeOnDragDown={true}
                 closeOnPressMask={true}
-                height={520}
-                openDuration={150}
+                height={550}
+                openDuration={250}
                 customStyles={{
                     wrapper: tw`bg-black bg-opacity-30`,
-                    container: tw`bg-gray-100 pt-3 rounded-t-lg flex flex-col justify-between`
+                    container: tw`bg-gray-100 rounded-t-lg flex flex-col`
                 }}
             >   
                 <FlatList 
-                    contentContainerStyle={tw`flex-1 pt-3 flex flex-col px-4`}
+                    contentContainerStyle={tw`flex-1 flex flex-col pt-3 px-4 w-full`}
                     data={post.item.comments}
                     renderItem={(comment) => {
                         return <Comments
@@ -181,7 +183,10 @@ const Feeds = (props) => {
                     }}
                     keyExtractor={comment => comment.idComment}
                 />
-                <WriteComment />
+                <View style={tw`mb-2 w-full`} >
+                    <WriteComment />    
+
+                </View>
             </RBSheet>
         </View>
     )

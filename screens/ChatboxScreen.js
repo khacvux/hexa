@@ -35,7 +35,7 @@ const ChatboxScreen = () => {
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         keyboardVerticalOffset={5}
       >
-        <WriteMessage />
+          <WriteMessage />
 
       </KeyboardAvoidingView>
     </SafeAreaView>

@@ -1,5 +1,4 @@
-export const posts = [
-    
+export const posts = [ 
     {
         avt: 'https://scontent.fhan4-2.fna.fbcdn.net/v/t39.30808-6/272193349_4765652010179377_189781419500184775_n.jpg?_nc_cat=111&ccb=1-5&_nc_sid=730e14&_nc_ohc=uz6eaHVt4ywAX9KPkeP&_nc_ht=scontent.fhan4-2.fna&oh=00_AT9A8ok2owhqJqPUFRxYomR68Ha-SKbo_K65QRlbLjFalw&oe=6208DF38',
         images: [
@@ -62,5 +61,39 @@ export const posts = [
                 date: '1 day ago',
             },
         ]
+    },
+]
+export const notifications = [
+    {
+        avt: 'https://scontent.fhan4-2.fna.fbcdn.net/v/t39.30808-6/272193349_4765652010179377_189781419500184775_n.jpg?_nc_cat=111&ccb=1-5&_nc_sid=730e14&_nc_ohc=uz6eaHVt4ywAX9KPkeP&_nc_ht=scontent.fhan4-2.fna&oh=00_AT9A8ok2owhqJqPUFRxYomR68Ha-SKbo_K65QRlbLjFalw&oe=6208DF38',
+        userName: 'username',
+        title: 'liked your post',
+        date: '10 munites ago',
+        id: '1',
+        status: true,
+    },
+    {
+        avt: 'https://scontent.fhan4-2.fna.fbcdn.net/v/t39.30808-6/272193349_4765652010179377_189781419500184775_n.jpg?_nc_cat=111&ccb=1-5&_nc_sid=730e14&_nc_ohc=uz6eaHVt4ywAX9KPkeP&_nc_ht=scontent.fhan4-2.fna&oh=00_AT9A8ok2owhqJqPUFRxYomR68Ha-SKbo_K65QRlbLjFalw&oe=6208DF38',
+        userName: 'username',
+        title: 'Thằng em mình học bách khoa cơ khí, sinh năm 96. Tự mày mò học code rồi đi làm remote cho công ty Mỹ 2 năm nay. Mỗi tối online 3-4 giờ là xong việc. Lương tháng 3k6. Nhưng thu nhập chính vẫn là từ nhận các project bên ngoài làm thêm. Tuần làm 2,3 cái nhẹ nhàng 9,10k tiền tươi thóc thật không phải đóng thuế',
+        date: '10 munites ago',
+        id: '2',
+        status: false,
+    },
+    {
+        avt: 'https://scontent.fhan4-2.fna.fbcdn.net/v/t39.30808-6/272193349_4765652010179377_189781419500184775_n.jpg?_nc_cat=111&ccb=1-5&_nc_sid=730e14&_nc_ohc=uz6eaHVt4ywAX9KPkeP&_nc_ht=scontent.fhan4-2.fna&oh=00_AT9A8ok2owhqJqPUFRxYomR68Ha-SKbo_K65QRlbLjFalw&oe=6208DF38',
+        userName: 'username',
+        title: 'liked your post',
+        date: '10 munites ago',
+        id: '3',
+        status: false,
+    },
+    {
+        avt: 'https://scontent.fhan4-2.fna.fbcdn.net/v/t39.30808-6/272193349_4765652010179377_189781419500184775_n.jpg?_nc_cat=111&ccb=1-5&_nc_sid=730e14&_nc_ohc=uz6eaHVt4ywAX9KPkeP&_nc_ht=scontent.fhan4-2.fna&oh=00_AT9A8ok2owhqJqPUFRxYomR68Ha-SKbo_K65QRlbLjFalw&oe=6208DF38',
+        userName: 'username',
+        title: 'liked your post',
+        date: '10 munites ago',
+        id: '4',
+        status: true,
     },
 ]
