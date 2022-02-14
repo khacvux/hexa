@@ -4,7 +4,7 @@ import tw from 'twrnc'
 import { AntDesign, Entypo } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
-const user = 1;
+const user = false;
 const Header = () => {
 
     const navigation = useNavigation();
@@ -25,9 +25,11 @@ const Header = () => {
                     </TouchableOpacity>
                 ) : (
                     <TouchableOpacity
-                        style={tw`flex flex-row bg-[#56C4F4] px-2 py-1 rounded-full items-center`}
+                        style={tw`flex flex-row bg-[#56C4F4] mt-[2] px-2 py-[5] rounded-lg items-center`}
+                        activeOpacity={.7}
+                        onPress={() => navigation.navigate('LoginStack')}
                     >
-                        <Text style={tw`text-md font-light text-white font-bold px-4`}>Login</Text>
+                        <Text style={tw`font-light text-white font-bold px-4`}>Login</Text>
                     </TouchableOpacity>
                 )}
             </View>

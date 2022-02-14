@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { View, Text, TouchableOpacity, Image, Animated, FlatList } from 'react-native'
+import { View, Text, TouchableOpacity, Image, Animated, FlatList, Dimensions } from 'react-native'
 import tw from 'twrnc'
 import { Ionicons, FontAwesome } from '@expo/vector-icons'; 
 import { LinearGradient } from 'expo-linear-gradient';
@@ -19,6 +19,12 @@ import Paginator from './Paginator';
 
 
 const Feeds = (props) => {
+
+    const {width: SCREEN_WIDTH} = Dimensions.get('window');
+    // frame size 3:2
+    const FRAMESIZE_W = SCREEN_WIDTH;
+    const FRAMESIZE_H = SCREEN_WIDTH/2*3;
+
     const refRBSheet = useRef();
     const navigation = useNavigation();
     const { post } = props;
@@ -63,11 +69,11 @@ const Feeds = (props) => {
     return (
      
         <View
-            style={tw`w-full h-150 mb-2 overflow-hidden flex bg-gray-100`}
+            style={[tw`mb-2 overflow-hidden flex bg-gray-100`, { width: FRAMESIZE_W, height: FRAMESIZE_H}]}
         >
-            <View style={tw`w-full h-150 `}>
+            <View style={tw`w-full h-full `}>
                 <TapGestureHandler 
-                    style={tw`flex-1 w-full h-150 mb-5`}
+                    style={tw`flex-1 w-full h-full mb-5`}
                     numberOfTaps={2}
                     onActivated={ handlePressHeart }   
                 >
@@ -164,9 +170,9 @@ const Feeds = (props) => {
 
             <RBSheet
                 ref={refRBSheet}
-                // closeOnDragDown={true}
+                closeOnDragDown={true}
                 closeOnPressMask={true}
-                height={550}
+                height={520}
                 openDuration={250}
                 customStyles={{
                     wrapper: tw`bg-black bg-opacity-30`,

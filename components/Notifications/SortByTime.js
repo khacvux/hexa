@@ -29,12 +29,8 @@ const SortByTime = (props) => {
         },
         onEnd: () => {
             const shouldBeDismissed = translateX.value < TRANSLATE_THRESHOLD;
-            const shouldBeShowBtn = translateX.value < TRANSLATE_THRESHOLD/2;
 
-            if(shouldBeShowBtn) {
-                translateX.value = withTiming(-WIDTH_DELETE_BTN)
-            }
-            else if(shouldBeDismissed){
+            if(shouldBeDismissed){
                 translateX.value = withTiming(-SCREEN_WIDTH)
                 itemHeight.value = withTiming(0)
                 mb.value = withTiming(0)
@@ -73,7 +69,7 @@ const SortByTime = (props) => {
                     <View style={tw`flex flex-row items-center bg-[${bgNotify}] w-full h-full px-5 z-10`}>
                         <Image
                             source={{uri: notification.avt }} 
-                            style={tw`w-12 h-12 rounded-full`}
+                            style={tw`w-12 h-12 rounded-full bg-gray-100`}
                         />
                         <View style={tw` flex-1 flex flex-col ml-3`}>
                             <Text style={tw`text-base`}

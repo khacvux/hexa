@@ -13,63 +13,30 @@ import CreateNewScreen from '../screens/CreateNewScreen';
 import MediaSelectorScreen from '../screens/MediaSelectorScreen';
 import DetailFeedsScreen from '../screens/DetailFeedsScreen';
 import BottomNavigator from './BottomNavigator';
+import LoginScreen from '../screens/LoginScreen';
 
 
 const Stack = createNativeStackNavigator();
 
 const StackNavigator = () => {
     return (
-        <Stack.Navigator>
-            <Stack.Screen name="HomeStack" component={BottomNavigator} 
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <Stack.Screen name="DetailFeedsStack" component={DetailFeedsScreen} 
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <Stack.Screen name="ProfileStack" component={ProfileScreen} 
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <Stack.Screen name="MenuStack" component={MenuScreen} 
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <Stack.Screen name="MyProfileStack" component={MyProfileScreen} 
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <Stack.Screen name="NotificationStack" component={NotificationScreen} 
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <Stack.Screen name="ChatboxStack" component={ChatboxScreen} 
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <Stack.Screen name="ChatsStack" component={ChatsScreen} 
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <Stack.Screen name="CreateNewStack" component={CreateNewScreen} 
-                options={{
-                    headerShown: false,
-                }}
-            />
-            <Stack.Screen name="MediaSelectorStack" component={MediaSelectorScreen} 
-                options={{
-                    headerShown: false,
-                }}
-            />
+        <Stack.Navigator
+            screenOptions={{
+                headerShown: false,
+            }}
+        >
+            <Stack.Screen name="HomeStack" component={BottomNavigator} />
+            <Stack.Screen name="DetailFeedsStack" component={DetailFeedsScreen} />
+            <Stack.Screen name="ProfileStack" component={ProfileScreen} />
+            <Stack.Screen name="MenuStack" component={MenuScreen} />
+            <Stack.Screen name="MyProfileStack" component={MyProfileScreen} />
+            <Stack.Screen name="NotificationStack" component={NotificationScreen} />
+            <Stack.Screen name="ChatboxStack" component={ChatboxScreen} />
+            <Stack.Screen name="ChatsStack" component={ChatsScreen} />
+            <Stack.Screen name="CreateNewStack" component={CreateNewScreen} />
+            <Stack.Screen name="MediaSelectorStack" component={MediaSelectorScreen} />
+            <Stack.Screen name="LoginStack" component={LoginScreen} />
+            
             
         </Stack.Navigator>
     )

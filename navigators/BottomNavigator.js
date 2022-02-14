@@ -9,11 +9,13 @@ import SvgHomeOutline from '../icons/home-outline.svg'
 import MyProfileScreen from '../screens/MyProfileScreen';
 import NotificationScreen from '../screens/NotificationScreen';
 import HomeScreen from '../screens/HomeScreen';
+import { View } from 'react-native';
 
 
 const Tab = createBottomTabNavigator();
 
 const BottomNavigator = () => {
+
     return (
         <Tab.Navigator>
             <Tab.Screen name="HomeTab" component={HomeScreen} 
@@ -65,12 +67,17 @@ const BottomNavigator = () => {
                 options={{
                     headerShown: false,
                     tabBarShowLabel: false,
-                    tabBarIcon: (({focused}) => 
-                        <Ionicons 
-                            name={focused ? 'ios-notifications-sharp' : 'ios-notifications-outline'} 
-                            style={focused ? tw`text-xl text-[#5EC2EA]` : tw`text-xl text-black` }
-                        />
-                    ),
+                    tabBarIcon: (({focused}) => {
+                        return(
+                            <View>
+                                <Ionicons 
+                                    name={focused ? 'ios-notifications-sharp' : 'ios-notifications-outline'} 
+                                    style={focused ? tw`text-xl text-[#5EC2EA]` : tw`text-xl text-black` }
+                                />
+
+                            </View>
+                        )
+                    }),
                     tabBarStyle: tw`bg-[#F5F7FA]`,
                 }}
             />
