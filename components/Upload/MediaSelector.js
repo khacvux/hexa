@@ -2,7 +2,6 @@ import { View, Text, SafeAreaView, StyleSheet, TouchableOpacity} from 'react-nat
 import React, { useMemo } from 'react'
 import tw from 'twrnc'
 import { useNavigation } from '@react-navigation/native'
-import { AssetsSelector } from 'expo-images-picker'
 import { Ionicons } from '@expo/vector-icons'
 import { MediaType, Asset } from 'expo-media-library'
 import { BlurView } from 'expo-blur'

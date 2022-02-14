@@ -82,7 +82,7 @@ const DetailFeedsScreen = ({route}) => {
                                 <View>
                                     <Image
                                         style={tw`w-12 h-12 rounded-full absolute -top-3 bg-gray-300`}
-                                        source={{uri: 'https://scontent.fhan4-2.fna.fbcdn.net/v/t39.30808-6/272193349_4765652010179377_189781419500184775_n.jpg?_nc_cat=111&ccb=1-5&_nc_sid=730e14&_nc_ohc=uz6eaHVt4ywAX9KPkeP&_nc_ht=scontent.fhan4-2.fna&oh=00_AT9A8ok2owhqJqPUFRxYomR68Ha-SKbo_K65QRlbLjFalw&oe=6208DF38'}}
+                                        source={{uri: post.avt}}
                                     />
                                     <View style={tw`ml-14 flex`}>
                                         <Text style={tw`font-bold text-lg`}>{post.name}</Text>  
