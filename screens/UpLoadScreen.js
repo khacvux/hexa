@@ -2,11 +2,11 @@ import React from 'react';
 import { Text, View } from 'react-native';
 import { UpLoadNavigatior } from '../navigators/TopTabNavigatior';
 
-const CreateNewScreen = () => {
+const UpLoadScreen = () => {
   return (
     <UpLoadNavigatior/>
    
   );
 };
 
-export default CreateNewScreen;
+export default UpLoadScreen;

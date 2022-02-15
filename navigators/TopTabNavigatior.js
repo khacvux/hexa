@@ -4,9 +4,10 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import tw from 'twrnc';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
+import SelectPicture from '../components/Upload/SelectPicture';
+import SelectAudio from '../components/Upload/SelectAudio';
 
-import CreateNewFeeds from '../components/Upload/CreateNewFeeds';
-import CreateNewTrack from '../components/Upload/CreateNewTrack';
+
 
 const TopBar = createMaterialTopTabNavigator();
 
@@ -29,7 +30,7 @@ export const UpLoadNavigatior = () => {
         >
             <TopBar.Screen 
                 name='CreateNewFeedTopBar' 
-                component={CreateNewFeeds} 
+                component={SelectPicture} 
                 options={{ 
                     tabBarIcon: (({focused}) => 
                         <>
@@ -51,7 +52,7 @@ export const UpLoadNavigatior = () => {
             />
             <TopBar.Screen 
                 name='CreateNewTrackTopBar' 
-                component={CreateNewTrack} 
+                component={SelectAudio} 
                 options={{ 
                     tabBarIcon: (({focused}) => 
                         <>

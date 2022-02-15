@@ -4,16 +4,15 @@ import React from 'react'
 
 import ChatboxScreen from '../screens/ChatboxScreen';
 import ChatsScreen from '../screens/ChatsScreen';
-
 import MenuScreen from '../screens/MenuScreen';
 import MyProfileScreen from '../screens/MyProfileScreen';
 import NotificationScreen from '../screens/NotificationScreen';
 import ProfileScreen from '../screens/ProfileScreen';
-import CreateNewScreen from '../screens/CreateNewScreen';
-import MediaSelectorScreen from '../screens/MediaSelectorScreen';
+import UpLoadScreen from '../screens/UpLoadScreen';
 import DetailFeedsScreen from '../screens/DetailFeedsScreen';
 import BottomNavigator from './BottomNavigator';
 import LoginScreen from '../screens/LoginScreen';
+import UpLoadPictureScreen from '../screens/UpLoadPictureScreen';
 
 
 const Stack = createNativeStackNavigator();
@@ -33,8 +32,8 @@ const StackNavigator = () => {
             <Stack.Screen name="NotificationStack" component={NotificationScreen} />
             <Stack.Screen name="ChatboxStack" component={ChatboxScreen} />
             <Stack.Screen name="ChatsStack" component={ChatsScreen} />
-            <Stack.Screen name="CreateNewStack" component={CreateNewScreen} />
-            <Stack.Screen name="MediaSelectorStack" component={MediaSelectorScreen} />
+            <Stack.Screen name="UpLoadStack" component={UpLoadScreen} />
+            <Stack.Screen name="UpLoadPictureStack" component={UpLoadPictureScreen} />
             <Stack.Screen name="LoginStack" component={LoginScreen} />
             
             

@@ -4,7 +4,7 @@ import tw from 'twrnc'
 import { AntDesign, Entypo } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
-const user = false;
+const user = true;
 const Header = () => {
 
     const navigation = useNavigation();
@@ -37,7 +37,7 @@ const Header = () => {
                 {user ? (
                     <TouchableOpacity
                         style={tw`bg-[#5EC2EA] py-1 px-2  rounded-lg items-center mr-1`}
-                        onPress={() => navigation.navigate('CreateNewStack')}
+                        onPress={() => navigation.navigate('UpLoadStack')}
                     >
                         <AntDesign 
                             name='plus' 
