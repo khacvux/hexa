@@ -1,9 +1,10 @@
 import { View, Text, SafeAreaView, Image, Dimensions, TouchableOpacity, TouchableWithoutFeedback, Keyboard, Switch } from 'react-native'
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import tw from 'twrnc'
 import { useNavigation } from '@react-navigation/native'
 import { Ionicons, MaterialIcons } from '@expo/vector-icons'
 import { TextInput } from 'react-native-gesture-handler'
+import RBSheet from "react-native-raw-bottom-sheet";
 
 
 
@@ -17,8 +18,11 @@ const UpLoadPictureScreen = ({route}) => {
     const FRAMESIZE_W = SCREEN_WIDTH;
     const FRAMESIZE_H = SCREEN_WIDTH/2*3;
 
+    const [viewer, setViewer] = useState('public');
     const [isEnabled, setIsEnabled] = useState(false);
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+
+    const refRBSheet = useRef();
 
 
     return (
@@ -57,7 +61,9 @@ const UpLoadPictureScreen = ({route}) => {
                     <View style={tw`w-full mt-2`}>
                         <View style={tw`flex flex-row items-center h-13 justify-between bg-white p-3 rounded border border-0 border-t border-b border-gray-200 my-2`}>
                             <Text style={tw`text-base`}>Who can see your posts?</Text>
-                            <TouchableOpacity>
+                            <TouchableOpacity
+                                onPress={() => refRBSheet.current.open()}
+                            >
                                 <MaterialIcons name='keyboard-arrow-down' size={23}/>
                             </TouchableOpacity>
                         </View>
@@ -81,6 +87,72 @@ const UpLoadPictureScreen = ({route}) => {
                 
 
             </View>
+            <RBSheet
+                ref={refRBSheet}
+                closeOnDragDown={true}
+                closeOnPressMask={true}
+                height={200}
+                openDuration={250}
+                customStyles={{
+                    wrapper: tw`bg-black bg-opacity-30`,
+                    container: tw`bg-gray-100 rounded-t-lg flex flex-col`
+                }}
+            >   
+                <TouchableOpacity 
+                    style={(viewer == 'public') ? (
+                        tw`flex flex-row w-full py-3 items-center justify-center border-r-0 border-l-0 border border-[#5EC2EA] bg-[#5EC2EA] mb-2`
+                    ) : (
+                        tw`flex flex-row w-full py-3 items-center justify-center border-r-0 border-l-0 border border-gray-400 mb-2`
+                    )}
+                    
+                    onPress={() => setViewer('public')}
+                >
+                    <Text style={(viewer == 'public') ? (
+                            tw`text-base tracking-wider text-white`
+                        ) : (
+                            tw`text-base tracking-wider`
+                        )}>
+                            Everyone
+                    </Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity 
+                    style={(viewer == 'follower') ? (
+                        tw`flex flex-row w-full py-3 items-center justify-center border-r-0 border-l-0 border border-[#5EC2EA] bg-[#5EC2EA] mb-2`
+                    ) : (
+                        tw`flex flex-row w-full py-3 items-center justify-center border-r-0 border-l-0 border border-gray-400 mb-2`
+                    )}
+                    
+                    onPress={() => setViewer('follower')}
+                >
+                    <Text style={(viewer == 'follower') ? (
+                            tw`text-base tracking-wider text-white`
+                        ) : (
+                            tw`text-base tracking-wider`
+                        )}>
+                            Follower
+                    </Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity 
+                    style={(viewer == 'private') ? (
+                        tw`flex flex-row w-full py-3 items-center justify-center border-r-0 border-l-0 border border-[#5EC2EA] bg-[#5EC2EA] mb-2`
+                    ) : (
+                        tw`flex flex-row w-full py-3 items-center justify-center border-r-0 border-l-0 border border-gray-400 mb-2`
+                    )}
+                    
+                    onPress={() => setViewer('private')}
+                >
+                    <Text style={(viewer == 'private') ? (
+                            tw`text-base tracking-wider text-white`
+                        ) : (
+                            tw`text-base tracking-wider`
+                        )}>
+                            Only me
+                    </Text>
+                </TouchableOpacity>
+               
+            </RBSheet>
         </SafeAreaView>
     )
 }
