@@ -8,7 +8,7 @@ const Comments = (props) => {
         <View style={tw`flex flex-row mb-3`}>
             <Image
                 source={{uri: comment.item.avt}}
-                style={tw`w-10 h-10 rounded-full mr-2`}
+                style={tw`w-10 h-10 rounded-full mr-2 bg-gray-200`}
             />
             <View style={tw`w-full`}>
                 <View style={tw`flex flex-row items-center`}>

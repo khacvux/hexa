@@ -101,7 +101,7 @@ const LoginOptions = () => {
                     ref={refRBSheet}
                     closeOnDragDown={true}
                     closeOnPressMask={true}
-                    height={500}
+                    height={350}
                     openDuration={250}
                     customStyles={{
                         wrapper: tw`bg-black bg-opacity-30`,
