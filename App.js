@@ -6,7 +6,7 @@ import StackNavigator from './navigators/StackNavigator';
 export default function App() {
   return (
     <SafeAreaProvider>
-        <NavigationContainer>
+        <NavigationContainer >
           <StackNavigator/>
         </NavigationContainer>
     </SafeAreaProvider>
