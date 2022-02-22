@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { SafeAreaView, FlatList, Animated, View } from 'react-native'
-import tw from 'twrnc'
+import tw, { useDeviceContext } from 'twrnc'
 import { posts } from '../data';
 
 import Feeds from '../components/Home/Feeds';
@@ -22,6 +22,8 @@ const HomeScreen = () => {
     //     // getData().then((res) => setPosts(res.data));
     //     // getData().catch((err) => console.log(err));
     // }, [])
+
+    useDeviceContext(tw)
     const CONTAINER_HEIGHT = 40;
     const scrollY = useRef(new Animated.Value(0)).current;
     const offsetAnim = useRef(new Animated.Value(0)).current;
@@ -84,7 +86,7 @@ const HomeScreen = () => {
     
 
     return (
-        <SafeAreaView style={tw`bg-white h-full`}>
+        <SafeAreaView style={tw`bg-white h-full dark:bg-black`}>
             <View style={tw`h-full overflow-hidden flex`}>
                 <Animated.View style={[tw`absolute top-0 left-0 right-0 z-50`,{height: CONTAINER_HEIGHT}, {transform: [{translateY: headerTranslate}]}]}>
                     <Header />

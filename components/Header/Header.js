@@ -4,8 +4,15 @@ import tw from 'twrnc'
 import { AntDesign, Entypo } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
-const user = true;
+
+import { useDispatch, useSelector } from 'react-redux'
+import { setUser } from '../../redux/actions'
+
+// const user = false;
 const Header = () => {
+
+    const { user } = useSelector(state => state.userReducer)
+    const dispatch = useDispatch() 
 
     const navigation = useNavigation();
     return (

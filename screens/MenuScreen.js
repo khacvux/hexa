@@ -1,14 +1,34 @@
 import React from 'react'
-import { View, Text, SafeAreaView } from 'react-native'
+import { View, Text, SafeAreaView, TouchableOpacity } from 'react-native'
+import tw from 'twrnc'
 
-import SvgHome from '../icons/home-outline.svg'
 
+import { useSelector, useDispatch,} from 'react-redux'
+import { setUser } from '../redux/actions'
+import { useNavigation } from '@react-navigation/native'
 
 
 const MenuScreen = () => {
+
+    const navigation = useNavigation()
+    const { user } = useSelector(state => state.userReducer)
+    const dispatch = useDispatch()
+
     return (
-        <SafeAreaView>
-            <Text>3443</Text>
+        <SafeAreaView style={tw`bg-white h-full`}>
+            <View style={tw`w-full px-3 py-2`}>
+                <TouchableOpacity 
+                    style={tw`bg-gray-200 rounded-md py-2 items-center`} 
+                    activeOpacity={.6}
+                    onPress={() => {
+                        dispatch(setUser(false))
+                        navigation.navigate('HomeTab');
+                    }}
+                >
+                    <Text style={tw`text-base font-bold`}>Log out</Text>
+                </TouchableOpacity>
+
+            </View>
 
 
         </SafeAreaView>

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { View, Text, TouchableOpacity, Image, Animated, FlatList, Dimensions } from 'react-native'
-import tw from 'twrnc'
+import tw, { useDeviceContext } from 'twrnc'
 import { Ionicons, FontAwesome } from '@expo/vector-icons'; 
 import { LinearGradient } from 'expo-linear-gradient';
 import { BlurView } from 'expo-blur';
@@ -19,7 +19,7 @@ import Paginator from './Paginator';
 
 
 const Feeds = (props) => {
-
+    useDeviceContext(tw);
     const {width: SCREEN_WIDTH} = Dimensions.get('window');
     // frame size 3:2
     const FRAMESIZE_W = SCREEN_WIDTH;
@@ -69,7 +69,7 @@ const Feeds = (props) => {
     return (
      
         <View
-            style={[tw`mb-2 overflow-hidden flex bg-gray-100`, { width: FRAMESIZE_W, height: FRAMESIZE_H}]}
+            style={[tw`mb-2 overflow-hidden flex bg-gray-100 dark:bg-black`, { width: FRAMESIZE_W, height: FRAMESIZE_H}]}
         >
             <View style={tw`w-full h-full `}>
                 <TapGestureHandler 

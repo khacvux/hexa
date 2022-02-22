@@ -94,6 +94,21 @@ const BottomNavigator = () => {
                     tabBarStyle: tw`bg-[#F5F7FA]`,
                 }}
             />
+            <Tab.Screen name="MenuTab" component={MenuScreen}
+                options={{
+                    headerShown: false,
+                    tabBarShowLabel: false,
+                    tabBarIcon: (({focused}) => 
+                        <Feather
+                            name='menu'
+                            style={focused ? (tw`text-[#5EC2EA]`) : (tw``)}
+                            size={23}
+                        />
+                    ),
+                    tabBarStyle: tw`bg-[#F5F7FA]`,
+                }}
+            />
+            
             
         </Tab.Navigator>
     )

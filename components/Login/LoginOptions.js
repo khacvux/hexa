@@ -8,12 +8,16 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 import { BlurView } from 'expo-blur'
 import RBSheet from 'react-native-raw-bottom-sheet'
 
+import { useSelector, useDispatch,} from 'react-redux'
+import { setUser } from '../../redux/actions'
 
 const LoginOptions = () => {
 
     const navigation = useNavigation();
     const refRBSheet = useRef();
 
+    // const { user } = useSelector(state => state.userReducer)
+    const dispatch = useDispatch()
 
     return (
         <ImageBackground
@@ -66,6 +70,10 @@ const LoginOptions = () => {
                         </TouchableOpacity>
                         <TouchableOpacity 
                             style={tw`w-full p-[9] bg-[#5EC2EA] items-center rounded-[2] mt-2`}
+                            onPress={() => {
+                                dispatch(setUser(true))
+                                navigation.goBack();
+                            }}
                         >
                             <Text style={tw`text-white font-bold text-base`}>
                                 Login
