@@ -11,8 +11,8 @@ export default function App() {
         <NavigationContainer >
           <StackNavigator/>
         </NavigationContainer>
-    </SafeAreaProvider>
-  </Provider>
+      </SafeAreaProvider>
+    </Provider>
   );
 }
 

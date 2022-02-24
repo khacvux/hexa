@@ -10,6 +10,7 @@ import MyProfileScreen from '../screens/MyProfileScreen';
 import NotificationScreen from '../screens/NotificationScreen';
 import HomeScreen from '../screens/HomeScreen';
 import { View } from 'react-native';
+import SearchScreen from '../screens/SearchScreen';
 
 
 const Tab = createBottomTabNavigator();
@@ -37,7 +38,7 @@ const BottomNavigator = () => {
 
                 }}
             />
-            <Tab.Screen name="SearchTab" component={MenuScreen}
+            <Tab.Screen name="SearchTab" component={SearchScreen}
                 options={{
                     headerShown: false,
                     tabBarShowLabel: false,
