@@ -11,6 +11,7 @@ import NotificationScreen from '../screens/NotificationScreen';
 import HomeScreen from '../screens/HomeScreen';
 import { View } from 'react-native';
 import SearchScreen from '../screens/SearchScreen';
+import MusicScreen from '../screens/MusicScreen';
 
 
 const Tab = createBottomTabNavigator();
@@ -51,7 +52,7 @@ const BottomNavigator = () => {
                     tabBarStyle: tw`bg-[#F5F7FA]`,
                 }}
             />
-            <Tab.Screen name="MusicTab" component={MenuScreen}
+            <Tab.Screen name="MusicTab" component={MusicScreen}
                 options={{
                     headerShown: false,
                     tabBarShowLabel: false,

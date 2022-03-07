@@ -5,14 +5,12 @@ import { AntDesign, Entypo } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
 
-import { useDispatch, useSelector } from 'react-redux'
-import { setUser } from '../../redux/actions'
+import { useSelector } from 'react-redux'
 
-// const user = false;
+const user = true;
 const Header = () => {
 
-    const { user } = useSelector(state => state.userReducer)
-    const dispatch = useDispatch() 
+    // const { user } = useSelector(state => state.loginReducer)
 
     const navigation = useNavigation();
     return (

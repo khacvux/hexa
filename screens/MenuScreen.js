@@ -3,16 +3,9 @@ import { View, Text, SafeAreaView, TouchableOpacity } from 'react-native'
 import tw from 'twrnc'
 
 
-import { useSelector, useDispatch,} from 'react-redux'
-import { setUser } from '../redux/actions'
-import { useNavigation } from '@react-navigation/native'
 
 
-const MenuScreen = () => {
-
-    const navigation = useNavigation()
-    const { user } = useSelector(state => state.userReducer)
-    const dispatch = useDispatch()
+const MenuScreen = ({navigation}) => {
 
     return (
         <SafeAreaView style={tw`bg-white h-full`}>
@@ -21,7 +14,7 @@ const MenuScreen = () => {
                     style={tw`bg-gray-200 rounded-md py-2 items-center`} 
                     activeOpacity={.6}
                     onPress={() => {
-                        dispatch(setUser(false))
+                        // dispatch(setUser(false))
                         navigation.navigate('HomeTab');
                     }}
                 >

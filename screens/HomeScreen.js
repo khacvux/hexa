@@ -5,23 +5,11 @@ import { posts } from '../data';
 
 import Feeds from '../components/Home/Feeds';
 import Header from '../components/Header/Header';
-import SkeletonFeeds from '../components/Home/SkeletonFeeds';
-// import axios from 'axios';
-
+// import SkeletonFeeds from '../components/Home/SkeletonFeeds';
 
 const HomeScreen = () => {
 
-    // const [posts, setPosts] = useState([]);
 
-    // useEffect(() => {
-    //     async function getData(){
-    //         const res = axios.get('http://localhost:3000/posts')
-    //         return res;
-    //     }
-
-    //     // getData().then((res) => setPosts(res.data));
-    //     // getData().catch((err) => console.log(err));
-    // }, [])
 
     useDeviceContext(tw)
     const CONTAINER_HEIGHT = 40;
