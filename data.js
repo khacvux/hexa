@@ -96,4 +96,73 @@ export const notifications = [
         status: true,
     },
 ]
+export const albums = [
+    {
+        img: 'http://image.vtc.vn/files/chubi/2019/11/09/denvau-4-5-1301424.jpg',
+        name: 'tai vi sao',
+        description: 'Related tracks',
+        id: '1',
+    },
+    {
+        img: 'http://image.vtc.vn/files/chubi/2019/11/09/denvau-4-5-1301424.jpg',
+        name: 'tai vi sao',
+        description: 'Related tracks',
+        id: '2',
+    },
+    {
+        img: 'http://image.vtc.vn/files/chubi/2019/11/09/denvau-4-5-1301424.jpg',
+        name: 'tai vi sao',
+        description: 'Related tracks',
+        id: '3',
+    },
+    {
+        img: 'http://image.vtc.vn/files/chubi/2019/11/09/denvau-4-5-1301424.jpg',
+        name: 'tai vi sao',
+        description: 'Related tracks',
+        id: '4',
+    },
+    {
+        img: 'http://image.vtc.vn/files/chubi/2019/11/09/denvau-4-5-1301424.jpg',
+        name: 'tai vi sao',
+        description: 'Related tracks',
+        id: '5',
+    },
+]
 
+export const listTrack = [
+    {
+        name: 'tai vi sao',
+        userSong: '@username',
+        img: 'http://image.vtc.vn/files/chubi/2019/11/09/denvau-4-5-1301424.jpg',
+    },
+    {
+        name: 'tai vi sao',
+        userSong: '@username',
+        img: 'http://image.vtc.vn/files/chubi/2019/11/09/denvau-4-5-1301424.jpg',
+    },
+    {
+        name: 'tai vi sao',
+        userSong: '@username',
+        img: 'http://image.vtc.vn/files/chubi/2019/11/09/denvau-4-5-1301424.jpg',
+    },
+    {
+        name: 'tai vi sao',
+        userSong: '@username',
+        img: 'http://image.vtc.vn/files/chubi/2019/11/09/denvau-4-5-1301424.jpg',
+    },
+    {
+        name: 'tai vi sao',
+        userSong: '@username',
+        img: 'http://image.vtc.vn/files/chubi/2019/11/09/denvau-4-5-1301424.jpg',
+    },
+    {
+        name: 'tai vi sao',
+        userSong: '@username',
+        img: 'http://image.vtc.vn/files/chubi/2019/11/09/denvau-4-5-1301424.jpg',
+    },
+    {
+        name: 'tai vi sao',
+        userSong: '@username',
+        img: 'http://image.vtc.vn/files/chubi/2019/11/09/denvau-4-5-1301424.jpg',
+    },
+]

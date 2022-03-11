@@ -5,8 +5,8 @@ const initState = {
     error: {},
 }
 
-export default contactReducer = (state = initState, {type, payload}) => {
-    switch(type) {
+export default contactReducer = (state = initState, action) => {
+    switch(action.type) {
         case TYPES.SEND_REQUEST_GET_ALL_USER:
             return {
                 ...state,
@@ -14,13 +14,13 @@ export default contactReducer = (state = initState, {type, payload}) => {
         case TYPES.SEND_REQUEST_GET_ALL_USER_SUCCESS:
             return {
                 ...state,
-                user: payload,
+                user: action.payload,
             }
         case TYPES.SEND_REQUEST_GET_ALL_USER_FAILURE:
             return {
                 ...state,
                 user: {},
-                error: payload
+                error: action.payload
             }
         default:
             return state;

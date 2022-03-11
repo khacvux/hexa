@@ -1,33 +1,33 @@
 import { View, Text, FlatList } from 'react-native'
-import React, { useEffect } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { useSelector, useDispatch } from 'react-redux'
-import { fetchContactData } from '../redux/actions/contactAPI'
-
 import tw from 'twrnc'
+import { Entypo } from '@expo/vector-icons'; 
+import { ScrollView } from 'react-native-gesture-handler';
+
+import SlideTrack from '../components/SlideTrack/SlideTrack';
+import Header from '../components/Header/Header';
+
 
 
 const MusicScreen = () => {
-    const dispatch = useDispatch();
-    const users = useSelector(state => state.contactReducer.user)
-
-    useEffect(() => {
-        dispatch(fetchContactData())
-    }, [])
-
-
     return (
-        <SafeAreaView style={tw`bg-white`}>
-            {users.map(user => (
-                <View style={tw`flex flex-col`} key={user.id}>      
-                    <Text style={tw` w-full`}>
-                        {user.name}
-                        <View>
-                            <Text >{user.phone}</Text>
-                        </View>
-                    </Text>
-                </View>
-            ))}
+        <SafeAreaView style={tw`bg-white h-full`}>
+           <Header />
+           <View style={tw`bg-[#F5F7FA] h-full pb-13`}>
+                <ScrollView 
+                    contentContainerStyle={tw`w-full flex flex-col items-center mt-2`}
+                    showsHorizontalScrollIndicator={false}
+                    showsVerticalScrollIndicator={false}    
+                >
+                    <SlideTrack />
+                    <SlideTrack />
+                    <SlideTrack />
+                    <SlideTrack />
+                </ScrollView>
+
+           </View>
+
+
         </SafeAreaView>  
     )
 }

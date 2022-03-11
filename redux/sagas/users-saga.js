@@ -14,12 +14,12 @@ function* getUsers() {
             type: TYPES.SEND_REQUEST_GET_ALL_USER_SUCCESS, 
             payload: user
         })
-    } catch (err){
+    } catch (error){
         yield put({
             type: TYPES.SEND_REQUEST_GET_ALL_USER_FAILURE, 
-            payload: err
+            payload: error
         })
-        console.log(err)
+        console.log(error)
     }
 }
 

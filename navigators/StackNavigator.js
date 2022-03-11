@@ -13,6 +13,7 @@ import DetailFeedsScreen from '../screens/DetailFeedsScreen';
 import BottomNavigator from './BottomNavigator';
 import LoginScreen from '../screens/LoginScreen';
 import UpLoadPictureScreen from '../screens/UpLoadPictureScreen';
+import ListTrackScreen from '../screens/ListTrackScreen';
 
 
 const Stack = createNativeStackNavigator();
@@ -35,6 +36,7 @@ const StackNavigator = () => {
             <Stack.Screen name="UpLoadStack" component={UpLoadScreen} />
             <Stack.Screen name="UpLoadPictureStack" component={UpLoadPictureScreen} />
             <Stack.Screen name="LoginStack" component={LoginScreen} />
+            <Stack.Screen name="ListTrackStack" component={ListTrackScreen} />
             
             
         </Stack.Navigator>

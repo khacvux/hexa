@@ -1,27 +1,32 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { View, Text, SafeAreaView, TouchableOpacity } from 'react-native'
+import { useDispatch, useSelector } from 'react-redux'
 import tw from 'twrnc'
+import { fetchContactData } from '../redux/actions/contactAPI'
 
 
 
 
 const MenuScreen = ({navigation}) => {
+    const dispatch = useDispatch();
+    const users = useSelector(state => state.contactReducer.user)
+    
+    useEffect(() => {
+        dispatch(fetchContactData())
+    }, [])
 
     return (
         <SafeAreaView style={tw`bg-white h-full`}>
-            <View style={tw`w-full px-3 py-2`}>
-                <TouchableOpacity 
-                    style={tw`bg-gray-200 rounded-md py-2 items-center`} 
-                    activeOpacity={.6}
-                    onPress={() => {
-                        // dispatch(setUser(false))
-                        navigation.navigate('HomeTab');
-                    }}
-                >
-                    <Text style={tw`text-base font-bold`}>Log out</Text>
-                </TouchableOpacity>
-
-            </View>
+           {users.map(user => (
+                <View style={tw`flex flex-col`} key={user.id}>      
+                    <Text style={tw` w-full`}>
+                        {user.name}
+                        <View>
+                            <Text >{user.phone}</Text>
+                        </View>
+                    </Text>
+                </View>
+            ))}
 
 
         </SafeAreaView>
