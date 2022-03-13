@@ -1,9 +1,9 @@
 export const posts = [ 
     {
-        avt: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+        avt: 'https://suckhoedoisong.qltns.mediacdn.vn/324455921873985536/2021/9/14/photo-1631595209643-1631595209776487019806.jpg',
         images: [
-            'https://images.unsplash.com/photo-1634926878768-2a5b3c42f139?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=756&q=80',
-            'https://images.unsplash.com/photo-1634295912158-9c847b6b3a40?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTl8fDNkfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
+            'https://www.elle.vn/wp-content/uploads/2019/05/13/bi-quyet-lam-dep-cua-nu-ca-si-IU-13-1024x1312.jpg',
+            'https://www.elle.vn/wp-content/uploads/2018/10/21/Nanjing-iu-thay-doi-kieu-toc-10.jpg',
 
         ],
         name: 'u s e r  n a m e',
@@ -34,13 +34,43 @@ export const posts = [
     {
         avt: 'https://images.unsplash.com/photo-1608889175123-8ee362201f81?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80',
         images: [
-            'https://images.unsplash.com/photo-1632516643720-e7f5d7d6ecc9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTN8fDNkfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
+            'https://kenh14cdn.com/thumb_w/660/2020/6/21/b16aa082fcd80878d01f1551a2cb699f-15927212820301225264790.jpg',
         ],
         name: 'u s e r  n a m e423423',
         userName: 'user_1',
         heart: 32,
         liked: true,
         postId: '004',
+        body: '..... :|',
+        comments: [
+            {
+                avt: 'https://mir-s3-cdn-cf.behance.net/project_modules/2800_opt_1/541c1c101650903.5f2369bc9b544.jpg',
+                idComment: '123',
+                userName: 'noname_1',
+                name: 'NONAME 1',
+                comment: 'aloo 123',
+                date: '1 day ago',
+            },
+            {
+                avt: 'https://mir-s3-cdn-cf.behance.net/project_modules/2800_opt_1/541c1c101650903.5f2369bc9b544.jpg',
+                idComment: '124',
+                userName: 'noname_3',
+                name: 'NONAME 3',
+                comment: 'aloo 1233',
+                date: '1 day ago',
+            },
+        ]
+    },
+    {
+        avt: 'https://images.unsplash.com/photo-1608889175123-8ee362201f81?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80',
+        images: [
+            'https://kenh14cdn.com/thumb_w/660/2019/3/12/4643726417096795924750643677676364082708480n-15523819211611381821731.jpg',
+        ],
+        name: 'u s e r  n a m e423423',
+        userName: 'user_12',
+        heart: '132K',
+        liked: true,
+        postId: '00412',
         body: '..... :|',
         comments: [
             {
