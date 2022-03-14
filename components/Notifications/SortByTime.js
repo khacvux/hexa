@@ -8,9 +8,11 @@ import { Ionicons } from '@expo/vector-icons';
 const SortByTime = (props) => {
     const { notification } = props;
     // const [status, setStatus]  = useState(notification.status)
-    var bgNotify;
+    let bgNotify;
+    let textNotify;
 
-    notification.status ? bgNotify = '#A7E5EA' : bgNotify = '#fff'
+    notification.status ? bgNotify = '#5EC2EA' : bgNotify = '#fff'
+    notification.status ? textNotify = '#fff' : textNotify = '#000'
     
     const ITEM_HEIGHT = 65;
     const MARGIN_BOTTOM = 2;
@@ -72,13 +74,13 @@ const SortByTime = (props) => {
                             style={tw`w-12 h-12 rounded-full bg-gray-100`}
                         />
                         <View style={tw` flex-1 flex flex-col ml-3`}>
-                            <Text style={tw`text-base`}
+                            <Text style={tw`text-base text-[${textNotify}]`}
                                 numberOfLines={2}
                             >
-                                <Text style={tw`font-bold`} >{notification.userName} </Text>
+                                <Text style={tw`font-bold `} >{notification.userName} </Text>
                                 {notification.title}
                             </Text>
-                            <Text style={tw`font-light text-xs`}>{notification.date}</Text>
+                            <Text style={tw`font-light text-xs text-[${textNotify}]`}>{notification.date}</Text>
                         </View>
 
                     </View>

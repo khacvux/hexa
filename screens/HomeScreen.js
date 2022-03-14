@@ -12,7 +12,7 @@ const HomeScreen = () => {
 
 
     useDeviceContext(tw)
-    const CONTAINER_HEIGHT = 40;
+    const CONTAINER_HEIGHT = 45;
     const scrollY = useRef(new Animated.Value(0)).current;
     const offsetAnim = useRef(new Animated.Value(0)).current;
 
@@ -74,7 +74,7 @@ const HomeScreen = () => {
     
 
     return (
-        <SafeAreaView style={tw`bg-white h-full dark:bg-black`}>
+        <SafeAreaView style={tw`bg-white h-full`}>
             <View style={tw`h-full overflow-hidden flex`}>
                 <Animated.View style={[tw`absolute top-0 left-0 right-0 z-50`,{height: CONTAINER_HEIGHT}, {transform: [{translateY: headerTranslate}]}]}>
                     <Header />
