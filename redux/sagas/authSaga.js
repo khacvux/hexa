@@ -8,8 +8,10 @@ function* signIn(data) {
     // console.log(data.payload)
     try{
         const res = yield call(signInAPI, data.payload)
-        console.log(res)
-        res && put(ACTION.signInSuccess(res.data))
+        // console.log(res)
+        if(res.status == 'ok'){
+            yield put(ACTION.signInSuccess(res.data))
+        }
 
     } catch (error) {
         yield put(ACTION.signInFailure(error))

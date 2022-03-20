@@ -8,10 +8,10 @@ export const signIn = (data) => {
     }
 }
 
-export const signInSuccess = (data) => {
+export const signInSuccess = (res) => {
     return {
         type: TYPES.SIGN_IN_SUCCESS,
-        payload: data,
+        payload: res,
     }
 }
 

@@ -6,15 +6,14 @@ const initState = {
 
 export default authReducer = ( state = initState, action ) => {
     switch(action.type) {
-        case TYPES.SIGN_IN: 
+        case TYPES.SIGN_IN:
             return {
                 ...state,
             }
         case TYPES.SIGN_IN_SUCCESS:
-            console.log(action.payload)
             return {
                 ...state,
-                token: action.payload.data
+                token: action.payload
             }
         case TYPES.SIGN_IN_FAILURE:
             console.log(action.error)

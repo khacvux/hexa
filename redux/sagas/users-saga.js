@@ -20,9 +20,6 @@ function* getUsers() {
     }
 }
 
-// export default function* contactSagas() {
-//     yield takeEvery(TYPES.SEND_REQUEST_GET_ALL_USER, getUsers);
-// }
 export default contactSagas = [
     takeEvery(TYPES.SEND_REQUEST_GET_ALL_USER, getUsers),
 ]

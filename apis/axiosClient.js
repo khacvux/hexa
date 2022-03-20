@@ -9,7 +9,7 @@ const axiosClient = axios.create({
 });
 
 export const AXIOS = axios.create({
-  baseURL: 'http://ec2-13-213-62-197.ap-southeast-1.compute.amazonaws.com:8080/',
+  baseURL: 'https://nts-sixblack-api-hexa.herokuapp.com/',
   headers: {
     'Content-Type': 'application/json'
   },
