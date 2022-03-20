@@ -7,7 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import { useSelector } from 'react-redux'
 
-const user = true;
+const user = '';
 const Header = () => {
 
     // const { user } = useSelector(state => state.loginReducer)

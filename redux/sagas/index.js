@@ -1,8 +1,12 @@
-import { spawn } from "@redux-saga/core/effects";
+import { all } from "@redux-saga/core/effects";
 
-import accountSaga from "./accountSaga";
+import authSaga from "./authSaga";
 import contactSagas from "./users-saga";
 
 export default function* rootSaga (){
-    yield spawn(contactSagas, accountSaga)
+    yield all([
+        ...contactSagas,
+        ...authSaga,
+    
+    ])
 }

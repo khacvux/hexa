@@ -1,25 +1,27 @@
-import * as TYPES from '../constants/account'
+import * as TYPES from '../constants/auth'
 
 const initState = {
-    account: [],
+    token: '',
 }
 
-export default acccountReducer = ( state = initState, action ) => {
+export default authReducer = ( state = initState, action ) => {
     switch(action.type) {
         case TYPES.SIGN_IN: 
             return {
                 ...state,
             }
         case TYPES.SIGN_IN_SUCCESS:
-
+            console.log(action.payload)
             return {
                 ...state,
-                account: account,
+                token: action.payload.data
             }
         case TYPES.SIGN_IN_FAILURE:
             console.log(action.error)
             return {
                 ...state
             }
+        default:
+            return state;
     }
 }

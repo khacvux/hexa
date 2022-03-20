@@ -10,7 +10,6 @@ import Header from '../components/Header/Header';
 const HomeScreen = () => {
 
 
-
     useDeviceContext(tw)
     const CONTAINER_HEIGHT = 45;
     const scrollY = useRef(new Animated.Value(0)).current;

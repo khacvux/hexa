@@ -1,10 +1,7 @@
-import { call, put, takeEvery } from '@redux-saga/core/effects'
+import { call, put, takeEvery, all } from '@redux-saga/core/effects'
 import * as TYPES from '../constants'
 import {
-    getAllPhotos,
     getAllUsers,
-    getDetailsofUser,
-    getPhotoofUser
 } from '../../apis/contactAPIs'
 
 function* getUsers() {
@@ -23,6 +20,9 @@ function* getUsers() {
     }
 }
 
-export default function* contactSagas() {
-    yield takeEvery(TYPES.SEND_REQUEST_GET_ALL_USER, getUsers);
-}
+// export default function* contactSagas() {
+//     yield takeEvery(TYPES.SEND_REQUEST_GET_ALL_USER, getUsers);
+// }
+export default contactSagas = [
+    takeEvery(TYPES.SEND_REQUEST_GET_ALL_USER, getUsers),
+]

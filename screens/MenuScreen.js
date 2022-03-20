@@ -10,7 +10,8 @@ import { fetchContactData } from '../redux/actions/contactAPI'
 const MenuScreen = ({navigation}) => {
     const dispatch = useDispatch();
     const users = useSelector(state => state.contactReducer.user)
-    
+    const auth = useSelector(state => state.authReducer.token)
+    console.log(auth)
     useEffect(() => {
         dispatch(fetchContactData())
     }, [])
@@ -27,7 +28,10 @@ const MenuScreen = ({navigation}) => {
                     </Text>
                 </View>
             ))}
+            {/* <Text style={tw`bg-black text-white`}>
+            {auth}
 
+            </Text> */}
 
         </SafeAreaView>
     )

@@ -1,24 +1,24 @@
-import * as TYPES from '../constants/account'
+import * as TYPES from '../constants/auth'
 
 
-export const signIn = (value) => {
+export const signIn = (data) => {
     return {
         type: TYPES.SIGN_IN,
-        payload: { value },
+        payload: data,
     }
 }
 
 export const signInSuccess = (data) => {
     return {
         type: TYPES.SIGN_IN_SUCCESS,
-        payload: { data },
+        payload: data,
     }
 }
 
 export const signInFailure = (error) => {
     return {
         type: TYPES.SIGN_IN_FAILURE,
-        payload: { },
+        payload: {},
         error: error,
     }
 }

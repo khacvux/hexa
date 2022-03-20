@@ -1,6 +1,6 @@
 import * as TYPES from '../constants'
 
-export function fetchContactData(data){
+export const fetchContactData = (data) => {
     return{
         type: TYPES.SEND_REQUEST_GET_ALL_USER,
         payload: data,

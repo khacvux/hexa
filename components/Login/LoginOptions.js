@@ -1,5 +1,5 @@
 import { View, Text, ImageBackground, TextInput, Image, KeyboardAvoidingView, Platform } from 'react-native'
-import React, { useRef } from 'react'
+import { useRef, useState } from 'react'
 import tw from 'twrnc'
 import { useNavigation } from '@react-navigation/native'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -9,6 +9,7 @@ import { BlurView } from 'expo-blur'
 import RBSheet from 'react-native-raw-bottom-sheet'
 
 import { useSelector, useDispatch,} from 'react-redux'
+import { signIn } from '../../redux/actions/authAction'
 
 
 const LoginOptions = () => {
@@ -16,9 +17,14 @@ const LoginOptions = () => {
     const navigation = useNavigation();
     const refRBSheet = useRef();
 
-    // const { user } = useSelector(state => state.userReducer)
-    // const dispatch = useDispatch()
+    const [userName, setUsername] = useState('');
+    const [password, setPassword] = useState('');
 
+    // const { user } = useSelector(state => state.userReducer)
+    const dispatch = useDispatch()
+
+
+    
     return (
         <ImageBackground
             source={require('../../assets/images/login_background.jpeg')}
@@ -58,12 +64,16 @@ const LoginOptions = () => {
                         <TextInput
                             style={tw`w-full p-3 rounded-[2] bg-[#F3F0F6] items-center mb-2`}
                             placeholder='Username'
+                            value={userName}
+                            onChangeText={val => setUsername(val)}
                         />
                         
                         <TextInput
                             style={tw`w-full p-3 rounded-[2] bg-[#F3F0F6] items-center mb-2`}
                             placeholder='Password'
                             secureTextEntry={true}
+                            value={password}
+                            onChangeText={val => setPassword(val)}
                         />
                         <TouchableOpacity>
                             <Text style={tw`text-xs mb-1 px-2 text-[#00A3EA]`}>Forgot your password?</Text>
@@ -71,8 +81,7 @@ const LoginOptions = () => {
                         <TouchableOpacity 
                             style={tw`w-full p-[9] bg-[#5EC2EA] items-center rounded-[2] mt-2`}
                             onPress={() => {
-                                // dispatch(setUser(true))
-                                navigation.goBack();
+                                dispatch(signIn({userName, password}))
                             }}
                         >
                             <Text style={tw`text-white font-bold text-base`}>
@@ -119,19 +128,35 @@ const LoginOptions = () => {
                     <Text style={tw`text-xl mb-5 text-[#00A3EA] px-1 font-bold`}>
                         Create account
                     </Text>
+                    <View style={tw` flex flex-row items-center overflow-hidden`}>
+                        <TextInput 
+                            style={tw`flex-3 mr-1 p-3 rounded-[2] bg-[#F3F0F6] mb-3`}
+                            placeholder='First name'
+                            placeholderTextColor='#ccc'
+                        />
+                        <TextInput 
+                            style={tw`flex-2 ml-1 p-3 rounded-[2] bg-[#F3F0F6] mb-3`}
+                            placeholder='Last name'
+                            placeholderTextColor='#ccc'
+                        />
+
+                    </View>
                     <TextInput 
                         placeholder='User name'
                         style={tw`p-3 rounded-[2] bg-[#F3F0F6] mb-3`}
+                        placeholderTextColor='#ccc'                    
                     />
                     <TextInput 
                         placeholder='Password'
                         style={tw`p-3 rounded-[2] bg-[#F3F0F6] mb-3`}
                         secureTextEntry={true}
+                        placeholderTextColor='#ccc'
                     />
                     <TextInput 
                         placeholder='Confirm Password'
                         style={tw`p-3 rounded-[2] bg-[#F3F0F6] mb-3`}
                         secureTextEntry={true}
+                        placeholderTextColor='#ccc'
                     />
                     <TouchableOpacity 
                         style={tw`w-full p-[9] bg-[#5EC2EA] items-center rounded-[2] mt-2`}
