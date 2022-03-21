@@ -24,25 +24,35 @@ export const signInFailure = (error) => {
 }
 
 
-export const signUp = (value) => {
+export const signUp = (data) => {
     return {
         type: TYPES.SIGN_UP,
-        payload: { value },
+        payload: data,
     }
 }
 
 
-export const signUpSuccess = (data) => {
+export const signUpSuccess = (res) => {
     return {
         type: TYPES.SIGN_UP_SUCCESS,
-        payload: { data },
+        payload: res
     }
 }
 
 export const signUpFailure = (error) => {
     return {
         type: TYPES.SIGN_UP_FAILURE,
-        payload: { },
+        payload: {},
         error: error,
+    }
+}
+
+
+
+
+export const signOut = () => {
+    return {
+        type: TYPES.SIGN_OUT,
+        payload: {},
     }
 }

@@ -14,29 +14,42 @@ import BottomNavigator from './BottomNavigator';
 import LoginScreen from '../screens/LoginScreen';
 import UpLoadPictureScreen from '../screens/UpLoadPictureScreen';
 import ListTrackScreen from '../screens/ListTrackScreen';
+import { useSelector } from 'react-redux';
 
 
 const Stack = createNativeStackNavigator();
 
 const StackNavigator = () => {
+
+    const token = useSelector(state => state.authReducer.token)
+
+
     return (
+        
         <Stack.Navigator
             screenOptions={{
                 headerShown: false,
             }}
         >
-            <Stack.Screen name="HomeStack" component={BottomNavigator} />
-            <Stack.Screen name="DetailFeedsStack" component={DetailFeedsScreen} />
-            <Stack.Screen name="ProfileStack" component={ProfileScreen} />
-            <Stack.Screen name="MenuStack" component={MenuScreen} />
-            <Stack.Screen name="MyProfileStack" component={MyProfileScreen} />
-            <Stack.Screen name="NotificationStack" component={NotificationScreen} />
-            <Stack.Screen name="ChatboxStack" component={ChatboxScreen} />
-            <Stack.Screen name="ChatsStack" component={ChatsScreen} />
-            <Stack.Screen name="UpLoadStack" component={UpLoadScreen} />
-            <Stack.Screen name="UpLoadPictureStack" component={UpLoadPictureScreen} />
-            <Stack.Screen name="LoginStack" component={LoginScreen} />
-            <Stack.Screen name="ListTrackStack" component={ListTrackScreen} />
+            {
+                token ? (
+                    <>
+                        <Stack.Screen name="HomeStack" component={BottomNavigator} />
+                        <Stack.Screen name="DetailFeedsStack" component={DetailFeedsScreen} />
+                        <Stack.Screen name="ProfileStack" component={ProfileScreen} />
+                        <Stack.Screen name="MenuStack" component={MenuScreen} />
+                        <Stack.Screen name="MyProfileStack" component={MyProfileScreen} />
+                        <Stack.Screen name="NotificationStack" component={NotificationScreen} />
+                        <Stack.Screen name="ChatboxStack" component={ChatboxScreen} />
+                        <Stack.Screen name="ChatsStack" component={ChatsScreen} />
+                        <Stack.Screen name="UpLoadStack" component={UpLoadScreen} />
+                        <Stack.Screen name="UpLoadPictureStack" component={UpLoadPictureScreen} />
+                        <Stack.Screen name="ListTrackStack" component={ListTrackScreen} />
+                    </>
+                ) : (
+                    <Stack.Screen name="LoginStack" component={LoginScreen} />
+                )
+            }
             
             
         </Stack.Navigator>
