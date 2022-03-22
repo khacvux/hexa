@@ -2,9 +2,13 @@ import * as TYPES from '../constants/auth'
 import * as ACTION from '../actions/authAction'
 import { call, put, delay, takeLatest, takeEvery } from 'redux-saga/effects';
 import { signInAPI, signUpAPI } from '../../apis/accountAPIs'
+import { onLoadingAuth } from '../actions/onLoading';
 
 function* signIn(data) {
     try{
+        console.log('SIGN IN running...')
+        yield put(onLoadingAuth(true));
+
         const res = yield call(signInAPI, data.payload)
         if(res.status == 'ok'){
             yield put(ACTION.signInSuccess(res.data))
@@ -13,6 +17,8 @@ function* signIn(data) {
     } catch (error) {
         yield put(ACTION.signInFailure(error))
     }
+    yield put(onLoadingAuth(false));
+
 }
 
 function* signUp(data) {
@@ -23,6 +29,7 @@ function* signUp(data) {
     const password = data.payload.crPassword;
 
     try {
+        console.log(' SIGN UP running...')
         const res = yield call(signUpAPI, {firstName, lastName, email, phone, password})
         if(res){
             console.log(res)
@@ -31,6 +38,7 @@ function* signUp(data) {
     } catch (error) {
         yield put(ACTION.signUpFailure(error))
     }
+
 }
 
 

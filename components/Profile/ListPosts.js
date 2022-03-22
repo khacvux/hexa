@@ -1,38 +1,26 @@
 import React from 'react'
-import { View, Text, Image } from 'react-native'
+import { View, Text, Image, FlatList, StyleSheet } from 'react-native'
 import tw from 'twrnc'
+import { FlatGrid } from 'react-native-super-grid';
 
+import { notifications } from '../../data'
+import PostItem from './PostItem'
 
 
 const ListPost = () => {
     return (
-        <View style={tw`my-5`}>
-            <View style={tw`px-5 flex flex-row mb-[4]`}>
-                <Image
-                    source={require('../../assets/images/post_1.png')}
-                    style={tw`flex-1 w-full h-70 mr-[2] rounded-sm`}
-                    resizeMode='cover'
-
-                />
-                <Image
-                    source={require('../../assets/images/post_1.png')}
-                    style={tw`flex-1 w-full h-70 ml-[2] rounded-sm`}
-                    resizeMode='cover'
-                />
-            </View>
-            <View style={tw`px-5 flex flex-row`}>
-                <Image
-                    source={require('../../assets/images/post_1.png')}
-                    style={tw`flex-1 w-full h-70 mr-[2] rounded-sm`}
-                    resizeMode='cover'
-
-                />
-                <Image
-                    source={require('../../assets/images/post_1.png')}
-                    style={tw`flex-1 w-full h-70 ml-[2] rounded-sm`}
-                    resizeMode='cover'
-                />
-            </View>
+        <View style={tw` px-4 bg-white `}>
+           <FlatGrid
+                data={notifications}
+                itemDimension={160}
+                renderItem={(item) => <PostItem item={item} />}
+                style={tw`pt-2`}
+                keyExtractor={item => item.id} 
+                spacing={5} 
+                showsHorizontalScrollIndicator={false}
+                showsVerticalScrollIndicator={false}
+            />
+            
         </View>
     )
 }

@@ -3,9 +3,11 @@ import React from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import tw from 'twrnc';
-import { Ionicons, MaterialIcons } from '@expo/vector-icons';
+import { Foundation, Ionicons, MaterialIcons } from '@expo/vector-icons';
 import SelectPicture from '../components/Upload/SelectPicture';
 import SelectAudio from '../components/Upload/SelectAudio';
+import ListPost from '../components/Profile/ListPosts';
+import ListTrack from '../components/Profile/ListTrack';
 
 
 
@@ -75,4 +77,48 @@ export const UpLoadNavigatior = () => {
     );
 };
 
-// export default TopTabNavigatior;
+export const TabListNavigator = () => {
+
+    return (
+        <TopBar.Navigator
+            screenOptions={{
+                tabBarStyle: tw`h-11`,
+                tabBarIndicatorStyle: tw`bg-[#5EC2EA] rounded-full`,
+                tabBarIndicatorContainerStyle: tw``,
+                tabBarShowLabel: false,
+                tabBarShowIcon: true,
+            }}
+        >
+            <TopBar.Screen 
+                name='ListPostTab' 
+                component={ListPost} 
+                options={{ 
+                    tabBarIcon: (({focused}) => 
+                        <>
+                            {focused ? (
+                                <Ionicons name='ios-grid' 
+                                    style={tw`text-[#5EC2EA]`}
+                                    size={23}
+                                />
+                            ) : (
+                                <Ionicons name='ios-grid-outline' 
+                                    style={tw`text-gray-500`}
+                                    size={23}
+                                />
+                            )}
+                        </>
+                    ),
+                }}
+            />
+            <TopBar.Screen 
+                name='ListTrackTab' 
+                component={ListTrack} 
+                options={{ 
+                    tabBarIcon: (({focused}) => 
+                        <Foundation name='sound' size={23} style={focused ? tw`text-[#5EC2EA]` : tw`text-gray-500`} />
+                    ),
+                }}
+            />
+        </TopBar.Navigator>
+    )
+}

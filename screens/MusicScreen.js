@@ -13,7 +13,7 @@ const MusicScreen = () => {
     return (
         <SafeAreaView style={tw`bg-white h-full`}>
            <Header />
-           <View style={tw`bg-[#F5F7FA] h-full pb-13`}>
+           <View style={tw`bg-[#F5F7FA] h-full`}>
                 <ScrollView 
                     contentContainerStyle={tw`w-full flex flex-col items-center mt-2`}
                     showsHorizontalScrollIndicator={false}

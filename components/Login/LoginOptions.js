@@ -31,7 +31,7 @@ const LoginOptions = () => {
     const [signUpWarn, setSignUpWarn] = useState('')
 
     const dispatch = useDispatch()
-
+    
     const handleSignIn = () => {
         if(!userName) {
             setSignInWarn(`Please enter your email!`)
@@ -78,7 +78,6 @@ const LoginOptions = () => {
                     </View>
                 </View>
                 <View style={tw`w-full px-8`}>
-                
                     <BlurView
                         intensity={20}
                         style={tw`w-full rounded-xl overflow-hidden px-3 py-3`}
