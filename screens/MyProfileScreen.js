@@ -18,8 +18,8 @@ const MyProfileScreen = () => {
     return (
         <SafeAreaView style={tw`bg-white h-full `}>
             <Text style={tw`my-1 text-lg font-bold text-center`}>Your profile</Text>
-            {/* <InfomationUser />   */}
-            <InformationUserSkeletion />
+            <InfomationUser />  
+            {/* <InformationUserSkeletion /> */}
             <EditProfile handleModalVisible={handleModalVisible} />
             <TabListNavigator />
             <EditProfileModal handleModalVisible={handleModalVisible} modalVisible={modalVisible} />

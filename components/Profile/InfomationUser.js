@@ -1,12 +1,19 @@
 import { View, Text, Image } from 'react-native'
+import { useSelector } from 'react-redux'
 import tw from 'twrnc'
+
+
 const InfomationUser = () => {
+
+    const { name, avatar, email } = useSelector(state => state.authReducer)
+
+
     return (
         <View style={tw`pt-2 px-5`}>
            <View style={tw`flex flex-row items-center justify-between`}>
                 <Image 
-                    source={require('../../assets/images/avt_3.png')}
-                    style={[{width: 70, height: 70},tw`rounded-full mr-4`]}
+                    source={avatar ? {uri: avatar} : (require('../../assets/images/defaultAvatar.png'))}
+                    style={[{width: 70, height: 70},tw`rounded-full mr-4 border border-[#5EC2EA]`]}
                 />
                 <View style={tw`flex-1 flex flex-row items-center`}>
                     <View style={tw`flex-1 flex items-center`}>
@@ -25,10 +32,10 @@ const InfomationUser = () => {
            </View>
            <View style={tw`mt-4`}>
                <Text style={tw`text-gray-500 text-xs`}>
-                   @milchelleJonas
+                    {email}
                </Text>
                <Text style={tw`text-2xl mt-1 font-bold`}>
-                   Michelle Jonas
+                   {name}
                </Text>
                <Text style={tw`mt-5`}>
                    loading 99%.......error

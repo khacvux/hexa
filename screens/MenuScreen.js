@@ -11,22 +11,29 @@ import { signOut } from '../redux/actions/authAction'
 const MenuScreen = ({navigation}) => {
 
     const dispatch = useDispatch();
-    const token = useSelector(state => state.authReducer.token)
+    const { followStatus } = useSelector(state => state.authReducer)
     
  
 
     return (
         <SafeAreaView style={tw`bg-white h-full`}>
             <ScrollView contentContainerStyle ={tw`px-3 flex flex-col items-center`}>
-                <TouchableOpacity 
-                    style={tw`w-full py-3 px-2 my-3 flex flex-row justify-between`}
-                    onPress={() => navigation.navigate('FollowRequestsStack')}
-                >
-                    <Text style={tw`text-base`}>
-                        Follow Requests
-                    </Text>
-                    <AntDesign name='right' />
-                </TouchableOpacity>
+                {
+                    followStatus ? (
+                            <></>
+                        ) : (
+                            <TouchableOpacity 
+                                style={tw`w-full py-3 px-2 my-3 flex flex-row justify-between`}
+                                onPress={() => navigation.navigate('FollowRequestsStack')}
+                            >
+                                <Text style={tw`text-base`}>
+                                    Follow Requests
+                                </Text>
+                                <AntDesign name='right' />
+                            </TouchableOpacity>
+
+                        )
+                }
 
 
 
