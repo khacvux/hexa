@@ -26,3 +26,31 @@ export const signUpAPI = async (data) => {
         return console.log(e)
     }
 }
+
+export const getUserInfo = async ({userId, token}) => {
+    try {
+        let params = ''
+        userId && (params = `/posts/${userId}`)
+        return res = await AXIOS.get(`${url}${params}`, {
+            headers: {
+                Authorization: token
+            }
+        })
+    } catch (e) {
+        console.log(e)
+    }   
+}
+
+export const getFollowRequests = async ({userId, token}) => {
+    try {
+        let params = ''
+        userId && (params = `/posts/${userId}/request`)
+        return res = await AXIOS.get(`${url}${params}`, {
+            headers: {
+                Authorization: token
+            }
+        })
+    } catch (e) {
+        console.log(e)
+    }   
+}

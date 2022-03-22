@@ -1,14 +1,12 @@
-import React from 'react'
-import { View, Text, Image, TouchableOpacity } from 'react-native'
+import { View, Text, Image } from 'react-native'
 import tw from 'twrnc'
-import Contact from './Contact'
 const InfomationUser = () => {
     return (
         <View style={tw`pt-2 px-5`}>
            <View style={tw`flex flex-row items-center justify-between`}>
                 <Image 
                     source={require('../../assets/images/avt_3.png')}
-                    style={tw`w-17 h-17 rounded-full mr-4`}
+                    style={[{width: 70, height: 70},tw`rounded-full mr-4`]}
                 />
                 <View style={tw`flex-1 flex flex-row items-center`}>
                     <View style={tw`flex-1 flex items-center`}>

@@ -1,7 +1,6 @@
 import { View, Text } from 'react-native'
-import React from 'react'
 import tw from 'twrnc'
-import Skeleton from '../Skeleton/Skeleton'
+import Skeleton from './Skeleton'
 
 
 

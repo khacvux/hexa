@@ -2,9 +2,7 @@ import { View, Text, Animated, StyleSheet } from 'react-native'
 import React, { useEffect, useRef } from 'react'
 import tw from 'twrnc';
 
-const Skeleton = (props) => {
-
-    const { w, h, rounded, bg } = props;
+const Skeleton = ({ w, h, rounded, bg }) => {
     const opacity = useRef(new Animated.Value(0.3));
     useEffect(() => {
         Animated.loop(

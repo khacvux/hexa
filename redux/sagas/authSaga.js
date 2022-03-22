@@ -32,7 +32,7 @@ function* signUp(data) {
         console.log(' SIGN UP running...')
         const res = yield call(signUpAPI, {firstName, lastName, email, phone, password})
         if(res){
-            console.log(res)
+            // console.log(res)
             yield put(ACTION.signUpSuccess(res.data))
         }
     } catch (error) {
