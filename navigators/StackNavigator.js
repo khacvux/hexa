@@ -16,6 +16,7 @@ import UpLoadPictureScreen from '../screens/UpLoadPictureScreen';
 import ListTrackScreen from '../screens/ListTrackScreen';
 import { useSelector } from 'react-redux';
 import FollowRequestsScreen from '../screens/FollowRequestsScreen';
+import FollowersScreen from '../screens/FollowersScreen'
 
 
 const Stack = createNativeStackNavigator();
@@ -47,6 +48,7 @@ const StackNavigator = () => {
                         <Stack.Screen name="UpLoadPictureStack" component={UpLoadPictureScreen} />
                         <Stack.Screen name="ListTrackStack" component={ListTrackScreen} />
                         <Stack.Screen name="FollowRequestsStack" component={FollowRequestsScreen} />
+                        <Stack.Screen name="FollowersStack" component={FollowersScreen} />
                     </>
                 ) : (
                     <Stack.Screen name="LoginStack" component={LoginScreen} />

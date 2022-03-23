@@ -47,6 +47,25 @@ export const signUpFailure = (error) => {
     }
 }
 
+export const setFollowStatus = ({token, userId}) => {
+    return { 
+        type: TYPES.SET_FOLLOW_STATUS,
+        payload: {token, userId}
+    }
+}
+
+export const setFollowStatusSuccess = () => {
+    return { 
+        type: TYPES.SET_FOLLOW_STATUS_SUCCESS,
+    }
+}
+
+export const setFollowStatusFailure = (error) => {
+    return { 
+        type: TYPES.SET_FOLLOW_STATUS_FAILURE,
+        error,
+    }
+}
 
 
 

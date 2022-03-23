@@ -1,7 +1,7 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 import LoginOptions from '../components/Login/LoginOptions'
-import AuthLoadingModal from '../components/Modal/AuthLoadingModal'
+import OnLoadingModal from '../components/Modal/OnLoadingModal'
 import { useSelector } from 'react-redux'
 
 
@@ -11,7 +11,7 @@ const LoginScreen = () => {
   return (
     <View>
       <LoginOptions />
-      <AuthLoadingModal authLoading={authLoading} />
+      <OnLoadingModal showLoading={authLoading} />
     </View>
   )
 }

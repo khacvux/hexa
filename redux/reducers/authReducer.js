@@ -10,7 +10,7 @@ const initState = {
     email: '',
     name: '',
     phone: '',
-    followStatus: true,
+    followStatus: null,
     userSender: null,
     userRecipient: null,
     postsList: null,
@@ -95,9 +95,27 @@ export default authReducer = ( state = initState, action ) => {
                 token: '',
             }
 
-        
+
+        //SET PRIVATE ACCOUNT
+        case TYPES.SET_FOLLOW_STATUS:
+            return {
+                ...state,
+            }
+
+        case TYPES.SET_FOLLOW_STATUS_SUCCESS:
+            return {
+                ...state,
+                followStatus: !followStatus
+            }
+
+        case TYPES.SET_FOLLOW_STATUS_FAILURE:
+            console.log('Set FOLLOW STATUS fail. ',error)
+            return {
+                ...state,
+            }
 
 
+        //DEFAULT
         default:
             return state;
     }

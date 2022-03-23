@@ -1,16 +1,15 @@
 import { View, Text, Modal } from 'react-native'
-import React, { useEffect, useRef } from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context'
+import React from 'react'
 import LottieView from 'lottie-react-native';
 import tw from 'twrnc';
 
-const AuthLoadingModal = ({authLoading}) => {
+const AuthLoadingModal = ({showLoading}) => {
       
 
   return (
     <Modal
         transparent={true}
-        visible={authLoading}
+        visible={showLoading}
     >   
         <View style={tw`w-full h-full items-center justify-center bg-[#CCCCCC40]`}>
             <LottieView 

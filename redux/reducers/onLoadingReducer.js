@@ -2,6 +2,7 @@ import * as TYPES from '../constants/onLoading'
 
 const initState = {
     authLoading: false,
+    followStatusLoading: false,
 }
 
 export default onLoadingReducer = ( state = initState, action ) => {
@@ -10,6 +11,11 @@ export default onLoadingReducer = ( state = initState, action ) => {
             return{
                 ...state,
                 authLoading: action.payload,
+            }
+        case TYPES.ON_LOADING_SET_FOLLOW_STATUS:
+            return{
+                ...state,
+                followStatusLoading: action.payload,
             }
         default:
             return state;

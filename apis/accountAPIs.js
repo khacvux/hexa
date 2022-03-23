@@ -27,30 +27,17 @@ export const signUpAPI = async (data) => {
     }
 }
 
-export const getUserInfo = async ({userId, token}) => {
-    try {
-        let params = ''
-        userId && (params = `/posts/${userId}`)
-        return res = await AXIOS.get(`${url}${params}`, {
-            headers: {
-                Authorization: token
-            }
-        })
-    } catch (e) {
-        console.log(e)
-    }   
-}
 
-export const getFollowRequests = async ({userId, token}) => {
+
+export const setFollowStatus = async ({userId, token}) => {
     try {
-        let params = ''
-        userId && (params = `/posts/${userId}/request`)
-        return res = await AXIOS.get(`${url}${params}`, {
+        let params = `follow/${userId}/followStatus`
+        return res = await AXIOS.get(`${params}`, {
             headers: {
-                Authorization: token
+                'Authorization': `Bearer ${token}`,
             }
         })
-    } catch (e) {
-        console.log(e)
-    }   
+    } catch (error) { 
+        console.log(error)
+    }
 }

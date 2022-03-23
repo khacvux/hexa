@@ -1,8 +1,10 @@
 import { AntDesign } from '@expo/vector-icons'
-import { View, Text, SafeAreaView, TouchableOpacity, ScrollView, Image } from 'react-native'
+import { useState } from 'react'
+import { View, Text, SafeAreaView, TouchableOpacity, ScrollView, Switch  } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import tw from 'twrnc'
-import { signOut } from '../redux/actions/authAction'
+import { signOut, setFollowStatus } from '../redux/actions/authAction'
+import OnLoadingModal from '../components/Modal/OnLoadingModal'
 
 
 
@@ -11,19 +13,45 @@ import { signOut } from '../redux/actions/authAction'
 const MenuScreen = ({navigation}) => {
 
     const dispatch = useDispatch();
-    const { followStatus } = useSelector(state => state.authReducer)
-    
- 
+    const { followStatus, token, userId } = useSelector(state => state.authReducer)
+    const { followStatusLoading } = useSelector(status => status.onLoadingReducer.followStatusLoading)
+
 
     return (
         <SafeAreaView style={tw`bg-white h-full`}>
             <ScrollView contentContainerStyle ={tw`px-3 flex flex-col items-center`}>
-                {
-                    followStatus ? (
+                <TouchableOpacity 
+                    style={tw`w-full py-3 px-2 flex flex-row justify-between`}
+                    onPress={() => navigation.navigate('FollowersStack')}
+                >
+                    <Text style={tw`text-base`}>
+                        Followers
+                    </Text>
+                    <AntDesign name='right' />
+                </TouchableOpacity>
+                <TouchableOpacity 
+                    style={tw`w-full py-3 px-2 flex flex-row justify-between items-center`}
+                    // onPress={}
+                >
+                    <Text style={tw`text-base`}>
+                        Private Account ?                        
+                    </Text>
+                    <Switch
+                        trackColor={{ false: "#C6CBD9", true: "#5EC2EA" }}
+                        thumbColor={"#fff"}
+                        ios_backgroundColor="#3e3e3e"
+                        onValueChange={() => {
+                            dispatch(setFollowStatus({token, userId}))
+                        }}
+                        value={followStatus}
+                    />
+                </TouchableOpacity>
+                    {
+                        followStatus ? (
                             <></>
                         ) : (
                             <TouchableOpacity 
-                                style={tw`w-full py-3 px-2 my-3 flex flex-row justify-between`}
+                                style={tw`w-full py-3 px-2 flex flex-row justify-between`}
                                 onPress={() => navigation.navigate('FollowRequestsStack')}
                             >
                                 <Text style={tw`text-base`}>
@@ -33,13 +61,13 @@ const MenuScreen = ({navigation}) => {
                             </TouchableOpacity>
 
                         )
-                }
+                    }
 
 
 
                 <View style={tw`py-3 border-t w-full border-gray-200`}>
                     <TouchableOpacity 
-                        style={tw`bg-gray-100 w-full py-3 items-center rounded-lg`}
+                        style={tw`bg-gray-100 w-full py-[16] items-center rounded-lg`}
                         onPress={() => {
                             dispatch(signOut())
                         }}    
@@ -48,6 +76,7 @@ const MenuScreen = ({navigation}) => {
                     </TouchableOpacity>
                 </View>
             </ScrollView>
+            {/* <OnLoadingModal showLoading={followStatusLoading}/> */}
         </SafeAreaView>
     )
 }

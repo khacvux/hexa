@@ -38,12 +38,24 @@ function* signUp(data) {
     } catch (error) {
         yield put(ACTION.signUpFailure(error))
     }
-
 }
 
+
+function* setFollowStatus({userId, token}) {
+    console.log('SET FOLLOW STATUS running...')
+    try {
+        const res = yield call(setFollowStatus, {userId, token})
+        if(res){
+            yield put(ACTION.setFollowStatusSuccess())
+        }
+    } catch (error) {
+        yield put(ACTION.setPrivateAccountFailure(error))
+    }
+}
 
 
 export default authSaga = [
     takeLatest(TYPES.SIGN_IN, signIn),
-    takeLatest(TYPES.SIGN_UP, signUp)
+    takeLatest(TYPES.SIGN_UP, signUp),
+    takeLatest(TYPES.SET_FOLLOW_STATUS, setFollowStatus),
 ]
