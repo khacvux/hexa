@@ -48,6 +48,7 @@ export const signUpFailure = (error) => {
 }
 
 export const setFollowStatus = ({token, userId}) => {
+    console.log("in action: ", userId)
     return { 
         type: TYPES.SET_FOLLOW_STATUS,
         payload: {token, userId}

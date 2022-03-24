@@ -1,8 +1,8 @@
 import * as TYPES from '../constants/auth'
 import * as ACTION from '../actions/authAction'
 import { call, put, delay, takeLatest, takeEvery } from 'redux-saga/effects';
-import { signInAPI, signUpAPI } from '../../apis/accountAPIs'
-import { onLoadingAuth } from '../actions/onLoading';
+import { setFollowStatusAPI, signInAPI, signUpAPI } from '../../apis/accountAPIs'
+import { onLoadingAuth, onLoadingSetFollowStatus } from '../actions/onLoading';
 
 function* signIn(data) {
     try{
@@ -41,16 +41,18 @@ function* signUp(data) {
 }
 
 
-function* setFollowStatus({userId, token}) {
+function* setFollowStatus(data) {
     console.log('SET FOLLOW STATUS running...')
+    yield put(onLoadingSetFollowStatus(true))
+    const { token, userId } = data.payload
     try {
-        const res = yield call(setFollowStatus, {userId, token})
-        if(res){
-            yield put(ACTION.setFollowStatusSuccess())
-        }
+        const res = yield call(setFollowStatusAPI, {userId, token})
+        res && (yield put(ACTION.setFollowStatusSuccess()))
     } catch (error) {
         yield put(ACTION.setPrivateAccountFailure(error))
     }
+    
+    yield put(onLoadingSetFollowStatus(false))
 }
 
 

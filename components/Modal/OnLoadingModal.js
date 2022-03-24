@@ -5,7 +5,7 @@ import tw from 'twrnc';
 
 const AuthLoadingModal = ({showLoading}) => {
       
-
+  console.log(showLoading)
   return (
     <Modal
         transparent={true}

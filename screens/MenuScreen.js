@@ -15,8 +15,8 @@ const MenuScreen = ({navigation}) => {
     const dispatch = useDispatch();
     const { followStatus, token, userId } = useSelector(state => state.authReducer)
     const { followStatusLoading } = useSelector(status => status.onLoadingReducer.followStatusLoading)
-
-
+    const [ privateAccount, setPrivateAccount] = useState(followStatus);
+    console.log(followStatusLoading)
     return (
         <SafeAreaView style={tw`bg-white h-full`}>
             <ScrollView contentContainerStyle ={tw`px-3 flex flex-col items-center`}>
@@ -43,7 +43,7 @@ const MenuScreen = ({navigation}) => {
                         onValueChange={() => {
                             dispatch(setFollowStatus({token, userId}))
                         }}
-                        value={followStatus}
+                        value={privateAccount}
                     />
                 </TouchableOpacity>
                     {

@@ -4,7 +4,23 @@ const url = 'follow/'
 
 
 
-export const getFollowRequests = async ({userId, token}) => {
+export const getListFollowerAPI = async ({userId, token}) => {
+
+    try {
+        let params = ''
+        userId && (params = `${userId}/following`)
+        const res = await AXIOS.get(`${url}${params}`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+        return res.data
+    } catch (e) {
+        console.log(e)
+    }   
+}
+
+export const getFollowRequestsAPI = async ({userId, token}) => {
     try {
         let params = ''
         userId && (params = `${userId}/request`)
@@ -18,21 +34,7 @@ export const getFollowRequests = async ({userId, token}) => {
     }   
 }
 
-export const getListFollower = async ({userId, token}) => {
-    try {
-        let params = ''
-        userId && (params = `/${userId}/following`)
-        return res = await AXIOS.get(`${url}${params}`, {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        })
-    } catch (e) {
-        console.log(e)
-    }   
-}
-
-export const getListFollowing = async ({userId, token}) => {
+export const getListFollowingAPI = async ({userId, token}) => {
     try {
         let params = ''
         userId && (params = `${userId}/follower`)

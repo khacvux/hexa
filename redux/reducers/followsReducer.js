@@ -52,6 +52,8 @@ export default followsReducer = ( state = initState, action) => {
                 ...state
             }
         
-            
+        default: 
+            return state
+        
     }
 }

@@ -23,10 +23,9 @@ export const getListFollowing = ({userId, token}) => {
     }
 }
 
-export const getListFollowingSuccess = (data) => {
+export const getListFollowingSuccess = () => {
     return {
         type: TYPES.GET_LIST_FOLLOWING_SUCCESS,
-        payload: data
     }
 }
 

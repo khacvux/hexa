@@ -29,15 +29,18 @@ export const signUpAPI = async (data) => {
 
 
 
-export const setFollowStatus = async ({userId, token}) => {
+export const setFollowStatusAPI = async ({userId, token}) => {
+    console.log('in API: ',userId)
     try {
         let params = `follow/${userId}/followStatus`
-        return res = await AXIOS.get(`${params}`, {
+        const res = await AXIOS.get(`${params}`, {
             headers: {
                 'Authorization': `Bearer ${token}`,
             }
         })
+        if(res)
+            return res.data
     } catch (error) { 
-        console.log(error)
+        console.log('API: ',error)
     }
 }
