@@ -3,19 +3,40 @@ import tw from 'twrnc'
 import { useNavigation } from '@react-navigation/native'
 import { View, Text, Image, TouchableOpacity, Alert } from 'react-native'
 import { AntDesign } from '@expo/vector-icons'
+import { useDispatch } from 'react-redux'
+import { addHistorySearch, deleteHistorySearch } from '../../redux/actions/searchsAction'
 
-const SearchItem = ({ item }) => {
+
+const SearchItem = ({ item, times }) => {
     
-    // console.log(item)
+    const dispatch = useDispatch()
     const navigation = useNavigation();
+
+    const handleSelect = () => {
+        navigation.navigate('ProfileStack', {
+            userId: item.item.userId  
+        })
+        
+        dispatch(addHistorySearch({
+            avatar: item.item.avatar, 
+            name: item.item.name, 
+            email: item.item.email, 
+            userId: item.item.userId
+        }))
+    }
+
+    const handleDelete = () => {
+        dispatch(deleteHistorySearch({
+            userId: item.item.userId,
+        }))
+    }
+
 
     return (
         <View style={tw`flex flex-row items-center justify-between py-2`}>   
             <TouchableOpacity 
-                style={tw`flex flex-row items-center`}
-                onPress={() => navigation.navigate('ProfileStack', {
-                    userId: item.item.userId
-                })}
+                style={tw`flex flex-row items-center flex-1`}
+                onPress={handleSelect}
             >
                 <Image 
                     source={require('../../assets/images/defaultAvatar.png')}
@@ -26,9 +47,15 @@ const SearchItem = ({ item }) => {
                     <Text style={tw`text-xs font-light`}>@{item.item.email}</Text>
                 </View>
             </TouchableOpacity>
-            <TouchableOpacity>
-                <AntDesign name='close' size={16} />
-            </TouchableOpacity> 
+            {
+                times ? (
+                    <TouchableOpacity
+                        onPress={handleDelete}
+                    >
+                        <AntDesign name='close' size={16} style={tw`p-2`} />
+                    </TouchableOpacity> 
+                ) : <></>
+            }
         </View>
 
     )

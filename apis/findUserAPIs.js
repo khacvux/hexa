@@ -4,7 +4,7 @@ const url = 'user/'
 
 export const findUserByNameAPI = async (params) => {
     try {
-        const res = await AXIOS.get(`${url}name=${params}`)
+        const res = await AXIOS.get(`${url}find/name=${params}`)
         return res.data;
     } catch (error) {
         console.log(error)

@@ -14,7 +14,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const SearchScreen = () => {
 
-  const { listResult } = useSelector(state => state.searchReducer)
+  const { listResult, listHistorySearch } = useSelector(state => state.searchReducer)
   const { findUserLoading } = useSelector(state => state.onLoadingReducer)
   const dispatch = useDispatch()
   const [input, setInput] = useState('')
@@ -37,32 +37,56 @@ const SearchScreen = () => {
               style={tw`mx-2 flex-1 py-3`}
               onChangeText={val => setInput(val)}
             />
-            <TouchableOpacity style={tw`bg-gray-300 p-1 rounded-full`} 
+            <TouchableOpacity style={tw`p-1`} 
               onPress={() => setInput('')}
             >
-                <AntDesign name='close' />
+                <Text style={tw`text-sm font-light`}>Cancel</Text>
 
             </TouchableOpacity>
         </View>
         <View style={tw`h-full w-full px-2`}>
-            {/* <Text style={tw`text-base font-light tracking-[.2] mt-3 mb-2`}>History</Text>
-            <SearchItem />
-          <SearchItem /> */}
             {
               findUserLoading ? (
-                <LoadingAnimation />
-                ) :
-                (listResult ? (
-                  <FlatList 
-                  data={listResult}
-                  renderItem={(item) => (
-                    <SearchItem item={item}/>
-                    )}
-                    keyExtractor={(item, index) => index.toString()}
-                    />
+                  <LoadingAnimation />
+              ) :
+                (
+                  listResult.length ? (
+                    <>
+                    <Text style={tw`text-base font-light tracking-[.2] mt-3 mb-2`}>Results</Text>
+                    <FlatList 
+                      data={listResult}
+                      renderItem={(item) => (
+                        <SearchItem item={item} times={false}/>
+                      )}
+                      keyExtractor={(item, index) => index.toString()}
+                      />
+                    </>
+                ) : (
+                // <FindingAnimation title={'Look for your friend'} />
+                  input ? (
+                    <View style={tw`px-3 py-5 border-b border-gray-200 `}>
+                      <Text style={tw`font-light tracking-[.2]`}>
+                        No result were found for '{input}'
+                      </Text>
+                    </View>
+                  ) : (
+                    listHistorySearch.length ? (
+                      <View>
+                        <Text style={tw`text-base font-light tracking-[.2] mt-3 mb-2`}>History</Text>
+                        <FlatList 
+                          data={listHistorySearch}
+                          renderItem={(item) => (
+                            <SearchItem item={item} times={true} />
+                          )}
+                          keyExtractor={(item,  index) => index.toString()}
+                        />
+                      </View>
                     ) : (
-                      <FindingAnimation />
-                ))
+                      <></> 
+                    )
+                  )
+                )
+              )
             }
         </View>
 
