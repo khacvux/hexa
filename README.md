@@ -1,1 +1,3 @@
-# HEXA_APP
+# HEXA
+### Stack
+
