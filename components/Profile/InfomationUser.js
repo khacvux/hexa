@@ -3,10 +3,7 @@ import { useSelector } from 'react-redux'
 import tw from 'twrnc'
 
 
-const InfomationUser = () => {
-
-    const { name, avatar, email } = useSelector(state => state.authReducer)
-
+const InfomationUser = ({name, avatar, email}) => {
 
     return (
         <View style={tw`pt-2 px-5`}>

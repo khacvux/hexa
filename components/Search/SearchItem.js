@@ -1,25 +1,36 @@
 import React from 'react'
 import tw from 'twrnc'
 import { useNavigation } from '@react-navigation/native'
-import { View, Text, Image, StyleSheet, TouchableOpacity, Alert } from 'react-native'
+import { View, Text, Image, TouchableOpacity, Alert } from 'react-native'
+import { AntDesign } from '@expo/vector-icons'
 
-
-const SearchItem = (props) => {
+const SearchItem = ({ item }) => {
     
+    // console.log(item)
     const navigation = useNavigation();
-    const { item } = props
+
     return (
-        <View style={tw`flex-1 h-42 m-[2] rounded-[1] overflow-hidden `}>
-            <TouchableOpacity
-                activeOpacity={.7}
-                onPress={() => Alert.alert('123')}
-                >
+        <View style={tw`flex flex-row items-center justify-between py-2`}>   
+            <TouchableOpacity 
+                style={tw`flex flex-row items-center`}
+                onPress={() => navigation.navigate('ProfileStack', {
+                    userId: item.item.userId
+                })}
+            >
                 <Image 
-                    source={{ uri: item.item.avt }}
-                    style={tw`h-50`}
+                    source={require('../../assets/images/defaultAvatar.png')}
+                    style={tw`w-14 h-14 rounded-full border border-blue-300 mr-2`}
                 />
+                <View>
+                    <Text style={tw`text-base font-semibold`}>{item.item.name}</Text>
+                    <Text style={tw`text-xs font-light`}>@{item.item.email}</Text>
+                </View>
+            </TouchableOpacity>
+            <TouchableOpacity>
+                <AntDesign name='close' size={16} />
             </TouchableOpacity> 
-        </View>  
+        </View>
+
     )
 } 
 export default SearchItem

@@ -7,7 +7,8 @@ import { notifications } from '../../data'
 import PostItem from './PostItem'
 
 
-const ListPost = () => {
+const ListPost = ({postsList}) => {
+    console.log(postsList, ' in list')
     return (
         <View style={tw` px-4 bg-white `}>
            <FlatGrid

@@ -55,6 +55,7 @@ export const UpLoadNavigatior = () => {
             <TopBar.Screen 
                 name='CreateNewTrackTopBar' 
                 component={SelectAudio} 
+                
                 options={{ 
                     tabBarIcon: (({focused}) => 
                         <>
@@ -77,8 +78,8 @@ export const UpLoadNavigatior = () => {
     );
 };
 
-export const TabListNavigator = () => {
-
+export const TabListNavigator = ({postsList}) => {
+    console.log(postsList, ' in tab')
     return (
         <TopBar.Navigator
             screenOptions={{
@@ -92,6 +93,7 @@ export const TabListNavigator = () => {
             <TopBar.Screen 
                 name='ListPostTab' 
                 component={ListPost} 
+                initialParams={{postsList: postsList}} 
                 options={{ 
                     tabBarIcon: (({focused}) => 
                         <>
@@ -112,7 +114,7 @@ export const TabListNavigator = () => {
             />
             <TopBar.Screen 
                 name='ListTrackTab' 
-                component={ListTrack} 
+                component={ListTrack}
                 options={{ 
                     tabBarIcon: (({focused}) => 
                         <Foundation name='sound' size={23} style={focused ? tw`text-[#5EC2EA]` : tw`text-gray-500`} />

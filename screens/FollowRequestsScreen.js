@@ -1,12 +1,19 @@
 import { AntDesign } from '@expo/vector-icons'
 import { View, Text, TouchableOpacity } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { useSelector } from 'react-redux'
 import tw from 'twrnc'
+import Empty from '../components/LottieAnimation/EmptyAnimation'
 import FollowRequest from '../components/Follows/FollowRequest'
 
 
 
 const FollowRequestsScreen = ({navigation}) => {
+
+
+    const { followings } = useSelector(state => state.followsReducer)
+
+
   return (
     <SafeAreaView style={tw`bg-white`}>
         <View style={tw`w-full h-full bg-white flex flex-col items-center bg-[#F5F7FA]`}> 
@@ -20,11 +27,17 @@ const FollowRequestsScreen = ({navigation}) => {
                 <Text style={tw`w-full text-center text-base font-semibold`}>Follow Requests</Text>
             </View>
             <View style={tw`flex flex-col`}>
-                <View>
-                    <FollowRequest />
-                    <FollowRequest />
-                    <FollowRequest />
-                </View>
+                {
+                    followings.lenth == 0 ? (
+                        <Empty /> 
+                    ) : (
+                        <View>
+                            <FollowRequest />
+                            <FollowRequest />
+                            <FollowRequest />
+                        </View>
+                    )
+                }
             </View>
         </View>
     </SafeAreaView>

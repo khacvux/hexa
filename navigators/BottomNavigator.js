@@ -1,5 +1,4 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import React from 'react'
 import { Ionicons, Feather, MaterialIcons } from '@expo/vector-icons'; 
 import tw from 'twrnc'
 import MenuScreen from '../screens/MenuScreen';
@@ -9,10 +8,10 @@ import SvgHomeOutline from '../icons/home-outline.svg'
 import MyProfileScreen from '../screens/MyProfileScreen';
 import NotificationScreen from '../screens/NotificationScreen';
 import HomeScreen from '../screens/HomeScreen';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import SearchScreen from '../screens/SearchScreen';
 import MusicScreen from '../screens/MusicScreen';
-
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Tab = createBottomTabNavigator();
 
@@ -32,11 +31,8 @@ const BottomNavigator = () => {
                                 <SvgHomeOutline width={22} />
                             )}
                         </>
-
-
                     ),
-                    tabBarStyle: tw`bg-[#F5F7FA]`,
-
+                    tabBarStyle: [tw`bg-[#F5F7FA]`],
                 }}
             />
             <Tab.Screen name="SearchTab" component={SearchScreen}
@@ -49,7 +45,7 @@ const BottomNavigator = () => {
                             style={focused ? (tw`text-xl text-[#5EC2EA]`) : (tw`text-xl`)}
                         />
                     ),
-                    tabBarStyle: tw`bg-[#F5F7FA]`,
+                    tabBarStyle: [tw`bg-[#F5F7FA]`],
                 }}
             />
             <Tab.Screen name="MusicTab" component={MusicScreen}
@@ -62,7 +58,7 @@ const BottomNavigator = () => {
                             style={focused ? (tw`text-xl text-[#5EC2EA]`) : (tw`text-xl`)}
                         />
                     ),
-                    tabBarStyle: tw`bg-[#F5F7FA]`,
+                    tabBarStyle: [tw`bg-[#F5F7FA]`],
                 }}
             />
             <Tab.Screen name="NotificationTab" component={NotificationScreen}
@@ -80,7 +76,7 @@ const BottomNavigator = () => {
                             </View>
                         )
                     }),
-                    tabBarStyle: tw`bg-[#F5F7FA]`,
+                    tabBarStyle: [tw`bg-[#F5F7FA]`],
                 }}
             />
             <Tab.Screen name="ProfileTab" component={MyProfileScreen}
@@ -93,7 +89,7 @@ const BottomNavigator = () => {
                             style={focused ? (tw`text-xl text-[#5EC2EA]`) : (tw`text-xl`)}
                         />
                     ),
-                    tabBarStyle: tw`bg-[#F5F7FA]`,
+                    tabBarStyle: [tw`bg-[#F5F7FA]`],
                 }}
             />
             <Tab.Screen name="MenuTab" component={MenuScreen}
@@ -107,7 +103,7 @@ const BottomNavigator = () => {
                             size={23}
                         />
                     ),
-                    tabBarStyle: tw`bg-[#F5F7FA]`,
+                    tabBarStyle: [tw`bg-[#F5F7FA]`],
                 }}
             />
             

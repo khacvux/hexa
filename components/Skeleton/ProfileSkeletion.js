@@ -4,7 +4,7 @@ import Skeleton from './Skeleton'
 
 
 
-const InformationUserSkeletion = () => {
+const ProfileSkeletion = () => {
   return (
     <View style={tw`pt-2 px-5`}>
            <View style={tw`flex flex-row items-center justify-between`}>
@@ -47,9 +47,28 @@ const InformationUserSkeletion = () => {
                     <Skeleton w={300} h={40} bg={'#ccc'} rounded={'1'} />   
                 </View>
                 
-           </View>
+            </View>
+            <View style={tw`flex flex-row items-center mt-2`}>
+                <View 
+                    style={tw`flex-2`}   
+                >
+                    <Skeleton w={245} h={45} bg={'#ccc'} rounded={'1'} />
+                </View>
+                <View
+                    style={tw`flex-1 ml-3`}
+                    activeOpacity={.8}    
+                >
+                    <Skeleton w={125} h={45} bg={'#ccc'} rounded={'1'} />
+                </View>
+            </View>
+            <View style={tw`mt-5 mb-1`}>
+                <Skeleton w={379} h={30} bg={'#ccc'} rounded={'1'} />
+            </View>
+            <View style={tw`flex flex-row items-center mt-1`}>
+                <Skeleton w={180} h={300} bg={'#ccc'} rounded={'2'} />
+            </View>
         </View>
   )
 }
 
-export default InformationUserSkeletion
+export default ProfileSkeletion

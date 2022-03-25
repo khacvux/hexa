@@ -13,3 +13,10 @@ export const onLoadingSetFollowStatus = payload => {
         payload
     }
 }
+
+export const onLoadingFindUser = payload => {
+    return {
+        type: TYPES.ON_LOADING_FIND_USER,
+        payload
+    }
+}

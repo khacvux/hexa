@@ -4,6 +4,7 @@ import { View, Text, TouchableOpacity } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useDispatch, useSelector } from 'react-redux'
 import tw from 'twrnc'
+import Empty from '../components/LottieAnimation/EmptyAnimation'
 import Follower from '../components/Follows/Follower'
 import { getListFollower } from '../redux/actions/followsAction'
 
@@ -15,8 +16,8 @@ const FollowersScreen = ({navigation}) => {
     const { userId, token } = useSelector(state => state.authReducer)
     const {followers} = useSelector(state => state.followsReducer)
 
-    console.log(followers)
 
+    
     useEffect(() => {
         dispatch(getListFollower({userId, token}))
     }, [])
@@ -34,10 +35,17 @@ const FollowersScreen = ({navigation}) => {
                     </TouchableOpacity>
                     <Text style={tw`w-full text-center text-base font-semibold`}>Followers</Text>
                 </View>
-                <View style={tw`flex flex-col`}>
-                    <View>
-                        <Follower />
-                    </View>
+                <View style={tw`flex flex-col w-full`}>
+                    {
+                        followers == 0 ? (
+                            <Empty />
+                        ) : (
+                            <View>
+                                <Follower />
+                            </View>
+
+                        )
+                    }
                 </View>
             </View>
         </SafeAreaView>

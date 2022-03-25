@@ -13,7 +13,7 @@ const AuthLoadingModal = ({showLoading}) => {
     >   
         <View style={tw`w-full h-full items-center justify-center bg-[#CCCCCC40]`}>
             <LottieView 
-                source={require('../../assets/images/loading.json')}
+                source={require('../../assets/lottieFiles/loading.json')}
                 style={tw`w-30 h-30`}
                 autoPlay
                 loop={true}

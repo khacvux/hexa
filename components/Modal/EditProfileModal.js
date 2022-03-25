@@ -3,7 +3,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 import tw from 'twrnc'
 
 
-const EditProfileModal = ({modalVisible, handleModalVisible}) => {
+const EditProfileModal = ({modalVisible, handleModalVisible, firstName, lastName, avatar, email}) => {
   return (
     <Modal
         animationType="slide"
@@ -28,7 +28,7 @@ const EditProfileModal = ({modalVisible, handleModalVisible}) => {
                 </View>
                 <View style={tw`flex items-center my-5`}>
                     <Image
-                            source={require('../../assets/images/avt_3.png')}
+                            source={avatar ? {uri: avatar} : require('../../assets/images/defaultAvatar.png')}
                             style={tw`w-21 h-21 border-2 border-[#F5F7FA] rounded-full`}
                     />
                     <TouchableOpacity>
@@ -43,6 +43,7 @@ const EditProfileModal = ({modalVisible, handleModalVisible}) => {
                         <TextInput 
                             placeholder='First name'
                             style={tw`border-b border-[#CCC] flex-3 py-4`}
+                            value={firstName}
                         />
                     </View>
                     <View style={tw` px-5 flex flex-row items-center`}>
@@ -52,6 +53,7 @@ const EditProfileModal = ({modalVisible, handleModalVisible}) => {
                         <TextInput 
                             placeholder='Last name'
                             style={tw`border-b border-[#CCC] flex-3 py-4`}
+                            value={lastName}
                         />
                     </View>
                     <View style={tw` px-5 flex flex-row items-center`}>
@@ -60,10 +62,9 @@ const EditProfileModal = ({modalVisible, handleModalVisible}) => {
                         </Text>
                         <View style={tw`border-b border-[#CCC] flex-3`}>
                             <Text 
-                                value={'User name'}
-                                style={tw`py-4`}
+                                style={tw`py-4 text-black`}
                             >
-                                @UserName    
+                                @{email}  
                             </Text>
                         </View>
                     </View>
