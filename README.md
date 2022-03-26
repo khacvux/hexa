@@ -1,5 +1,7 @@
 # HEXA
 
+    A social app
+
 ## Stack
 
 - [React Native](https://reactnative.dev/)
