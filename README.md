@@ -1,5 +1,5 @@
 # HEXA
 
-### Stack
+## Stack
 
-### Project structure
+## Project structure
