@@ -11,7 +11,7 @@ const AuthLoadingModal = ({showLoading}) => {
         transparent={true}
         visible={showLoading}
     >   
-        <View style={tw`w-full h-full items-center justify-center bg-[#CCCCCC40]`}>
+        <View style={tw`w-full h-full items-center justify-center bg-[#00000020]`}>
             <LottieView 
                 source={require('../../assets/lottieFiles/loading.json')}
                 style={tw`w-30 h-30`}

@@ -12,16 +12,23 @@ export const getPostsAPI = async (data) => {
     }
 }
 
-export const getUserInfo = async ({userId, token}) => {
+
+export const uploadPostsAPI = async ({token, formData}) => {
+    console.log(formData)
     try {
-        let params = ''
-        userId && (params = `/${userId}`)
-        return res = await AXIOS.get(`${url}${params}`, {
+        let params = '';
+        token && (params = '/upLoadFile')
+        const res = await AXIOS.post(`${url}${params}`, {
+            data: formData,
             headers: {
-                'Authorization': `Bearer ${token}`
-            }
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': `multipart/form-data`,
+            },
         })
-    } catch (e) {
-        console.log(e)
-    }   
+        if(res.data.status == 'ok') {
+            return res.data
+        }
+    } catch (error) {
+        console.log(error)
+    }
 }

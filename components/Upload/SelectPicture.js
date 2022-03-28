@@ -1,11 +1,11 @@
 import { View, Text, SafeAreaView, TouchableOpacity, Image, Dimensions } from 'react-native';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import tw from 'twrnc';
 import { useNavigation } from '@react-navigation/native';
 import * as ImagePicker from 'expo-image-picker';
 
 
-import { EvilIcons, Ionicons, MaterialIcons } from '@expo/vector-icons';
+import { EvilIcons, MaterialIcons } from '@expo/vector-icons';
 
 
 
@@ -17,19 +17,24 @@ const SelectPicture = () => {
   const FRAMESIZE_H = SCREEN_WIDTH/2*3*.97;
 
   const navigation = useNavigation();
-  const [status, setStatus] = useState('');
-  const [uriImage, setUriImage] = useState(null);
+  const [image, setImage] = useState(null);
 
 
   const selectPicture = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
       // allowsEditing: true,
-      // aspect: [2, 3],
+      aspect: [2, 3],
       quality: 1,
     });
 
     if (!result.cancelled) {
-      setUriImage(result.uri);
+      const image = {
+        uri: result.uri,
+        type: result.type,
+        name: result.fileName || result.uri.substr(result.uri.lastIndexOf('/') + 1)
+      }
+      setImage(image);
     }
   };
 
@@ -39,10 +44,10 @@ const SelectPicture = () => {
     <SafeAreaView style={tw`bg-white h-full flex items-center`}>
       <View style={[tw`flex items-center justify-center w-full overflow-hidden`, {height:FRAMESIZE_H}]}>
         {
-          uriImage ? (
+          image ? (
             <View style={[tw`w-full items-center`]}>
               <Image 
-                source={{ uri: uriImage}} 
+                source={{ uri: image.uri}} 
                 style={[{width: FRAMESIZE_W, height: FRAMESIZE_H}]}
               />
             </View>
@@ -67,16 +72,16 @@ const SelectPicture = () => {
           <TouchableOpacity style={tw`items-center px-7 mx-3 bg-[#5EC2EA] rounded-lg`}
             onPress={selectPicture}
           >
-            <Text style={tw`py-2 text-white`}>
+            <Text style={tw`py-3 text-white`}>
               Gallery
             </Text>
           </TouchableOpacity>
           {
-            uriImage ? (
+            image ? (
               <TouchableOpacity style={tw`items-center px-2 flex flex-row` }
                 activeOpacity={.8}
                 onPress={() => navigation.navigate('UpLoadPictureStack', {
-                  uriImage: uriImage
+                  image: image
                 })}
               >
                 <Text style={tw`py-2 text-[#5EC2EA]`}>

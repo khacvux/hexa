@@ -17,10 +17,23 @@ export default postsReducer = (state = initState, action) => {
                 ...state,
                 posts: posts.concat(action.payload)
             }
+
+        case TYPES.ADD_POST: 
+            return {
+                ...state,
+            }
+
+        case TYPES.ADD_POST_SUCCESS:
+            return {
+                ...state,
+            }
+        
         case TYPES.POST_ERROR:
             return {
                 ...state,
                 error: action.error,
             }
+        default:
+            return state
     }
 }

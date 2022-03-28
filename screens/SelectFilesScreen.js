@@ -2,11 +2,11 @@ import React from 'react';
 import { Text, View } from 'react-native';
 import { UpLoadNavigatior } from '../navigators/TopTabNavigatior';
 
-const UpLoadScreen = () => {
+const SelectFilesScreen = () => {
   return (
     <UpLoadNavigatior/>
    
   );
 };
 
-export default UpLoadScreen;
+export default SelectFilesScreen;

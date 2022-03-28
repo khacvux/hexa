@@ -8,7 +8,7 @@ import MenuScreen from '../screens/MenuScreen';
 import MyProfileScreen from '../screens/MyProfileScreen';
 import NotificationScreen from '../screens/NotificationScreen';
 import ProfileScreen from '../screens/ProfileScreen';
-import UpLoadScreen from '../screens/UpLoadScreen';
+import SelectFilesScreen from '../screens/SelectFilesScreen';
 import DetailFeedsScreen from '../screens/DetailFeedsScreen';
 import BottomNavigator from './BottomNavigator';
 import LoginScreen from '../screens/LoginScreen';
@@ -44,7 +44,7 @@ const StackNavigator = () => {
                         <Stack.Screen name="NotificationStack" component={NotificationScreen} />
                         <Stack.Screen name="ChatboxStack" component={ChatboxScreen} />
                         <Stack.Screen name="ChatsStack" component={ChatsScreen} />
-                        <Stack.Screen name="UpLoadStack" component={UpLoadScreen} />
+                        <Stack.Screen name="SelectFilesStack" component={SelectFilesScreen} />
                         <Stack.Screen name="UpLoadPictureStack" component={UpLoadPictureScreen} />
                         <Stack.Screen name="ListTrackStack" component={ListTrackScreen} />
                         <Stack.Screen name="FollowRequestsStack" component={FollowRequestsScreen} />
