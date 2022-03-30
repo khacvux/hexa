@@ -1,5 +1,16 @@
-import { View, Text, SafeAreaView, Image, StatusBar, ScrollView, TouchableOpacity, Animated, FlatList, TextInput, KeyboardAvoidingView } from 'react-native'
-import React, { useRef, useState } from 'react'
+import { View, 
+        Text, 
+        SafeAreaView, 
+        Image, 
+        StatusBar,
+        ScrollView, 
+        TouchableOpacity, 
+        Animated, 
+        FlatList, 
+        TextInput, 
+        KeyboardAvoidingView 
+    } from 'react-native'
+import { useLayoutEffect, useRef, useState } from 'react'
 import tw from 'twrnc'
 import { Feather, FontAwesome, Ionicons } from '@expo/vector-icons'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
@@ -10,11 +21,26 @@ import { LinearGradient } from 'expo-linear-gradient'
 import WriteComment from '../components/Comments/WriteComment'
 import { BlurView } from 'expo-blur'
 import Comments from '../components/Comments/Comments'
+import { useDispatch, useSelector } from 'react-redux'
+import { findPostsById } from '../redux/actions/postsAction'
 
 const DetailFeedsScreen = ({route}) => {
 
+    const { postsId } = route.params
+
     const navigation = useNavigation();
-    const { post } = route.params
+    const dispatch = useDispatch();
+    const { post } = useSelector(state => state.postsReducer)
+    const { token } = useSelector(state => state.authReducer)
+
+
+    useLayoutEffect(() => {
+        dispatch(findPostsById({postsId, token}))
+    }, [postsId])
+
+    console.log(post)
+
+
     const scrollX = useRef(new Animated.Value(0)).current;
     const [currentIndex, setCurrentIndex] = useState(0);
     const slidesRef = useRef(null);
@@ -47,11 +73,9 @@ const DetailFeedsScreen = ({route}) => {
                     <StatusBar hidden={true} />
                     <View style={tw`h-140 w-full bg-gray-200`}>
                         <FlatList
-                            data={post.images}
-                            renderItem={ ({item}) => {
-                                return <ImageItem image={item} />
-                            }}
-                            keyExtractor={item => item}
+                            data={post.postsImageList}
+                            renderItem={ ({item}) => <ImageItem item={item} /> }
+                            keyExtractor={item => item.postsImageId}
                             pagingEnabled
                             horizontal
                             showsHorizontalScrollIndicator={false}
@@ -68,33 +92,39 @@ const DetailFeedsScreen = ({route}) => {
                             colors={['rgba(0, 0, 0, 0.0003)', 'rgba(0, 0, 0, 0.2)']}
                             style={tw`w-full h-15 py-3 absolute bottom-0 right-0 left-0 flex flex-col justify-end z-0`}
                         >   
-                            {(post.images.length > 1) ? (
+                            {/* {(post.postsImageList.length) ? (
                                 <Paginator data={post.images} scrollX={scrollX} />
                             ) : (
                                 <></>
-                            )}
+                            )} */}
                         
                         </LinearGradient>
                     </View>
                     <View style={tw`w-full px-5`}> 
                         <View style={tw`flex flex-row items-center`}>
                             <View style={tw`flex flex-row items-center justify-between w-full`}>
-                                <View>
-                                    <Image
-                                        style={tw`w-12 h-12 rounded-full absolute -top-3 bg-gray-300`}
-                                        source={{uri: post.avt}}
-                                    />
-                                    <View style={tw`ml-14 flex`}>
-                                        <Text style={tw`font-bold text-lg`}>{post.name}</Text>  
-                                        <Text style={[{fontSize: 11 }, tw`font-light`]}>3 munites ago</Text>
-                                    </View>
-                                </View>
+                                {
+                                    post.postsUserList ? (
+                                        <View>
+                                            <Image
+                                                style={tw`w-12 h-12 rounded-full absolute -top-3 bg-gray-300`}
+                                                source={post.postsUserList[0].image ? {uri: post.postsUserList[0].image} : require('../assets/images/defaultAvatar.png')}
+                                            />
+                                            <View style={tw`ml-14 flex`}>
+                                                <Text style={tw`font-bold text-base`}>{post.postsUserList[0].name}</Text>  
+                                                <Text style={[{fontSize: 11 }, tw`font-light`]}>3 munites ago</Text>
+                                            </View>
+                                        </View>
+                                    ) : (
+                                        <></>
+                                    )
+                                }
                                 <View style={tw`flex flex-row items-center justify-center bg-gray-200 px-5 py-[1] rounded-xl`}>
                                     <TouchableOpacity
                                         activeOpacity={.7}
                                         style={tw` items-center flex flex-row`}
                                     >
-                                        <Text>{post.heart}</Text>
+                                        <Text>{post.totalFeel}</Text>
                                         <Ionicons name="heart"
                                             style={ tw`text-[#ED4366] ml-1 mr-3`}
                                             size={24}
@@ -117,12 +147,13 @@ const DetailFeedsScreen = ({route}) => {
                         </View>
                         <View>
                             <Text style={tw` my-3  pl-3`}>
-                                {post.body}
+                                {post.caption}
                             </Text>
                             
                             <View style={tw`w-full flex justify-center items-center`}>
-                                <View style={tw`bg-gray-200 rounded-full w-2/5 h-[1] items-center my-5`} />
+                                <View style={tw`bg-gray-200 rounded-full w-2/5 h-[1] items-center mt-4 mb-1`} />
                             </View>
+                            <Text style={tw`text-center text-gray-500`}>{post.totalComment} comments</Text>
                         </View>
                     </View>
                 </ScrollView>

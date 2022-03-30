@@ -3,13 +3,12 @@ import React from 'react';
 import tw from 'twrnc'
 const { width, height } = Dimensions.get('window')
 
-const ImageItem = (props) => {
-    const { image } = props;
+const ImageItem = ({item}) => {
     PixelRatio.getPixelSizeForLayoutSize(width);
     return (
         <View>
             <Image 
-                source={{ uri: image }} 
+                source={{ uri: item.image }} 
                 style={[styles.image, tw`h-full`]} 
                 resizeMode='cover' 
             />

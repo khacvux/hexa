@@ -29,9 +29,11 @@ const SelectPicture = () => {
     });
 
     if (!result.cancelled) {
+      console.log(result)
       const image = {
-        uri: result.uri,
-        type: result.type,
+        // uri: result.uri,
+        uri: result.uri.substr(7),
+        type: `${result.type}/jpg`,
         name: result.fileName || result.uri.substr(result.uri.lastIndexOf('/') + 1)
       }
       setImage(image);

@@ -14,9 +14,16 @@ const MenuScreen = ({navigation}) => {
 
     const dispatch = useDispatch();
     const { followStatus, token, userId } = useSelector(state => state.authReducer)
-    const { followStatusLoading } = useSelector(status => status.onLoadingReducer.followStatusLoading)
+    const { followStatusLoading } = useSelector(status => status.onLoadingReducer)
     const [ privateAccount, setPrivateAccount] = useState(followStatus);
     console.log(followStatusLoading)
+
+    const handlePressFollowStatus = () => {
+        dispatch(setFollowStatus({token, userId}))
+        setPrivateAccount(!privateAccount)
+    }
+
+
     return (
         <SafeAreaView style={tw`bg-white h-full`}>
             <ScrollView contentContainerStyle ={tw`px-3 flex flex-col items-center`}>
@@ -40,25 +47,23 @@ const MenuScreen = ({navigation}) => {
                         trackColor={{ false: "#C6CBD9", true: "#5EC2EA" }}
                         thumbColor={"#fff"}
                         ios_backgroundColor="#3e3e3e"
-                        onValueChange={() => {
-                            dispatch(setFollowStatus({token, userId}))
-                        }}
+                        onValueChange={handlePressFollowStatus}
                         value={privateAccount}
                     />
                 </TouchableOpacity>
                     {
                         followStatus ? (
-                            <></>
-                        ) : (
                             <TouchableOpacity 
                                 style={tw`w-full py-3 px-2 flex flex-row justify-between`}
                                 onPress={() => navigation.navigate('FollowRequestsStack')}
-                            >
+                                >
                                 <Text style={tw`text-base`}>
                                     Follow Requests
                                 </Text>
                                 <AntDesign name='right' />
                             </TouchableOpacity>
+                            ) : (
+                            <></>
 
                         )
                     }

@@ -10,12 +10,14 @@ const initState = {
     email: '',
     name: '',
     phone: '',
-    followStatus: null,
+    followStatus: false,
     userSender: null,
     userRecipient: null,
-    postsList: null,
     songList: null,
-    listSongInfoList: null
+    listSongInfoList: null,
+    numberOfPosts: null,
+    numberOfFollower: null,
+    numberOfFollowing: null,
 
 }
 
@@ -28,7 +30,7 @@ export default authReducer = ( state = initState, action ) => {
                 ...state,
             }
         case TYPES.SIGN_IN_SUCCESS:
-            console.log('LOGIN SUCCESS: TOKEN -',action.payload.token)
+            // console.log('LOGIN SUCCESS: TOKEN -',action.payload.token)
             return {
                 ...state,
                 token: action.payload.token,
@@ -43,9 +45,11 @@ export default authReducer = ( state = initState, action ) => {
                 followStatus: action.payload.followStatus,
                 userSender: action.payload.userSender,
                 userRecipient: action.payload.userRecipient,
-                postsList: action.payload.postsList,
                 songList: action.payload.songList,
                 listSongInfoList: action.payload.listSongInfoList,
+                numberOfPosts: action.payload.numberOfPosts,
+                numberOfFollower: action.payload.numberOfFollower,
+                numberOfFollowing: action.payload.numberOfFollowing,
             }
         case TYPES.SIGN_IN_FAILURE:
             console.log(action.error)
@@ -53,15 +57,15 @@ export default authReducer = ( state = initState, action ) => {
                 ...state
             }
 
+
+
         // SIGN UP ACTION
         case TYPES.SIGN_UP:
             return {
                 ...state
             }
-
         case TYPES.SIGN_UP_SUCCESS:
-
-            console.log('SIGNUP SUCCESS: TOKEN -',action.payload.token)
+            // console.log('SIGNUP SUCCESS: TOKEN -',action.payload.token)
             return {
                 ...state,
                 token: action.payload.token,
@@ -76,11 +80,12 @@ export default authReducer = ( state = initState, action ) => {
                 followStatus: action.payload.followStatus,
                 userSender: action.payload.userSender,
                 userRecipient: action.payload.userRecipient,
-                postsList: action.payload.postsList,
                 songList: action.payload.songList,
                 listSongInfoList: action.payload.listSongInfoList,
+                numberOfPosts: action.payload.numberOfPosts,
+                numberOfFollower: action.payload.numberOfFollower,
+                numberOfFollowing: action.payload.numberOfFollowing,
             }
-            
         case TYPES.SIGN_UP_FAILURE:
             console.log(action.error)
             return {
@@ -101,18 +106,35 @@ export default authReducer = ( state = initState, action ) => {
             return {
                 ...state,
             }
-
         case TYPES.SET_FOLLOW_STATUS_SUCCESS:
             return {
                 ...state,
                 followStatus: !followStatus
             }
-
         case TYPES.SET_FOLLOW_STATUS_FAILURE:
-            console.log('Set FOLLOW STATUS fail. ',error)
+            // console.log('Set FOLLOW STATUS fail. ',error)
             return {
                 ...state,
             }
+        
+
+
+        case TYPES.EDIT_PROFILE:
+            return {
+                ...state,
+            }
+        case TYPES.EDIT_PROFILE_SUCCESS:
+            return {
+                ...state,
+                firstName: action.payload.firstName,
+                lastName: action.payload.lastName,
+            }
+        case TYPES.EDIT_PROFILE_FAILURE:
+            console.log(action.error)
+            return {
+                ...state,
+            }
+
 
 
         //DEFAULT

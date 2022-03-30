@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import tw from 'twrnc'
 
 
-const InfomationUser = ({name, avatar, email}) => {
+const InfomationUser = ({name, avatar, email, numberOfPosts, numberOfFollowing, numberOfFollower, bio}) => {
 
     return (
         <View style={tw`pt-2 px-5`}>
@@ -15,28 +15,34 @@ const InfomationUser = ({name, avatar, email}) => {
                 <View style={tw`flex-1 flex flex-row items-center`}>
                     <View style={tw`flex-1 flex items-center`}>
                         <Text style={tw`font-bold text-gray-400 `}>Post</Text>   
-                        <Text style={tw`font-bold text-xl`}>36</Text>                     
+                        <Text style={tw`font-bold text-xl`}>{numberOfPosts}</Text>                     
                     </View>
                     <View style={tw`flex-1 flex items-center`}>
                         <Text style={tw`font-bold text-gray-400 `}>Following</Text>   
-                        <Text style={tw`font-bold text-xl`}>537</Text>                     
+                        <Text style={tw`font-bold text-xl`}>{numberOfFollowing}</Text>                     
                     </View>
                     <View style={tw`flex-1 flex items-center`}>
                         <Text style={tw`font-bold text-gray-400 `}>Followers</Text>   
-                        <Text style={tw`font-bold text-xl`}>986</Text>                     
+                        <Text style={tw`font-bold text-xl`}>{numberOfFollower}</Text>                     
                     </View>
                 </View>
            </View>
-           <View style={tw`mt-4`}>
+           <View style={tw`mt-2`}>
                <Text style={tw`text-gray-500 text-xs`}>
                     {email}
                </Text>
-               <Text style={tw`text-2xl mt-1 font-bold`}>
+               <Text style={tw`text-2xl font-bold`}>
                    {name}
                </Text>
-               <Text style={tw`mt-5`}>
-                   loading 99%.......error
-               </Text>
+               {
+                   bio ? (
+                    <Text style={tw`mt-5`}>
+                        {bio}
+                    </Text>
+                   ) : (
+                       <></>
+                   )
+               }
            </View>
         </View>
     )

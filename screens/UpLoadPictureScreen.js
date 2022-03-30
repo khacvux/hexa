@@ -41,6 +41,7 @@ const UpLoadPictureScreen = ({route}) => {
         formData.append('userId', userId)
 
         dispatch(addPost({formData, token}))
+        navigation.navigate('HomeTab')
     }
 
 

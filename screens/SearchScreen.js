@@ -9,6 +9,7 @@ import LoadingAnimation from '../components/LottieAnimation/LoadingAnimation';
 import { useSelector, useDispatch,} from 'react-redux'
 import { findUserByName } from '../redux/actions/searchsAction';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import OnSearchingSkeletion from '../components/Skeleton/OnSearchingSkeletion';
 
 
 
@@ -47,7 +48,7 @@ const SearchScreen = () => {
         <View style={tw`h-full w-full px-2`}>
             {
               findUserLoading ? (
-                  <LoadingAnimation />
+                <OnSearchingSkeletion />
               ) :
                 (
                   listResult.length ? (
@@ -82,7 +83,7 @@ const SearchScreen = () => {
                         />
                       </View>
                     ) : (
-                      <></> 
+                      <FindingAnimation />
                     )
                   )
                 )

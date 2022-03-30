@@ -2,7 +2,7 @@ import { View, Text, Animated, StyleSheet } from 'react-native'
 import React, { useEffect, useRef } from 'react'
 import tw from 'twrnc';
 
-const Skeleton = ({ w, h, rounded, bg }) => {
+const Skeleton = ({ w, h, rounded, bg, twrnc }) => {
     const opacity = useRef(new Animated.Value(0.3));
     useEffect(() => {
         Animated.loop(
@@ -24,7 +24,7 @@ const Skeleton = ({ w, h, rounded, bg }) => {
 
     return (
         <Animated.View style={{opacity: opacity.current}}>
-             <View style={[{width: w, height: h},tw`bg-[${bg}] rounded-[${rounded}]`]} />
+             <View style={[{width: w, height: h},tw`bg-[${bg}] rounded-[${rounded}] ${twrnc}`]} />
         </Animated.View>
     )
 }

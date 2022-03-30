@@ -1,7 +1,7 @@
 import * as TYPES from '../constants/auth'
 import * as ACTION from '../actions/authAction'
 import { call, put, delay, takeLatest, takeEvery } from 'redux-saga/effects';
-import { setFollowStatusAPI, signInAPI, signUpAPI } from '../../apis/accountAPIs'
+import { editProfileAPI, setFollowStatusAPI, signInAPI, signUpAPI } from '../../apis/accountAPIs'
 import { onLoadingAuth, onLoadingSetFollowStatus } from '../actions/onLoading';
 
 function* signIn(data) {
@@ -47,17 +47,34 @@ function* setFollowStatus(data) {
     const { token, userId } = data.payload
     try {
         const res = yield call(setFollowStatusAPI, {userId, token})
-        res && (yield put(ACTION.setFollowStatusSuccess()))
+        if(res.status == 'ok') {
+            console.log(res)
+            (yield put(ACTION.setFollowStatusSuccess()))
+        }
     } catch (error) {
-        yield put(ACTION.setPrivateAccountFailure(error))
+        yield put(ACTION.setFollowStatusFailure(error))
     }
     
     yield put(onLoadingSetFollowStatus(false))
 }
 
+function* editProfile(data) {
+    console.log('EDIT PROFILE RUNNING...')
+    try {
+        // console.log(data.payload)
+        const res = yield call(editProfileAPI, data.payload)
+        if(res.data.status == 'ok'){
+            yield put(ACTION.editProfileSuccess(data.payload))
+        }
+    } catch (error) {
+        yield put(ACTION.editProfileFailure(error))
+    }
+    
+}
 
 export default authSaga = [
     takeLatest(TYPES.SIGN_IN, signIn),
     takeLatest(TYPES.SIGN_UP, signUp),
     takeLatest(TYPES.SET_FOLLOW_STATUS, setFollowStatus),
+    takeLatest(TYPES.EDIT_PROFILE, editProfile),
 ]

@@ -16,19 +16,42 @@ export const getPostsAPI = async (data) => {
 export const uploadPostsAPI = async ({token, formData}) => {
     console.log(formData)
     try {
-        let params = '';
-        token && (params = '/upLoadFile')
-        const res = await AXIOS.post(`${url}${params}`, {
-            data: formData,
+        const res = await AXIOS.post(`${url}/uploadFile`, formData, {
             headers: {
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': `multipart/form-data`,
             },
         })
-        if(res.data.status == 'ok') {
-            return res.data
-        }
+        return res.data
     } catch (error) {
         console.log(error)
+    }
+}
+
+export const getListPostsAPI = async ({token, userId}) => {
+
+    try {
+        const res = await AXIOS.get(`${url}/listPosts/${userId}`, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            },
+        })
+        return res.data
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
+export const findPostsByIdAPI = async ({token, postsId}) => {
+    try {
+        const res = await AXIOS.get(`${url}/${postsId}`, {
+            headers: {
+                'Authorization:': `Bearer ${token}`,
+            }
+        })
+        return res.data
+    } catch (error) {
+        console.log('API: ', error)
     }
 }

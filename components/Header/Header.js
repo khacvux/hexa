@@ -6,12 +6,15 @@ import { useNavigation } from '@react-navigation/native';
 
 
 import { useSelector } from 'react-redux'
+import OnAddingPosts from '../LottieAnimation/OnAddingPosts';
+import OnAddingFail from '../LottieAnimation/OnAddingFail';
+import OnAddingSuccess from '../LottieAnimation/OnAddingSuccess';
 
 
 
 const Header = () => {
 
-
+    const { onAddingPosts, onAddingSuccess, onAddingFail } = useSelector(state => state.postsReducer)
     const { firstName, avatar } = useSelector(state => state.authReducer)
     const navigation = useNavigation();
 
@@ -20,7 +23,7 @@ const Header = () => {
         <View
             style={tw`flex flex-row justify-between items-center pt-1 pb-2 px-2 bg-white`}
         >
-            <View>
+            <View style={tw`flex flex-row items-center`}>
                 <TouchableOpacity
                     style={tw`flex flex-row bg-[#F5F7FA] px-2 py-1 rounded-full items-center`}
                     onPress={() => navigation.navigate('ProfileTab')}
@@ -31,6 +34,19 @@ const Header = () => {
                     />
                     <Text style={tw`text-xs font-light`}>{firstName}</Text>
                 </TouchableOpacity>
+                {
+                    onAddingPosts ? (
+                        <OnAddingPosts />
+                    ) : (
+                        onAddingSuccess ? (
+                            <OnAddingSuccess />
+                        ) : (
+                            onAddingFail ? (
+                                <OnAddingFail />
+                            ) : <></>
+                        )
+                    )
+                }
             </View>
             <View style={tw`flex flex-row items-center`}>
                 <TouchableOpacity

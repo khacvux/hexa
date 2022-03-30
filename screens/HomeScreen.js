@@ -78,7 +78,7 @@ const HomeScreen = () => {
                 <Animated.View style={[tw`absolute top-0 left-0 right-0 z-50`,{height: CONTAINER_HEIGHT}, {transform: [{translateY: headerTranslate}]}]}>
                     <Header />
                 </Animated.View>
-                <Animated.FlatList
+                {/* <Animated.FlatList
                     data={posts}
                     renderItem={(post) => {
                         return <Feeds post={post} />
@@ -95,7 +95,7 @@ const HomeScreen = () => {
                     onMomentumScrollEnd={onMomentumScrollEnd}
                     onScrollEndDrag={onScrollEndDrag}
                     scrollEventThrottle={1}
-                />
+                /> */}
                 {/* <SkeletonFeeds /> */}
             </View>
 

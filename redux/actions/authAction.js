@@ -48,7 +48,6 @@ export const signUpFailure = (error) => {
 }
 
 export const setFollowStatus = ({token, userId}) => {
-    console.log("in action: ", userId)
     return { 
         type: TYPES.SET_FOLLOW_STATUS,
         payload: {token, userId}
@@ -67,6 +66,29 @@ export const setFollowStatusFailure = (error) => {
         error,
     }
 }
+
+
+export const editProfile = (data) => {
+    return {
+        type: TYPES.EDIT_PROFILE,
+        payload: data,
+    }
+}
+
+export const editProfileSuccess = (data) => {
+    return {
+        type: TYPES.EDIT_PROFILE_SUCCESS,
+        payload: data,
+    }
+}
+
+export const editProfileFailure = (error) => {
+    return {
+        type: TYPES.EDIT_PROFILE_FAILURE,
+        error,
+    }
+}
+
 
 
 

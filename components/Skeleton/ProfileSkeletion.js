@@ -1,4 +1,4 @@
-import { View, Text, Image } from 'react-native'
+import { View } from 'react-native'
 import tw from 'twrnc'
 import Skeleton from './Skeleton'
 

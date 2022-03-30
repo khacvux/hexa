@@ -1,20 +1,37 @@
 import { View, Text, TouchableOpacity, Image } from 'react-native'
 import React from 'react'
 import tw from 'twrnc'
+import { LinearGradient } from 'expo-linear-gradient'
+import { Ionicons } from '@expo/vector-icons'; 
+import { useNavigation } from '@react-navigation/native';
 
 
 const PostItem = ({item}) => {
+
+  const navigation = useNavigation()
+
+
   return (
-    <View style={tw`flex-1 h-66 overflow-hidden `}>
+    <View style={tw`flex-1 h-65 overflow-hidden `}>
         <TouchableOpacity
             activeOpacity={.7}
-            
-            >
+            onPress={() => navigation.navigate('DetailFeedsStack', {
+              postsId: item.item.postsId,
+            }) }  
+          >
             <Image 
-                source={{ uri: item.item.avt }}
+                source={{ uri: item.item.postsImageList[0].image }}
                 style={tw`h-full w-full`}
                 resizeMode={'cover'}
             />
+             
+             <LinearGradient
+                colors={['rgba(0, 0, 0, 0.000004)', 'rgba(0, 0, 0, 0.2)']}
+                style={tw`w-full h-45 py-3 absolute bottom-0 right-0 left-0 flex flex-col justify-end z-0`}
+            >   
+                 {/* <Ionicons name="heart" style={tw`text-2xl text-white` } />
+                 <Ionicons name="chatbubble-ellipses" style={tw`text-2xl text-[#FEFEFD] my-2`} /> */}
+            </LinearGradient>
         </TouchableOpacity> 
     </View> 
   )

@@ -23,6 +23,7 @@ export default onLoadingReducer = ( state = initState, action ) => {
                 ...state,
                 findUserLoading: action.payload
             }
+       
         
         default:
             return state;

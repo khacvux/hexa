@@ -25,14 +25,54 @@ export const addPost = (data) => {
     }
 }
 
-export const addPostSuccess = (data) => {
+export const onAddingPosts = payload => {
     return {
-        type: TYPES.ADD_POST_SUCCESS,
-        payload: data
+        type: TYPES.ON_ADDING_POSTS,
+        payload
     }
 }
 
+export const addPostSuccess = payload => {
+    return {
+        type: TYPES.ADD_POST_SUCCESS,
+        payload
+    }
+}
 
+export const addPostFail = payload => {
+    return {
+        type: TYPES.ADD_POST_FAILURE,
+        payload
+    }
+}
+
+export const getListPostUser = payload => {
+    return {
+        type: TYPES.GET_LIST_POST_USER,
+        payload
+    }
+}
+
+export const getListPostUserSuccess = payload => {
+    return {
+        type: TYPES.GET_LIST_POST_USER_SUCCESS,
+        payload
+    }
+}
+
+export const findPostsById = payload => {
+    return {
+        type: TYPES.FIND_POST_BY_ID,
+        payload
+    }
+}
+
+export const findPostsByIdSuccess = payload => {
+    return {
+        type: TYPES.FIND_POST_BY_ID_SUCCESS,
+        payload
+    }
+}
 
 
 export const consoleError = (error) => {

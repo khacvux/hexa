@@ -1,12 +1,16 @@
 import { View, Image, TextInput } from 'react-native';
 import React from 'react';
 import tw from 'twrnc';
+import { useSelector } from 'react-redux';
 
 
 const WriteComment = () => {
+
+  const { avatar } = useSelector(state => state.authReducer)
+
   return (
-    <View style={tw`bg-[#F4F6F9] py-2 px-4 flex flex-row items-center`}>   
-        <Image source={require('../../assets/images/avt.jpeg')} 
+    <View style={tw`bg-gray-100 py-2 px-4 flex flex-row items-center`}>   
+        <Image source={avatar ? {uri: avatar} : require('../../assets/images/defaultAvatar.png')} 
             style={tw`w-10 h-10 rounded-full mr-4`}
         />
         <TextInput

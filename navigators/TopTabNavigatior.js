@@ -8,6 +8,7 @@ import SelectPicture from '../components/Upload/SelectPicture';
 import SelectAudio from '../components/Upload/SelectAudio';
 import ListPost from '../components/Profile/ListPosts';
 import ListTrack from '../components/Profile/ListTrack';
+import { useNavigation } from '@react-navigation/native';
 
 
 
@@ -77,9 +78,9 @@ export const UpLoadNavigatior = () => {
         </TopBar.Navigator>
     );
 };
-export const TabListNavigator = ({postsList}) => {
+export const TabListNavigator = ({userId}) => {
 
-    console.log(postsList, ' in tab')
+
     return (
         <TopBar.Navigator
             screenOptions={{
@@ -92,9 +93,9 @@ export const TabListNavigator = ({postsList}) => {
         >
             <TopBar.Screen 
                 name='ListPostTab' 
-                component={ListPost} 
-                // component={() => <ListPost postsList={postsList} />} 
-                initialParams={{postsList: postsList}} 
+                // component={ListPost} 
+                children={() => <ListPost userId={userId} />} 
+                // initialParams={{postsList: postsList}} 
                 options={{ 
                     tabBarIcon: (({focused}) => 
                         <>
@@ -115,7 +116,7 @@ export const TabListNavigator = ({postsList}) => {
             />
             <TopBar.Screen 
                 name='ListTrackTab' 
-                component={ListTrack}
+                children={() => <ListTrack userId={userId} />} 
                 options={{ 
                     tabBarIcon: (({focused}) => 
                         <Foundation name='sound' size={23} style={focused ? tw`text-[#5EC2EA]` : tw`text-gray-500`} />

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Text, SafeAreaView } from 'react-native'
 import InfomationUser from '../components/Profile/InfomationUser'
 import tw from 'twrnc'
@@ -11,7 +11,7 @@ import { useSelector } from 'react-redux'
 
 
 const MyProfileScreen = () => {
-    const { name, firstName, lastName, avatar, email, listsPost } = useSelector(state => state.authReducer)
+    const { name, firstName, lastName, avatar, email, userId, numberOfPosts, numberOfFollowing, numberOfFollower } = useSelector(state => state.authReducer)
     const [modalVisible, setModalVisible] = useState(false);
     const handleModalVisible = () => {
         setModalVisible(!modalVisible)
@@ -20,12 +20,27 @@ const MyProfileScreen = () => {
     return (
         <SafeAreaView style={tw`bg-white h-full `}>
             <Text style={tw`my-1 text-lg font-bold text-center`}>Your profile</Text>
-            <InfomationUser name={name} avatar={avatar} email={email} />  
-            {/* <InformationUserSkeletion /> */}
+            <InfomationUser 
+                name={name} 
+                avatar={avatar} 
+                email={email} 
+                numberOfFollower={numberOfFollower}
+                numberOfPosts={numberOfPosts}
+                numberOfFollowing={numberOfFollowing}
+            />  
             <EditProfile handleModalVisible={handleModalVisible} />
-            <TabListNavigator postsList={listsPost} />
-            <EditProfileModal handleModalVisible={handleModalVisible} modalVisible={modalVisible} firstName={firstName} lastName={lastName} avatar={avatar} email={email} />
+            <TabListNavigator userId={userId} />
+            <EditProfileModal 
+                handleModalVisible={handleModalVisible} 
+                modalVisible={modalVisible} 
+                firstName={firstName} 
+                lastName={lastName} 
+                avatar={avatar} 
+                email={email} 
+                userId={userId}    
+            />
         </SafeAreaView>
+
     )
 }
 

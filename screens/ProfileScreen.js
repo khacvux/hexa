@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useLayoutEffect } from 'react'
 import { View, Text, SafeAreaView } from 'react-native'
 import InfomationUser from '../components/Profile/InfomationUser'
 import tw from 'twrnc'
@@ -19,7 +19,7 @@ const ProfileScreen = ({route}) => {
     const dispatch = useDispatch();
     
     
-    useEffect(() => {
+    useLayoutEffect(() => {
         dispatch(getProfileUserByID(route.params.userId))
     }, [route.params.userId])
     
