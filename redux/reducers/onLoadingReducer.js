@@ -4,6 +4,7 @@ const initState = {
     authLoading: false,
     followStatusLoading: false,
     findUserLoading: false,
+    getListPostLoading: false,
 }
 
 export default onLoadingReducer = ( state = initState, action ) => {
@@ -21,8 +22,14 @@ export default onLoadingReducer = ( state = initState, action ) => {
         case TYPES.ON_LOADING_FIND_USER:
             return {
                 ...state,
-                findUserLoading: action.payload
+                findUserLoading: action.payload,
             }
+        case TYPES.ON_LOADING_GET_LIST_POST:
+            return {
+                ...state,
+                getListPostLoading: action.payload,
+            }
+        
        
         
         default:

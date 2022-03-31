@@ -20,3 +20,11 @@ export const onLoadingFindUser = payload => {
         payload
     }
 }
+
+
+export const onLoadingGetListPost = payload => {
+    return {
+        type: TYPES.ON_LOADING_GET_LIST_POST,
+        payload
+    }
+}

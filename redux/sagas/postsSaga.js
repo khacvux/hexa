@@ -2,6 +2,7 @@ import * as TYPES from '../constants/posts'
 import * as ACTION from '../actions/postsAction'
 import { call, delay, put, takeLatest } from 'redux-saga/effects'
 import { findPostsByIdAPI, getListPostsAPI, uploadPostsAPI } from '../../apis/postsAPIs'
+import { onLoadingGetListPost } from '../actions/onLoading'
 
 
 
@@ -27,6 +28,7 @@ function* addPost(data) {
 function* getListPostUser(data) {
     try {
         console.log('GET LIST POST USER RUNNING....')
+        yield put(onLoadingGetListPost(true))
         const res  = yield call(getListPostsAPI, {
             token: data.payload.token,
             userId: data.payload.userId,
@@ -37,6 +39,7 @@ function* getListPostUser(data) {
     } catch (error) {
         yield put(ACTION.consoleError(error))
     }
+    yield put(onLoadingGetListPost(false))
 }
 
 function* findPostsById(data) {

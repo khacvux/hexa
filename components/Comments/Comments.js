@@ -2,8 +2,8 @@ import React from 'react'
 import { View, Text, ScrollView, Image, TextInput } from 'react-native'
 import tw from 'twrnc'
 
-const Comments = (props) => {
-    const { comment } = props;
+const Comments = ({comment}) => {
+
     return (
         <View style={tw`flex flex-row mb-3`}>
             <Image

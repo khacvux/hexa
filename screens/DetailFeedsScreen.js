@@ -154,14 +154,11 @@ const DetailFeedsScreen = ({route}) => {
                                 <View style={tw`bg-gray-200 rounded-full w-2/5 h-[1] items-center mt-4 mb-1`} />
                             </View>
                             <Text style={tw`text-center text-gray-500`}>
-                                {
-                                    post.totalComment == 0 ? (
-                                        `No comment`
-                                    ) : (
-                                        post.totalComment `comments`
-                                    )
-                            
-                            }</Text>
+                                        {post.totalComment} comments
+                            </Text>
+                            {/* {
+                                post.postsCommentList.map()
+                            } */}
                         </View>
                     </View>
                 </ScrollView>

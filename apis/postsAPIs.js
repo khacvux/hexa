@@ -12,6 +12,14 @@ export const getPostsAPI = async (data) => {
     }
 }
 
+// export const likePostAPI = async ({token, postId}) => {
+
+// }
+
+// export const commentPostAPI = async ({token, postId}) => {
+
+// }
+
 
 export const uploadPostsAPI = async ({token, formData}) => {
     console.log(formData)
@@ -46,6 +54,32 @@ export const getListPostsAPI = async ({token, userId}) => {
 export const findPostsByIdAPI = async ({token, postsId}) => {
     try {
         const res = await AXIOS.get(`${url}/${postsId}`, {
+            headers: {
+                'Authorization:': `Bearer ${token}`,
+            }
+        })
+        return res.data
+    } catch (error) {
+        console.log('API: ', error)
+    }
+}
+
+export const deletePostByIdAPI = async ({token, postsId}) => {
+    try {
+        const res = await AXIOS.delete(`${url}/${postsId}`, {
+            headers: {
+                'Authorization:': `Bearer ${token}`,
+            }
+        })
+        return res.data
+    } catch (error) {
+        console.log('API: ', error)
+    }
+}
+
+export const getCommentsOfPostAPI = async ({token, postsId}) => {
+    try {
+        const res = await AXIOS.get(`${url}/listComment/${postsId}`, {
             headers: {
                 'Authorization:': `Bearer ${token}`,
             }
