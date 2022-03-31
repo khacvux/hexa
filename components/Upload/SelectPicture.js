@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, TouchableOpacity, Image, Dimensions } from 'react-native';
+import { View, Text, SafeAreaView, TouchableOpacity, Image, Dimensions, Platform } from 'react-native';
 import { useState } from 'react';
 import tw from 'twrnc';
 import { useNavigation } from '@react-navigation/native';
@@ -32,8 +32,8 @@ const SelectPicture = () => {
       console.log(result)
       const image = {
         // uri: result.uri,
-        uri: result.uri.substr(7),
-        type: `${result.type}/jpg`,
+        uri: Platform.OS == 'ios' ? result.uri.substr(7) : result.uri,
+        // type: `${result.type}/jpg`,
         name: result.fileName || result.uri.substr(result.uri.lastIndexOf('/') + 1)
       }
       setImage(image);

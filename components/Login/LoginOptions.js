@@ -1,10 +1,9 @@
-import { View, Text, ImageBackground, TextInput, Image, KeyboardAvoidingView, Platform } from 'react-native'
+import { View, Text, ImageBackground, TextInput, Image, KeyboardAvoidingView, Platform, TouchableOpacity } from 'react-native'
 import { useEffect, useRef, useState } from 'react'
 import tw from 'twrnc'
 import { useNavigation } from '@react-navigation/native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Ionicons } from '@expo/vector-icons'
-import { TouchableOpacity } from 'react-native-gesture-handler'
 import { BlurView } from 'expo-blur'
 import RBSheet from 'react-native-raw-bottom-sheet'
 

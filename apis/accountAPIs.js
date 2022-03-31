@@ -8,16 +8,16 @@ export const signInAPI = async (data) => {
     try {
         const res =  await AXIOS.post(`${url}/login`, data);
         return res.data;
-    } catch (e) {
-        return console.log(e)
+    } catch (error) {
+        return error
     }
 }
 export const signUpAPI = async (data) => {
     try {
         const res =  await AXIOS.post(`${url}/register`, data);
         return res.data;
-    } catch (e) {
-        return console.log(e)
+    } catch (error) {
+        return error
     }
 }
 
@@ -31,7 +31,7 @@ export const setFollowStatusAPI = async ({userId, token}) => {
         })
         return res.data
     } catch (error) { 
-        console.log('API: ',error)
+        return error
     }
 }
 
@@ -39,6 +39,6 @@ export const editProfileAPI = async (data) => {
     try {
         return await AXIOS.post(`${url}/changeName`, data)
     } catch (error) {
-        console.log('API: ', error)
+        return error
     }
 }

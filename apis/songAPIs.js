@@ -10,55 +10,67 @@ const url = 'song/'
 
 export const findSongByIdAPI = ({token, SongId}) => {
     try {
-        const res = await AXIOS.get(`${url}song/${SongId}`, {
+        const res = await AXIOS.get(`${url}${SongId}`, {
             headers: {
                 'Authorization': `Bearer ${token}`,
             },
         })
         return res.data
     } catch (error) {
-        console.log(error)
+        return error
     }
 }
 
 export const findSongByCategoryAPI = ({token, category}) => {
     try {
-        const res = await AXIOS.get(`${url}song/list/${category}`, {
+        const res = await AXIOS.get(`${url}list/${category}`, {
             headers: {
                 'Authorization': `Bearer ${token}`,
             },
         })
         return res.data
     } catch (error) {
-        console.log(error)
+        return error
     }
 }
 
 
-// export const likeSongAPI = ({token, category}) => {
-//     try {
-//         const res = await AXIOS.post(`${url}song/like/${category}`, {
-//             headers: {
-//                 'Authorization': `Bearer ${token}`,
-//             },
-//         })
-//         return res.data
-//     } catch (error) {
-//         console.log(error)
-//     }
-// }
+export const likeSongAPI = ({token, data}) => {
+    try {
+        const res = await AXIOS.post(`${url}like`, data, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            },
+        })
+        return res.data
+    } catch (error) {
+        return error
+    }
+}
+
+export const commentSongAPI = ({token, data}) => {
+    try {
+        const res = await AXIOS.post(`${url}comment`, data, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            },
+        })
+        return res.data
+    } catch (error) {
+        return error
+    }
+}
 
 
 export const uploadSongAPI = ({token, formData}) => {
     try {
-        const res = await AXIOS.post(`${url}/uploadFile`, formData, {
+        const res = await AXIOS.post(`${url}uploadFile`, formData, {
             headers: {
                 'Authorization': `Bearer ${token}`,
             }
         })
         return res.data;
     } catch (error) {
-        console.log(error)
+        return error
     }
 }
-

@@ -14,8 +14,8 @@ export const getListFollowerAPI = async ({userId, token}) => {
             }
         })
         return res.data
-    } catch (e) {
-        console.log(e)
+    } catch (error) {
+        return error
     }   
 }
 
@@ -29,8 +29,8 @@ export const getFollowRequestsAPI = async ({userId, token}) => {
             }
         })
         return res.data
-    } catch (e) {
-        console.log(e)
+    } catch (error) {
+        return error
     }   
 }
 
@@ -45,6 +45,6 @@ export const getListFollowingAPI = async ({userId, token}) => {
         })
         return res.data
     } catch (error) {
-        console.log(error)
+        return error
     }
 }

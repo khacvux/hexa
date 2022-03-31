@@ -7,7 +7,7 @@ export const findUserByNameAPI = async (params) => {
         const res = await AXIOS.get(`${url}find/name=${params}`)
         return res.data;
     } catch (error) {
-        console.log(error)
+        return error
     }
 }
 
@@ -17,6 +17,6 @@ export const getProfileUserByIDAPI = async (params) => {
         const res = await AXIOS.get(`${url}${params}`)
         return res.data
     } catch (error) {
-        console.log(error)
+        return error
     }
 }

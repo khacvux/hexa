@@ -8,7 +8,8 @@ import { View,
         Animated, 
         FlatList, 
         TextInput, 
-        KeyboardAvoidingView 
+        KeyboardAvoidingView ,
+        Platform
     } from 'react-native'
 import { useLayoutEffect, useRef, useState } from 'react'
 import tw from 'twrnc'
