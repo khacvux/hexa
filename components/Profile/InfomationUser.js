@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import tw from 'twrnc'
 
 
-const InfomationUser = ({name, avatar, email, numberOfPosts, numberOfFollowing, numberOfFollower, bio}) => {
+const InfomationUser = ({isFirstName, isLastName, avatar, email, numberOfPosts, numberOfFollowing, numberOfFollower, bio}) => {
 
     return (
         <View style={tw`pt-2 px-5`}>
@@ -32,7 +32,7 @@ const InfomationUser = ({name, avatar, email, numberOfPosts, numberOfFollowing, 
                     {email}
                </Text>
                <Text style={tw`text-2xl font-bold`}>
-                   {name}
+                   {`${isFirstName} ${isLastName}`}
                </Text>
                {
                    bio ? (

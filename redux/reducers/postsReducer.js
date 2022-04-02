@@ -45,6 +45,16 @@ export default postsReducer = (state = initState, action) => {
                 onAddingFail: action.payload
             }
 
+        case TYPES.DELETE_POST:
+            return {
+                ...state,
+            }
+        
+        case TYPES.DELETE_POST_SUCCESS:
+            return {
+                ...state,
+            }
+
 
         case TYPES.GET_LIST_POST_USER: 
             return {
@@ -55,7 +65,6 @@ export default postsReducer = (state = initState, action) => {
                 ...state,
                 listPostUser: action.payload,
             }
-
 
 
         case TYPES.FIND_POST_BY_ID:

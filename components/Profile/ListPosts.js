@@ -1,15 +1,15 @@
-import { useEffect } from 'react'
-import { View, Text, Image, FlatList, StyleSheet } from 'react-native'
+import { useEffect, useState } from 'react'
+import { View } from 'react-native'
 import tw from 'twrnc'
 import { FlatGrid } from 'react-native-super-grid';
 
-import { notifications } from '../../data'
 import PostItem from './PostItem'
 import EmptyAnimation from '../LottieAnimation/EmptyAnimation'
 
 import { useDispatch, useSelector } from 'react-redux';
 import { getListPostUser } from '../../redux/actions/postsAction';
 import ListPostSkeleton from '../Skeleton/ListPostSkeleton';
+import OnDeletePostModal from '../Modal/OnDeletePostModal';
 
 
 const ListPost = ({userId, numberOfPosts}) => {
@@ -18,6 +18,13 @@ const ListPost = ({userId, numberOfPosts}) => {
     const { listPostUser } = useSelector(state => state.postsReducer)
     const { token } = useSelector(state => state.authReducer)
     const { getListPostLoading } = useSelector(state => state.onLoadingReducer)
+
+    const [isVisibleDeleteModal, setVisibleDeleteModal] = useState(false)
+    const [isIdPostSelected, setIdPostSelected] = useState(null)
+    // console.log(isIdPostSelected)
+    const handleVisibleDeleteModal = () => {
+        setVisibleDeleteModal(!isVisibleDeleteModal)
+    }
 
     useEffect(() => {
         if(numberOfPosts) {
@@ -40,7 +47,12 @@ const ListPost = ({userId, numberOfPosts}) => {
                         <FlatGrid
                                 data={listPostUser}
                                 itemDimension={100}
-                                renderItem={(item) => <PostItem item={item} />}
+                                renderItem={(item) => 
+                                    <PostItem item={item} 
+                                        handleVisibleDeleteModal={handleVisibleDeleteModal} 
+                                        setIdPostSelected={setIdPostSelected}
+                                    />
+                                }   
                                 style={tw`pt-2`}
                                 keyExtractor={item => item.postsId} 
                                 spacing={5} 
@@ -50,6 +62,12 @@ const ListPost = ({userId, numberOfPosts}) => {
                     )
                 )
             }
+
+            <OnDeletePostModal 
+                handleVisibleDeleteModal={handleVisibleDeleteModal}
+                isVisibleDeleteModal={isVisibleDeleteModal}
+                isIdPostSelected={isIdPostSelected}
+            />
         </View>
     )
 }

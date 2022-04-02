@@ -1,7 +1,13 @@
 import * as TYPES from '../constants/auth'
 import * as ACTION from '../actions/authAction'
-import { call, put, delay, takeLatest, takeEvery } from 'redux-saga/effects';
-import { editProfileAPI, setFollowStatusAPI, signInAPI, signUpAPI } from '../../apis/accountAPIs'
+import { call, put, delay, takeLatest, takeEvery, takeLeading } from 'redux-saga/effects';
+import { deleteAvatarAPI, 
+        editProfileAPI, 
+        setFollowStatusAPI, 
+        signInAPI, 
+        signUpAPI, 
+        updateAvatarAPI 
+    } from '../../apis/accountAPIs'
 import { onLoadingAuth, onLoadingSetFollowStatus } from '../actions/onLoading';
 
 function* signIn(data) {
@@ -22,15 +28,21 @@ function* signIn(data) {
 }
 
 function* signUp(data) {
-    const firstName = data.payload.firstName;
-    const lastName = data.payload.lastName;
-    const email = data.payload.email;
-    const phone = data.payload.numberPhone;
-    const password = data.payload.crPassword;
+    // const firstName = data.payload.firstName;
+    // const lastName = data.payload.lastName;
+    // const email = data.payload.email;
+    // const phone = data.payload.numberPhone;
+    // const password = data.payload.crPassword;
 
     try {
         console.log(' SIGN UP running...')
-        const res = yield call(signUpAPI, {firstName, lastName, email, phone, password})
+        const res = yield call(signUpAPI, {
+            firstName: data.payload.firstName, 
+            lastName: data.payload.lastName, 
+            email: data.payload.email, 
+            phone: data.payload.numberPhone, 
+            password: data.payload.crPassword
+        })
         if(res){
             // console.log(res)
             yield put(ACTION.signUpSuccess(res.data))
@@ -58,6 +70,7 @@ function* setFollowStatus(data) {
     yield put(onLoadingSetFollowStatus(false))
 }
 
+
 function* editProfile(data) {
     console.log('EDIT PROFILE RUNNING...')
     try {
@@ -69,12 +82,48 @@ function* editProfile(data) {
     } catch (error) {
         yield put(ACTION.editProfileFailure(error))
     }
-    
 }
+
+
+function* updateAvatar(data) {
+    console.log('UPDATE AVATAR RUNNING...')
+    try {
+        const res = yield call(updateAvatarAPI, {
+            token: data.payload.token,
+            formData: data.payload.formData
+        })
+        if(res.data.status == 'ok'){
+            return res.data
+        }
+    } catch (error) {
+        yield put(ACTION.updateAvatarFailure(error))
+    }
+}
+
+
+function* deleteAvatar(data) {
+    console.log('DELETE AVATAR RUNNING...')
+    try {
+        const res = yield call(deleteAvatarAPI, {
+            token: data.payload.token,
+            userId: data.payload.userId
+        })
+        if(res.data.status == 'ok'){
+            yield put(ACTION.deleteAvatarSuccess())
+        }
+    } catch (error) {
+        yield put(ACTION.deleteAvatarFailure(error))
+    }
+}
+
+
+
 
 export default authSaga = [
     takeLatest(TYPES.SIGN_IN, signIn),
     takeLatest(TYPES.SIGN_UP, signUp),
     takeLatest(TYPES.SET_FOLLOW_STATUS, setFollowStatus),
     takeLatest(TYPES.EDIT_PROFILE, editProfile),
+    takeLeading(TYPES.DELETE_AVATAR, deleteAvatar),
+    takeLatest(TYPES.UPDATE_AVATAR, updateAvatar),
 ]

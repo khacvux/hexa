@@ -3,14 +3,29 @@ import { View, Text, SafeAreaView, Modal, Alert, Image, TextInput, TouchableOpac
 import { useDispatch } from 'react-redux'
 import tw from 'twrnc'
 import { editProfile } from '../../redux/actions/authAction'
+import ChangeAvatarModal from './ChangeAvatarModal'
 
 
-const EditProfileModal = ({modalVisible, handleModalVisible, firstName, lastName, avatar, email, userId}) => {
+const EditProfileModal = ({
+        modalVisible, 
+        handleModalVisible, 
+        firstName, 
+        lastName, 
+        avatar, 
+        email, 
+        userId, 
+        setFirstName, 
+        setLastName, 
+        isFirstName, 
+        isLastName
+    }) => {
 
     const dispatch = useDispatch();
+    const [isVisibleChangeAvtModal, setVisibleChangeAvtModal] = useState(false);
 
-    const [isFirstName, setFirstName] = useState(firstName)
-    const [isLastName, setLastName] = useState(lastName)
+    const handleVisibleChangeAvtModal = () => {
+        setVisibleChangeAvtModal(!isVisibleChangeAvtModal)
+    }
 
     const showConfirmDialog = () => {
         return Alert.alert(
@@ -27,6 +42,10 @@ const EditProfileModal = ({modalVisible, handleModalVisible, firstName, lastName
               },
               {
                 text: "No",
+                onPress: () => {
+                    setFirstName(firstName)
+                    setLastName(lastName)
+                }
               },
             ]
         )
@@ -39,6 +58,12 @@ const EditProfileModal = ({modalVisible, handleModalVisible, firstName, lastName
         else handleModalVisible()
     }
 
+    const handleCancel = () => {
+        setFirstName(firstName)
+        setLastName(lastName)
+        handleModalVisible()
+    }
+
 
 
     return (
@@ -49,16 +74,16 @@ const EditProfileModal = ({modalVisible, handleModalVisible, firstName, lastName
         >
             <View style={tw`w-full h-full flex flex-col`}>
                 <SafeAreaView>
-                    <View style={tw`flex flex-row items-center justify-between px-5 py-2 border-b border-[#F5F7FA]`}>
+                    <View style={tw`flex flex-row items-center justify-between px-5 border-b border-[#F5F7FA]`}>
                         <TouchableOpacity
-                            style={tw``}
-                            onPress={handleModalVisible}
+                            style={tw`py-2 px-1`}
+                            onPress={handleCancel}
                         >
                             <Text style={tw`text-sm`}>Cancel</Text>
                         </TouchableOpacity>
                         <Text style={tw`text-base font-bold tracking-[.2]`}>Edit profile</Text>
                         <TouchableOpacity
-                            // onPress={handleModalVisible}
+                            style={tw`py-2 px-1`}
                             onPress={handleSubmit}
                         >
                             <Text style={tw`text-base font-bold text-[#5EC2EA]`}>Done</Text>
@@ -69,7 +94,9 @@ const EditProfileModal = ({modalVisible, handleModalVisible, firstName, lastName
                                 source={avatar ? {uri: avatar} : require('../../assets/images/defaultAvatar.png')}
                                 style={tw`w-21 h-21 border-2 border-[#F5F7FA] rounded-full`}
                         />
-                        <TouchableOpacity>
+                        <TouchableOpacity 
+                            onPress={handleVisibleChangeAvtModal}
+                        >
                             <Text style={tw`mt-2 font-bold text-[#5EC2EA]`}>Change your avatar</Text>
                         </TouchableOpacity>
                     </View>
@@ -122,6 +149,10 @@ const EditProfileModal = ({modalVisible, handleModalVisible, firstName, lastName
                     </View>
                 </SafeAreaView>
             </View>
+            <ChangeAvatarModal 
+                isVisibleChangeAvtModal={isVisibleChangeAvtModal}
+                handleVisibleChangeAvtModal={handleVisibleChangeAvtModal}
+            />
         </Modal>
     )
     }

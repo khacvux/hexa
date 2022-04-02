@@ -42,3 +42,31 @@ export const editProfileAPI = async (data) => {
         return error
     }
 }
+
+export const updateAvatarAPI = async ({token, formData}) => {
+    try {
+        return await AXIOS.post(`${url}/updateAvatar`, formData, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': `multipart/form-data`,
+            },
+        })
+    } catch (error) {
+        console.log(error)
+        return error
+    }
+}
+
+
+export const deleteAvatarAPI = async ({token, userId}) => {
+    try {
+        return await AXIOS.delete(`${url}/deleteAvatar/${userId}`, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            },
+        })
+    } catch (error) {
+        console.log(error)
+        return error
+    }
+}

@@ -1,14 +1,13 @@
 import { View, Text, TouchableOpacity, Image } from 'react-native'
-import React from 'react'
+import { useState } from 'react'
 import tw from 'twrnc'
 import { LinearGradient } from 'expo-linear-gradient'
 import { useNavigation } from '@react-navigation/native';
 
 
-const PostItem = ({item}) => {
+const PostItem = ({item, handleVisibleDeleteModal, setIdPostSelected}) => {
 
   const navigation = useNavigation()
-
 
   return (
     <View style={tw`flex-1 h-43 overflow-hidden `}>
@@ -17,6 +16,10 @@ const PostItem = ({item}) => {
             onPress={() => navigation.navigate('DetailFeedsStack', {
               postsId: item.item.postsId,
             }) }  
+            onLongPress={() => {
+              handleVisibleDeleteModal()
+              setIdPostSelected(item.item.postsId)
+            }}
           >
             <Image 
                 source={{ uri: item.item.postsImageList[0].image }}

@@ -112,7 +112,7 @@ export default authReducer = ( state = initState, action ) => {
                 followStatus: !followStatus
             }
         case TYPES.SET_FOLLOW_STATUS_FAILURE:
-            // console.log('Set FOLLOW STATUS fail. ',error)
+            console.log('Set FOLLOW STATUS fail. ',action.error)
             return {
                 ...state,
             }
@@ -135,7 +135,40 @@ export default authReducer = ( state = initState, action ) => {
                 ...state,
             }
 
+        case TYPES.UPDATE_AVATAR:
+            return {
+                ...state
+            }
+        
+        case TYPES.UPDATE_AVATAR_SUCCESS:
+            return {
+                ...state
+            }
 
+        case TYPES.UPDATE_AVATAR_FAILURE:
+            console.log(action.error)
+            return {
+                ...state
+            }
+
+
+        case TYPES.DELETE_AVATAR:
+            return {
+                ...state
+            }
+
+        case TYPES.DELETE_AVATAR_SUCCESS:
+            return {
+                ...state
+            }
+
+        case TYPES.DELETE_AVATAR_FAILURE:
+            console.log(action.error)
+            return {
+                ...state
+            }
+
+            
 
         //DEFAULT
         default:

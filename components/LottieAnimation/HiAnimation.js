@@ -32,7 +32,7 @@ const HiAnimation = ({h1, h5}) => {
             </Text>
             <TouchableOpacity
                 onPress={() => navigation.navigate('SearchTab')}
-                style={tw`py-3 items-center bg-[#5EC2EA] rounded-lg my-4`}
+                style={tw`py-3 items-center bg-[#5EC2EA] rounded my-4`}
                 activeOpacity={.5}
             >
                 <Text style={tw`text-white font-bold tracking-[.2]`}>Find People to Follow</Text>

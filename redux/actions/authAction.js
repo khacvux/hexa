@@ -91,6 +91,52 @@ export const editProfileFailure = (error) => {
 
 
 
+export const updateAvatar = payload => {
+    return {
+        type: TYPES.UPDATE_AVATAR,
+        payload
+    }
+}
+
+export const updateAvatarSuccess = payload => {
+    return {
+        type: TYPES.UPDATE_AVATAR_SUCCESS,
+        payload
+    }
+}
+
+export const updateAvatarFailure = error => {
+    return {
+        type: TYPES.UPDATE_AVATAR_SUCCESS,
+        error
+    }
+}
+
+
+
+export const deleteAvatar = payload => {
+    return {
+        type: TYPES.DELETE_AVATAR,
+        payload
+    }
+}
+
+export const deleteAvatarSuccess = payload => {
+    return {
+        type: TYPES.DELETE_AVATAR_SUCCESS,
+        payload
+    }
+}
+
+export const deleteAvatarFailure = error => {
+    return {
+        type: TYPES.DELETE_AVATAR_SUCCESS,
+        error
+    }
+}
+
+
+
 
 export const signOut = () => {
     return {

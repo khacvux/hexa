@@ -39,7 +39,7 @@ export default searchReducer = (state = initState, action ) => {
         case TYPES.DELETE_HISTORY_SEARCH:
             const newListHistorySearch = [...state.listHistorySearch]
 
-            newListHistorySearch.splice(newListHistorySearch.findIndex(function(item) {
+            newListHistorySearch.splice(newListHistorySearch.findIndex((item) => {
                 return item.userId == action.payload.userId
             }), 1)
             return {

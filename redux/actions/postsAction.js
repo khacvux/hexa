@@ -74,6 +74,20 @@ export const findPostsByIdSuccess = payload => {
     }
 }
 
+export const deletePost = payload => {
+    return {
+        type: TYPES.DELETE_POST,
+        payload
+    }
+}
+
+export const deletePostSuccess = payload => {
+    return {
+        type: TYPES.DELETE_POST_SUCCESS,
+        payload
+    }
+}
+
 
 export const consoleError = (error) => {
     return {
