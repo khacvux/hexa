@@ -1,6 +1,5 @@
 import { useState } from 'react'
-import { View, Text, SafeAreaView, Modal, Alert, Image, TextInput } from 'react-native'
-import { TouchableOpacity } from 'react-native-gesture-handler'
+import { View, Text, SafeAreaView, Modal, Alert, Image, TextInput, TouchableOpacity } from 'react-native'
 import { useDispatch } from 'react-redux'
 import tw from 'twrnc'
 import { editProfile } from '../../redux/actions/authAction'

@@ -9,6 +9,7 @@ import RBSheet from 'react-native-raw-bottom-sheet'
 
 import { useSelector, useDispatch,} from 'react-redux'
 import { signIn, signUp } from '../../redux/actions/authAction'
+import SafeArea from '../SafeArea'
 
 
 const LoginOptions = () => {
@@ -65,7 +66,7 @@ const LoginOptions = () => {
             source={require('../../assets/images/login_background.jpeg')}
             style={tw`w-full h-full`}
         >
-            <SafeAreaView style={tw`py-2 flex flex-col  h-full`}>
+            <SafeAreaView style={[tw`py-2 flex flex-col h-full`, SafeArea.AndroidSafeArea]}>
                 <View>
                     <View style={tw`w-full px-10 py-3 mt-15 mb-17`}>
                         <Text style={tw`text-5xl font-bold text-white`}>
@@ -125,7 +126,7 @@ const LoginOptions = () => {
                         <TouchableOpacity style={tw`flex flex-row items-center w-full px-5`}>
                             <Image 
                                 style={tw`w-6 h-6`}
-                                source={require('../../icons/google_icon.png')}
+                                source={require('../../assets/icons/google_icon.png')}
                             />
                             <Text style={tw`flex-1 text-center`}>Continue with Google</Text>
 

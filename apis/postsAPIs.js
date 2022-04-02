@@ -42,6 +42,7 @@ export const uploadPostsAPI = async ({token, formData}) => {
         })
         return res.data
     } catch (error) {
+        console.log(error)
         return error;
     }
 }

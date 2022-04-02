@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import tw from 'twrnc'
 import { signOut, setFollowStatus } from '../redux/actions/authAction'
 import OnLoadingModal from '../components/Modal/OnLoadingModal'
+import SafeArea from '../components/SafeArea'
 
 
 
@@ -25,7 +26,7 @@ const MenuScreen = ({navigation}) => {
 
 
     return (
-        <SafeAreaView style={tw`bg-white h-full`}>
+        <SafeAreaView style={[tw`bg-white h-full`, SafeArea.AndroidSafeArea]}>
             <ScrollView contentContainerStyle ={tw`px-3 flex flex-col items-center`}>
                 <TouchableOpacity 
                     style={tw`w-full py-3 px-2 flex flex-row justify-between`}

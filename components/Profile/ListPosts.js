@@ -12,7 +12,7 @@ import { getListPostUser } from '../../redux/actions/postsAction';
 import ListPostSkeleton from '../Skeleton/ListPostSkeleton';
 
 
-const ListPost = ({userId}) => {
+const ListPost = ({userId, numberOfPosts}) => {
 
     const dispatch = useDispatch()
     const { listPostUser } = useSelector(state => state.postsReducer)
@@ -20,7 +20,9 @@ const ListPost = ({userId}) => {
     const { getListPostLoading } = useSelector(state => state.onLoadingReducer)
 
     useEffect(() => {
-        dispatch(getListPostUser({userId, token}))
+        if(numberOfPosts) {
+            dispatch(getListPostUser({userId, token}))
+        }
     }, [])
 
 
@@ -30,22 +32,21 @@ const ListPost = ({userId}) => {
                 getListPostLoading ? (
                     <ListPostSkeleton />
                 ) : (
-                    listPostUser.length ? (
-                        <FlatGrid
-                             data={listPostUser}
-                             itemDimension={100}
-                             renderItem={(item) => <PostItem item={item} />}
-                             style={tw`pt-2`}
-                             keyExtractor={item => item.postsId} 
-                             spacing={5} 
-                             showsHorizontalScrollIndicator={false}
-                             showsVerticalScrollIndicator={false}
-                         />
-    
-                    ) : (
+                    numberOfPosts == 0 || listPostUser.length == 0 ? (
                         <View style={tw`w-full h-full items-center justify-center`}>
                             <EmptyAnimation title={'No posts yet!!'} />
                         </View>
+                    ) : (
+                        <FlatGrid
+                                data={listPostUser}
+                                itemDimension={100}
+                                renderItem={(item) => <PostItem item={item} />}
+                                style={tw`pt-2`}
+                                keyExtractor={item => item.postsId} 
+                                spacing={5} 
+                                showsHorizontalScrollIndicator={false}
+                                showsVerticalScrollIndicator={false}
+                            />
                     )
                 )
             }

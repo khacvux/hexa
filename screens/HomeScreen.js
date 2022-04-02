@@ -5,6 +5,7 @@ import { posts } from '../data';
 
 import Feeds from '../components/Home/Feeds';
 import Header from '../components/Header/Header';
+import SafeArea from '../components/SafeArea';
 
 import { useSelector } from 'react-redux';
 import HiAnimation from '../components/LottieAnimation/HiAnimation';
@@ -77,7 +78,7 @@ const HomeScreen = () => {
     
 
     return (
-        <SafeAreaView style={tw`bg-white h-full`}>
+        <SafeAreaView style={[tw`bg-white h-full`, SafeArea.AndroidSafeArea]}>
             <View style={tw`h-full overflow-hidden flex`}>
                 <Animated.View style={[tw`absolute top-0 left-0 right-0 z-50`,{height: CONTAINER_HEIGHT}, {transform: [{translateY: headerTranslate}]}]}>
                     <Header />
@@ -104,7 +105,7 @@ const HomeScreen = () => {
                             scrollEventThrottle={1}
                         /> 
                     ) : (
-                        <View style={tw`bg-gray-100`}>
+                        <View style={tw`bg-gray-50`}>
                             <HiAnimation 
                                 h1={`Welcome to Hexa, ${firstName}!`} 
                                 h5={`When you follow people, you'll see the photos they post here.`}    

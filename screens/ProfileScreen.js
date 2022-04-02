@@ -1,4 +1,4 @@
-import { useLayoutEffect } from 'react'
+import { useEffect } from 'react'
 import { View, Text, SafeAreaView } from 'react-native'
 import InfomationUser from '../components/Profile/InfomationUser'
 import tw from 'twrnc'
@@ -11,15 +11,23 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getProfileUserByID } from '../redux/actions/searchsAction'
 import { TabListNavigator } from '../navigators/TopTabNavigatior'
 import ProfileSkeletion from '../components/Skeleton/ProfileSkeletion'
+import SafeArea from '../components/SafeArea'
+import { getListPostUser } from '../redux/actions/postsAction';
 
 const ProfileScreen = ({route}) => {
 
 
     const navigation = useNavigation();
     const dispatch = useDispatch();
+
+    const { token, userId } = useSelector(state => state.authReducer)
+
+    const handleGoBack = () => {
+        dispatch(getListPostUser({userId, token}))
+        navigation.goBack()
+    }
     
-    
-    useLayoutEffect(() => {
+    useEffect(() => {
         dispatch(getProfileUserByID(route.params.userId))
     }, [route.params.userId])
     
@@ -28,11 +36,11 @@ const ProfileScreen = ({route}) => {
 
 
     return (
-        <SafeAreaView style={tw`bg-white h-full`}>
+        <SafeAreaView style={[tw`bg-white h-full`, SafeArea.AndroidSafeArea]}>
             <View style={tw`flex flex-row items-center justify-between pt-1 pb-2 px-4`}>
                 <TouchableOpacity
                     activeOpacity={.6}
-                    onPress={() => navigation.goBack()}
+                    onPress={handleGoBack}
                 >
                     <Ionicons name='chevron-back' size={23} />
                 </TouchableOpacity>
@@ -45,10 +53,20 @@ const ProfileScreen = ({route}) => {
                 profileUser ? (
                     <View style={tw`flex flex-1`}>
 
-                        <InfomationUser name={profileUser.name} avatar={profileUser.avatar} email={profileUser.email} />  
+                        <InfomationUser 
+                            name={profileUser.name} 
+                            avatar={profileUser.avatar} 
+                            email={profileUser.email}
+                            numberOfFollower={profileUser.numberOfFollower}
+                            numberOfPosts={profileUser.numberOfPosts}
+                            numberOfFollowing={profileUser.numberOfFollowing}
+                        />  
                         <Contact />
                         <View style={tw`mt-1 flex flex-1`}>
-                            <TabListNavigator postsList={profileUser.postsList} />
+                            <TabListNavigator 
+                                numberOfPosts={profileUser.numberOfPosts} 
+                                userId={profileUser.userId} 
+                            />
                         </View>
 
                     </View>

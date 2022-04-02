@@ -6,12 +6,13 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 import SlideTrack from '../components/SlideTrack/SlideTrack';
 import Header from '../components/Header/Header';
+import SafeArea from '../components/SafeArea';
 
 
 
 const MusicScreen = () => {
     return (
-        <SafeAreaView style={tw`bg-white h-full`}>
+        <SafeAreaView style={[tw`bg-white h-full`]}>
            <Header />
            <View style={tw`bg-[#F5F7FA] h-full`}>
                 <ScrollView 

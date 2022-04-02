@@ -7,6 +7,7 @@ import { TextInput } from 'react-native-gesture-handler'
 import FormData from 'form-data'
 import { useDispatch, useSelector } from 'react-redux'
 import { addPost } from '../redux/actions/postsAction'
+import SafeArea from '../components/SafeArea'
 
 
 //
@@ -48,7 +49,7 @@ const UpLoadPictureScreen = ({route}) => {
 
 
     return (
-        <SafeAreaView style={tw`bg-white w-full h-full flex`}>
+        <SafeAreaView style={[tw`bg-white w-full h-full flex`, SafeArea.AndroidSafeArea]}>
             <View style={tw`h-11 px-3 flex-row items-center border border-0 border-b border-[#5EC2EA]`}>
                 <TouchableOpacity
                     onPress={() => navigation.goBack()}

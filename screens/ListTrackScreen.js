@@ -7,6 +7,7 @@ import { Ionicons, Entypo } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { listTrack } from '../data'
 import TrackItem from '../components/ListTrack/TrackItem'
+import SafeArea from '../components/SafeArea'
 
 
 
@@ -15,7 +16,7 @@ const ListTrackScreen = () => {
 
 
     return (
-        <SafeAreaView>
+        <SafeAreaView style={SafeArea.AndroidSafeArea}>
             <View style={tw`flex flex-row items-center px-5 py-3 `}>
                 <TouchableOpacity
                     onPress={() => navigation.goBack()}

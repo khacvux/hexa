@@ -1,6 +1,5 @@
 import { View, 
         Text, 
-        SafeAreaView, 
         Image, 
         StatusBar,
         ScrollView, 
@@ -13,17 +12,22 @@ import { View,
     } from 'react-native'
 import { useLayoutEffect, useRef, useState } from 'react'
 import tw from 'twrnc'
-import { Feather, FontAwesome, Ionicons } from '@expo/vector-icons'
-import { SafeAreaProvider } from 'react-native-safe-area-context'
+import { FontAwesome, Ionicons } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
+import { LinearGradient } from 'expo-linear-gradient'
+import { BlurView } from 'expo-blur'
+
+
 import ImageItem from '../components/Home/ImageItem'
 import Paginator from '../components/Home/Paginator'
-import { LinearGradient } from 'expo-linear-gradient'
 import WriteComment from '../components/Comments/WriteComment'
-import { BlurView } from 'expo-blur'
 import Comments from '../components/Comments/Comments'
+
+
 import { useDispatch, useSelector } from 'react-redux'
 import { findPostsById } from '../redux/actions/postsAction'
+
+
 
 const DetailFeedsScreen = ({route}) => {
 
@@ -53,7 +57,7 @@ const DetailFeedsScreen = ({route}) => {
 
 
     return (
-        <SafeAreaProvider>
+        <View>
             <View style={tw`bg-white h-full`}>
                 <TouchableOpacity
                     style={tw`absolute top-5 left-3 z-50`}
@@ -170,7 +174,7 @@ const DetailFeedsScreen = ({route}) => {
                     <WriteComment />
                 </KeyboardAvoidingView>
             </View>
-        </SafeAreaProvider>
+        </View>
     )
 }
 

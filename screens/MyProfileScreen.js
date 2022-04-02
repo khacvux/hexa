@@ -6,6 +6,7 @@ import EditProfile from '../components/Profile/EditProfile'
 import EditProfileModal from '../components/Modal/EditProfileModal'
 import { TabListNavigator } from '../navigators/TopTabNavigatior'
 import { useSelector } from 'react-redux'
+import SafeArea from '../components/SafeArea'
 
 
 
@@ -18,7 +19,7 @@ const MyProfileScreen = () => {
     }
 
     return (
-        <SafeAreaView style={tw`bg-white h-full `}>
+        <SafeAreaView style={[tw`bg-white h-full `, SafeArea.AndroidSafeArea]}>
             <Text style={tw`my-1 text-lg font-bold text-center`}>Your profile</Text>
             <InfomationUser 
                 name={name} 
@@ -29,7 +30,10 @@ const MyProfileScreen = () => {
                 numberOfFollowing={numberOfFollowing}
             />  
             <EditProfile handleModalVisible={handleModalVisible} />
-            <TabListNavigator userId={userId} />
+            <TabListNavigator 
+                userId={userId} 
+                numberOfPosts={numberOfPosts}    
+            />
             <EditProfileModal 
                 handleModalVisible={handleModalVisible} 
                 modalVisible={modalVisible} 

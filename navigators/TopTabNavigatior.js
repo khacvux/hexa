@@ -78,7 +78,7 @@ export const UpLoadNavigatior = () => {
         </TopBar.Navigator>
     );
 };
-export const TabListNavigator = ({userId}) => {
+export const TabListNavigator = ({userId, numberOfPosts}) => {
 
 
     return (
@@ -93,9 +93,7 @@ export const TabListNavigator = ({userId}) => {
         >
             <TopBar.Screen 
                 name='ListPostTab' 
-                // component={ListPost} 
-                children={() => <ListPost userId={userId} />} 
-                // initialParams={{postsList: postsList}} 
+                children={() => <ListPost userId={userId} numberOfPosts={numberOfPosts} />} 
                 options={{ 
                     tabBarIcon: (({focused}) => 
                         <>

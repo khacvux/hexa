@@ -32,6 +32,7 @@ function* getProfileUserById(data) {
         const res = yield call(getProfileUserByIDAPI, data.payload)
         if(res){
             console.log('GET PROFILE USER BY ID SUCCESS')
+            console.log(res.data)
             yield put(ACTION.getProfileUserByIDSuccess(res.data))
         } 
     } catch (error) {

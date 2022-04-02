@@ -8,7 +8,7 @@ const SelectAudio = () => {
     <SafeAreaView style={tw`bg-white h-full flex-1 flex items-center`}>
       <View style={tw`flex items-center justify-center flex-1`}>
         <View style={tw`flex items-center justify-center border-2 rounded-full w-25 h-25 my-6 border-[#5EC2EA]`}>
-          <Image source={require('../../icons/audio-waves.png')}
+          <Image source={require('../../assets/icons/audio-waves.png')}
             style={tw`w-12 h-12`}
           />
         </View>

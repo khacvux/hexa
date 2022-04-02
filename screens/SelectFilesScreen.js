@@ -5,7 +5,6 @@ import { UpLoadNavigatior } from '../navigators/TopTabNavigatior';
 const SelectFilesScreen = () => {
   return (
     <UpLoadNavigatior/>
-   
   );
 };
 

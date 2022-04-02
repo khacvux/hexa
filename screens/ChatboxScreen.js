@@ -1,18 +1,17 @@
 import { View, Text, SafeAreaView, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
-import React from 'react';
 import tw from 'twrnc'
 import Message from '../components/Chatbox/Message';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import WriteMessage from '../components/Chatbox/WriteMessage';
-
+import SafeArea from '../components/SafeArea';
 
 
 const ChatboxScreen = () => {
 
   const navigation = useNavigation();
   return (
-    <SafeAreaView style={tw`bg-white h-full flex`}>
+    <SafeAreaView style={[tw`bg-white h-full flex`, SafeArea.AndroidSafeArea ]}>
       <View style={tw`flex flex-row items-center pt-1 pb-2 `}>
         <TouchableOpacity
           style={tw`px-2 py-1`}

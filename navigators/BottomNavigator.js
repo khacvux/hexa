@@ -3,8 +3,8 @@ import { Ionicons, Feather, MaterialIcons } from '@expo/vector-icons';
 import tw from 'twrnc'
 import MenuScreen from '../screens/MenuScreen';
 
-import SvgHome from '../icons/home.svg'
-import SvgHomeOutline from '../icons/home-outline.svg'
+import SvgHome from '../assets/icons/home.svg'
+import SvgHomeOutline from '../assets/icons/home-outline.svg'
 import MyProfileScreen from '../screens/MyProfileScreen';
 import NotificationScreen from '../screens/NotificationScreen';
 import HomeScreen from '../screens/HomeScreen';
@@ -24,13 +24,13 @@ const BottomNavigator = () => {
                     headerShown: false,
                     tabBarShowLabel: false,
                     tabBarIcon: (({focused}) => 
-                        <>
+                        <View style={tw`px-5`}>
                             {focused ? (
                                 <SvgHome width={22} fill={"#5EC2EA"} />
                             ) : (
                                 <SvgHomeOutline width={22} />
                             )}
-                        </>
+                        </View>
                     ),
                     tabBarStyle: [tw`bg-[#F5F7FA]`],
                 }}
@@ -40,10 +40,12 @@ const BottomNavigator = () => {
                     headerShown: false,
                     tabBarShowLabel: false,
                     tabBarIcon: (({focused}) => 
-                        <Ionicons
-                            name={focused ? 'search' : 'search-outline'}
-                            style={focused ? (tw`text-xl text-[#5EC2EA]`) : (tw`text-xl`)}
-                        />
+                        <View style={tw`py-3 px-5`}>
+                            <Ionicons
+                                name={focused ? 'search' : 'search-outline'}
+                                style={focused ? (tw`text-xl text-[#5EC2EA]`) : (tw`text-xl`)}
+                            />
+                        </View>
                     ),
                     tabBarStyle: [tw`bg-[#F5F7FA]`],
                 }}
@@ -53,10 +55,12 @@ const BottomNavigator = () => {
                     headerShown: false,
                     tabBarShowLabel: false,
                     tabBarIcon: (({focused}) => 
-                        <MaterialIcons
-                            name='multitrack-audio'
-                            style={focused ? (tw`text-xl text-[#5EC2EA]`) : (tw`text-xl`)}
-                        />
+                        <View style={tw`px-5 py-3`}>
+                            <MaterialIcons
+                                name='multitrack-audio'
+                                style={focused ? (tw`text-xl text-[#5EC2EA]`) : (tw`text-xl`)}
+                            />
+                        </View>
                     ),
                     tabBarStyle: [tw`bg-[#F5F7FA]`],
                 }}
@@ -67,7 +71,7 @@ const BottomNavigator = () => {
                     tabBarShowLabel: false,
                     tabBarIcon: (({focused}) => {
                         return(
-                            <View>
+                            <View style={tw`px-5 py-3`}>
                                 <Ionicons 
                                     name={focused ? 'ios-notifications-sharp' : 'ios-notifications-outline'} 
                                     style={focused ? tw`text-xl text-[#5EC2EA]` : tw`text-xl text-black` }
@@ -84,10 +88,12 @@ const BottomNavigator = () => {
                     headerShown: false,
                     tabBarShowLabel: false,
                     tabBarIcon: (({focused}) => 
-                        <Feather
-                            name={'user'} 
-                            style={focused ? (tw`text-xl text-[#5EC2EA]`) : (tw`text-xl`)}
-                        />
+                        <View style={tw`py-3 px-5`}>
+                            <Feather
+                                name={'user'} 
+                                style={focused ? (tw`text-xl text-[#5EC2EA]`) : (tw`text-xl`)}
+                            />
+                        </View>
                     ),
                     tabBarStyle: [tw`bg-[#F5F7FA]`],
                 }}
@@ -97,11 +103,13 @@ const BottomNavigator = () => {
                     headerShown: false,
                     tabBarShowLabel: false,
                     tabBarIcon: (({focused}) => 
-                        <Feather
-                            name='menu'
-                            style={focused ? (tw`text-[#5EC2EA]`) : (tw``)}
-                            size={23}
-                        />
+                        <View style={tw`py-3 px-5`}>
+                            <Feather
+                                name='menu'
+                                style={focused ? (tw`text-[#5EC2EA]`) : (tw``)}
+                                size={23}
+                            />
+                        </View>
                     ),
                     tabBarStyle: [tw`bg-[#F5F7FA]`],
                 }}
