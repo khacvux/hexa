@@ -46,6 +46,50 @@ export const addPostFail = payload => {
     }
 }
 
+export const likePost = payload => {
+    return {
+        type: TYPES.LIKE_POST,
+        payload
+    }
+}
+
+export const likePostSuccess = payload => {
+    return {
+        type: TYPES.LIKE_POST_SUCCESS,
+        payload
+    }
+}
+
+export const commentPost = payload => {
+    return {
+        type: TYPES.COMMENT_POST,
+        payload
+    }
+}
+
+export const commentPostSuccess = payload => {
+    return {
+        type: TYPES.COMMENT_POST_SUCCESS,
+        payload
+    }
+}
+
+export const getListCommentOfPost = payload => {
+    return {
+        type: TYPES.GET_LIST_COMMENT_POST,
+        payload
+    }
+}
+
+export const getListCommentOfPostSuccess = payload => {
+    return {
+        type: TYPES.GET_LIST_COMMENT_POST_SUCCESS,
+        payload
+    }
+}
+
+
+
 export const getListPostUser = payload => {
     return {
         type: TYPES.GET_LIST_POST_USER,
@@ -84,6 +128,20 @@ export const deletePost = payload => {
 export const deletePostSuccess = payload => {
     return {
         type: TYPES.DELETE_POST_SUCCESS,
+        payload
+    }
+}
+
+export const deleteComment = payload => {
+    return {
+        type: TYPES.DELETE_COMMENT_POST,
+        payload
+    }
+}
+
+export const deleteCommentSuccess = payload => {
+    return {
+        type: TYPES.DELETE_COMMENT_POST_SUCCESS,
         payload
     }
 }

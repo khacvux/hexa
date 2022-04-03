@@ -21,12 +21,7 @@ export const findUserByNameFailure = (error) => {
     }
 }
 
-// export const getListHistoryResearch = (data)  => {
-//     return {
-//         type: TYPES.GET_LIST_HISTORY_SEARCH,
-//         payload: data
-//     }
-// }
+
 export const addHistorySearch = (data) => {
     return {
         type: TYPES.ADD_HISTORY_SEARCH,

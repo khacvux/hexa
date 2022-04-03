@@ -114,7 +114,7 @@ export const commentPostAPI = async ({token, data}) => {
     }
 }
 
-export const deleteCommmenAPI = async ({token, commentId}) => {
+export const deleteCommmentAPI = async ({token, commentId}) => {
     try {
         const res = await AXIOS.get(`${url}/comment/${commentId}`, {
             headers: {
@@ -123,6 +123,7 @@ export const deleteCommmenAPI = async ({token, commentId}) => {
         })     
         return res.data   
     } catch (error) {
+        console.log(error)
         return error;
     }
 }

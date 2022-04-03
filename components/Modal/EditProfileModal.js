@@ -2,11 +2,14 @@ import { useState } from 'react'
 import { View, Text, SafeAreaView, Modal, Alert, Image, TextInput, TouchableOpacity } from 'react-native'
 import { useDispatch } from 'react-redux'
 import tw from 'twrnc'
-import { editProfile } from '../../redux/actions/authAction'
+import { editProfile, updateAvatar } from '../../redux/actions/authAction'
 import ChangeAvatarModal from './ChangeAvatarModal'
+import FormData from 'form-data'
+
 
 
 const EditProfileModal = ({
+        token,
         modalVisible, 
         handleModalVisible, 
         firstName, 
@@ -17,17 +20,20 @@ const EditProfileModal = ({
         setFirstName, 
         setLastName, 
         isFirstName, 
-        isLastName
+        isLastName,
+        isAvatar,
+        setAvatar,
     }) => {
 
     const dispatch = useDispatch();
     const [isVisibleChangeAvtModal, setVisibleChangeAvtModal] = useState(false);
 
+
     const handleVisibleChangeAvtModal = () => {
         setVisibleChangeAvtModal(!isVisibleChangeAvtModal)
     }
 
-    const showConfirmDialog = () => {
+    const showConfirmDialog = ({formData}) => {
         return Alert.alert(
             "Confirm",
             "Are you sure you want to change your name?",
@@ -35,8 +41,10 @@ const EditProfileModal = ({
               {
                 text: "Yes",
                 onPress: () => {
-                    console.log(12)
+                    
                     dispatch(editProfile({ userId, firstName: isFirstName, lastName: isLastName,}))
+
+                    dispatch(updateAvatar({token, formData}))
                     handleModalVisible();
                 },
               },
@@ -52,8 +60,12 @@ const EditProfileModal = ({
     }
 
     const handleSubmit = () => {
-        if(isFirstName != firstName || isLastName != lastName){
-        showConfirmDialog()
+        if(isFirstName != firstName || isLastName != lastName || isAvatar != avatar){
+            let formData = new FormData()
+            formData.append('userId', userId)
+            formData.append('file', isAvatar)
+
+            showConfirmDialog({formData})
         }
         else handleModalVisible()
     }
@@ -61,6 +73,7 @@ const EditProfileModal = ({
     const handleCancel = () => {
         setFirstName(firstName)
         setLastName(lastName)
+        setAvatar(avatar)
         handleModalVisible()
     }
 
@@ -91,7 +104,13 @@ const EditProfileModal = ({
                     </View>
                     <View style={tw`flex items-center my-5`}>
                         <Image
-                                source={avatar ? {uri: avatar} : require('../../assets/images/defaultAvatar.png')}
+                                source={
+                                    isAvatar ? {uri: isAvatar.uri} : (
+                                        avatar ? {uri: avatar} : 
+                                            require('../../assets/images/defaultAvatar.png'
+                                        )
+                                    )
+                                }
                                 style={tw`w-21 h-21 border-2 border-[#F5F7FA] rounded-full`}
                         />
                         <TouchableOpacity 
@@ -152,6 +171,8 @@ const EditProfileModal = ({
             <ChangeAvatarModal 
                 isVisibleChangeAvtModal={isVisibleChangeAvtModal}
                 handleVisibleChangeAvtModal={handleVisibleChangeAvtModal}
+                setAvatar={setAvatar}
+                avatar={avatar}
             />
         </Modal>
     )

@@ -1,15 +1,30 @@
 import { View, Text, Image } from 'react-native'
-import { useSelector } from 'react-redux'
 import tw from 'twrnc'
 
 
-const InfomationUser = ({isFirstName, isLastName, avatar, email, numberOfPosts, numberOfFollowing, numberOfFollower, bio}) => {
+const InfomationUser = ({isFirstName, 
+            isLastName, 
+            avatar, 
+            isAvatar, 
+            email, 
+            numberOfPosts, 
+            numberOfFollowing, 
+            numberOfFollower, 
+            bio
+        }) => {
 
     return (
         <View style={tw`pt-2 px-5`}>
            <View style={tw`flex flex-row items-center justify-between`}>
                 <Image 
-                    source={avatar ? {uri: avatar} : (require('../../assets/images/defaultAvatar.png'))}
+                    source={
+                        isAvatar ? {uri: isAvatar.uri} : (
+                            avatar ? {uri: avatar} : (
+                                require('../../assets/images/defaultAvatar.png'
+                                )
+                            )
+                        )
+                    }
                     style={[{width: 70, height: 70},tw`rounded-full mr-4 border border-[#5EC2EA]`]}
                 />
                 <View style={tw`flex-1 flex flex-row items-center`}>

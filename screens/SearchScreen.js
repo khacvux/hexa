@@ -64,30 +64,30 @@ const SearchScreen = () => {
                         showsVerticalScrollIndicator={false}
                         />
                     </View>
-                ) : (
-                  input ? (
-                    <View style={tw`px-3 py-5 border-b border-gray-200 `}>
-                      <Text style={tw`font-light tracking-[.2]`}>
-                        No result were found for '{input}'
-                      </Text>
-                    </View>
                   ) : (
-                    listHistorySearch.length ? (
-                      <View>
-                        <Text style={tw`text-base font-light tracking-[.2] mt-3 mb-2`}>History</Text>
-                        <FlatList 
-                          data={listHistorySearch}
-                          renderItem={(item) => (
-                            <SearchItem item={item} times={true} />
-                          )}
-                          keyExtractor={(item,  index) => index.toString()}
-                        />
+                    input ? (
+                      <View style={tw`px-3 py-5 border-b border-gray-200 `}>
+                        <Text style={tw`font-light tracking-[.2]`}>
+                          No result were found for '{input}'
+                        </Text>
                       </View>
                     ) : (
-                      <FindingAnimation />
+                      listHistorySearch.length ? (
+                        <View>
+                          <Text style={tw`text-base font-light tracking-[.2] mt-3 mb-2`}>History</Text>
+                          <FlatList 
+                            data={listHistorySearch}
+                            renderItem={(item) => (
+                              <SearchItem item={item} times={true} />
+                            )}
+                            keyExtractor={(item,  index) => index.toString()}
+                          />
+                        </View>
+                      ) : (
+                        <FindingAnimation />
+                      )
                     )
                   )
-                )
               )
             }
         </View>

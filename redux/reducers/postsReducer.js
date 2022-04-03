@@ -3,6 +3,7 @@ import * as TYPES from '../constants/posts'
 const initState = {
     posts: [],
     post: {},
+    listCommentOfPost: [],
     listPostUser: [],
     onAddingPosts: false,
     onAddingSuccess: false,
@@ -55,7 +56,53 @@ export default postsReducer = (state = initState, action) => {
                 ...state,
             }
 
+        case TYPES.LIKE_POST: 
+            return {
+                ...state,
+            }
 
+        case TYPES.LIKE_POST_SUCCESS:
+            return {
+                ...state
+            }
+            
+        case TYPES.COMMENT_POST:
+            return {
+                ...state,
+            }
+
+        case TYPES.COMMENT_POST_SUCCESS:
+            return {
+                ...state,
+                listCommentOfPost: [...state.listCommentOfPost, action.payload]
+            }
+
+        case TYPES.GET_LIST_COMMENT_POST:
+            return {
+                ...state
+            }
+
+        case TYPES.GET_LIST_COMMENT_POST_SUCCESS:
+            return {
+                ...state,
+                listCommentOfPost: action.payload
+            }
+
+        case TYPES.DELETE_COMMENT_POST:
+            return {
+                ...state,
+            }
+
+        case TYPES.DELETE_COMMENT_POST_SUCCESS:
+            const newListCommemtOfPost = [...state.listCommentOfPost]
+            newListCommemtOfPost.splice(newListCommemtOfPost.findIndex((item) => {
+                return item.postsCommentId == action.payload
+            }), 1)
+            return {
+                ...state,
+                listCommentOfPost: newListCommemtOfPost
+            }
+        
         case TYPES.GET_LIST_POST_USER: 
             return {
                 ...state,

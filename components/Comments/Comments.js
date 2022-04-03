@@ -1,26 +1,28 @@
 import React from 'react'
-import { View, Text, ScrollView, Image, TextInput } from 'react-native'
+import { View, Text, Image, TouchableOpacity } from 'react-native'
 import tw from 'twrnc'
 
-const Comments = ({comment}) => {
+const Comments = ({item, setIdCommentSelected, handleVisibleDeleteModal}) => {
 
     return (
-        <View style={tw`flex flex-row mb-3`}>
+        <TouchableOpacity style={tw` flex-1 flex flex-row my-2`}
+            onLongPress={() => {
+                setIdCommentSelected(item.postsCommentId)
+                handleVisibleDeleteModal()
+            }}
+        >
             <Image
-                source={{uri: comment.item.avt}}
+                source={item.image ? {uri: item.image} : require('../../assets/images/defaultAvatar.png')}
                 style={tw`w-10 h-10 rounded-full mr-2 bg-gray-200`}
             />
             <View style={tw`w-full`}>
                 <View style={tw`flex flex-row items-center`}>
-                    <Text style={tw`font-bold my-1`}>{comment.item.name}</Text>
-                    <Text style={tw`text-gray-500 text-xs`}> - {comment.item.date}</Text>
+                    <Text style={tw`font-bold my-1`}>{item.name}</Text>
+                    <Text style={tw`text-gray-500 text-xs`}> - {item.dateCreate}</Text>
                 </View>
-                <Text>{comment.item.comment}</Text>
+                <Text style={tw`ml-1`}>{item.comment}</Text>
             </View>
-        </View>
-        
-
-
+        </TouchableOpacity>
     )
 }
 

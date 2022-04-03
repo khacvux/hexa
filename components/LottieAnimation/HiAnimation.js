@@ -1,6 +1,5 @@
-import { Text, View, TouchableOpacity } from 'react-native'
+import { Text, View, TouchableOpacity, Image } from 'react-native'
 import tw from 'twrnc'
-import LottieView from 'lottie-react-native'
 import { useNavigation } from '@react-navigation/native'
 import SvgHomeOutline from '../../assets/icons/home-outline.svg'
 
@@ -13,14 +12,12 @@ const HiAnimation = ({h1, h5}) => {
     return (
         <View style={tw`w-full h-full justify-around items-center`}>
         <View style={tw`flex-6 justify-end`}>
-            {/* <LottieView 
-            source={require('../../assets/lottieFiles/hi-animation.json')}
-            style={tw`w-60 h-60`}
-            autoPlay
-            loop={true}
-            /> */}
-            <View style={tw`border-2 w-25 h-25 items-center justify-center rounded-full mb-10`}>
-                <SvgHomeOutline width={50}  />
+            <View style={tw`border w-25 h-25 items-center justify-center rounded-full mb-10 overflow-hidden bg-white`}>
+                {/* <SvgHomeOutline width={50}  /> */}
+                <Image 
+                    style={tw`w-20 h-20`}
+                    source={require('../../assets/images/home-outline.jpg')}
+                />
             </View>
         </View>
         <View style={tw`flex-5 px-13`}>

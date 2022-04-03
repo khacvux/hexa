@@ -1,12 +1,20 @@
 import { View, Image, TextInput } from 'react-native';
-import React from 'react';
 import tw from 'twrnc';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
+import { commentPost } from '../../redux/actions/postsAction';
 
 
-const WriteComment = () => {
+const WriteComment = ({postId}) => {
 
-  const { avatar } = useSelector(state => state.authReducer)
+  const dispatch = useDispatch()
+  const { avatar, token, userId, name } = useSelector(state => state.authReducer)
+  const [isComment, setComment] = useState()
+
+  const handleComment = () => {
+    dispatch(commentPost({token, userId, postId, comment: isComment, avatar, name}))
+  }
+
 
   return (
     <View style={tw`bg-gray-100 py-2 px-4 flex flex-row items-center`}>   
@@ -16,6 +24,8 @@ const WriteComment = () => {
         <TextInput
             style={tw`bg-white flex-1 py-3 rounded-full px-3`}
             placeholder='Write your comment...'
+            onChangeText={val => setComment(val)}
+            onEndEditing={handleComment}
         />
     </View>
   );

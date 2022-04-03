@@ -9,13 +9,13 @@ import { useSelector } from 'react-redux'
 import SafeArea from '../components/SafeArea'
 
 
-
-
 const MyProfileScreen = () => {
-    const { name, firstName, lastName, avatar, email, userId, numberOfPosts, numberOfFollowing, numberOfFollower } = useSelector(state => state.authReducer)
+    const { token, firstName, lastName, avatar, email, userId, numberOfPosts, numberOfFollowing, numberOfFollower } = useSelector(state => state.authReducer)
     const [modalVisible, setModalVisible] = useState(false);
     const [isFirstName, setFirstName] = useState(firstName)
     const [isLastName, setLastName] = useState(lastName)
+    const [isAvatar, setAvatar] = useState();
+
     const handleModalVisible = () => {
         setModalVisible(!modalVisible)
     }
@@ -27,6 +27,7 @@ const MyProfileScreen = () => {
                 isFirstName={isFirstName}
                 isLastName={isLastName}
                 avatar={avatar} 
+                isAvatar={isAvatar}
                 email={email} 
                 numberOfFollower={numberOfFollower}
                 numberOfPosts={numberOfPosts}
@@ -38,6 +39,7 @@ const MyProfileScreen = () => {
                 numberOfPosts={numberOfPosts}    
             />
             <EditProfileModal 
+                token={token}
                 handleModalVisible={handleModalVisible} 
                 modalVisible={modalVisible} 
                 firstName={firstName} 
@@ -49,6 +51,8 @@ const MyProfileScreen = () => {
                 avatar={avatar} 
                 email={email} 
                 userId={userId}    
+                isAvatar={isAvatar}
+                setAvatar={setAvatar}
             />
         </SafeAreaView>
 
