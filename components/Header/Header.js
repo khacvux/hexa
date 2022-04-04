@@ -1,22 +1,30 @@
 import { View, Text, TouchableOpacity, Image } from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import tw from 'twrnc'
 import { AntDesign, Entypo } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
 
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import OnAddingPosts from '../LottieAnimation/OnAddingPosts';
 import OnAddingFail from '../LottieAnimation/OnAddingFail';
 import OnAddingSuccess from '../LottieAnimation/OnAddingSuccess';
+import { getListPostUser } from '../../redux/actions/postsAction';
 
 
 
 const Header = () => {
 
     const { onAddingPosts, onAddingSuccess, onAddingFail } = useSelector(state => state.postsReducer)
-    const { firstName, avatar } = useSelector(state => state.authReducer)
+    const { firstName, avatar, userId, token } = useSelector(state => state.authReducer)
+    const dispatch = useDispatch()
     const navigation = useNavigation();
+
+    useEffect(() => {
+        if(onAddingSuccess){
+            dispatch(getListPostUser({token, userId}))
+        }
+    }, [onAddingSuccess])  
 
 
     return (

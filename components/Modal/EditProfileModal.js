@@ -41,11 +41,10 @@ const EditProfileModal = ({
               {
                 text: "Yes",
                 onPress: () => {
-                    
                     dispatch(editProfile({ userId, firstName: isFirstName, lastName: isLastName,}))
-
-                    dispatch(updateAvatar({token, formData}))
+                    formData && dispatch(updateAvatar({token, formData}))
                     handleModalVisible();
+                    return;
                 },
               },
               {
@@ -53,6 +52,8 @@ const EditProfileModal = ({
                 onPress: () => {
                     setFirstName(firstName)
                     setLastName(lastName)
+                    setAvatar(avatar)
+                    return;
                 }
               },
             ]
@@ -61,11 +62,14 @@ const EditProfileModal = ({
 
     const handleSubmit = () => {
         if(isFirstName != firstName || isLastName != lastName || isAvatar != avatar){
-            let formData = new FormData()
-            formData.append('userId', userId)
-            formData.append('file', isAvatar)
-
-            showConfirmDialog({formData})
+            if(isAvatar != avatar){
+                let formData = new FormData()
+                formData.append('userId', userId)
+                formData.append('file', isAvatar)
+                showConfirmDialog({formData})
+            }else{
+                showConfirmDialog()
+            }
         }
         else handleModalVisible()
     }

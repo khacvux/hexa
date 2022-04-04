@@ -24,11 +24,15 @@ function* addPost(data) {
             formData: data.payload.formData
         })
         yield put(ACTION.onAddingPosts(false))
-        if(res.data.status == 'ok'){
-            console.log(res)
+        if(res.status == 'ok'){
+            yield put(ACTION.addPostSuccess(true))
+            yield delay(2000)
+            yield put(ACTION.addPostSuccess(false))
         }
     } catch (error) {
-        yield put(ACTION.consoleError(error))
+        yield put(ACTION.addPostFail(true))
+        yield delay(5000)
+        yield put(ACTION.addPostFail(false))
     }
 }
 

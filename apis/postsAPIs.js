@@ -32,7 +32,6 @@ export const likePostAPI = async ({token, data}) => {
 
 
 export const uploadPostsAPI = async ({token, formData}) => {
-    console.log(formData)
     try {
         const res = await AXIOS.post(`${url}/uploadFile`, formData, {
             headers: {
@@ -99,7 +98,6 @@ export const getCommentsOfPostAPI = async ({token, postsId}) => {
         return error;
     }
 }
-
 
 export const commentPostAPI = async ({token, data}) => {
     try {

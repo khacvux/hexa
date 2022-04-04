@@ -28,11 +28,20 @@ const OnDeletePostModal = ({handleVisibleDeleteModal, isVisibleDeleteModal, isId
                 onPress={handleVisibleDeleteModal}
             />
             <View style={tw`px-3 my-10`}>
+                <View style={tw`bg-white rounded-lg py-1 my-2 border border-gray-100`}>
+                    <TouchableOpacity
+                        style={tw` items-center justify-center py-3 shadow-xl`}
+                        onPress={handleDelete}
+                    >
+                        <Text style={tw`text-red-400 text-base`}>Delete</Text>
+                    </TouchableOpacity>
+
+                </View>
                 <TouchableOpacity
                     style={tw`bg-white rounded-lg items-center justify-center py-3 shadow-xl`}
-                    onPress={handleDelete}
+                    onPress={handleVisibleDeleteModal}
                 >
-                    <Text style={tw`text-red-400 text-base`}>Delete</Text>
+                    <Text style={tw`text-base`}>Cancel</Text>
                 </TouchableOpacity>
             </View>
 

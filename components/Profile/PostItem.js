@@ -21,11 +21,15 @@ const PostItem = ({item, handleVisibleDeleteModal, setIdPostSelected}) => {
               setIdPostSelected(item.item.postsId)
             }}
           >
-            <Image 
-                source={{ uri: item.item.postsImageList[0].image }}
-                style={tw`h-full w-full`}
-                resizeMode={'cover'}
-            />
+            {
+              item.item.postsImageList[0].image ? (
+                <Image 
+                    source={{ uri: item.item.postsImageList[0].image }}
+                    style={tw`h-full w-full`}
+                    resizeMode={'cover'}
+                />
+              ) : <></>
+            }
              
              <LinearGradient
                 colors={['rgba(0, 0, 0, 0.000004)', 'rgba(0, 0, 0, 0.2)']}

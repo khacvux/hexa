@@ -1,6 +1,8 @@
 import { View, Text } from 'react-native'
 import LottieView from 'lottie-react-native'
 import tw from 'twrnc'
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react'
 
 const OnAddingSuccess = () => {
   return (

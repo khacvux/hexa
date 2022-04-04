@@ -13,6 +13,7 @@ const WriteComment = ({postId}) => {
 
   const handleComment = () => {
     dispatch(commentPost({token, userId, postId, comment: isComment, avatar, name}))
+    setComment('')
   }
 
 
@@ -24,6 +25,7 @@ const WriteComment = ({postId}) => {
         <TextInput
             style={tw`bg-white flex-1 py-3 rounded-full px-3`}
             placeholder='Write your comment...'
+            value={isComment}
             onChangeText={val => setComment(val)}
             onEndEditing={handleComment}
         />

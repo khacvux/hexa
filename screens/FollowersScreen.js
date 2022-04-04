@@ -38,14 +38,14 @@ const FollowersScreen = ({navigation}) => {
                 </View>
                 <View style={tw`flex flex-col w-full`}>
                     {
-                        followers == 0 ? (
-                            <Empty />
-                        ) : (
+                        // followers == 0 ? (
+                        //     <Empty />
+                        // ) : (
                             <View>
                                 <Follower />
                             </View>
 
-                        )
+                        // )
                     }
                 </View>
             </View>
