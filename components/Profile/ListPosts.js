@@ -12,7 +12,7 @@ import ListPostSkeleton from '../Skeleton/ListPostSkeleton';
 import OnDeletePostModal from '../Modal/OnDeletePostModal';
 
 
-const ListPost = ({userId, numberOfPosts}) => {
+const ListPost = ({userId, myUserId, numberOfPosts}) => {
 
     const dispatch = useDispatch()
     const { listPostUser } = useSelector(state => state.postsReducer)
@@ -27,11 +27,10 @@ const ListPost = ({userId, numberOfPosts}) => {
     }
 
     useEffect(() => {
-        if(numberOfPosts) {
-            dispatch(getListPostUser({userId, token}))
+        if(numberOfPosts && myUserId && userId) {
+            dispatch(getListPostUser({myUserId, userId, token}))
         }
-    }, [])
-
+    }, [userId])
 
     return (
         <View style={tw`bg-white h-full`}>

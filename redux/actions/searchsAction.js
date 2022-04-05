@@ -58,3 +58,45 @@ export const getProfileUserByIDFailure = (error) => {
     }
 }
 
+export const postRequestFollow = payload => {
+    return {
+        type: TYPES.POST_REQUEST_FOLLOW,
+        payload
+    }
+}
+
+export const postRequestFollowSuccess = payload => {
+    return {
+        type: TYPES.POST_REQUEST_FOLLOW_SUCCESS,
+        payload
+    }
+}
+
+export const postRequestFollowFailure = payload => {
+    return {
+        type: TYPES.POST_REQUEST_FOLLOW_FAILURE,
+        payload
+    }
+}
+
+export const confirmRequestFollow = payload => {
+    return {
+        type: TYPES.CONFIRM_REQUEST_FOLLOW,
+        payload
+    }
+}
+
+export const confirmRequestFollowSuccess = payload => {
+    return {
+        type: TYPES.CONFIRM_REQUEST_FOLLOW_SUCCESS,
+        payload
+    }
+}
+
+export const confirmRequestFollowFailure = payload => {
+    return {
+        type: TYPES.CONFIRM_REQUEST_FOLLOW_FAILURE,
+        payload
+    }
+}
+

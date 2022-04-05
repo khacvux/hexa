@@ -3,7 +3,7 @@ import tw from 'twrnc'
 import { useNavigation } from '@react-navigation/native'
 import { View, Text, Image, TouchableOpacity, Alert } from 'react-native'
 import { AntDesign } from '@expo/vector-icons'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { addHistorySearch, deleteHistorySearch } from '../../redux/actions/searchsAction'
 
 
@@ -11,9 +11,11 @@ const SearchItem = ({ item, times }) => {
     
     const dispatch = useDispatch()
     const navigation = useNavigation();
+    const { userId } = useSelector(state => state.authReducer)
 
     const handleSelect = () => {
         navigation.navigate('ProfileStack', {
+            myUserId: userId,
             userId: item.item.userId  
         })
         

@@ -10,7 +10,8 @@ const InfomationUser = ({isFirstName,
             numberOfPosts, 
             numberOfFollowing, 
             numberOfFollower, 
-            bio
+            bio, 
+            name
         }) => {
 
     return (
@@ -47,7 +48,13 @@ const InfomationUser = ({isFirstName,
                     {email}
                </Text>
                <Text style={tw`text-2xl font-bold`}>
-                   {`${isFirstName} ${isLastName}`}
+                   {
+                       isFirstName ? (
+                        `${isFirstName} ${isLastName}`
+                       ) : (
+                           `${name}`
+                       )
+                   }
                </Text>
                {
                    bio ? (

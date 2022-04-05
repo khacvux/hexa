@@ -29,14 +29,26 @@ function* findUserByName(data) {
 function* getProfileUserById(data) {
     try {
         console.log('GET PROFILE USER BY ID running...')
-        const res = yield call(getProfileUserByIDAPI, data.payload)
+        const res = yield call(getProfileUserByIDAPI, {
+            myUserId: data.payload.myUserId,
+            userId: data.payload.userId
+        })
         if(res){
             console.log('GET PROFILE USER BY ID SUCCESS')
-            console.log(res.data)
+            // console.log(res.data)
             yield put(ACTION.getProfileUserByIDSuccess(res.data))
         } 
     } catch (error) {
         yield put(ACTION.getProfileUserByIDFailure(error))
+    }
+}
+
+function* postRequestFollow(data){
+    try {
+        console.log('POST REQUEST FOLLOW running...')
+        const res = yield call()
+    } catch (error) {
+        yield put(ACTION.postRequestFollowFailure(error))
     }
 }
 

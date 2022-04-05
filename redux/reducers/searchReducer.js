@@ -3,7 +3,7 @@ import * as TYPES from '../constants/search'
 const initState = {
     listResult: [],
     listHistorySearch: [],
-    profileUser: null,
+    profileUser: {},
 }
 
 
@@ -47,29 +47,57 @@ export default searchReducer = (state = initState, action ) => {
                 listHistorySearch: newListHistorySearch,
             }
 
-
-
-
-
         case TYPES.GET_PROFILE_USER_BY_ID: 
             return {
                 ...state,
             }
+
+
         
         case TYPES.GET_PROFILE_USER_BY_ID_SUCCESS:
             return {
                 ...state,
                 profileUser: action.payload,
             }
-
         case TYPES.GET_PROFILE_USER_BY_ID_FAILURE:
             return {
                 ...state,
                 profileUser: null,
             }
-
-
         
+
+        case TYPES.POST_REQUEST_FOLLOW: 
+            return {
+                ...state,
+            }
+        case TYPES.POST_REQUEST_FOLLOW_SUCCESS: 
+            return {
+                ...state,
+                follow: 0,
+            }
+        case TYPES.POST_REQUEST_FOLLOW_FAILURE:
+            console.log(action.error)
+            return {
+                ...state
+            }
+
+
+        case TYPES.CONFIRM_REQUEST_FOLLOW:
+            return {
+                ...state
+            }
+        case TYPES.CONFIRM_REQUEST_FOLLOW_SUCCESS:
+            return {
+                ...state,
+                follow: 1,
+            }
+        case TYPES.CONFIRM_REQUEST_FOLLOW_FAILURE:
+            console.log(action.error)
+            return {
+                ...state
+            }
+
+
         default:
             return state
     }

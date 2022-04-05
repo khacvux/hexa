@@ -28,12 +28,10 @@ const ProfileScreen = ({route}) => {
     }
     
     useEffect(() => {
-        dispatch(getProfileUserByID(route.params.userId))
+        dispatch(getProfileUserByID({userId: route.params.userId, myUserId: userId}))
     }, [route.params.userId])
     
     const { profileUser } = useSelector(state => state.searchReducer)
-    // profileUser.postsList ? console.log(profileUser.postsList) : console.log(23)
-
 
     return (
         <SafeAreaView style={[tw`bg-white h-full`, SafeArea.AndroidSafeArea]}>
@@ -52,7 +50,6 @@ const ProfileScreen = ({route}) => {
             {
                 profileUser ? (
                     <View style={tw`flex flex-1`}>
-
                         <InfomationUser 
                             name={profileUser.name} 
                             avatar={profileUser.avatar} 
@@ -61,11 +58,14 @@ const ProfileScreen = ({route}) => {
                             numberOfPosts={profileUser.numberOfPosts}
                             numberOfFollowing={profileUser.numberOfFollowing}
                         />  
-                        <Contact />
+                        <Contact
+                            follow={profileUser.follow}
+                        />
                         <View style={tw`mt-1 flex flex-1`}>
                             <TabListNavigator 
                                 numberOfPosts={profileUser.numberOfPosts} 
                                 userId={profileUser.userId} 
+                                myUserId={userId}
                             />
                         </View>
 
