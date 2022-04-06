@@ -30,7 +30,7 @@ const ListPost = ({userId, myUserId, numberOfPosts}) => {
         if(numberOfPosts && myUserId && userId) {
             dispatch(getListPostUser({myUserId, userId, token}))
         }
-    }, [userId])
+    }, [])
 
     return (
         <View style={tw`bg-white h-full`}>

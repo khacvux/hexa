@@ -30,10 +30,10 @@ export const getListFollowingSuccess = () => {
 }
 
 
-export const getListFollowRequest = ({userId, token}) => {
+export const getListFollowRequest = payload => {
     return {
         type: TYPES.GET_LIST_FOLLOW_REQUEST,
-        payload: {userId, token}
+        payload
     }
 }
 

@@ -4,14 +4,14 @@ import tw from 'twrnc'
 import { deleteAvatar } from '../../redux/actions/authAction'
 import * as ImagePicker from 'expo-image-picker'
 import { Camera } from 'expo-camera';
-
+import { useState, useEffect } from 'react'
 
 
 
 const ChangeAvatarModal = ({isVisibleChangeAvtModal, handleVisibleChangeAvtModal, setAvatar, avatar}) => {
 
-    const [hasPermission, setHasPermission] = useState(null);
-    const [type, setType] = useState(Camera.Constants.Type.back);
+    // const [hasPermission, setHasPermission] = useState(null);
+    // const [type, setType] = useState(Camera.Constants.Type.back);
 
     const dispatch = useDispatch()
     const { token, userId } = useSelector(state => state.authReducer)
@@ -40,12 +40,12 @@ const ChangeAvatarModal = ({isVisibleChangeAvtModal, handleVisibleChangeAvtModal
     }
 
 
-    useEffect(() => {
-        (async () => {
-          const { status } = await Camera.requestCameraPermissionsAsync();
-          setHasPermission(status === 'granted');
-        })();
-      }, []);
+    // useEffect(() => {
+    //     (async () => {
+    //       const { status } = await Camera.requestCameraPermissionsAsync();
+    //       setHasPermission(status === 'granted');
+    //     })();
+    //   }, []);
 
       
 

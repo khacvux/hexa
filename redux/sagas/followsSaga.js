@@ -1,5 +1,5 @@
 import { call, put, takeLeading } from 'redux-saga/effects'
-import { getListFollowerAPI } from '../../apis/followAPIs'
+import { getFollowRequestsAPI, getListFollowerAPI } from '../../apis/followAPIs'
 import * as TYPES from '../constants/follows'
 import * as ACTION from '../actions/followsAction'
 
@@ -20,8 +20,23 @@ function* getListFollower(data) {
     }
 }
 
+function* getFollowRequests(data) {
+    try {
+        console.log('GET FOLLOW REQUESTS running...')
+        const res = yield call(getFollowRequestsAPI, {
+            userId: data.payload.userId,
+            token: data.payload.token
+        })
+        if(res.status == 'ok') {
+            yield put(ACTION.getListFollowRequestSuccess(res.data))
+        }
+    } catch (error) {
+        yield put(ACTION.getFail(error))
+    }
+}
 
 
 export default followsSaga = [
     takeLeading(TYPES.GET_LIST_FOLLOWER, getListFollower),
+    takeLeading(TYPES.GET_LIST_FOLLOW_REQUEST, getFollowRequests)
 ]

@@ -72,10 +72,10 @@ export const postRequestFollowSuccess = payload => {
     }
 }
 
-export const postRequestFollowFailure = payload => {
+export const postRequestFollowFailure = error => {
     return {
         type: TYPES.POST_REQUEST_FOLLOW_FAILURE,
-        payload
+        error
     }
 }
 
@@ -93,10 +93,30 @@ export const confirmRequestFollowSuccess = payload => {
     }
 }
 
-export const confirmRequestFollowFailure = payload => {
+export const confirmRequestFollowFailure = error => {
     return {
         type: TYPES.CONFIRM_REQUEST_FOLLOW_FAILURE,
+        error
+    }
+}
+
+export const refuseRequsestFollow = payload => {
+    return {
+        type: TYPES.REFUSE_REQUEST_FOLLOW,
         payload
     }
 }
 
+export const refuseRequsestFollowSuccess = payload => {
+    return {
+        type: TYPES.REFUSE_REQUEST_FOLLOW_SUCCESS,
+        payload
+    }
+}
+
+export const refuseRequsestFollowFailure = error => {
+    return {
+        type: TYPES.REFUSE_REQUEST_FOLLOW_FAILURE,
+        error
+    }
+}

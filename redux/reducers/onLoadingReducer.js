@@ -4,6 +4,7 @@ const initState = {
     authLoading: false,
     followStatusLoading: false,
     findUserLoading: false,
+    buttonLoading:  false,
     getListPostLoading: false,
 }
 
@@ -29,7 +30,11 @@ export default onLoadingReducer = ( state = initState, action ) => {
                 ...state,
                 getListPostLoading: action.payload,
             }
-        
+        case TYPES.BUTTON_LOADING:
+            return {
+                ...state,
+                buttonLoading: action.payload
+            }
        
         
         default:

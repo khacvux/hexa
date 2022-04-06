@@ -29,7 +29,7 @@ export default followsReducer = ( state = initState, action) => {
         case TYPES.GET_LIST_FOLLOWING_SUCCESS:
             return {
                 ...state,
-                followings: [action.payload]
+                followings: action.payload
             }
         
         // GET LIST FOLLOW REQUESTS
@@ -41,7 +41,7 @@ export default followsReducer = ( state = initState, action) => {
         case TYPES.GET_LIST_FOLLOW_REQUEST_SUCCESS:
             return {
                 ...state,
-                followRequests: [action.payload]
+                followRequests: action.payload
             }
 
 

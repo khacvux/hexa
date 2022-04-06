@@ -1,16 +1,18 @@
 import * as TYPES from '../constants/search'
 import * as ACTION from '../actions/searchsAction'
 
-import { call, put, takeEvery, takeLatest } from 'redux-saga/effects'
+import { call, delay, put, takeEvery, takeLatest, takeLeading } from 'redux-saga/effects'
 import { findUserByNameAPI, getProfileUserByIDAPI } from '../../apis/findUserAPIs'
-import { onLoadingFindUser } from '../actions/onLoading'
+import { buttonLoading, onLoadingFindUser } from '../actions/onLoading'
+import { confirmRequestFollowAPI, postRequestFollowAPI, refuseRequestFollowAPI } from '../../apis/followAPIs'
 
 
 function* findUserByName(data) {
     try {
         if(data.payload){
-            console.log('FIND USER BY NAME running...')
             yield put(onLoadingFindUser(true))
+            yield delay(1000)
+            console.log('FIND USER BY NAME running...')
             const res = yield call(findUserByNameAPI, data.payload)
             if(res){
                 console.log('FIND USER BY NAME SUCCESS')
@@ -46,13 +48,60 @@ function* getProfileUserById(data) {
 function* postRequestFollow(data){
     try {
         console.log('POST REQUEST FOLLOW running...')
-        const res = yield call()
+        yield put(buttonLoading(true))
+        const res = yield call(postRequestFollowAPI, {
+            myUserId: data.payload.myUserId,
+            userId: data.payload.userId,
+            token: data.payload.token
+        })
+        if(res.status = 'ok'){
+            console.log('POST REQUEST FOLLOW SUCCESS')
+            yield put(ACTION.postRequestFollowSuccess())
+        }
     } catch (error) {
         yield put(ACTION.postRequestFollowFailure(error))
     }
+    yield put(buttonLoading(false))
 }
+
+
+function* confirmRequestFollow(data) {
+    try {
+        console.log('CONFIRM REQUEST FOLLOW RUNNING...')
+        const res = yield call(confirmRequestFollowAPI, {
+            userId: data.payload.userId,
+            token: data.payload.token
+        })
+        if(res.status == 'ok'){
+            console.log('CONFIRM REQUEST SUCCESS.')
+            yield put(ACTION.confirmRequestFollowSuccess())
+        }
+    } catch (error) {
+        yield put(ACTION.confirmRequestFollowFailure(error))
+    }
+}
+
+function* refuseRequestFollow(data) {
+    try {
+        console.log('REFUSE REQUEST FOLLOW RUNNING...')
+        const res = yield call(refuseRequestFollowAPI, {
+            userId: data.payload.userId,
+            token: data.payload.token
+        })
+        if(res.status == 'ok'){
+            console.log('REFUSE REQUEST SUCCESS.')
+            yield put(ACTION.refuseRequsestFollowSuccess({userId: data.payload.userId}))
+        }
+    } catch (error) {
+        yield put(ACTION.refuseRequsestFollowFailure())
+    }
+}
+
 
 export default searchSaga = [
     takeLatest(TYPES.FIND_USER, findUserByName),
     takeLatest(TYPES.GET_PROFILE_USER_BY_ID, getProfileUserById),
+    takeLatest(TYPES.POST_REQUEST_FOLLOW, postRequestFollow),
+    takeLeading(TYPES.CONFIRM_REQUEST_FOLLOW, confirmRequestFollow),
+    takeLeading(TYPES.REFUSE_REQUEST_FOLLOW, refuseRequestFollow)
 ]

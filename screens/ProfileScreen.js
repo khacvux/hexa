@@ -32,6 +32,7 @@ const ProfileScreen = ({route}) => {
     }, [route.params.userId])
     
     const { profileUser } = useSelector(state => state.searchReducer)
+    // console.log(profileUser)
 
     return (
         <SafeAreaView style={[tw`bg-white h-full`, SafeArea.AndroidSafeArea]}>
@@ -60,6 +61,7 @@ const ProfileScreen = ({route}) => {
                         />  
                         <Contact
                             follow={profileUser.follow}
+                            followerId={route.params.userId}
                         />
                         <View style={tw`mt-1 flex flex-1`}>
                             <TabListNavigator 

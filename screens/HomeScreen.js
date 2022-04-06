@@ -86,24 +86,25 @@ const HomeScreen = () => {
 
                 {
                     numberOfFollowing ? (
-                        <Animated.FlatList
-                            data={posts}
-                            renderItem={(post) => {
-                                return <Feeds post={post} />
-                            }}
-                            keyExtractor={post => post.postId}
-                            contentContainerStyle={[tw`py-2 pt-[${CONTAINER_HEIGHT}]`]}
-                            showsHorizontalScrollIndicator={false}
-                            showsVerticalScrollIndicator={false}
-                            onScroll={Animated.event(
-                                [{nativeEvent: {contentOffset: {y: scrollY}}}],
-                                {useNativeDriver: true}
-                            )}
-                            onMomentumScrollBegin={onMomentumScrollBegin}
-                            onMomentumScrollEnd={onMomentumScrollEnd}
-                            onScrollEndDrag={onScrollEndDrag}
-                            scrollEventThrottle={1}
-                        /> 
+                        <></>
+                        // <Animated.FlatList
+                        //     data={posts}
+                        //     renderItem={(post) => {
+                        //         return <Feeds post={post} />
+                        //     }}
+                        //     keyExtractor={post => post.postId}
+                        //     contentContainerStyle={[tw`py-2 pt-[${CONTAINER_HEIGHT}]`]}
+                        //     showsHorizontalScrollIndicator={false}
+                        //     showsVerticalScrollIndicator={false}
+                        //     onScroll={Animated.event(
+                        //         [{nativeEvent: {contentOffset: {y: scrollY}}}],
+                        //         {useNativeDriver: true}
+                        //     )}
+                        //     onMomentumScrollBegin={onMomentumScrollBegin}
+                        //     onMomentumScrollEnd={onMomentumScrollEnd}
+                        //     onScrollEndDrag={onScrollEndDrag}
+                        //     scrollEventThrottle={1}
+                        // /> 
                     ) : (
                         <View style={tw`bg-gray-50`}>
                             <HiAnimation 

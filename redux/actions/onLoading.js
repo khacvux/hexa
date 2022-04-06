@@ -28,3 +28,10 @@ export const onLoadingGetListPost = payload => {
         payload
     }
 }
+
+export const buttonLoading = payload => {
+    return {
+        type: TYPES.BUTTON_LOADING,
+        payload
+    }
+}

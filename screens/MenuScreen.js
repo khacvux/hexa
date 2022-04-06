@@ -54,6 +54,8 @@ const MenuScreen = ({navigation}) => {
                 </TouchableOpacity>
                     {
                         followStatus ? (
+                                <></>
+                            ) : (
                             <TouchableOpacity 
                                 style={tw`w-full py-3 px-2 flex flex-row justify-between`}
                                 onPress={() => navigation.navigate('FollowRequestsStack')}
@@ -63,8 +65,6 @@ const MenuScreen = ({navigation}) => {
                                 </Text>
                                 <AntDesign name='right' />
                             </TouchableOpacity>
-                            ) : (
-                            <></>
 
                         )
                     }

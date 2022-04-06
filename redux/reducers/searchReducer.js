@@ -71,10 +71,29 @@ export default searchReducer = (state = initState, action ) => {
                 ...state,
             }
         case TYPES.POST_REQUEST_FOLLOW_SUCCESS: 
-            return {
-                ...state,
-                follow: 0,
+            if(state.profileUser.follow == -1 && state.profileUser.followStatus == false){
+                return {
+                    ...state,
+                    profileUser: {...state.profileUser, follow: 0}
+                }
+            } else if(state.profileUser.follow == 0 && state.profileUser.followStatus == false
+                || state.profileUser.follow == 1 && state.profileUser.followStatus == false){
+                return {
+                    ...state,
+                    profileUser: {...state.profileUser, follow: -1}
+                }
+            } else if(state.profileUser.follow == 1){
+                return {
+                    ...state,
+                    profileUser: {...state.profileUser, follow: -1}
+                }
+            } else if(state.profileUser.follow == -1){
+                return {
+                    ...state,
+                    profileUser: {...state.profileUser, follow: 1}
+                }
             }
+            else console.log('else')
         case TYPES.POST_REQUEST_FOLLOW_FAILURE:
             console.log(action.error)
             return {
@@ -89,13 +108,29 @@ export default searchReducer = (state = initState, action ) => {
         case TYPES.CONFIRM_REQUEST_FOLLOW_SUCCESS:
             return {
                 ...state,
-                follow: 1,
+                profileUser: {...state.profileUser, follow: 1}
             }
         case TYPES.CONFIRM_REQUEST_FOLLOW_FAILURE:
             console.log(action.error)
             return {
                 ...state
             }
+
+        case TYPES.REFUSE_REQUEST_FOLLOW:
+            return {
+                ...state
+            }
+        case TYPES.REFUSE_REQUEST_FOLLOW_SUCCESS:
+            return {
+                ...state,
+                //
+            }
+        case TYPES.CONFIRM_REQUEST_FOLLOW_FAILURE:
+            console.log(action.error)
+            return {
+                ...state,
+            }
+    
 
 
         default:
