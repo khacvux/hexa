@@ -1,5 +1,4 @@
-import { View, Text, FlatList } from 'react-native'
-import { SafeAreaView } from 'react-native-safe-area-context'
+import { View, Text, FlatList,SafeAreaView } from 'react-native'
 import tw from 'twrnc'
 import { Entypo } from '@expo/vector-icons'; 
 import { ScrollView } from 'react-native-gesture-handler';

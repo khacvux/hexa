@@ -1,6 +1,5 @@
-import { View, Text, TextInput, FlatList } from 'react-native'
-import React, { useEffect, useState } from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context'
+import { View, Text, TextInput, FlatList, SafeAreaView } from 'react-native'
+import { useEffect, useState } from 'react'
 import tw from 'twrnc'
 import { AntDesign, EvilIcons } from '@expo/vector-icons'; 
 import SearchItem from '../components/Search/SearchItem';

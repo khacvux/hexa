@@ -12,8 +12,10 @@ const WriteComment = ({postId}) => {
   const [isComment, setComment] = useState()
 
   const handleComment = () => {
-    dispatch(commentPost({token, userId, postId, comment: isComment, avatar, name}))
-    setComment('')
+    if(isComment){
+      dispatch(commentPost({token, userId, postId, comment: isComment, avatar, name}))
+      setComment('')
+    }
   }
 
 
