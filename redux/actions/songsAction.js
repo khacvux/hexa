@@ -1,6 +1,20 @@
 import * as TYPES from '../constants/songs'
 
 
+export const ShowlayerBar = payload => {
+    return {
+        type: TYPES.SHOW_PLAYER_BAR,
+        payload,
+    }
+}
+
+export const hidePlayerBar = payload => {
+    return {
+        type: TYPES.HIDE_PLAYER_BAR,
+        payload
+    }
+}
+
 export const getListCategorySong = payload => {
     return {
         type: TYPES.GET_LIST_CATEGORY_SONG,

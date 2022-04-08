@@ -1,6 +1,7 @@
 import * as TYPES from '../constants/songs'
 
 const initialState = {
+    playerBar: false,
     listCategorySong: [],
     listSongByCategory: [],
     listOfSearchResults: [],
@@ -10,6 +11,22 @@ const initialState = {
 
 export default songsReducer = (state = initialState, action) => {
     switch(action.type) {
+        case TYPES.PLAYER_BAR: 
+            return {
+                ...state
+            }
+        case TYPES.SHOW_PLAYER_BAR:
+            return {
+                type: TYPES.SHOW_PLAYER_BAR,
+                ...state,
+                playerBar: true,
+            }
+        case TYPES.HIDE_PLAYER_BAR:
+            return {
+                ...state,
+                playerBar: false
+            }
+        
         
         case TYPES.GET_LIST_CATEGORY_SONG:
             return {
