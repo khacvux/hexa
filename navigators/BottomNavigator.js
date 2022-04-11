@@ -8,29 +8,37 @@ import SvgHomeOutline from '../assets/icons/home-outline.svg'
 import MyProfileScreen from '../screens/MyProfileScreen';
 import NotificationScreen from '../screens/NotificationScreen';
 import HomeScreen from '../screens/HomeScreen';
-import { View, StyleSheet } from 'react-native';
+import { View } from 'react-native';
 import SearchScreen from '../screens/SearchScreen';
 import MusicScreen from '../screens/MusicScreen';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Player from '../components/Player/Player';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
+
+
+
 
 const Tab = createBottomTabNavigator();
 
 const BottomNavigator = () => {
 
     const { playerBar } = useSelector(state => state.songReducer)
+    const [isTabBarHeight, setTabBarHeight] = useState()
 
     return (
         <SafeAreaView style={tw`h-full w-full bg-white relative`} edges={['top']}>
             <View style={tw`w-full h-full`}>
                 {
                     playerBar ? (
-                        <Player/>
-                    ) : <></>
+                        <Player tabBarHeight={isTabBarHeight} />
+                    ) : (
+                        <></>
+                    )
                 }
                 <Tab.Navigator>
-                    <Tab.Screen name="HomeTab" component={HomeScreen} 
+                    <Tab.Screen name="HomeTab"
+                        component={HomeScreen}
                         options={{
                             headerShown: false,
                             tabBarShowLabel: false,
@@ -61,7 +69,8 @@ const BottomNavigator = () => {
                             tabBarStyle: [tw`bg-[#F5F7FA]`],
                         }}
                     />
-                    <Tab.Screen name="MusicTab" component={MusicScreen}
+                    <Tab.Screen name="MusicTab"
+                        children={() => <MusicScreen setTabBarHeight={setTabBarHeight} />}
                         options={{
                             headerShown: false,
                             tabBarShowLabel: false,
@@ -134,11 +143,3 @@ const BottomNavigator = () => {
 }
 
 export default BottomNavigator
-
-
-const styles = StyleSheet.create({
-    bottomtabsHeight: {
-        height: 50,
-        width: '100%'
-    }
-})

@@ -1,15 +1,14 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { FlatList, Animated, View, Platform } from 'react-native'
 import tw, { useDeviceContext } from 'twrnc'
-import { posts } from '../data';
-
 import Feeds from '../components/Home/Feeds';
 import Header from '../components/Header/Header';
 import SafeArea from '../components/SafeArea';
-
 import { useSelector } from 'react-redux';
 import HiAnimation from '../components/LottieAnimation/HiAnimation';
 // import SkeletonFeeds from '../components/Home/SkeletonFeeds';
+
+
 
 const HomeScreen = () => {
 
@@ -78,7 +77,7 @@ const HomeScreen = () => {
     
 
     return (
-        <View style={[tw`bg-white h-full`, SafeArea.AndroidSafeArea]}>
+        <View style={[tw`bg-white h-full`]}>
             <View style={tw`h-full overflow-hidden flex`}>
                 <Animated.View style={[tw`absolute top-0 left-0 right-0 z-50`,{height: CONTAINER_HEIGHT}, {transform: [{translateY: headerTranslate}]}]}>
                     <Header />

@@ -1,7 +1,7 @@
 import * as TYPES from '../constants/songs'
 
 
-export const ShowlayerBar = payload => {
+export const showlayerBar = payload => {
     return {
         type: TYPES.SHOW_PLAYER_BAR,
         payload,
