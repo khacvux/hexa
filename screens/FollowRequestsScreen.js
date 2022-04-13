@@ -15,10 +15,10 @@ const FollowRequestsScreen = ({navigation}) => {
 
     const dispatch = useDispatch()
     const { followRequests } = useSelector(state => state.followsReducer)
-    const { token, userId } = useSelector(state => state.authReducer)
+    const { token } = useSelector(state => state.authReducer)
 
     useEffect(() => {
-        dispatch(getListFollowRequest({userId, token}))
+        dispatch(getListFollowRequest({token}))
     }, [])
     // console.log(followRequests)
 

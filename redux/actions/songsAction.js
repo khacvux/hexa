@@ -15,6 +15,21 @@ export const hidePlayerBar = payload => {
     }
 }
 
+export const playMusic = payload => {
+    return {
+        type: TYPES.PLAY_MUSIC,
+        payload
+    }
+}
+
+export const pauseMusic = payload => {
+    return {
+        type: TYPES.PAUSE_MUSIC,
+        payload
+    }
+}
+
+
 export const getListCategorySong = payload => {
     return {
         type: TYPES.GET_LIST_CATEGORY_SONG,

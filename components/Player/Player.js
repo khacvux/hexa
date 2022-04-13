@@ -17,7 +17,7 @@ const Player = ({tabBarHeight}) => {
   }
 
   return (
-    <View style={[tw`bg-white border-t border-gray-100 py-2 px-3 absolute left-0 right-0 bottom-[45px] z-100 flex flex-row items-center transition`, {bottom: tabBarHeight}]}>
+    <View style={[tw`bg-white border-t border-gray-100 py-2 px-3 absolute left-0 right-0 bottom-[45px] z-100 flex flex-row items-center`, {bottom: tabBarHeight}]}>
       <View style={tw`w-full`}>
         <View style={tw`flex flex-row justify-between items-center`}>
           <TouchableOpacity style={tw`flex flex-row items-center w-1/2`}
@@ -35,7 +35,7 @@ const Player = ({tabBarHeight}) => {
           <View style={tw`flex flex-row items-center`}>
             <View style={tw`px-2 flex-row items-center`}>
               <TouchableOpacity>
-                <Ionicons name="play" size={23} style={tw`p-2 text-gray-800`} />
+                <Ionicons name="play" size={23} style={tw`p-2 text-[#5EC2EA]`} />
               </TouchableOpacity>
               {/* <TouchableOpacity>
                 <Ionicons name="ios-pause-outline" size={23} style={tw`p-2 text-gray-600`} />

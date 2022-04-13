@@ -22,9 +22,9 @@ export const signUpAPI = async (data) => {
 }
 
 
-export const setFollowStatusAPI = async ({userId, token}) => {
+export const setFollowStatusAPI = async ({token}) => {
     try {
-        const res = await AXIOS.get(`follow/${userId}/followStatus`, {
+        const res = await AXIOS.get(`follow/followStatus`, {
             headers: {
                 'Authorization': `Bearer ${token}`,
             }

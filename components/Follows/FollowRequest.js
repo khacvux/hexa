@@ -1,7 +1,7 @@
 import { View, Text, Image, TouchableOpacity } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import tw from 'twrnc'
-import { confirmRequestFollow } from '../../redux/actions/searchsAction';
+import { acceptRequestFollow } from '../../redux/actions/searchsAction';
 
 const FollowRequest = ({item}) => {
 
@@ -9,7 +9,7 @@ const FollowRequest = ({item}) => {
     const { token } = useSelector(state => state.authReducer)
 
 
-    const handleAccept = () => dispatch(confirmRequestFollow({token, userId: item.userId}))
+    const handleAccept = () => dispatch(acceptRequestFollow({token, userId: item.userId}))
 
     return (
         <View style={tw`flex flex-row justify-between items-center py-2`}>

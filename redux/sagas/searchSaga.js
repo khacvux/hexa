@@ -4,7 +4,7 @@ import * as ACTION from '../actions/searchsAction'
 import { call, delay, put, takeEvery, takeLatest, takeLeading } from 'redux-saga/effects'
 import { findUserByNameAPI, getProfileUserByIDAPI } from '../../apis/findUserAPIs'
 import { buttonLoading, onLoadingFindUser } from '../actions/onLoading'
-import { confirmRequestFollowAPI, postRequestFollowAPI, refuseRequestFollowAPI } from '../../apis/followAPIs'
+import { acceptRequestFollowAPI, postRequestFollowAPI, refuseRequestFollowAPI } from '../../apis/followAPIs'
 
 
 function* findUserByName(data) {
@@ -65,19 +65,19 @@ function* postRequestFollow(data){
 }
 
 
-function* confirmRequestFollow(data) {
+function* acceptRequestFollow(data) {
     try {
         console.log('CONFIRM REQUEST FOLLOW RUNNING...')
-        const res = yield call(confirmRequestFollowAPI, {
-            userId: data.payload.userId,
+        const res = yield call(acceptRequestFollowAPI, {
+            followId: data.payload.userId,
             token: data.payload.token
         })
         if(res.status == 'ok'){
             console.log('CONFIRM REQUEST SUCCESS.')
-            yield put(ACTION.confirmRequestFollowSuccess())
+            yield put(ACTION.acceptRequestFollowSuccess())
         }
     } catch (error) {
-        yield put(ACTION.confirmRequestFollowFailure(error))
+        yield put(ACTION.acceptRequestFollowFailure(error))
     }
 }
 
@@ -85,7 +85,7 @@ function* refuseRequestFollow(data) {
     try {
         console.log('REFUSE REQUEST FOLLOW RUNNING...')
         const res = yield call(refuseRequestFollowAPI, {
-            userId: data.payload.userId,
+            followId: data.payload.userId,
             token: data.payload.token
         })
         if(res.status == 'ok'){
@@ -102,6 +102,6 @@ export default searchSaga = [
     takeLatest(TYPES.FIND_USER, findUserByName),
     takeLatest(TYPES.GET_PROFILE_USER_BY_ID, getProfileUserById),
     takeLatest(TYPES.POST_REQUEST_FOLLOW, postRequestFollow),
-    takeLeading(TYPES.CONFIRM_REQUEST_FOLLOW, confirmRequestFollow),
+    takeLeading(TYPES.ACCEPT_REQUEST_FOLLOW, acceptRequestFollow),
     takeLeading(TYPES.REFUSE_REQUEST_FOLLOW, refuseRequestFollow)
 ]

@@ -6,17 +6,16 @@ import * as ACTION from '../actions/followsAction'
 
 
 function* getListFollower(data) {
-    const { token, userId } = data.payload
     try {
         console.log('GET LIST FOLLOWER running...')
-        const res = yield call(getListFollowerAPI,{userId, token})
-        
+        const res = yield call(getListFollowerAPI,{
+            token: data.payload.token
+        })
         if(res){
-            // yield put(ACTION.getListFollowerSuccess(res))
-            // console.log('in saga',res.data.data)
+            yield put(ACTION.getListFollowerSuccess(res.data))
         }
     } catch (error) {
-        console.log(error)
+        yield put(ACTION.getFail(error))
     }
 }
 
@@ -24,7 +23,6 @@ function* getFollowRequests(data) {
     try {
         console.log('GET FOLLOW REQUESTS running...')
         const res = yield call(getFollowRequestsAPI, {
-            userId: data.payload.userId,
             token: data.payload.token
         })
         if(res.status == 'ok') {
@@ -34,7 +32,6 @@ function* getFollowRequests(data) {
         yield put(ACTION.getFail(error))
     }
 }
-
 
 export default followsSaga = [
     takeLeading(TYPES.GET_LIST_FOLLOWER, getListFollower),

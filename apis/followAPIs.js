@@ -3,9 +3,9 @@ import AXIOS from "./axiosClient";
 const url = 'follow/'
 
 
-export const getListFollowerAPI = async ({userId, token}) => {
+export const getListFollowerAPI = async ({token}) => {
     try {
-        const res = await AXIOS.get(`${url}${userId}/following`, {
+        const res = await AXIOS.get(`${url}following`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -16,9 +16,9 @@ export const getListFollowerAPI = async ({userId, token}) => {
     }   
 }
 
-export const getFollowRequestsAPI = async ({userId, token}) => {
+export const getFollowRequestsAPI = async ({token}) => {
     try {
-        const res = await AXIOS.get(`${url}${userId}/request`, {
+        const res = await AXIOS.get(`${url}request`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -29,9 +29,9 @@ export const getFollowRequestsAPI = async ({userId, token}) => {
     }   
 }
 
-export const getListFollowingAPI = async ({userId, token}) => {
+export const getListFollowingAPI = async ({token}) => {
     try {
-        const res = await AXIOS.get(`${url}${userId}/follower`,{
+        const res = await AXIOS.get(`${url}follower`,{
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -42,9 +42,9 @@ export const getListFollowingAPI = async ({userId, token}) => {
     }
 }
 
-export const postRequestFollowAPI = async ({myUserId, userId, token}) => {
+export const postRequestFollowAPI = async ({userIdRecipient, token}) => {
     try {
-        const res = await AXIOS.get(`${url}${myUserId}/${userId}`,{
+        const res = await AXIOS.get(`${url}send/${userIdRecipient}`,{
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -57,23 +57,22 @@ export const postRequestFollowAPI = async ({myUserId, userId, token}) => {
 }
 
 
-export const confirmRequestFollowAPI = async ({userId, token}) => {
+export const acceptRequestFollowAPI = async ({followId, token}) => {
     try {
-        const res = await AXIOS.get(`${url}user/${userId}`, {
+        const res = await AXIOS.get(`${url}accept/${followId}`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
         })
         return res.data
     } catch (error) {
-        console.log(error)
-        return
+        return error
     }
 }
 
-export const refuseRequestFollowAPI = async ({userId, token}) => {
+export const refuseRequestFollowAPI = async ({followId, token}) => {
     try {
-        const res = await AXIOS.get(`${url}delete/${userId}`, {
+        const res = await AXIOS.get(`${url}delete/${followId}`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
