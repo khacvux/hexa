@@ -67,16 +67,17 @@ function* postRequestFollow(data){
 
 function* acceptRequestFollow(data) {
     try {
-        console.log('CONFIRM REQUEST FOLLOW RUNNING...')
+        console.log('ACCEPT REQUEST FOLLOW RUNNING...')
         const res = yield call(acceptRequestFollowAPI, {
-            followId: data.payload.userId,
+            followId: data.payload.followId,
             token: data.payload.token
         })
         if(res.status == 'ok'){
-            console.log('CONFIRM REQUEST SUCCESS.')
+            console.log('ACCEPT REQUEST SUCCESS.')
             yield put(ACTION.acceptRequestFollowSuccess())
         }
     } catch (error) {
+        console.log(error)
         yield put(ACTION.acceptRequestFollowFailure(error))
     }
 }

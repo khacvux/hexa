@@ -5,7 +5,7 @@ const url = 'follow/'
 
 export const getListFollowerAPI = async ({token}) => {
     try {
-        const res = await AXIOS.get(`${url}following`, {
+        const res = await AXIOS.get(`${url}follower`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }

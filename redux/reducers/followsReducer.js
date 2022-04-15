@@ -17,7 +17,7 @@ export default followsReducer = ( state = initState, action) => {
         case TYPES.GET_LIST_FOLLOWER_SUCCESS:
             return {
                 ...state,
-                followers: [action.payload]
+                followers: action.payload
             }
 
         //GET LIST FOLLOWING

@@ -101,16 +101,16 @@ export default searchReducer = (state = initState, action ) => {
             }
 
 
-        case TYPES.CONFIRM_REQUEST_FOLLOW:
+        case TYPES.ACCEPT_REQUEST_FOLLOW:
             return {
                 ...state
             }
-        case TYPES.CONFIRM_REQUEST_FOLLOW_SUCCESS:
+        case TYPES.ACCEPT_REQUEST_FOLLOW_SUCCESS:
             return {
                 ...state,
                 profileUser: {...state.profileUser, follow: 1}
             }
-        case TYPES.CONFIRM_REQUEST_FOLLOW_FAILURE:
+        case TYPES.ACCEPT_REQUEST_FOLLOW_FAILURE:
             console.log(action.error)
             return {
                 ...state
@@ -125,7 +125,7 @@ export default searchReducer = (state = initState, action ) => {
                 ...state,
                 //
             }
-        case TYPES.CONFIRM_REQUEST_FOLLOW_FAILURE:
+        case TYPES.REFUSE_REQUEST_FOLLOW_FAILURE:
             console.log(action.error)
             return {
                 ...state,

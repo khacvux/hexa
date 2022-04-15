@@ -81,21 +81,21 @@ export const postRequestFollowFailure = error => {
 
 export const acceptRequestFollow = payload => {
     return {
-        type: TYPES.CONFIRM_REQUEST_FOLLOW,
+        type: TYPES.ACCEPT_REQUEST_FOLLOW,
         payload
     }
 }
 
 export const acceptRequestFollowSuccess = payload => {
     return {
-        type: TYPES.CONFIRM_REQUEST_FOLLOW_SUCCESS,
+        type: TYPES.ACCEPT_REQUEST_FOLLOW_SUCCESS,
         payload
     }
 }
 
 export const acceptRequestFollowFailure = error => {
     return {
-        type: TYPES.CONFIRM_REQUEST_FOLLOW_FAILURE,
+        type: TYPES.ACCEPT_REQUEST_FOLLOW_FAILURE,
         error
     }
 }

@@ -1,6 +1,6 @@
 import { AntDesign } from '@expo/vector-icons'
 import { useEffect } from 'react'
-import { View, Text, TouchableOpacity } from 'react-native'
+import { View, Text, TouchableOpacity, FlatList } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useDispatch, useSelector } from 'react-redux'
 import tw from 'twrnc'
@@ -17,10 +17,10 @@ const FollowersScreen = ({navigation}) => {
     const { userId, token } = useSelector(state => state.authReducer)
     const {followers} = useSelector(state => state.followsReducer)
 
-
+    
     
     useEffect(() => {
-        dispatch(getListFollower({userId, token}))
+        dispatch(getListFollower({token}))
     }, [])
     
 
@@ -38,14 +38,19 @@ const FollowersScreen = ({navigation}) => {
                 </View>
                 <View style={tw`flex flex-col w-full`}>
                     {
-                        // followers == 0 ? (
-                        //     <Empty />
-                        // ) : (
-                            <View>
-                                <Follower />
-                            </View>
+                        followers == 0 ? (
+                            <Empty />
+                        ) : (
+                            <FlatList 
+                                data={followers}
+                                renderItem={({item}) => <Follower item={item} />}
+                                keyExtractor={(item, index) => index.toString()}
+                            />
 
-                        // )
+                                // <Follower />
+                           
+
+                        )
                     }
                 </View>
             </View>

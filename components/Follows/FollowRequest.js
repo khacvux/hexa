@@ -9,7 +9,7 @@ const FollowRequest = ({item}) => {
     const { token } = useSelector(state => state.authReducer)
 
 
-    const handleAccept = () => dispatch(acceptRequestFollow({token, userId: item.userId}))
+    const handleAccept = () => dispatch(acceptRequestFollow({token, followId: item.followId}))
 
     return (
         <View style={tw`flex flex-row justify-between items-center py-2`}>
@@ -22,7 +22,7 @@ const FollowRequest = ({item}) => {
                     />
                     <View>
                         <Text style={tw`text-base font-semibold`}>{item.userName}</Text>
-                        <Text style={tw`text-xs font-light text-gray-600`}>@kieutrinh123</Text>
+                        <Text style={tw`text-xs font-light text-gray-600`}>{item.email}</Text>
                     </View>
                 </View>
                 <View style={tw`flex flex-row items-center`}>
