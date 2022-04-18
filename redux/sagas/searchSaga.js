@@ -50,8 +50,7 @@ function* postRequestFollow(data){
         console.log('POST REQUEST FOLLOW running...')
         yield put(buttonLoading(true))
         const res = yield call(postRequestFollowAPI, {
-            myUserId: data.payload.myUserId,
-            userId: data.payload.userId,
+            userIdRecipient: data.payload.userIdRecipient,
             token: data.payload.token
         })
         if(res.status = 'ok'){

@@ -1,7 +1,22 @@
+import { useState } from 'react'
 import { View, Text, Image, TouchableOpacity } from 'react-native'
+import { useDispatch, useSelector } from 'react-redux'
 import tw from 'twrnc'
+import { postRequestFollow } from '../../redux/actions/searchsAction'
 
 const Follower = ({item}) => {
+    
+    const dispatch = useDispatch()
+    const { token } = useSelector(state => state.authReducer)
+    const [followStatus, setFollowStatus] = useState('Follow')
+
+
+    const handlePostRequest = () => {
+        dispatch(postRequestFollow({userIdRecipient: item.userId, token}));
+        (followStatus == 'Follow') ? setFollowStatus('Waiting') : setFollowStatus('Follow')
+    }
+
+
   return (
     <View style={tw`flex flex-row items-center py-2 px-3`}>
         <View style={tw`w-full px-3 justify-between flex flex-row`}>
@@ -18,12 +33,22 @@ const Follower = ({item}) => {
             </View>
             <View style={tw`flex flex-row items-center`}>
                 <TouchableOpacity 
-                    style={tw` bg-[#5EC2EA] px-6 py-2 rounded-lg`}
+                    style={followStatus == 'Follow' ? tw` bg-[#5EC2EA] px-6 py-2 rounded-lg` : tw`border border-[#5EC2EA] px-6 py-2 rounded-lg`}
                     activeOpacity={.4}    
+                    onPress={handlePostRequest}
                 >
-                    <Text style={tw`text-white font-bold text-xs`}>
-                        Follow
-                    </Text>
+                    {
+                        followStatus == 'Follow' ? (
+                            <Text style={tw`text-white font-bold text-xs`}>
+                                {followStatus}
+                            </Text>
+                        ) : (
+                            <Text style={tw`text-[#5EC2EA] font-bold text-xs`}>
+                                {followStatus}
+                            </Text>
+                        )
+                    }
+                   
                 </TouchableOpacity>
             </View>
         </View>

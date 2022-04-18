@@ -13,7 +13,7 @@ const Contact = ({follow, followerId}) => {
     const { buttonLoading } = useSelector(state => state.onLoadingReducer)
 
     const handlePostRequest = () => {
-        dispatch(postRequestFollow({myUserId: userId, userId: followerId, token}))
+        dispatch(postRequestFollow({userIdRecipient: followerId, token}))
     }
 
 

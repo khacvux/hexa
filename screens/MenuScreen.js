@@ -38,6 +38,15 @@ const MenuScreen = ({navigation}) => {
                     <AntDesign name='right' />
                 </TouchableOpacity>
                 <TouchableOpacity 
+                    style={tw`w-full py-3 px-2 flex flex-row justify-between`}
+                    onPress={() => navigation.navigate('FollowingsStack')}
+                >
+                    <Text style={tw`text-base`}>
+                        Followings
+                    </Text>
+                    <AntDesign name='right' />
+                </TouchableOpacity>
+                <TouchableOpacity 
                     style={tw`w-full py-3 px-2 flex flex-row justify-between items-center`}
                     // onPress={}
                 >
