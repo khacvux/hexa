@@ -7,9 +7,11 @@ import { deletePostByIdAPI,
         uploadPostsAPI,
         commentPostAPI,
         getCommentsOfPostAPI,
-        deleteCommmentAPI
+        deleteCommmentAPI,
+        getPostsAPI
     } from '../../apis/postsAPIs'
 import { onLoadingGetListPost } from '../actions/onLoading'
+import { unauthorized } from '../actions/authAction'
 
 
 
@@ -36,6 +38,27 @@ function* addPost(data) {
     }
 }
 
+function* getPost(data) {
+    try {
+        yield put(ACTION.showLoadingGetPost())
+        console.log('GET POST RUNNING....')
+        const res = yield call(getPostsAPI, {
+            token: data.payload.token,
+            userId: data.payload.userId,
+        })
+
+        if(res.status == 200){
+            yield put(ACTION.getPostSuccess(res.data.data))
+        }else if (res == 403){
+            yield put(unauthorized(true))
+        }
+        
+    } catch (error) {
+        yield put(ACTION.consoleError(error))
+    }
+    yield put(ACTION.hideLoadingGetPost())
+}
+
 function* getListPostUser(data) {
     try {
         console.log('GET LIST POST USER RUNNING....')
@@ -45,7 +68,8 @@ function* getListPostUser(data) {
             userId: data.payload.userId,
         })
         if(res.status == 'ok') {
-            yield put(ACTION.getListPostUserSuccess(res.data))
+            // console.log(res.data,'API')
+            yield put(ACTION.getListPostUserSuccess(res.data))        
         }
     } catch (error) {
         yield put(ACTION.consoleError(error))
@@ -144,6 +168,7 @@ function* deleteComment(data) {
 }
 
 export default postsSaga = [
+    takeLeading(TYPES.GET_POST, getPost),
     takeLatest(TYPES.ADD_POST, addPost),
     takeLatest(TYPES.GET_LIST_POST_USER, getListPostUser),
     takeLatest(TYPES.FIND_POST_BY_ID, findPostsById),

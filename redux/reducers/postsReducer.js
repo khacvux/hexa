@@ -5,6 +5,7 @@ const initState = {
     post: {},
     listCommentOfPost: [],
     listPostUser: [],
+    loadingGetPosts: false,
     onAddingPosts: false,
     onAddingSuccess: false,
     onAddingFail: false,
@@ -20,7 +21,19 @@ export default postsReducer = (state = initState, action) => {
         case TYPES.GET_POST_SUCCESS:
             return {
                 ...state,
-                posts: posts.concat(action.payload)
+                posts: action.payload
+            }
+
+        case TYPES.SHOW_LOADING_GET_POST:
+            return {
+                ...state,
+                loadingGetPosts: true
+            }
+
+        case TYPES.HIDE_LOADING_GET_POST:
+            return {
+                ...state,
+                loadingGetPosts: false
             }
 
         case TYPES.ADD_POST: 
@@ -132,6 +145,9 @@ export default postsReducer = (state = initState, action) => {
                 ...state,
                 error: action.error,
             }
+
+
+
         default:
             return state
     }

@@ -18,7 +18,10 @@ import Paginator from './Paginator';
 
 
 
-const Feeds = (props) => {
+const Feeds = ({post}) => {
+
+
+
     useDeviceContext(tw);
     const {width: SCREEN_WIDTH} = Dimensions.get('window');
     // frame size 3:2
@@ -27,8 +30,8 @@ const Feeds = (props) => {
 
     const refRBSheet = useRef();
     const navigation = useNavigation();
-    const { post } = props;
-    const [isHeart, setHeart] = useState(post.item.liked);
+
+    const [isHeart, setHeart] = useState();
     const [sound, setSound] = useState();
 
     const scrollX = useRef(new Animated.Value(0)).current;
@@ -78,7 +81,7 @@ const Feeds = (props) => {
                     onActivated={ handlePressHeart }   
                 >
                     <FlatList
-                        data={post.item.images}
+                        data={post.item.postsImageList}
                         renderItem={ ({item}) => {
                             return <ImageItem image={item} />
                         }}
@@ -110,7 +113,7 @@ const Feeds = (props) => {
                         <Ionicons name="heart"
                             style={isHeart ? tw`text-2xl text-[#ED4366]` : tw`text-2xl text-white` }
                         />
-                        <Text style={isHeart ? tw`text-white` : tw`text-white`}>{post.item.heart}</Text>
+                        <Text style={tw`text-white`}>{post.item.totalFeel}</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                         activeOpacity={.7}
@@ -119,6 +122,7 @@ const Feeds = (props) => {
                         <Ionicons name="chatbubble-ellipses" 
                             style={tw`text-2xl text-[#FEFEFD] my-2`}
                         />
+                        <Text style={tw`text-white text-center`}>{post.item.totalComment}</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                         activeOpacity={.7}
@@ -137,35 +141,35 @@ const Feeds = (props) => {
                 <View style={tw`flex flex-row`}>
                     <TouchableOpacity
                         onPress={() => navigation.navigate('ProfileStack')}
-                        style={tw`flex flex-row items-center px-4`}
+                        style={tw`flex flex-row items-center px-4 mb-3`}
                     >
-                        <Image source={{uri: post.item.avt}} 
+                        <Image source={ post.item.postsUserList[0].image ? {uri: post.item.postsUserList[0].image} : require('../../assets/images/defaultAvatar.png')} 
                             style={tw`w-9 h-9 rounded-full mr-2`}
                         />
                         <View>
-                            <Text style={tw`font-bold text-white text-base`}>{post.item.name}</Text>  
+                            <Text style={tw`font-bold text-white text-base`}>{post.item.postsUserList[0].name}</Text>  
                             <Text style={[{fontSize: 11 }, tw`text-white mb-1 font-light`]}>3 munites ago</Text>
                         </View>
                     </TouchableOpacity>
                 </View>
                 <TouchableOpacity
-                    onPress={() => navigation.navigate('DetailFeedsStack', {
-                        post: post.item
-                    })}
+                    // onPress={() => navigation.navigate('DetailFeedsStack', {
+                    //     post: post.item
+                    // })}
                 >
-                    <Text style={tw`text-white my-3 px-5 w-95/100`}
+                    <Text style={tw`text-white px-5 w-95/100`}
                         numberOfLines={3}
                     >
-                        {post.item.body}
+                        {post.item.caption}
                     </Text>
                 </TouchableOpacity>
-
+{/* 
                 {(post.item.images.length > 1) ? (
                     <Paginator data={post.item.images} scrollX={scrollX} />
                 ) : (
                     <></>
                 )}
-               
+                */}
             </LinearGradient>
 
             <RBSheet

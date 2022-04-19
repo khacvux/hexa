@@ -1,24 +1,29 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { FlatList, Animated, View, Platform } from 'react-native'
+import { FlatList, Animated, View, Platform, Alert } from 'react-native'
 import tw, { useDeviceContext } from 'twrnc'
 import Feeds from '../components/Home/Feeds';
 import Header from '../components/Header/Header';
 import SafeArea from '../components/SafeArea';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import HiAnimation from '../components/LottieAnimation/HiAnimation';
-// import SkeletonFeeds from '../components/Home/SkeletonFeeds';
+import { getPost } from '../redux/actions/postsAction';
+import { signOut, unauthorized } from '../redux/actions/authAction';
+import SkeletonFeeds from '../components/Skeleton/FeedsSkeleton'
 
 
 
 const HomeScreen = () => {
 
-    const { firstName, numberOfFollowing } = useSelector(state => state.authReducer)
-
     useDeviceContext(tw)
+
+
+    const { firstName, numberOfFollowing, token, userId, unauth } = useSelector(state => state.authReducer)
+    const { posts, loadingGetPosts } = useSelector(state => state.postsReducer)
+    const dispatch = useDispatch()
+
     const CONTAINER_HEIGHT = 45;
     const scrollY = useRef(new Animated.Value(0)).current;
     const offsetAnim = useRef(new Animated.Value(0)).current;
-
     const clampedScroll = Animated.diffClamp(
         Animated.add(
             scrollY.interpolate({
@@ -35,6 +40,9 @@ const HomeScreen = () => {
     var _clampedScrollValue = 0;
     var _offsetValue = 0;
     var _scrollValue = 0;
+    var scrollEndTimer = null;
+
+
 
     useEffect(() => {
         scrollY.addListener(({value}) => {
@@ -49,8 +57,13 @@ const HomeScreen = () => {
             _offsetValue = value;
         })
     }, []);
+
+    if(numberOfFollowing){
+        useEffect(() => {
+            dispatch(getPost({token, userId}))
+        }, [])
+    }
     
-    var scrollEndTimer = null;
     const onMomentumScrollBegin = () => {
         clearTimeout(scrollEndTimer);
     };
@@ -74,10 +87,24 @@ const HomeScreen = () => {
         extrapolate: 'clamp'
     })
 
+    if(unauth) {
+        return Alert.alert(
+            "Session expired",
+            "Please log in again",
+            [{
+                text: "Ok",
+                onPress: () => {
+                    dispatch(signOut())
+                    dispatch(unauthorized(false))
+                    return;
+                },
+              }]
+        )
+    }
     
 
     return (
-        <View style={[tw`bg-white h-full`]}>
+        <View style={[tw`bg-gray-100 h-full`]}>
             <View style={tw`h-full overflow-hidden flex`}>
                 <Animated.View style={[tw`absolute top-0 left-0 right-0 z-50`,{height: CONTAINER_HEIGHT}, {transform: [{translateY: headerTranslate}]}]}>
                     <Header />
@@ -85,25 +112,29 @@ const HomeScreen = () => {
 
                 {
                     numberOfFollowing ? (
-                        <></>
-                        // <Animated.FlatList
-                        //     data={posts}
-                        //     renderItem={(post) => {
-                        //         return <Feeds post={post} />
-                        //     }}
-                        //     keyExtractor={post => post.postId}
-                        //     contentContainerStyle={[tw`py-2 pt-[${CONTAINER_HEIGHT}]`]}
-                        //     showsHorizontalScrollIndicator={false}
-                        //     showsVerticalScrollIndicator={false}
-                        //     onScroll={Animated.event(
-                        //         [{nativeEvent: {contentOffset: {y: scrollY}}}],
-                        //         {useNativeDriver: true}
-                        //     )}
-                        //     onMomentumScrollBegin={onMomentumScrollBegin}
-                        //     onMomentumScrollEnd={onMomentumScrollEnd}
-                        //     onScrollEndDrag={onScrollEndDrag}
-                        //     scrollEventThrottle={1}
-                        // /> 
+                        loadingGetPosts ? (
+                            <SkeletonFeeds />
+                        ) : (
+                            <Animated.FlatList
+                                data={posts}
+                                renderItem={(post) => {
+                                    return <Feeds post={post} />
+                                }}
+                                keyExtractor={post => post.postsId}
+                                contentContainerStyle={[tw`py-2 pt-[${CONTAINER_HEIGHT}]`]}
+                                showsHorizontalScrollIndicator={false}
+                                showsVerticalScrollIndicator={false}
+                                onScroll={Animated.event(
+                                    [{nativeEvent: {contentOffset: {y: scrollY}}}],
+                                    {useNativeDriver: true}
+                                )}
+                                onMomentumScrollBegin={onMomentumScrollBegin}
+                                onMomentumScrollEnd={onMomentumScrollEnd}
+                                onScrollEndDrag={onScrollEndDrag}
+                                scrollEventThrottle={1}
+                            /> 
+
+                        )
                     ) : (
                         <View style={tw`bg-gray-50`}>
                             <HiAnimation 
@@ -114,7 +145,6 @@ const HomeScreen = () => {
                     )
                 }
 
-                {/* <SkeletonFeeds /> */}
             </View>
         </View>
     )

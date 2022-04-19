@@ -1,12 +1,17 @@
-import { View } from 'react-native'
+import { View, Dimensions } from 'react-native'
 import tw from 'twrnc'
 import Skeleton from './Skeleton'
 
 
 
 const SkeletonFeeds = () => {
+    const {width: SCREEN_WIDTH} = Dimensions.get('window');
+    // frame size 3:2
+    const FRAMESIZE_W = SCREEN_WIDTH;
+    const FRAMESIZE_H = SCREEN_WIDTH/2*3;
+
   return (
-    <View style={tw`w-full h-150 overflow-hidden flex bg-[#F5F7FA]`}>
+    <View style={[tw` overflow-hidden flex bg-[#F5F7FA]`,  { width: FRAMESIZE_W, height: FRAMESIZE_H}]}>
         <View style={tw`absolute right-3 top-40`}>
             <Skeleton w={50} h={150} rounded={2} bg={'#8BC2D040'} />
         </View>

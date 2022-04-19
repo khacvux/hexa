@@ -144,3 +144,10 @@ export const signOut = () => {
         payload: {},
     }
 }
+
+export const unauthorized = payload => {
+    return {
+        type: TYPES.UNAUTHORIZED,
+        payload: payload
+    }
+}

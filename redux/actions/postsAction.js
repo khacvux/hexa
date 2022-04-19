@@ -16,7 +16,19 @@ export const getPostSuccess = (data) => {
     }
 }
 
+export const showLoadingGetPost = () => {
+    return {
+        type: TYPES.SHOW_LOADING_GET_POST,
+        payload: true
+    }
+}
 
+export const hideLoadingGetPost = () => {
+    return {
+        type: TYPES.HIDE_LOADING_GET_POST,
+        payload: false
+    }
+}
 
 export const addPost = (data) => {
     return {
@@ -153,3 +165,4 @@ export const consoleError = (error) => {
         error,
     }
 }
+

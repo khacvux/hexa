@@ -18,6 +18,7 @@ const initState = {
     numberOfPosts: null,
     numberOfFollower: null,
     numberOfFollowing: null,
+    unauth: false,
 
 }
 
@@ -168,7 +169,12 @@ export default authReducer = ( state = initState, action ) => {
                 ...state
             }
 
-            
+        
+        case TYPES.UNAUTHORIZED:
+            return {
+                ...state,
+                unauth: action.payload
+            }
 
         //DEFAULT
         default:

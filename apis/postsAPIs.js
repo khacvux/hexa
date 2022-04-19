@@ -10,10 +10,10 @@ export const getPostsAPI = async ({token, userId}) => {
                 'Authorization': `Bearer ${token}`,
             }
         })    
-        return res.data  
+        return res 
     } catch (error) {
         console.log(error)
-        return error
+        return 403;
     }
 }
 
