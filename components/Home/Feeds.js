@@ -37,6 +37,8 @@ const Feeds = ({post}) => {
     const scrollX = useRef(new Animated.Value(0)).current;
     const [currentIndex, setCurrentIndex] = useState(0);
     const slidesRef = useRef(null);
+    const date = new Date( Date.parse(post.item.dateCreate));
+
 
     const viewableItemsChanged = useRef(({viewableItems}) => {
         setCurrentIndex(viewableItems[0].index);
@@ -148,7 +150,7 @@ const Feeds = ({post}) => {
                         />
                         <View>
                             <Text style={tw`font-bold text-white text-base`}>{post.item.postsUserList[0].name}</Text>  
-                            <Text style={[{fontSize: 11 }, tw`text-white mb-1 font-light`]}>3 munites ago</Text>
+                            <Text style={[{fontSize: 11 }, tw`text-gray-200 mb-1 mx-1 font-light`]}>{date.getTimezoneOffset()}</Text>
                         </View>
                     </TouchableOpacity>
                 </View>

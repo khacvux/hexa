@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { FlatList, Animated, View, Platform, Alert } from 'react-native'
+import { FlatList, Animated, View, Platform, Alert, ScrollView } from 'react-native'
 import tw, { useDeviceContext } from 'twrnc'
 import Feeds from '../components/Home/Feeds';
 import Header from '../components/Header/Header';
@@ -17,7 +17,7 @@ const HomeScreen = () => {
     useDeviceContext(tw)
 
 
-    const { firstName, numberOfFollowing, token, userId, unauth } = useSelector(state => state.authReducer)
+    const { firstName, numberOfFollowing, token, userId, unauth } = useRef(useSelector(state => state.authReducer)).current
     const { posts, loadingGetPosts } = useSelector(state => state.postsReducer)
     const dispatch = useDispatch()
 
@@ -41,7 +41,6 @@ const HomeScreen = () => {
     var _offsetValue = 0;
     var _scrollValue = 0;
     var scrollEndTimer = null;
-
 
 
     useEffect(() => {
@@ -87,33 +86,36 @@ const HomeScreen = () => {
         extrapolate: 'clamp'
     })
 
-    if(unauth) {
-        return Alert.alert(
-            "Session expired",
-            "Please log in again",
-            [{
-                text: "Ok",
-                onPress: () => {
-                    dispatch(signOut())
-                    dispatch(unauthorized(false))
-                    return;
-                },
-              }]
-        )
-    }
     
 
     return (
         <View style={[tw`bg-gray-100 h-full`]}>
+            {
+                unauth ? (
+                    Alert.alert(
+                        "Session expired",
+                        "Please log in again",
+                        [{
+                            text: "Ok",
+                            onPress: () => {
+                                dispatch(signOut())
+                                dispatch(unauthorized(false))
+                            },
+                          }]
+                    )
+                ) : <></>
+            }
             <View style={tw`h-full overflow-hidden flex`}>
                 <Animated.View style={[tw`absolute top-0 left-0 right-0 z-50`,{height: CONTAINER_HEIGHT}, {transform: [{translateY: headerTranslate}]}]}>
                     <Header />
                 </Animated.View>
-
                 {
                     numberOfFollowing ? (
                         loadingGetPosts ? (
-                            <SkeletonFeeds />
+                            <ScrollView>
+                                <SkeletonFeeds />
+                                <SkeletonFeeds />
+                            </ScrollView>
                         ) : (
                             <Animated.FlatList
                                 data={posts}
