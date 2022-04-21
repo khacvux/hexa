@@ -69,12 +69,12 @@ export default postsReducer = (state = initState, action) => {
                 ...state,
             }
 
-        case TYPES.LIKE_POST: 
+        case TYPES.REACT_POST: 
             return {
                 ...state,
             }
 
-        case TYPES.LIKE_POST_SUCCESS:
+        case TYPES.REACT_POST_SUCCESS:
             return {
                 ...state
             }

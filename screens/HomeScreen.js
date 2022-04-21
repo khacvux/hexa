@@ -60,6 +60,19 @@ const HomeScreen = () => {
     if(numberOfFollowing){
         useEffect(() => {
             dispatch(getPost({token, userId}))
+            if(unauth){
+                Alert.alert(
+                    "Session expired",
+                    "Please log in again",
+                    [{
+                        text: "Ok",
+                        onPress: () => {
+                            dispatch(signOut())
+                            dispatch(unauthorized(false))
+                        },
+                      }]
+                )
+            }
         }, [])
     }
     
@@ -90,21 +103,6 @@ const HomeScreen = () => {
 
     return (
         <View style={[tw`bg-gray-100 h-full`]}>
-            {
-                unauth ? (
-                    Alert.alert(
-                        "Session expired",
-                        "Please log in again",
-                        [{
-                            text: "Ok",
-                            onPress: () => {
-                                dispatch(signOut())
-                                dispatch(unauthorized(false))
-                            },
-                          }]
-                    )
-                ) : <></>
-            }
             <View style={tw`h-full overflow-hidden flex`}>
                 <Animated.View style={[tw`absolute top-0 left-0 right-0 z-50`,{height: CONTAINER_HEIGHT}, {transform: [{translateY: headerTranslate}]}]}>
                     <Header />
@@ -120,7 +118,7 @@ const HomeScreen = () => {
                             <Animated.FlatList
                                 data={posts}
                                 renderItem={(post) => {
-                                    return <Feeds post={post} />
+                                    return <Feeds post={post} token={token} userId={userId} />
                                 }}
                                 keyExtractor={post => post.postsId}
                                 contentContainerStyle={[tw`py-2 pt-[${CONTAINER_HEIGHT}]`]}

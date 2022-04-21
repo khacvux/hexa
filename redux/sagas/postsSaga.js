@@ -8,7 +8,8 @@ import { deletePostByIdAPI,
         commentPostAPI,
         getCommentsOfPostAPI,
         deleteCommmentAPI,
-        getPostsAPI
+        getPostsAPI,
+        reactPostAPI
     } from '../../apis/postsAPIs'
 import { onLoadingGetListPost } from '../actions/onLoading'
 import { unauthorized } from '../actions/authAction'
@@ -107,6 +108,23 @@ function* deletePostById(data) {
     }
 }
 
+function* reactPost(data) {
+    try {
+        console.log('REACTING...')
+        const res = yield call(reactPostAPI, {
+            token: data.payload.token,
+            userId: data.payload.userId,
+            tusId: data.payload.tusId,
+        })
+        if(res.status == 'ok'){
+            console.log('REACT SUCCESS.')
+            yield put(ACTION.reactPostSuccess())
+        }
+    } catch (error) {
+        yield put(ACTION.consoleError(error))
+    }
+}
+
 function* commentPost(data) {
     try {
         console.log('COMMENT POST RUNNING..')
@@ -168,6 +186,7 @@ function* deleteComment(data) {
 }
 
 export default postsSaga = [
+    takeEvery(TYPES.REACT_POST, reactPost),
     takeLeading(TYPES.GET_POST, getPost),
     takeLatest(TYPES.ADD_POST, addPost),
     takeLatest(TYPES.GET_LIST_POST_USER, getListPostUser),

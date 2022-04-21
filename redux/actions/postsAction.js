@@ -58,16 +58,16 @@ export const addPostFail = payload => {
     }
 }
 
-export const likePost = payload => {
+export const reactPost = payload => {
     return {
-        type: TYPES.LIKE_POST,
+        type: TYPES.REACT_POST,
         payload
     }
 }
 
-export const likePostSuccess = payload => {
+export const reactPostSuccess = payload => {
     return {
-        type: TYPES.LIKE_POST_SUCCESS,
+        type: TYPES.REACT_POST_SUCCESS,
         payload
     }
 }

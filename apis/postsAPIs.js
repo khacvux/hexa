@@ -17,9 +17,12 @@ export const getPostsAPI = async ({token, userId}) => {
     }
 }
 
-export const likePostAPI = async ({token, data}) => {
+export const reactPostAPI = async ({token, tusId, userId}) => {
     try {
-        const res = await AXIOS.post(`${url}/like`, data, {
+        const res = await AXIOS.post(`${url}/like`, {
+            tusId,
+            userId,
+        }, {
             headers: {
                 'Authorization': `Bearer ${token}`,
             }

@@ -14,13 +14,16 @@ import Comments from '../Comments/Comments';
 import WriteComment from '../Comments/WriteComment';
 import ImageItem from './ImageItem';
 import Paginator from './Paginator';
+import { useDispatch } from 'react-redux';
+import { getListCommentOfPost, reactPost } from '../../redux/actions/postsAction';
+import ListCommentOfPost from '../Comments/ListCommentOfPost';
 
 
 
 
-const Feeds = ({post}) => {
+const Feeds = ({post, token, userId}) => {
 
-
+    const dispatch = useDispatch();
 
     useDeviceContext(tw);
     const {width: SCREEN_WIDTH} = Dimensions.get('window');
@@ -31,7 +34,8 @@ const Feeds = ({post}) => {
     const refRBSheet = useRef();
     const navigation = useNavigation();
 
-    const [isHeart, setHeart] = useState();
+    const [isHeart, setHeart] = useState(post.item.feel);
+    const [isTotalFeel, setTotalFeel] = useState(post.item.totalFeel)
     const [sound, setSound] = useState();
 
     const scrollX = useRef(new Animated.Value(0)).current;
@@ -56,7 +60,8 @@ const Feeds = ({post}) => {
         setSound(sound);
     
         // console.log('Playing Sound');
-        await sound.playAsync(); }
+        await sound.playAsync(); 
+    }
     
       useEffect(() => {
         return sound
@@ -67,9 +72,23 @@ const Feeds = ({post}) => {
       }, [sound]);
     
     const handlePressHeart = () => {
-        setHeart(!isHeart);
         playSound()
+        setHeart(!isHeart);
+        dispatch(reactPost({
+            token,
+            tusId: post.item.postsId,
+            userId
+        }))
+        isHeart ? setTotalFeel(isTotalFeel - 1) : setTotalFeel(isTotalFeel + 1)
     }    
+
+    const handlePressComment = () => {
+        refRBSheet.current.open()
+        dispatch(getListCommentOfPost({
+            postsId: post.item.postsId,
+            token,
+        }))
+    }
 
     return (
      
@@ -115,11 +134,11 @@ const Feeds = ({post}) => {
                         <Ionicons name="heart"
                             style={isHeart ? tw`text-2xl text-[#ED4366]` : tw`text-2xl text-white` }
                         />
-                        <Text style={tw`text-white`}>{post.item.totalFeel}</Text>
+                        <Text style={tw`text-white`}>{isTotalFeel}</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                         activeOpacity={.7}
-                        onPress={() => refRBSheet.current.open()}
+                        onPress={handlePressComment}
                     >
                         <Ionicons name="chatbubble-ellipses" 
                             style={tw`text-2xl text-[#FEFEFD] my-2`}
@@ -150,7 +169,7 @@ const Feeds = ({post}) => {
                         />
                         <View>
                             <Text style={tw`font-bold text-white text-base`}>{post.item.postsUserList[0].name}</Text>  
-                            <Text style={[{fontSize: 11 }, tw`text-gray-200 mb-1 mx-1 font-light`]}>{date.getTimezoneOffset()}</Text>
+                            <Text style={[{fontSize: 11 }, tw`text-gray-200 mb-1 mx-1 font-light`]}>{date.toLocaleDateString()}</Text>
                         </View>
                     </TouchableOpacity>
                 </View>
@@ -185,16 +204,12 @@ const Feeds = ({post}) => {
                     container: tw`bg-gray-100 rounded-t-lg flex flex-col`
                 }}
             >   
-                <FlatList 
-                    contentContainerStyle={tw`flex-1 flex flex-col pt-3 px-4 w-full`}
-                    data={post.item.comments}
-                    renderItem={(comment) => {
-                        return <Comments
-                            comment={comment}
-                        />
-                    }}
-                    keyExtractor={comment => comment.idComment}
-                />
+                <View
+                    style={tw`flex-1 flex flex-col pt-3 px-4 w-full`}
+                >
+                    <ListCommentOfPost />
+                </View>
+                
                 <View style={tw`mb-2 w-full`} >
                     <WriteComment />    
 
