@@ -63,7 +63,7 @@ const DetailFeedsScreen = ({route}) => {
     }).current;
     const viewConfig = useRef({ viewAreaCoveragePercentThreshold: 50 }).current;
 
-    // console.log(listCommentOfPost)
+    // console.log(post.postsImageList, 'post image list')
 
     return (
         <SafeAreaView edges={['bottom']} >
@@ -88,8 +88,8 @@ const DetailFeedsScreen = ({route}) => {
                     <View style={tw`h-140 w-full bg-gray-200`}>
                         <FlatList
                             data={post.postsImageList}
-                            renderItem={ ({item}) => <ImageItem item={item} /> }
-                            keyExtractor={item => item.postsImageId}
+                            renderItem={ (image) => <ImageItem image={image} /> }
+                            keyExtractor={image => image.postsImageId}
                             pagingEnabled
                             horizontal
                             showsHorizontalScrollIndicator={false}

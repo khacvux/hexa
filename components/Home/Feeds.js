@@ -90,6 +90,13 @@ const Feeds = ({post, token, userId}) => {
         }))
     }
 
+    const handleGetProfile = () => {
+        navigation.navigate('ProfileStack', {
+            myUserId: userId,
+            userId: post.item.postsUserList[0].userId 
+        })
+    }
+
     return (
      
         <View
@@ -161,7 +168,7 @@ const Feeds = ({post, token, userId}) => {
             >   
                 <View style={tw`flex flex-row`}>
                     <TouchableOpacity
-                        onPress={() => navigation.navigate('ProfileStack')}
+                        onPress={handleGetProfile}
                         style={tw`flex flex-row items-center px-4 mb-3`}
                     >
                         <Image source={ post.item.postsUserList[0].image ? {uri: post.item.postsUserList[0].image} : require('../../assets/images/defaultAvatar.png')} 
