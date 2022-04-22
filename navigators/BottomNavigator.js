@@ -8,13 +8,15 @@ import SvgHomeOutline from '../assets/icons/home-outline.svg'
 import MyProfileScreen from '../screens/MyProfileScreen';
 import NotificationScreen from '../screens/NotificationScreen';
 import HomeScreen from '../screens/HomeScreen';
-import { View } from 'react-native';
+import { View, Alert } from 'react-native';
 import SearchScreen from '../screens/SearchScreen';
 import MusicScreen from '../screens/MusicScreen';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Player from '../components/Player/Player';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { signOut, unauthorized } from '../redux/actions/authAction';
+
 
 
 
@@ -24,7 +26,23 @@ const Tab = createBottomTabNavigator();
 const BottomNavigator = () => {
 
     const { playerBar } = useSelector(state => state.songReducer)
+    const { unauth } = useSelector(state => state.authReducer)
     const [isTabBarHeight, setTabBarHeight] = useState()
+    const dispatch = useDispatch();
+
+    if(unauth){
+        Alert.alert(
+            "Session expired",
+            "Please log in again",
+            [{
+                text: "Ok",
+                onPress: () => {
+                    dispatch(signOut())
+                    dispatch(unauthorized(false))
+                },
+              }]
+        )
+    }
 
     return (
         <SafeAreaView style={tw`h-full w-full bg-white relative`} edges={['top']}>

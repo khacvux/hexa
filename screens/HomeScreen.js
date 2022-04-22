@@ -7,7 +7,6 @@ import SafeArea from '../components/SafeArea';
 import { useDispatch, useSelector } from 'react-redux';
 import HiAnimation from '../components/LottieAnimation/HiAnimation';
 import { getPost } from '../redux/actions/postsAction';
-import { signOut, unauthorized } from '../redux/actions/authAction';
 import SkeletonFeeds from '../components/Skeleton/FeedsSkeleton'
 
 
@@ -60,19 +59,6 @@ const HomeScreen = () => {
     if(numberOfFollowing){
         useEffect(() => {
             dispatch(getPost({token, userId}))
-            if(unauth){
-                Alert.alert(
-                    "Session expired",
-                    "Please log in again",
-                    [{
-                        text: "Ok",
-                        onPress: () => {
-                            dispatch(signOut())
-                            dispatch(unauthorized(false))
-                        },
-                      }]
-                )
-            }
         }, [])
     }
     
@@ -110,7 +96,9 @@ const HomeScreen = () => {
                 {
                     numberOfFollowing ? (
                         loadingGetPosts ? (
-                            <ScrollView>
+                            <ScrollView
+                                showsVerticalScrollIndicator={false}
+                            >
                                 <SkeletonFeeds />
                                 <SkeletonFeeds />
                             </ScrollView>

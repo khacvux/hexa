@@ -1,9 +1,14 @@
+import { useNavigation } from '@react-navigation/native'
 import React from 'react'
 import { View, Text, Image, TouchableOpacity } from 'react-native'
+import { useSelector } from 'react-redux'
 import tw from 'twrnc'
 
-const Comments = ({item, setIdCommentSelected, handleVisibleDeleteModal}) => {
+const Comments = ({item, setIdCommentSelected, handleVisibleDeleteModal, refRBSheet}) => {
+
+    const navigation = useNavigation()
     const date = new Date( Date.parse(item.dateCreate));
+    const { userId } = useSelector(state => state.authReducer)
 
     const handleLongPress = () => {
         if(setIdCommentSelected){
@@ -12,14 +17,28 @@ const Comments = ({item, setIdCommentSelected, handleVisibleDeleteModal}) => {
         }
     }
 
+    const handleGetProfile = () => {
+        if(refRBSheet){
+            refRBSheet.current.close()
+        }
+        navigation.navigate('ProfileStack', {
+            myUserId: userId,
+            userId: item.userId  
+        })
+    }
+
     return (
         <TouchableOpacity style={tw`w-full flex flex-row my-2`}
             onLongPress={handleLongPress}
         >
-            <Image
-                source={item.image ? {uri: item.image} : require('../../assets/images/defaultAvatar.png')}
-                style={tw`w-10 h-10 rounded-full mr-2 bg-gray-200`}
-            />
+            <TouchableOpacity
+                onPress={handleGetProfile}
+            >
+                <Image
+                    source={item.image ? {uri: item.image} : require('../../assets/images/defaultAvatar.png')}
+                    style={tw`w-10 h-10 rounded-full mr-2 bg-gray-200`}
+                />
+            </TouchableOpacity>
             <View style={tw`w-full`}>
                 <View style={tw`flex flex-row items-center`}>
                     <Text style={tw`font-bold my-1`}>{item.name}</Text>

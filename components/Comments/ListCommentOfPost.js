@@ -6,7 +6,7 @@ import Comments from './Comments'
 
 
 
-const ListCommentOfPost = () => {
+const ListCommentOfPost = ({refRBSheet}) => {
     const { listCommentOfPost } = useSelector(state => state.postsReducer)
 
     return (
@@ -16,6 +16,7 @@ const ListCommentOfPost = () => {
             renderItem={({item}) => {
                 return <Comments
                     item={item}
+                    refRBSheet={refRBSheet}
                 />
             }}
             keyExtractor={comment => comment.postsCommentId}

@@ -93,7 +93,7 @@ const Feeds = ({post, token, userId}) => {
     return (
      
         <View
-            style={[tw`mb-2 overflow-hidden flex bg-gray-100 dark:bg-black`, { width: FRAMESIZE_W, height: FRAMESIZE_H}]}
+            style={[tw`mb-2 overflow-hidden flex bg-gray-100`, { width: FRAMESIZE_W, height: FRAMESIZE_H}]}
         >
             <View style={tw`w-full h-full `}>
                 <TapGestureHandler 
@@ -205,14 +205,13 @@ const Feeds = ({post, token, userId}) => {
                 }}
             >   
                 <View
-                    style={tw`flex-1 flex flex-col pt-3 px-4 w-full`}
+                    style={tw`flex-1 flex flex-col w-full`}
                 >
-                    <ListCommentOfPost />
+                    <ListCommentOfPost refRBSheet={refRBSheet} />
                 </View>
                 
                 <View style={tw`mb-2 w-full`} >
-                    <WriteComment />    
-
+                    <WriteComment postsId={post.item.postsId} />    
                 </View>
             </RBSheet>
         </View>
