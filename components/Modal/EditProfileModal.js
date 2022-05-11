@@ -64,7 +64,6 @@ const EditProfileModal = ({
         if(isFirstName != firstName || isLastName != lastName || isAvatar != avatar){
             if(isAvatar != avatar){
                 let formData = new FormData()
-                formData.append('userId', userId)
                 formData.append('file', isAvatar)
                 showConfirmDialog({formData})
             }else{

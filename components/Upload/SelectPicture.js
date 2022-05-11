@@ -3,6 +3,7 @@ import { useState } from 'react';
 import tw from 'twrnc';
 import { useNavigation } from '@react-navigation/native';
 import * as ImagePicker from 'expo-image-picker';
+import * as DocumentPicker from 'expo-document-picker'
 
 
 import { EvilIcons, MaterialIcons } from '@expo/vector-icons';
@@ -39,16 +40,16 @@ const SelectPicture = () => {
   };
 
 
-
   return (
-    <SafeAreaView style={tw`bg-white h-full flex items-center relative`}>
+    <SafeAreaView style={tw`bg-white h-full flex items-center relative `}>
       <View style={[tw`flex items-center justify-center w-full h-full overflow-hidden`]}>
         {
           image ? (
-            <View style={[tw`w-full items-center`]}>
+            <View style={[tw`w-full h-full items-center`]}>
               <Image 
-                source={{ uri: image.uri}} 
+                source={{ uri: image.uri }} 
                 style={tw`w-full h-full`}
+                resizeMode='cover'
               />
             </View>
           ) : (

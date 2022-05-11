@@ -132,7 +132,6 @@ function* commentPost(data) {
             token: data.payload.token,
             data: {
                 comment: data.payload.comment,
-                userId: data.payload.userId,
                 tusId: data.payload.postId
             },
         })
@@ -145,7 +144,7 @@ function* commentPost(data) {
                 name: data.payload.name,
                 userId: data.payload.userId,
                 postsId: data.payload.postId,
-                postsCommentId: null
+                postsCommentId: Math.random()
             }))
         }
     } catch (error) {

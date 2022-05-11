@@ -13,11 +13,13 @@ import DetailFeedsScreen from '../screens/DetailFeedsScreen';
 import BottomNavigator from './BottomNavigator';
 import LoginScreen from '../screens/LoginScreen';
 import UpLoadPictureScreen from '../screens/UpLoadPictureScreen';
-import ListTrackScreen from '../screens/ListTrackScreen';
 import { useSelector } from 'react-redux';
 import FollowRequestsScreen from '../screens/FollowRequestsScreen';
 import FollowersScreen from '../screens/FollowersScreen'
 import FollowingsScreen from '../screens/FollowingsScreen';
+import SongsPostScreen from '../screens/SongsPostScreen'
+import MusicScreen from '../screens/MusicScreen';
+import PlaylistScreen from '../screens/PlaylistScreen';
 
 
 const Stack = createNativeStackNavigator();
@@ -28,7 +30,6 @@ const StackNavigator = () => {
 
 
     return (
-        
         <Stack.Navigator
             screenOptions={{
                 headerShown: false,
@@ -47,10 +48,11 @@ const StackNavigator = () => {
                         <Stack.Screen name="ChatsStack" component={ChatsScreen} />
                         <Stack.Screen name="SelectFilesStack" component={SelectFilesScreen} />
                         <Stack.Screen name="UpLoadPictureStack" component={UpLoadPictureScreen} />
-                        <Stack.Screen name="ListTrackStack" component={ListTrackScreen} />
                         <Stack.Screen name="FollowRequestsStack" component={FollowRequestsScreen} />
                         <Stack.Screen name="FollowersStack" component={FollowersScreen} />
                         <Stack.Screen name="FollowingsStack" component={FollowingsScreen} />
+                        <Stack.Screen name="PlaylistStack" component={PlaylistScreen} />
+                        <Stack.Screen name="SongsPostStack" component={SongsPostScreen} />
                     </>
                 ) : (
                     <Stack.Screen name="LoginStack" component={LoginScreen} />
@@ -61,5 +63,24 @@ const StackNavigator = () => {
         </Stack.Navigator>
     )
 }
+
+// const MusicStackNavigator = ({setTabBarHeight}) => {
+//     return (
+//         <Stack.Navigator
+//             screenOptions={{
+//                 headerShown: false,
+//             }}
+//             >
+//             <Stack.Screen name="MusicStack"
+//                 children={() => <MusicScreen setTabBarHeight={setTabBarHeight} />}
+//             />
+//             <Stack.Screen name="SongsPostStack" component={SongsPostScreen} />
+//             <Stack.Screen name="ListTrackStack" component={ListTrackScreen} />
+//         </Stack.Navigator>
+//     )
+// }
+
+
+// export { MusicStackNavigator };
 
 export default StackNavigator

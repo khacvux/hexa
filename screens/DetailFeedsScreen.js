@@ -25,7 +25,7 @@ import Comments from '../components/Comments/Comments'
 
 
 import { useDispatch, useSelector } from 'react-redux'
-import { findPostsById, getListCommentOfPost } from '../redux/actions/postsAction'
+import { findPostsById, getListCommentOfPost, reactPost } from '../redux/actions/postsAction'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import DeleteCommentModal from '../components/Modal/DeleteCommentModal'
 
@@ -44,7 +44,10 @@ const DetailFeedsScreen = ({route}) => {
     const navigation = useNavigation();
     const dispatch = useDispatch();
     const { post, listCommentOfPost } = useSelector(state => state.postsReducer)
-    const { token } = useSelector(state => state.authReducer)
+    const { token, userId } = useSelector(state => state.authReducer)
+
+    const [isHeart, setHeart] = useState(post.feel);
+    const [isTotalFeel, setTotalFeel] = useState(post.totalFeel)
 
 
     const scrollX = useRef(new Animated.Value(0)).current;
@@ -63,7 +66,15 @@ const DetailFeedsScreen = ({route}) => {
     }).current;
     const viewConfig = useRef({ viewAreaCoveragePercentThreshold: 50 }).current;
 
-    // console.log(post.postsImageList, 'post image list')
+    const handleReact = () => {
+        setHeart(!isHeart);
+        dispatch(reactPost({
+            token,
+            tusId: post.postsId,
+            userId
+        }))
+        isHeart ? setTotalFeel(isTotalFeel - 1) : setTotalFeel(isTotalFeel + 1)
+    }
 
     return (
         <SafeAreaView edges={['bottom']} >
@@ -80,12 +91,11 @@ const DetailFeedsScreen = ({route}) => {
                 </TouchableOpacity>
                 <ScrollView 
                     contentContainerStyle={tw`flex items-center`}
-                    pagingEnabled
                     showsHorizontalScrollIndicator={false}
                     showsVerticalScrollIndicator={false}
                 >
                     <StatusBar hidden={true} />
-                    <View style={tw`h-140 w-full bg-gray-200`}>
+                    <View style={tw`h-140 w-full bg-gray-100`}>
                         <FlatList
                             data={post.postsImageList}
                             renderItem={ (image) => <ImageItem image={image} /> }
@@ -121,7 +131,7 @@ const DetailFeedsScreen = ({route}) => {
                                     post.postsUserList ? (
                                         <View>
                                             <Image
-                                                style={tw`w-13 h-13 rounded-full absolute -top-3 bg-gray-300 border border-2 border-white`}
+                                                style={tw`w-14 h-14 rounded-full absolute -top-5 bg-gray-300 border border-2 border-white`}
                                                 source={post.postsUserList[0].image ? {uri: post.postsUserList[0].image} : require('../assets/images/defaultAvatar.png')}
                                             />
                                             <View style={tw`ml-15 flex`}>
@@ -133,21 +143,22 @@ const DetailFeedsScreen = ({route}) => {
                                         <></>
                                     )
                                 }
-                                <View style={tw`flex flex-row items-center justify-center bg-gray-100 px-5 py-1 my-2 rounded-xl`}>
+                                <View style={tw`w-30 flex flex-row items-center justify-center bg-gray-50 px-5 py-1 my-2 rounded-xl`}>
                                     <TouchableOpacity
                                         activeOpacity={.7}
-                                        style={tw` items-center flex flex-row`}
+                                        style={tw`flex-2 items-center flex flex-row justify-center`}
+                                        onPress={handleReact}
                                     >
-                                        <Text>{post.totalFeel}</Text>
+                                        <Text>{isTotalFeel}</Text>
                                         <Ionicons name="heart"
-                                            style={ tw`text-[#ED4366] ml-1 mr-3 ml-2`}
+                                            style={isHeart ? tw`text-2xl text-[#ED4366] mr-2 ml-1` : tw`text-2xl text-white mr-2 ml-1` }
                                             size={24}
                                         />
                                     </TouchableOpacity>
 
                                     <TouchableOpacity
                                         activeOpacity={.7}
-                                        style={tw``}
+                                        style={tw`items-center justify-center`}
                                     >
                                         <FontAwesome name="send"
                                             style={tw`text-gray-400`}

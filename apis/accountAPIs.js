@@ -58,9 +58,9 @@ export const updateAvatarAPI = async ({token, formData}) => {
 }
 
 
-export const deleteAvatarAPI = async ({token, userId}) => {
+export const deleteAvatarAPI = async ({token}) => {
     try {
-        return await AXIOS.delete(`${url}/deleteAvatar/${userId}`, {
+        return await AXIOS.delete(`${url}/deleteAvatar`, {
             headers: {
                 'Authorization': `Bearer ${token}`,
             },

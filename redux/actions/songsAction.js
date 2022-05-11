@@ -29,6 +29,26 @@ export const pauseMusic = payload => {
     }
 }
 
+export const changeArraySongs = payload => {
+    return {
+        type: TYPES.CHANGE_ARRAY_SONGS,
+        payload
+    }
+}
+
+export const addSongToArray = payload => {
+    return {
+        type: TYPES.ADD_SONG_TO_ARRAY,
+        payload
+    }
+}
+
+export const removeSongToArray = payload => {
+    return {
+        type: TYPES.REMOVE_SONG_TO_ARRAY,
+        payload
+    }
+}
 
 export const getListCategorySong = payload => {
     return {
@@ -203,5 +223,12 @@ export const actionFailure = error => {
     return {
         type: TYPES.ACTION_FAILURE,
         error
+    }
+}
+
+export const setTabBarHeight = payload => {
+    return {
+        type: TYPES.SET_TAB_BAR_HEIGHT,
+        payload
     }
 }

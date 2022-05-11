@@ -34,7 +34,7 @@ const ChangeAvatarModal = ({isVisibleChangeAvtModal, handleVisibleChangeAvtModal
     }
 
     const handleDeleteAvatar = () => {
-        dispatch(deleteAvatar({token, userId}))
+        dispatch(deleteAvatar({token}))
         setAvatar(avatar)
         handleVisibleChangeAvtModal()
     }

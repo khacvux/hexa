@@ -7,14 +7,18 @@ import { hidePlayerBar } from '../../redux/actions/songsAction';
 
 
 
-const Player = ({tabBarHeight}) => {
+const Player = ({}) => {
 
   const navigation = useNavigation();
   const dispatch = useDispatch()
+  const { arraySongs, tabBarHeight } = useSelector(state => state.songReducer)
 
   const handleClose = () => {
     return dispatch(hidePlayerBar())
   }
+
+  console.log(arraySongs)
+
 
   return (
     <View style={[tw`bg-white border-t border-gray-100 py-2 px-3 absolute left-0 right-0 bottom-[45px] z-100 flex flex-row items-center`, {bottom: tabBarHeight}]}>

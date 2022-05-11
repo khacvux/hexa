@@ -8,6 +8,7 @@ import SvgHomeOutline from '../assets/icons/home-outline.svg'
 import MyProfileScreen from '../screens/MyProfileScreen';
 import NotificationScreen from '../screens/NotificationScreen';
 import HomeScreen from '../screens/HomeScreen';
+// import { MusicStackNavigator } from './StackNavigator';
 import { View, Alert } from 'react-native';
 import SearchScreen from '../screens/SearchScreen';
 import MusicScreen from '../screens/MusicScreen';
@@ -27,7 +28,6 @@ const BottomNavigator = () => {
 
     const { playerBar } = useSelector(state => state.songReducer)
     const { unauth } = useSelector(state => state.authReducer)
-    const [isTabBarHeight, setTabBarHeight] = useState()
     const dispatch = useDispatch();
 
     if(unauth){
@@ -49,7 +49,7 @@ const BottomNavigator = () => {
             <View style={tw`w-full h-full`}>
                 {
                     playerBar ? (
-                        <Player tabBarHeight={isTabBarHeight} />
+                        <Player />
                     ) : (
                         <></>
                     )
@@ -88,7 +88,7 @@ const BottomNavigator = () => {
                         }}
                     />
                     <Tab.Screen name="MusicTab"
-                        children={() => <MusicScreen setTabBarHeight={setTabBarHeight} />}
+                        children={() => <MusicScreen />}
                         options={{
                             headerShown: false,
                             tabBarShowLabel: false,

@@ -131,7 +131,7 @@ const Feeds = ({post, token, userId}) => {
             
             <View style={tw`absolute right-2 top-40 flex  items-center justify-end`}>
                 <BlurView 
-                    intensity={30} tint="light"
+                    intensity={30} tint="dark"
                     style={tw`mr-1 w-12 py-1 flex flex-col items-center overflow-hidden rounded-lg overflow-hidden` }>
                     <TouchableOpacity
                         activeOpacity={.7}
@@ -181,9 +181,9 @@ const Feeds = ({post, token, userId}) => {
                     </TouchableOpacity>
                 </View>
                 <TouchableOpacity
-                    // onPress={() => navigation.navigate('DetailFeedsStack', {
-                    //     post: post.item
-                    // })}
+                    onPress={() => navigation.navigate('DetailFeedsStack', {
+                        postsId: post.item.postsId
+                    })}
                 >
                     <Text style={tw`text-white px-5 w-95/100`}
                         numberOfLines={3}
@@ -218,7 +218,7 @@ const Feeds = ({post, token, userId}) => {
                 </View>
                 
                 <View style={tw`mb-2 w-full`} >
-                    <WriteComment postsId={post.item.postsId} />    
+                    <WriteComment postId={post.item.postsId} />    
                 </View>
             </RBSheet>
         </View>

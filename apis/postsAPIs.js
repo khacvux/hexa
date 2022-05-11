@@ -3,9 +3,9 @@ import AXIOS from "./axiosClient";
 const url = 'posts'
 
 
-export const getPostsAPI = async ({token, userId}) => {
+export const getPostsAPI = async ({token}) => {
     try {
-        const res = await AXIOS.get(`${url}/myUserId/${userId}`, {
+        const res = await AXIOS.get(`${url}/show`, {
             headers: {
                 'Authorization': `Bearer ${token}`,
             }
@@ -17,12 +17,9 @@ export const getPostsAPI = async ({token, userId}) => {
     }
 }
 
-export const reactPostAPI = async ({token, tusId, userId}) => {
+export const reactPostAPI = async ({token, tusId}) => {
     try {
-        const res = await AXIOS.post(`${url}/like`, {
-            tusId,
-            userId,
-        }, {
+        const res = await AXIOS.get(`${url}/like/${tusId}`, {
             headers: {
                 'Authorization': `Bearer ${token}`,
             }
@@ -103,6 +100,8 @@ export const getCommentsOfPostAPI = async ({token, postsId}) => {
 }
 
 export const commentPostAPI = async ({token, data}) => {
+
+    console.log(data)
     try {
         const res = await AXIOS.post(`${url}/comment`, data, {
             headers: {

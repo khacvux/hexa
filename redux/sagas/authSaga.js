@@ -44,7 +44,7 @@ function* signUp(data) {
             password: data.payload.crPassword
         })
         if(res){
-            // console.log(res)
+            // console.log(res.data)
             yield put(ACTION.signUpSuccess(res.data))
         }
     } catch (error) {
@@ -106,7 +106,6 @@ function* deleteAvatar(data) {
     try {
         const res = yield call(deleteAvatarAPI, {
             token: data.payload.token,
-            userId: data.payload.userId
         })
         if(res.data.status == 'ok'){
             yield put(ACTION.deleteAvatarSuccess())
