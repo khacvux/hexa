@@ -7,12 +7,12 @@
 ### Installing
 The app will be available in App Store and Google Play Store soon.
  ```
-    Comming soon
+Comming soon
  ```
 
 ## Screenshots
 
 
 ## Authors
-* **Nguyen Khac Vu - [Khacvux](https://github.com/khacvux)
+* Nguyen Khac Vu - [Khacvux](https://github.com/khacvux)
 
