@@ -1,30 +1,18 @@
 # HEXA
+**A social app**
 
-    A social app
+## Features
+* etc
 
-## Stack
+### Installing
+The app will be available in App Store and Google Play Store soon.
+ ```
+    Comming soon
+ ```
 
-- [React Native](https://reactnative.dev/)
-- [React Navigation v6](https://reactnavigation.org/)
-- [Tailwind React Native Classnames](https://www.npmjs.com/package/twrnc)
-- [Redux](https://redux.js.org/)
-- [Redux Saga](https://redux-saga.js.org/)
-- etc.
+## Screenshots
 
-## Project structure
 
-```
-$PROJECT_ROOT
-│   # Call apis
-├── apis
-│   # Static files for icons, images, sound effects, littie files..
-├── assets
-│   # React native component files
-├── components
-│   # ...
-├── navigatiors
-│   # ...
-├── redux
-│   # ...
-└── screens
-```
+## Authors
+* **Nguyen Khac Vu - [Khacvux](https://github.com/khacvux)
+
