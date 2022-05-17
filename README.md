@@ -1,10 +1,10 @@
-# HEXA
+# Hexa
 **A social app**
 
 ## Features
 * etc
 
-### Installing
+## Installing
 The app will be available in App Store and Google Play Store soon.
  ```
 Comming soon
