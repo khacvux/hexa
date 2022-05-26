@@ -9,10 +9,10 @@ import { Entypo, Ionicons } from '@expo/vector-icons'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { useDispatch, useSelector } from 'react-redux'
 import { getProfileUserByID } from '../redux/actions/searchsAction'
-import { TabListNavigator } from '../navigators/TopTabNavigatior'
+import { TabListNavigator, TabListOfUserNavigator } from '../navigators/TopTabNavigatior'
 import ProfileSkeletion from '../components/Skeleton/ProfileSkeletion'
 import SafeArea from '../components/SafeArea'
-import { getListPostUser } from '../redux/actions/postsAction';
+
 
 const ProfileScreen = ({route}) => {
 
@@ -20,19 +20,21 @@ const ProfileScreen = ({route}) => {
     const navigation = useNavigation();
     const dispatch = useDispatch();
 
-    const { token, userId } = useSelector(state => state.authReducer)
+    const { token } = useSelector(state => state.authReducer)
 
     const handleGoBack = () => {
-        dispatch(getListPostUser({userId, token}))
+        // dispatch(getListPostUser({userId, token}))
         navigation.goBack()
     }
     
     useEffect(() => {
-        dispatch(getProfileUserByID({userId: route.params.userId, myUserId: userId}))
+        dispatch(getProfileUserByID({userId: route.params.userId, token: token }))
     }, [route.params.userId])
+    
     
     const { profileUser } = useSelector(state => state.searchReducer)
     // console.log(profileUser)
+    console.log(profileUser?.avatar)
 
     return (
         <SafeAreaView style={[tw`bg-white h-full`, SafeArea.AndroidSafeArea]}>
@@ -52,22 +54,21 @@ const ProfileScreen = ({route}) => {
                 profileUser ? (
                     <View style={tw`flex flex-1`}>
                         <InfomationUser 
-                            name={profileUser.name} 
-                            avatar={profileUser.avatar} 
-                            email={profileUser.email}
-                            numberOfFollower={profileUser.numberOfFollower}
-                            numberOfPosts={profileUser.numberOfPosts}
-                            numberOfFollowing={profileUser.numberOfFollowing}
+                            name={profileUser?.name} 
+                            avatar={profileUser?.avatar} 
+                            email={profileUser?.email}
+                            numberOfFollower={profileUser?.numberOfFollower}
+                            numberOfPosts={profileUser?.numberOfPosts}
+                            numberOfFollowing={profileUser?.numberOfFollowing}
                         />  
                         <Contact
-                            follow={profileUser.follow}
-                            followerId={route.params.userId}
+                            follow={profileUser?.follow}
+                            followerId={route.params?.userId}
                         />
                         <View style={tw`mt-1 flex flex-1`}>
-                            <TabListNavigator 
-                                numberOfPosts={profileUser.numberOfPosts} 
-                                userId={profileUser.userId} 
-                                myUserId={userId}
+                            <TabListOfUserNavigator
+                                numberOfPosts={profileUser?.numberOfPosts} 
+                                userId={profileUser?.userId} 
                             />
                         </View>
 

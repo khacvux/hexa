@@ -1,16 +1,18 @@
 import * as TYPES from '../constants/posts'
 import * as ACTION from '../actions/postsAction'
 import { call, delay, put, takeEvery, takeLatest, takeLeading } from 'redux-saga/effects'
-import { deletePostByIdAPI, 
-        findPostsByIdAPI, 
-        getListPostsAPI, 
-        uploadPostsAPI,
-        commentPostAPI,
-        getCommentsOfPostAPI,
-        deleteCommmentAPI,
-        getPostsAPI,
-        reactPostAPI
-    } from '../../apis/postsAPIs'
+import {
+    deletePostByIdAPI,
+    findPostsByIdAPI,
+    getListPostsAPI,
+    uploadPostsAPI,
+    commentPostAPI,
+    getCommentsOfPostAPI,
+    deleteCommmentAPI,
+    getPostsAPI,
+    reactPostAPI,
+    getListPostsByUIDAPI
+} from '../../apis/postsAPIs'
 import { onLoadingGetListPost } from '../actions/onLoading'
 import { unauthorized } from '../actions/authAction'
 
@@ -20,14 +22,14 @@ import { unauthorized } from '../actions/authAction'
 function* addPost(data) {
     try {
         console.log('ADD POST running...')
-        
+
         yield put(ACTION.onAddingPosts(true))
         const res = yield call(uploadPostsAPI, {
-            token: data.payload.token, 
+            token: data.payload.token,
             formData: data.payload.formData
         })
         yield put(ACTION.onAddingPosts(false))
-        if(res.status == 'ok'){
+        if (res.status == 'ok') {
             yield put(ACTION.addPostSuccess(true))
             yield delay(2000)
             yield put(ACTION.addPostSuccess(false))
@@ -48,12 +50,12 @@ function* getPost(data) {
             userId: data.payload.userId,
         })
 
-        if(res.status == 200){
+        if (res.status == 200) {
             yield put(ACTION.getPostSuccess(res.data.data))
-        }else if (res == 403){
+        } else if (res == 403) {
             yield put(unauthorized(true))
         }
-        
+
     } catch (error) {
         yield put(ACTION.consoleError(error))
     }
@@ -64,13 +66,30 @@ function* getListPostUser(data) {
     try {
         console.log('GET LIST POST USER RUNNING....')
         yield put(onLoadingGetListPost(true))
-        const res  = yield call(getListPostsAPI, {
+        const res = yield call(getListPostsAPI, {
             token: data.payload.token,
             userId: data.payload.userId,
         })
-        if(res.status == 'ok') {
+        if (res.status == 'ok') {
             // console.log(res.data,'API')
-            yield put(ACTION.getListPostUserSuccess(res.data))        
+            yield put(ACTION.getListPostUserSuccess(res.data))
+        }
+    } catch (error) {
+        yield put(ACTION.consoleError(error))
+    }
+    yield put(onLoadingGetListPost(false))
+}
+
+function* getListPostsByUID(data) {
+    try {
+        console.log('GET LIST POST by uid RUNNING....')
+        yield put(onLoadingGetListPost(true))
+        const res = yield call(getListPostsByUIDAPI, {
+            token: data.payload.token,
+            uid: data.payload.uid,
+        })
+        if (res.status = 'ok') {
+            yield put(ACTION.getListPostsByUIDSuccess(res.data))
         }
     } catch (error) {
         yield put(ACTION.consoleError(error))
@@ -85,7 +104,7 @@ function* findPostsById(data) {
             token: data.payload.token,
             postsId: data.payload.postsId,
         })
-        if(res.status == 'ok') {
+        if (res.status == 'ok') {
             yield put(ACTION.findPostsByIdSuccess(res.data))
         }
     } catch (error) {
@@ -100,7 +119,7 @@ function* deletePostById(data) {
             token: data.payload.token,
             postsId: data.payload.postsId,
         })
-        if(res.status == 'ok') {
+        if (res.status == 'ok') {
             yield put(ACTION.deletePostSuccess(data.payload.postsId))
         }
     } catch (error) {
@@ -116,7 +135,7 @@ function* reactPost(data) {
             userId: data.payload.userId,
             tusId: data.payload.tusId,
         })
-        if(res.status == 'ok'){
+        if (res.status == 'ok') {
             console.log('REACT SUCCESS.')
             yield put(ACTION.reactPostSuccess())
         }
@@ -135,8 +154,8 @@ function* commentPost(data) {
                 tusId: data.payload.postId
             },
         })
-        if(res.status == 'ok'){
-        console.log('COMMENT POST SUCCESS..')
+        if (res.status == 'ok') {
+            console.log('COMMENT POST SUCCESS..')
             yield put(ACTION.commentPostSuccess({
                 comment: data.payload.comment,
                 image: data.payload.avatar,
@@ -152,19 +171,19 @@ function* commentPost(data) {
         yield put(ACTION.consoleError(error))
     }
 }
-function* getListCommentOfPost (data) {
+function* getListCommentOfPost(data) {
     try {
         console.log('GET LIST COMMENT OF POST RUNNING...')
         const res = yield call(getCommentsOfPostAPI, {
             token: data.payload.token,
             postsId: data.payload.postsId
         })
-        if(res.status == 'ok'){
+        if (res.status == 'ok') {
             console.log('GET LIST COMMENT OF POST SUCCESS...')
             yield put(ACTION.getListCommentOfPostSuccess(res.data))
         }
     } catch (error) {
-          yield put(ACTION.consoleError(error))
+        yield put(ACTION.consoleError(error))
     }
 }
 
@@ -175,7 +194,7 @@ function* deleteComment(data) {
             token: data.payload.token,
             commentId: data.payload.commentId
         })
-        if(res.status == 'ok'){
+        if (res.status == 'ok') {
             console.log('DELETE COMMENT SUCCESS')
             yield put(ACTION.deleteCommentSuccess(data.payload.commentId))
         }
@@ -194,4 +213,5 @@ export default postsSaga = [
     takeEvery(TYPES.COMMENT_POST, commentPost),
     takeLatest(TYPES.GET_LIST_COMMENT_POST, getListCommentOfPost),
     takeLeading(TYPES.DELETE_COMMENT_POST, deleteComment),
+    takeLatest(TYPES.GET_LIST_POST_BY_UID, getListPostsByUID)
 ]

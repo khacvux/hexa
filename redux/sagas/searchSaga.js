@@ -32,12 +32,11 @@ function* getProfileUserById(data) {
     try {
         console.log('GET PROFILE USER BY ID running...')
         const res = yield call(getProfileUserByIDAPI, {
-            myUserId: data.payload.myUserId,
-            userId: data.payload.userId
+            userId: data.payload.userId,
+            token: data.payload.token,
         })
         if(res){
             console.log('GET PROFILE USER BY ID SUCCESS')
-            // console.log(res.data)
             yield put(ACTION.getProfileUserByIDSuccess(res.data))
         } 
     } catch (error) {
@@ -103,5 +102,5 @@ export default searchSaga = [
     takeLatest(TYPES.GET_PROFILE_USER_BY_ID, getProfileUserById),
     takeLatest(TYPES.POST_REQUEST_FOLLOW, postRequestFollow),
     takeLeading(TYPES.ACCEPT_REQUEST_FOLLOW, acceptRequestFollow),
-    takeLeading(TYPES.REFUSE_REQUEST_FOLLOW, refuseRequestFollow)
+    takeLeading(TYPES.REFUSE_REQUEST_FOLLOW, refuseRequestFollow),
 ]

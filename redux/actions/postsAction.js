@@ -116,6 +116,20 @@ export const getListPostUserSuccess = payload => {
     }
 }
 
+export const getListPostsByUID = payload => {
+    return {
+        type: TYPES.GET_LIST_POST_BY_UID,
+        payload
+    }
+}
+
+export const getListPostsByUIDSuccess = payload => {
+    return {
+        type: TYPES.GET_LIST_POST_BY_UID_SUCCESS,
+        payload
+    }
+}
+
 export const findPostsById = payload => {
     return {
         type: TYPES.FIND_POST_BY_ID,

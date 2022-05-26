@@ -37,10 +37,10 @@ export const deleteHistorySearch = (data) => {
 }
 
 
-export const getProfileUserByID = (data) => {
+export const getProfileUserByID = payload => {
     return {
         type: TYPES.GET_PROFILE_USER_BY_ID,
-        payload: data
+        payload
     }
 }
 

@@ -12,9 +12,13 @@ export const findUserByNameAPI = async (params) => {
 }
 
 
-export const getProfileUserByIDAPI = async ({myUserId, userId}) => {
+export const getProfileUserByIDAPI = async ({userId, token}) => {
     try {
-        const res = await AXIOS.get(`find/${myUserId}/${userId}`)
+        const res = await AXIOS.get(`${url}${userId}`, {
+            headers: {
+                'Authorization:': `Bearer ${token}`,
+            }
+        })
         return res.data
     } catch (error) {
         return error

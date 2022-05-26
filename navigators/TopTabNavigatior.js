@@ -9,7 +9,7 @@ import SelectAudio from '../components/Upload/SelectAudio';
 import ListPost from '../components/Profile/ListPosts';
 import ListTrack from '../components/Profile/ListTrack';
 import { useNavigation } from '@react-navigation/native';
-
+import ListPostByUID from '../components/Profile/ListPostsByUID';
 
 
 const TopBar = createMaterialTopTabNavigator();
@@ -79,8 +79,6 @@ export const UpLoadNavigatior = () => {
     );
 };
 export const TabListNavigator = ({userId, myUserId, numberOfPosts}) => {
-
-
     return (
         <TopBar.Navigator
             screenOptions={{
@@ -94,6 +92,51 @@ export const TabListNavigator = ({userId, myUserId, numberOfPosts}) => {
             <TopBar.Screen 
                 name='ListPostTab' 
                 children={() => <ListPost userId={userId} numberOfPosts={numberOfPosts} myUserId={myUserId} />} 
+                options={{ 
+                    tabBarIcon: (({focused}) => 
+                        <>
+                            {focused ? (
+                                <Ionicons name='ios-grid' 
+                                    style={tw`text-[#5EC2EA]`}
+                                    size={23}
+                                />
+                            ) : (
+                                <Ionicons name='ios-grid-outline' 
+                                    style={tw`text-gray-500`}
+                                    size={23}
+                                />
+                            )}
+                        </>
+                    ),
+                }}
+            />
+            <TopBar.Screen 
+                name='ListTrackTab' 
+                children={() => <ListTrack userId={userId} />} 
+                options={{ 
+                    tabBarIcon: (({focused}) => 
+                        <Foundation name='sound' size={23} style={focused ? tw`text-[#5EC2EA]` : tw`text-gray-500`} />
+                    ),
+                }}
+            />
+        </TopBar.Navigator>
+    )
+}
+
+export const TabListOfUserNavigator  = ({userId, numberOfPosts}) => {
+    return (
+        <TopBar.Navigator
+            screenOptions={{
+                tabBarStyle: tw`h-11`,
+                tabBarIndicatorStyle: tw`bg-[#5EC2EA] rounded-full`,
+                tabBarIndicatorContainerStyle: tw``,
+                tabBarShowLabel: false,
+                tabBarShowIcon: true,
+            }}
+        >
+            <TopBar.Screen 
+                name='ListPostTab' 
+                children={() => <ListPostByUID userId={userId} numberOfPosts={numberOfPosts} /> } 
                 options={{ 
                     tabBarIcon: (({focused}) => 
                         <>

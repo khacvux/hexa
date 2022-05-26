@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux'
 import SafeArea from '../components/SafeArea'
 
 
+
 const MyProfileScreen = () => {
     const { token, firstName, lastName, avatar, email, userId, numberOfPosts, numberOfFollowing, numberOfFollower } = useSelector(state => state.authReducer)
     const [modalVisible, setModalVisible] = useState(false);
@@ -36,7 +37,7 @@ const MyProfileScreen = () => {
             <EditProfile handleModalVisible={handleModalVisible} />
             <TabListNavigator 
                 userId={userId} 
-                myUserId={userId}
+                // myUserId={userId}
                 numberOfPosts={numberOfPosts}    
             />
             <EditProfileModal 

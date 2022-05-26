@@ -17,6 +17,7 @@ import Player from '../components/Player/Player';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { signOut, unauthorized } from '../redux/actions/authAction';
+import SafeArea from '../components/SafeArea'
 
 
 
@@ -45,7 +46,7 @@ const BottomNavigator = () => {
     }
 
     return (
-        <SafeAreaView style={tw`h-full w-full bg-white relative`} edges={['top']}>
+        <SafeAreaView style={[tw`h-full w-full bg-white relative`, SafeArea.AndroidSafeArea]} edges={['top'] }>
             <View style={tw`w-full h-full`}>
                 {
                     playerBar ? (
@@ -103,7 +104,7 @@ const BottomNavigator = () => {
                             tabBarStyle: [tw`bg-[#F5F7FA]`],
                         }}
                     />
-                    <Tab.Screen name="NotificationTab" component={NotificationScreen}
+                    {/* <Tab.Screen name="NotificationTab" component={NotificationScreen}
                         options={{
                             headerShown: false,
                             tabBarShowLabel: false,
@@ -120,7 +121,7 @@ const BottomNavigator = () => {
                             }),
                             tabBarStyle: [tw`bg-[#F5F7FA]`],
                         }}
-                    />
+                    /> */}
                     <Tab.Screen name="ProfileTab" component={MyProfileScreen}
                         options={{
                             headerShown: false,

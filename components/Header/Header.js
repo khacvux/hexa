@@ -22,7 +22,7 @@ const Header = () => {
 
     useEffect(() => {
         if(onAddingSuccess){
-            dispatch(getListPostUser({token, userId}))
+            dispatch(getListPostUser({userId, token}))
         }
     }, [onAddingSuccess])  
 

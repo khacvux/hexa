@@ -28,11 +28,6 @@ function* signIn(data) {
 }
 
 function* signUp(data) {
-    // const firstName = data.payload.firstName;
-    // const lastName = data.payload.lastName;
-    // const email = data.payload.email;
-    // const phone = data.payload.numberPhone;
-    // const password = data.payload.crPassword;
 
     try {
         console.log(' SIGN UP running...')

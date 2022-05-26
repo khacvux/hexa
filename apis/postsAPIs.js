@@ -46,9 +46,9 @@ export const uploadPostsAPI = async ({token, formData}) => {
     }
 }
 
-export const getListPostsAPI = async ({token, userId}) => {
+export const getListPostsAPI = async ({token}) => {
     try {
-        const res = await AXIOS.get(`${url}/listPosts/${userId}`, {
+        const res = await AXIOS.get(`${url}/myPosts`, {
             headers: {
                 'Authorization': `Bearer ${token}`,
             },
@@ -56,6 +56,19 @@ export const getListPostsAPI = async ({token, userId}) => {
         return res.data
     } catch (error) {
         return error;
+    }
+}
+
+export const getListPostsByUIDAPI = async ({uid, token}) => {
+    try {
+        const res = await AXIOS.get(`${url}/user/${uid}`, {
+            headers: {
+                'Authorization:': `Bearer ${token}`,
+            }
+        })
+        return res.data
+    } catch (error) {
+        return error
     }
 }
 

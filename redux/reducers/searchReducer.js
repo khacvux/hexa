@@ -4,12 +4,13 @@ const initState = {
     listResult: [],
     listHistorySearch: [],
     profileUser: {},
+    myProfile: {}
 }
 
 
 export default searchReducer = (state = initState, action ) => {
     switch(action.type) {
-
+            
         case TYPES.FIND_USER:
             return {
                 ...state

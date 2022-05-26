@@ -66,6 +66,9 @@ const SelectAudio = () => {
             audioFiles ? (
               <TouchableOpacity style={tw`items-center flex-1 border border-[#5EC2EA] rounded-lg bg-[#5EC2EA]`}
                   activeOpacity={.8}
+                  onPress={() => navigation.navigate('UpLoadAudioStack', {
+                    audioFiles: audioFiles
+                  })}
                 >
                 <Text style={tw`py-3 text-white font-bold text-center`}>
                   Next

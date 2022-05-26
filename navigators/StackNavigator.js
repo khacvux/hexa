@@ -20,6 +20,7 @@ import FollowingsScreen from '../screens/FollowingsScreen';
 import SongsPostScreen from '../screens/SongsPostScreen'
 import MusicScreen from '../screens/MusicScreen';
 import PlaylistScreen from '../screens/PlaylistScreen';
+import UploadAudioScreen from '../screens/UploadAudioScreen';
 
 
 const Stack = createNativeStackNavigator();
@@ -53,6 +54,7 @@ const StackNavigator = () => {
                         <Stack.Screen name="FollowingsStack" component={FollowingsScreen} />
                         <Stack.Screen name="PlaylistStack" component={PlaylistScreen} />
                         <Stack.Screen name="SongsPostStack" component={SongsPostScreen} />
+                        <Stack.Screen name="UpLoadAudioStack" component={UploadAudioScreen} />
                     </>
                 ) : (
                     <Stack.Screen name="LoginStack" component={LoginScreen} />

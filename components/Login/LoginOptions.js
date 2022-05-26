@@ -87,6 +87,7 @@ const LoginOptions = () => {
                             placeholder='Email'
                             value={userName}
                             onChangeText={val => setUsername(val)}
+                            placeholderTextColor="#CCC"
                         />
                         
                         <TextInput
@@ -95,6 +96,7 @@ const LoginOptions = () => {
                             secureTextEntry={true}
                             value={password}
                             onChangeText={val => setPassword(val)}
+                            placeholderTextColor="#CCC"
                         />
                         <TouchableOpacity>
                             <Text style={tw`text-xs mb-1 px-2 text-[#00A3EA]`}>Forgot your password?</Text>

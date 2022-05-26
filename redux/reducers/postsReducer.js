@@ -5,6 +5,7 @@ const initState = {
     post: {},
     listCommentOfPost: [],
     listPostUser: [],
+    listPostByUID: [],
     loadingGetPosts: false,
     onAddingPosts: false,
     onAddingSuccess: false,
@@ -126,7 +127,17 @@ export default postsReducer = (state = initState, action) => {
                 listPostUser: action.payload,
             }
 
+        case TYPES.GET_LIST_POST_BY_UID:
+            return {
+                ...state
+            }
 
+        case TYPES.GET_LIST_POST_BY_UID_SUCCESS:
+            return {
+                ...state,
+                listPostByUID: action.payload
+            }
+                
         case TYPES.FIND_POST_BY_ID:
             return {
                 ...state,

@@ -20,7 +20,7 @@ const SearchScreen = () => {
   const dispatch = useDispatch()
   const [input, setInput] = useState('')
 
-  // console.log(findUserLoading)
+
   
   useEffect(() => {
     dispatch(findUserByName(input))

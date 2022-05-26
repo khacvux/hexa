@@ -3,7 +3,7 @@ import { useState } from 'react';
 import tw from 'twrnc';
 import { useNavigation } from '@react-navigation/native';
 import * as ImagePicker from 'expo-image-picker';
-import * as DocumentPicker from 'expo-document-picker'
+
 
 
 import { EvilIcons, MaterialIcons } from '@expo/vector-icons';

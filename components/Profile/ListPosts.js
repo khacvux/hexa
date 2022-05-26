@@ -2,9 +2,8 @@ import { useEffect, useState } from 'react'
 import { View } from 'react-native'
 import tw from 'twrnc'
 import { FlatGrid } from 'react-native-super-grid';
-
 import PostItem from './PostItem'
-import EmptyAnimation from '../LottieAnimation/EmptyAnimation'
+import EmptyList from '../Static/EmptyList';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { getListPostUser } from '../../redux/actions/postsAction';
@@ -12,7 +11,7 @@ import ListPostSkeleton from '../Skeleton/ListPostSkeleton';
 import OnDeletePostModal from '../Modal/OnDeletePostModal';
 
 
-const ListPost = ({userId, myUserId, numberOfPosts}) => {
+const ListPost = ({userId, numberOfPosts}) => {
 
     const dispatch = useDispatch()
     const { listPostUser } = useSelector(state => state.postsReducer)
@@ -21,26 +20,26 @@ const ListPost = ({userId, myUserId, numberOfPosts}) => {
 
     const [isVisibleDeleteModal, setVisibleDeleteModal] = useState(false)
     const [isIdPostSelected, setIdPostSelected] = useState(null)
-    // console.log(isIdPostSelected)
+
     const handleVisibleDeleteModal = () => {
         setVisibleDeleteModal(!isVisibleDeleteModal)
     }
 
     useEffect(() => {
-        if(numberOfPosts && myUserId && userId) {
-            dispatch(getListPostUser({myUserId, userId, token}))
+        if(numberOfPosts && userId) {
+            dispatch(getListPostUser({userId, token}))
         }
     }, [])
 
     return (
-        <View style={tw`bg-white h-full`}>
+        <View style={tw`bg-white h-full px-3`}>
             {
                 getListPostLoading ? (
                     <ListPostSkeleton />
                 ) : (
                     numberOfPosts == 0 || listPostUser.length == 0 ? (
                         <View style={tw`w-full h-full items-center justify-center`}>
-                            <EmptyAnimation title={'No posts yet!!'} />
+                            <EmptyList title={'No posts yet!!'} />
                         </View>
                     ) : (
                         <FlatGrid

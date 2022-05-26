@@ -11,11 +11,9 @@ const SearchItem = ({ item, times }) => {
     
     const dispatch = useDispatch()
     const navigation = useNavigation();
-    const { userId } = useSelector(state => state.authReducer)
 
     const handleSelect = () => {
         navigation.navigate('ProfileStack', {
-            myUserId: userId,
             userId: item.item.userId  
         })
         
