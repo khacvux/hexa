@@ -110,10 +110,10 @@ export default authReducer = ( state = initState, action ) => {
         case TYPES.SET_FOLLOW_STATUS_SUCCESS:
             return {
                 ...state,
-                followStatus: !followStatus
+                followStatus: !state.followStatus
             }
         case TYPES.SET_FOLLOW_STATUS_FAILURE:
-            console.log('Set FOLLOW STATUS fail. ',action.error)
+            // console.log('SET_FOLLOW_STATUS_FAILURE:',action.error)
             return {
                 ...state,
             }

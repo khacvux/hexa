@@ -11,7 +11,7 @@ const OnAddingPosts = () => {
                 autoPlay={true}
                 loop={true}
             />
-      <Text style={tw`font-light tracking-[.2] text-xs ml-1`}>Uploading posts...</Text>
+      <Text style={tw`font-light tracking-[.2] text-xs ml-1`}>Uploading...</Text>
     </View>
   )
 }

@@ -8,7 +8,10 @@ const initialState = {
     listSongByCategory: [],
     listOfSearchResults: [],
     listComments: [],
-    arraySongs: []
+    arraySongs: [],
+    onAddingSong: false,
+    onAddingSongSuccess: false,
+    onAddingSongFail: false,
 }
 
 
@@ -64,7 +67,7 @@ export default songsReducer = (state = initialState, action) => {
         case TYPES.GET_LIST_SONG_BY_CATEGORY_SUCCESS:
             return {
                 ...state,
-                //
+                listSongByCategory: action.payload
             }
             
         case TYPES.FIND_SONG_BY_ID:
@@ -100,9 +103,20 @@ export default songsReducer = (state = initialState, action) => {
             return {
                 ...state
             }
+        case TYPES.ON_ADDING_SONG:
+            return {
+                ...state,
+                onAddingSong: action.payload
+            }
         case TYPES.ADD_SONG_SUCCESS:
             return {
                 ...state,
+                onAddingSongSuccess: action.payload
+            }
+        case TYPES.ADD_SONG_FAILURE:
+            return {
+                ...state,
+                onAddingSongFail: action.payload
             }
 
         case TYPES.ADD_PLAYLIST:

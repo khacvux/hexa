@@ -5,6 +5,9 @@ import { useNavigation } from '@react-navigation/native';
 import * as ImagePicker from 'expo-image-picker';
 import { Entypo, Ionicons } from '@expo/vector-icons';
 import SelectGenreModal from '../components/Modal/SelectGenreModal';
+import { useDispatch, useSelector } from 'react-redux';
+import FormData from 'form-data'
+import { addSong } from '../redux/actions/songsAction';
 
 
 
@@ -13,9 +16,17 @@ const UploadAudioScreen = ({route}) => {
 
     const { audioFiles } = route.params;
     const navigation = useNavigation()
+    const dispatch = useDispatch()
+    const { token } = useSelector(state => state.authReducer)
 
-    const [image, setImage] = useState(null)
+    const [isImage, setImage] = useState(null)
     const [showModal, setShowModal] = useState(false) 
+    const [isTitle, setTitle] = useState('')
+    const [isGenre, setGenre] = useState({
+        idGenre: '',
+        genre: '',
+    })
+    const [isCaption, setCaption] = useState('')
 
 
     const selectPicture = async () => {
@@ -35,6 +46,21 @@ const UploadAudioScreen = ({route}) => {
         }
     }
 
+    const handleSubmit = () => {
+        let formData = new FormData
+        formData.append('name', isTitle)
+        formData.append('image', isImage)
+        formData.append('song', audioFiles )
+        formData.append('songCategoryId', isGenre.idGenre)
+
+        dispatch(addSong({formData, token}))
+        navigation.navigate('MusicTab')
+    }
+
+
+
+
+
     return (
         <SafeAreaView style={tw`bg-white h-full w-full`}>
             <View style={tw`items-center`}>
@@ -43,17 +69,28 @@ const UploadAudioScreen = ({route}) => {
                         style={tw`p-1`}
                         onPress={() => navigation.goBack()}
                     >
-                        <Text style={tw`text-gray-400 font-bold text-base`}>Cancel</Text>
+                        <Text style={tw`text-gray-400 text-base`}>Cancel</Text>
                     </TouchableOpacity>
                     <View style={tw`flex-1 px-2 items-center`}>
                         <Text style={tw``}
                         numberOfLines={1}>{audioFiles.name}</Text>
                     </View>
-                    <TouchableOpacity
-                        style={tw`p-1`}
-                    >
-                        <Text style={tw`font-bold text-[#5EC2EA] text-base`}>Save</Text>
-                    </TouchableOpacity>
+                    {
+                        isTitle && isGenre.idGenre ? (
+                            <TouchableOpacity
+                                style={tw`p-1`}
+                                onPress={handleSubmit}
+                            >
+                                <Text style={tw`font-bold text-[#5EC2EA] text-base`}>Done</Text>
+                            </TouchableOpacity>
+                        ) : (
+                            <View>
+                                <Text style={tw`font-thin text-gray-600 text-base`}>Done</Text>
+                            </View>
+                        )
+                    }
+                   
+          
                 </View>
                 <View>
                     <TouchableOpacity 
@@ -61,11 +98,11 @@ const UploadAudioScreen = ({route}) => {
                         onPress={selectPicture}
                     >
                         <ImageBackground
-                            source={image ? {uri: image.uri} : require('../assets/images/default-song-avatar.jpeg')}
+                            source={isImage ? {uri: isImage.uri} : require('../assets/images/default-song-avatar.jpeg')}
                             style={tw`w-35 h-35 m-5 rounded-lg overflow-hidden justify-center items-center`} 
                         >
                             {
-                                !image ? (
+                                !isImage ? (
                                     <View style={tw`w-full h-full justify-center items-center bg-black opacity-40`}>
                                         <Ionicons 
                                             name='ios-camera-outline' 
@@ -85,7 +122,9 @@ const UploadAudioScreen = ({route}) => {
                         <TextInput 
                             placeholder={audioFiles.name}
                             placeholderTextColor='#CCC'
-                            style={tw` h-10 pt-1 pb-3 text-lg tracking-[.2]`}
+                            style={tw` h-10 py-1 text-lg tracking-[.2]`}
+                            value={isTitle}
+                            onChangeText={val => setTitle(val)}
                         />
                     </View>
                     <View style={tw`my-2`}>
@@ -96,7 +135,13 @@ const UploadAudioScreen = ({route}) => {
                             onPress={() => setShowModal(true)}
                         >
                             <Text style={tw`text-lg tracking-[.2] flex-1`}>
-                                Cai luong
+                                {
+                                    isGenre.genre ? isGenre.genre : (
+                                        <Text style={tw`text-gray-400 font-light`}>
+                                            Select Genre
+                                        </Text>
+                                    )
+                                }
                             </Text>
                             <Entypo 
                                 size={18}
@@ -112,11 +157,18 @@ const UploadAudioScreen = ({route}) => {
                             placeholderTextColor='#CCC'
                             style={tw` h-10 pt-1 pb-3 text-lg tracking-[.2]`}
                             multiline={true}
+                            value={isCaption}
+                            onChangeText={val => setCaption(val)}
                         />
                     </View>
                 </View>
             </View>
-            <SelectGenreModal showModal={showModal} setShowModal={setShowModal} />
+            <SelectGenreModal 
+                showModal={showModal} 
+                setShowModal={setShowModal} 
+                token={token}
+                setGenre={setGenre}
+            />
         </SafeAreaView>
     )
 }

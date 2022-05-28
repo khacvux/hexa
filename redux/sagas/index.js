@@ -4,6 +4,7 @@ import authSaga from "./authSaga";
 import followsSaga from "./followsSaga";
 import searchSaga from "./searchSaga";
 import postsSaga from "./postsSaga";
+import playerSaga from "./playerSaga";
 
 
 export default function* rootSaga (){
@@ -12,5 +13,6 @@ export default function* rootSaga (){
         ...followsSaga,
         ...searchSaga,
         ...postsSaga,
+        ...playerSaga,
     ])
 }

@@ -69,7 +69,6 @@ function* setFollowStatus(data) {
 function* editProfile(data) {
     console.log('EDIT PROFILE RUNNING...')
     try {
-        // console.log(data.payload)
         const res = yield call(editProfileAPI, data.payload)
         if(res.data.status == 'ok'){
             yield put(ACTION.editProfileSuccess(data.payload))

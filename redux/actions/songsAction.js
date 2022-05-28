@@ -128,12 +128,27 @@ export const addSong = payload => {
     }
 }
 
+export const onAddingSong = payload => {
+    return {
+        type: TYPES.ON_ADDING_SONG,
+        payload
+    }
+}
+
 export const addSongSuccess = payload => {
     return {
         type: TYPES.ADD_SONG_SUCCESS,
         payload
     }
 }
+
+export const addSongFailure = payload => {
+    return {
+        type: TYPES.ADD_SONG_FAILURE,
+        payload
+    }
+}
+
 
 export const addPlaylist = payload => {
     return {

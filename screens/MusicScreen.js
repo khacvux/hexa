@@ -7,44 +7,38 @@ import Header from '../components/Header/Header';
 import SafeArea from '../components/SafeArea';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import { useDispatch, useSelector } from 'react-redux';
-import { hidePlayerBar, showlayerBar } from '../redux/actions/songsAction';
+import { getListCategorySong, hidePlayerBar, showlayerBar } from '../redux/actions/songsAction';
 import { LinearGradient } from 'expo-linear-gradient';
 import ListCategoryMusic from '../components/ListCategorySong/ListCategoryMusic';
 import VirtualizedScrollView from '../components/VitualizedScrollView';
+import { useEffect } from 'react';
 
 
 
 
 const MusicScreen = () => {
 
-    const tabBarHeight = useBottomTabBarHeight()
     const dispatch = useDispatch()
-    const { playerBar } = useSelector(state => state.songReducer)
+    const { token } = useSelector(state => state.authReducer)
+
+    useEffect(() => {
+        dispatch(getListCategorySong({ token }))
+    }, [])
+
   
-    // const handlePlayer = () => {
-    //     setTabBarHeight(tabBarHeight)
-    //     if(playerBar){
-    //         return dispatch(hidePlayerBar())
-    //     }else
-    //         return dispatch(showlayerBar())
-    // }
+  
     return (
         <SafeAreaView style={[tw`bg-white h-full`]}>
                 <Header />
                 <View style={tw`h-full`}>
-                        {/* <TouchableOpacity 
-                            onPress={handlePlayer}
-                            style={tw`w-full py-3 bg-yellow-300 items-center`}
-                        >
-                            <Text>on</Text>
-                        </TouchableOpacity> */}
+                       
                     <VirtualizedScrollView >
                         {/* Playlists */}
                         <Playlist 
                             title={'Library'}   
                         />
                         {/* CATEGORY SONG */}
-                        <ListCategoryMusic /> 
+                        <ListCategoryMusic token={token} /> 
                     </VirtualizedScrollView>
                 </View>
         </SafeAreaView>  

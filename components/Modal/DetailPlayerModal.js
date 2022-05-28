@@ -80,8 +80,8 @@ const DetailPlayerModal = ({ showDetailPlayer, setShowDetailPlayer }) => {
                     value={0}
                     minimumValue={0}
                     maximumValue={100}
-                    thumbTintColor='#5EC2EA'
-                    minimumTrackTintColor='#5EC2EA'
+                    thumbTintColor='#4b5563'
+                    minimumTrackTintColor='#4b5563'
                     maximumTrackTintColor='#F5F7FA'
                   />
                   <View style={tw`flex flex-row items-center justify-between`}>

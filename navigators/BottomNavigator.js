@@ -9,15 +9,16 @@ import MyProfileScreen from '../screens/MyProfileScreen';
 import NotificationScreen from '../screens/NotificationScreen';
 import HomeScreen from '../screens/HomeScreen';
 // import { MusicStackNavigator } from './StackNavigator';
-import { View, Alert } from 'react-native';
+import { View, Alert, SafeAreaView } from 'react-native';
 import SearchScreen from '../screens/SearchScreen';
 import MusicScreen from '../screens/MusicScreen';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import {  } from 'react-native-safe-area-context';
 import Player from '../components/Player/Player';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { signOut, unauthorized } from '../redux/actions/authAction';
 import SafeArea from '../components/SafeArea'
+
 
 
 
@@ -46,7 +47,8 @@ const BottomNavigator = () => {
     }
 
     return (
-        <SafeAreaView style={[tw`h-full w-full bg-white relative`, SafeArea.AndroidSafeArea]} edges={['top'] }>
+        <SafeAreaView style={[tw`h-full w-full bg-white relative`]}>
+        {/* <SafeAreaView style={[tw`h-full w-full bg-white relative`, SafeArea.AndroidSafeArea]} edges={['top'] }> */}
             <View style={tw`w-full h-full`}>
                 {
                     playerBar ? (

@@ -18,7 +18,9 @@ const ListCategoryItem = ({item, dispatch, tabBarHeight}) => {
     if(tabBarHeight == false){
       dispatch(setTabBarHeight(isTabBarHeight))
     }
-    navigation.navigate('SongsPostStack')
+    navigation.navigate('SongsPostStack', {
+      genreId: item.item.songCategoryId
+    })
   }
 
   return (
@@ -27,12 +29,12 @@ const ListCategoryItem = ({item, dispatch, tabBarHeight}) => {
       onPress={handleOnPress}
     >
       <Image
-        source={require('../../assets/images/song_image.jpeg')}
-        style={tw`w-full h-40 rounded-1`}
+        source={item.item?.image ? {uri: item.item?.image} :require('../../assets/images/default-song-avatar.jpeg')}
+        style={tw`w-full h-40 rounded-xl`}
         resizeMode='cover'
       />
-      <Text style={tw`text-base text-center`}>
-        There's no one at all
+      <Text style={tw`text-lg text-center mt-1 font-light `}>
+        {item.item.name}
       </Text>
     </TouchableOpacity>
   )

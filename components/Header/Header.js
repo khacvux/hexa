@@ -16,13 +16,15 @@ import { getListPostUser } from '../../redux/actions/postsAction';
 const Header = () => {
 
     const { onAddingPosts, onAddingSuccess, onAddingFail } = useSelector(state => state.postsReducer)
+    const { onAddingSong, onAddingSongSuccess, onAddingSongFail } = useSelector(state => state.songReducer)
     const { firstName, avatar, userId, token } = useSelector(state => state.authReducer)
+    
     const dispatch = useDispatch()
     const navigation = useNavigation();
 
     useEffect(() => {
         if(onAddingSuccess){
-            dispatch(getListPostUser({userId, token}))
+            setTimeout(() => dispatch(getListPostUser({userId, token})), 2000)
         }
     }, [onAddingSuccess])  
 
@@ -43,13 +45,13 @@ const Header = () => {
                     <Text style={tw`text-xs font-light`}>{firstName}</Text>
                 </TouchableOpacity>
                 {
-                    onAddingPosts ? (
+                    onAddingPosts || onAddingSong ? (
                         <OnAddingPosts />
                     ) : (
-                        onAddingSuccess ? (
+                        onAddingSuccess || onAddingSongSuccess ? (
                             <OnAddingSuccess />
                         ) : (
-                            onAddingFail ? (
+                            onAddingFail || onAddingSongFail ? (
                                 <OnAddingFail />
                             ) : <></>
                         )

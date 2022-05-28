@@ -132,10 +132,10 @@ const DetailFeedsScreen = ({route}) => {
                                         <View>
                                             <Image
                                                 style={tw`w-14 h-14 rounded-full absolute -top-5 bg-gray-300 border border-2 border-white`}
-                                                source={post.postsUserList[0].image ? {uri: post.postsUserList[0].image} : require('../assets/images/defaultAvatar.png')}
+                                                source={post?.postsUserList[0].image ? {uri: post?.postsUserList[0].image} : require('../assets/images/defaultAvatar.png')}
                                             />
                                             <View style={tw`ml-15 flex`}>
-                                                <Text style={tw`font-bold text-base`}>{post.postsUserList[0].name}</Text>  
+                                                <Text style={tw`font-bold text-base`}>{post?.postsUserList[0].name}</Text>  
                                                 <Text style={[{fontSize: 11 }, tw`font-light`]}>3 munites ago</Text>
                                             </View>
                                         </View>
@@ -143,17 +143,17 @@ const DetailFeedsScreen = ({route}) => {
                                         <></>
                                     )
                                 }
-                                <View style={tw`w-30 flex flex-row items-center justify-center bg-gray-50 px-5 py-1 my-2 rounded-xl`}>
+                                <View style={tw` flex flex-row items-center justify-around bg-gray-50 px-3 py-1 my-2 rounded-xl border border-gray-200`}>
                                     <TouchableOpacity
                                         activeOpacity={.7}
-                                        style={tw`flex-2 items-center flex flex-row justify-center`}
+                                        style={tw` items-center flex flex-row justify-center`}
                                         onPress={handleReact}
                                     >
-                                        <Text>{isTotalFeel}</Text>
-                                        <Ionicons name="heart"
-                                            style={isHeart ? tw`text-2xl text-[#ED4366] mr-2 ml-1` : tw`text-2xl text-white mr-2 ml-1` }
+                                        <Ionicons name={isHeart ? "heart" : "heart-outline"}
+                                            style={isHeart ? tw`text-2xl text-[#ED4366] mr-2` : tw`text-2xl text-gray-300 mr-2 ml-1` }
                                             size={24}
                                         />
+                                        <Text style={tw`font-semibold text-gray-800 mr-3`}>{isTotalFeel}</Text>
                                     </TouchableOpacity>
 
                                     <TouchableOpacity

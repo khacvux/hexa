@@ -31,7 +31,7 @@ function* addPost(data) {
         yield put(ACTION.onAddingPosts(false))
         if (res.status == 'ok') {
             yield put(ACTION.addPostSuccess(true))
-            yield delay(2000)
+            yield delay(5000)
             yield put(ACTION.addPostSuccess(false))
         }
     } catch (error) {

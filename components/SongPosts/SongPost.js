@@ -7,7 +7,7 @@ import { changeArraySongs, showlayerBar } from '../../redux/actions/songsAction'
 
 
 
-const SongPost = ({dispatch}) => {
+const SongPost = ({dispatch, item}) => {
     const {width: SCREEN_WIDTH} = Dimensions.get('window');
 
     const FRAMESIZE_W = SCREEN_WIDTH;
@@ -29,8 +29,8 @@ const SongPost = ({dispatch}) => {
                 onPress={handlePlaySong}
             >
                 <Image 
-                    source={require('../../assets/images/song_image.jpeg')}
-                    style={tw`w-full h-full`}
+                    source={item.item.image ? {uri: item.item.image} : require('../../assets/images/default-song-avatar.jpeg')}
+                    style={tw`w-full h-full bg-gray-600`}
                     resizeMode='cover'
                 />
 
@@ -43,14 +43,14 @@ const SongPost = ({dispatch}) => {
                     </View>
                     <View style={tw`ml-2`}>
                         <View>
-                            <Text style={tw`bg-black text-white px-1 text-lg`}>There's no one at all</Text>
+                            <Text style={tw`bg-black text-white px-1 text-lg`}>{item.item.name}</Text>
                         </View>
                         <View style={tw`flex flex-row`}>
                             <Text style={tw`leading-4 text-gray-300 bg-black px-1 pb-[3]`}>@Username</Text>
                         </View>
                         <View style={tw`flex flex-row items-center`}>
                             <Ionicons name='ios-play' size={12} style={tw`text-gray-300 bg-black h-4 pt-[2] pl-1`}/>
-                            <Text style={tw`text-xs text-gray-300 bg-black h-4 pr-1`}> 123</Text>
+                            <Text style={tw`text-xs text-gray-300 bg-black h-4 pr-1`}> {item.item.songFeelList.length}</Text>
                         </View>
                     </View>
                 </View>
@@ -64,7 +64,7 @@ const SongPost = ({dispatch}) => {
                         <Ionicons name="heart-outline"
                             style={isHeart ? tw`text-2xl text-[#ED4366]` : tw`text-2xl text-white` }
                         />
-                        <Text style={tw`text-white ml-1`}>2</Text>
+                        <Text style={tw`text-white ml-1`}>{item.item.songFeelList.length}</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                         activeOpacity={.7}
@@ -73,7 +73,7 @@ const SongPost = ({dispatch}) => {
                         <Ionicons name="chatbubble-ellipses-outline" 
                             style={tw`text-2xl text-[#FEFEFD] `}
                         />
-                        <Text style={tw`text-white text-center ml-1`}>3</Text>
+                        <Text style={tw`text-white text-center ml-1`}>{item.item.songCommentList.length}</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                         activeOpacity={.7}

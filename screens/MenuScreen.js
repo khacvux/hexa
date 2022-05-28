@@ -27,6 +27,7 @@ const MenuScreen = ({navigation}) => {
 
     return (
         <SafeAreaView style={[tw`bg-white h-full`, SafeArea.AndroidSafeArea]}>
+            <Text style={tw`text-center font-bold text-base my-2`}>Menu</Text>
             <ScrollView contentContainerStyle ={tw`px-3 flex flex-col items-center`}>
                 <TouchableOpacity 
                     style={tw`w-full py-3 px-2 flex flex-row justify-between`}
@@ -58,7 +59,7 @@ const MenuScreen = ({navigation}) => {
                         thumbColor={"#fff"}
                         ios_backgroundColor="#3e3e3e"
                         onValueChange={handlePressFollowStatus}
-                        value={privateAccount}
+                        value={!privateAccount}
                     />
                 </TouchableOpacity>
                     {

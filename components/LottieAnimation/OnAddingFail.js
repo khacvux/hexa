@@ -11,7 +11,7 @@ const OnAddingFail = () => {
                 autoPlay={true}
                 loop={true}
             />
-      <Text style={tw`font-light tracking-[.2] text-xs ml-1`}>Post Failed!</Text>
+      <Text style={tw`font-light tracking-[.2] text-xs ml-1`}>Upload Failed!</Text>
     </View>
   )
 }
