@@ -25,7 +25,7 @@ const ListCategoryMusic = () => {
                 </View>
                 <View style={tw`h-9 justify-center`}>
                     <View style={tw`bg-[#5EC2EA] px-.8 py-[2] rounded-xl`}>
-                        <Text style={tw`px-1.3 text-white`}>4</Text>
+                        <Text style={tw`px-1.3 text-white`}>{listCategorySong.length}</Text>
                     </View>
                 </View>
             </View>

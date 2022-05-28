@@ -6,6 +6,7 @@ const initialState = {
     playSong: false,
     listCategorySong: [],
     listSongByCategory: [],
+    listLibrary: [],
     listOfSearchResults: [],
     listComments: [],
     arraySongs: [],
@@ -164,13 +165,14 @@ export default songsReducer = (state = initialState, action) => {
                 ...state
             }
 
-        case TYPES.FIND_PLAYLIST_BY_USERID:
+        case TYPES.GET_LIBRARY_OF_USER_BY_UID:
             return {
                 ...state
             }
-        case TYPES.FIND_PLAYLIST_BY_USERID_SUCCESS:
+        case TYPES.GET_LIBRARY_OF_USER_BY_UID_SUCCESS:
             return {
-                ...state
+                ...state,
+                listLibrary: action.payload
             }
 
         case TYPES.ACTION_FAILURE:

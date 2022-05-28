@@ -1,4 +1,4 @@
-import { View, Text, FlatList,SafeAreaView, TouchableOpacity, ScrollView, ImageBackground } from 'react-native'
+import { View, Text, FlatList,SafeAreaView } from 'react-native'
 import tw from 'twrnc'
 import { Entypo } from '@expo/vector-icons'; 
 
@@ -31,7 +31,6 @@ const MusicScreen = () => {
         <SafeAreaView style={[tw`bg-white h-full`]}>
                 <Header />
                 <View style={tw`h-full`}>
-                       
                     <VirtualizedScrollView >
                         {/* Playlists */}
                         <Playlist 

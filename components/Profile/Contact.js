@@ -19,7 +19,7 @@ const Contact = ({follow, followerId}) => {
 
     return (
         <View>
-            <View style={tw`flex flex-row items-center mt-4 px-5`}>
+            <View style={tw`flex flex-row items-center mt-2 px-5`}>
                 {   
                     buttonLoading ? (
                         <View style={tw`flex-2 bg-white h-10 items-center justify-center flex border  border-[#56C4F4] rounded-sm overflow-hidden`}>

@@ -33,8 +33,6 @@ const ProfileScreen = ({route}) => {
     
     
     const { profileUser } = useSelector(state => state.searchReducer)
-    // console.log(profileUser)
-    console.log(profileUser?.avatar)
 
     return (
         <SafeAreaView style={[tw`bg-white h-full`, SafeArea.AndroidSafeArea]}>

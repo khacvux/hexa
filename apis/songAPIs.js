@@ -88,3 +88,12 @@ export const uploadSongAPI = async ({token, formData}) => {
         return error
     }
 }
+
+export const getLibraryByUIDAPI = async ({token, uid}) => {
+    try {
+        const res = await AXIOS.get()
+    } catch (error) {
+        console.log(error)
+        return error
+    }
+}

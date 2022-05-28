@@ -1,4 +1,4 @@
-import { AntDesign, FontAwesome5, Ionicons, SimpleLineIcons } from '@expo/vector-icons'
+import { AntDesign, Entypo, FontAwesome5, Ionicons, SimpleLineIcons } from '@expo/vector-icons'
 import { BlurView } from 'expo-blur'
 import { StatusBar } from 'expo-status-bar'
 import { View, Text, Modal, ImageBackground, SafeAreaView, TouchableOpacity } from 'react-native'
@@ -6,7 +6,7 @@ import tw from 'twrnc'
 import Slider from '@react-native-community/slider'
 
 
-const DetailPlayerModal = ({ showDetailPlayer, setShowDetailPlayer }) => {
+const DetailPlayerModal = ({ showDetailPlayer, setShowDetailPlayer, arraySongs }) => {
   return (
     <Modal
       visible={showDetailPlayer}
@@ -14,7 +14,7 @@ const DetailPlayerModal = ({ showDetailPlayer, setShowDetailPlayer }) => {
     >
       <StatusBar hidden={true} />
       <ImageBackground
-        source={require('../../assets/images/song_image.jpeg')}
+        source={arraySongs[0]?.image ? {uri: arraySongs[0]?.image} : require('../../assets/images/default-song-avatar.jpeg')}
         style={tw`w-full h-full`}
         resizeMode='cover'
       >
@@ -27,16 +27,17 @@ const DetailPlayerModal = ({ showDetailPlayer, setShowDetailPlayer }) => {
             <View style={tw`px-5 flex flex-col h-full justify-between`} >
               <View style={tw`flex flex-row items-center my-5`}>
                 <TouchableOpacity
-                  style={tw`bg-gray-100 p-2 rounded-full mr-3`}
+                  style={tw`p-2 rounded-full mr-3 border border-white`}
                   onPress={() => setShowDetailPlayer(!showDetailPlayer)}
                 >
                   <AntDesign
                     name='down'
                     size={20}
+                    style={tw`text-white`}
                   />
                 </TouchableOpacity>
                 <View style={tw`flex-1`}>
-                  <Text style={tw`text-2xl font-semibold text-white tracking-[.25]`}>Name Song</Text>
+                  <Text style={tw`text-2xl font-semibold text-white tracking-[.25]`}>{arraySongs[0].name}</Text>
                   <Text style={tw`text-white text-base`}>@auther</Text>
                 </View>
 
@@ -44,7 +45,7 @@ const DetailPlayerModal = ({ showDetailPlayer, setShowDetailPlayer }) => {
               <View style={tw`flex-1 justify-end`}>
                   <View style={tw`flex flex-row items-center my-3 justify-around`}>
                     <TouchableOpacity
-                      style={tw`p-3 bg-gray-700 rounded-full `}
+                      style={tw`p-3 rounded-full `}
                       activeOpacity={.5}
                     >
                       <AntDesign name='stepbackward'
@@ -53,7 +54,7 @@ const DetailPlayerModal = ({ showDetailPlayer, setShowDetailPlayer }) => {
                       />
                     </TouchableOpacity>
                     <TouchableOpacity
-                      style={tw`p-6 bg-gray-700 rounded-full`}
+                      style={tw`p-6 rounded-full`}
                       activeOpacity={.5}
                     >
                       <FontAwesome5 name='pause'
@@ -62,7 +63,7 @@ const DetailPlayerModal = ({ showDetailPlayer, setShowDetailPlayer }) => {
                       />
                     </TouchableOpacity>
                     <TouchableOpacity
-                      style={tw`p-3 bg-gray-700 rounded-full`}
+                      style={tw`p-3 rounded-full`}
                       activeOpacity={.5}
                     >
                       <AntDesign name='stepforward'
@@ -96,13 +97,13 @@ const DetailPlayerModal = ({ showDetailPlayer, setShowDetailPlayer }) => {
                 <TouchableOpacity
                   style={tw`flex flex-row flex-1 items-center justify-center`}>
                   <Ionicons name='heart-outline' size={33} style={tw`mx-1 text-white`} />
-                  <Text style={tw`font-bold text-white`}>2342</Text>
+                  {/* <Text style={tw`font-bold text-white`}>2342</Text> */}
                 </TouchableOpacity>
                 <TouchableOpacity
                   style={tw`flex flex-row flex-1 items-center justify-center`}
                 >
                   <Ionicons name='chatbubble-ellipses-outline' size={30} style={tw`mx-1 text-white`} />
-                  <Text style={tw`font-bold text-white`}>2342</Text>
+                  {/* <Text style={tw`font-bold text-white`}>2342</Text> */}
                 </TouchableOpacity>
                 <TouchableOpacity
                   style={tw`flex-1 items-center`}
@@ -113,6 +114,11 @@ const DetailPlayerModal = ({ showDetailPlayer, setShowDetailPlayer }) => {
                   style={tw`flex-1 items-center`}
                 >
                   <SimpleLineIcons name='loop' size={30} style={tw`mx-1 text-white`} />
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={tw`flex-1 items-center`}
+                >
+                  <Entypo name='dots-three-horizontal' size={24} style={tw`mx-1 text-white`} />
                 </TouchableOpacity>
               </View>
             </View>

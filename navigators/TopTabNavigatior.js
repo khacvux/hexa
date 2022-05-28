@@ -10,6 +10,7 @@ import ListPost from '../components/Profile/ListPosts';
 import ListTrack from '../components/Profile/ListTrack';
 import { useNavigation } from '@react-navigation/native';
 import ListPostByUID from '../components/Profile/ListPostsByUID';
+import MyPostedPlaylist from '../components/PostedPlaylist/MyPostedPlaylist';
 
 
 const TopBar = createMaterialTopTabNavigator();
@@ -91,7 +92,7 @@ export const TabListNavigator = ({userId, myUserId, numberOfPosts}) => {
         >
             <TopBar.Screen 
                 name='ListPostTab' 
-                children={() => <ListPost userId={userId} numberOfPosts={numberOfPosts} myUserId={myUserId} />} 
+                children={() => <ListPost userId={userId} numberOfPosts={numberOfPosts}/>} 
                 options={{ 
                     tabBarIcon: (({focused}) => 
                         <>
@@ -112,7 +113,7 @@ export const TabListNavigator = ({userId, myUserId, numberOfPosts}) => {
             />
             <TopBar.Screen 
                 name='ListTrackTab' 
-                children={() => <ListTrack userId={userId} />} 
+                children={() => <MyPostedPlaylist  />} 
                 options={{ 
                     tabBarIcon: (({focused}) => 
                         <Foundation name='sound' size={23} style={focused ? tw`text-[#5EC2EA]` : tw`text-gray-500`} />
@@ -167,3 +168,4 @@ export const TabListOfUserNavigator  = ({userId, numberOfPosts}) => {
         </TopBar.Navigator>
     )
 }
+

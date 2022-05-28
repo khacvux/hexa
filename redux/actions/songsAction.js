@@ -220,16 +220,16 @@ export const findPlaylistByIdSuccess = payload => {
     }
 }
 
-export const findPlaylistByUserId = payload => {
+export const getLibraryOfUserByUID = payload => {
     return {
-        type: TYPES.FIND_PLAYLIST_BY_USERID,
+        type: TYPES.GET_LIBRARY_OF_USER_BY_UID,
         payload
     }
 }
 
-export const findPlaylistByUserIdSuccess = payload => {
+export const getLibraryOfUserByUIDSuccess = payload => {
     return {
-        type: TYPES.FIND_PLAYLIST_BY_USERID_SUCCESS,
+        type: TYPES.GET_LIBRARY_OF_USER_BY_UID_SUCCESS,
         payload
     }
 }

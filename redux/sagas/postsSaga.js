@@ -71,7 +71,6 @@ function* getListPostUser(data) {
             userId: data.payload.userId,
         })
         if (res.status == 'ok') {
-            // console.log(res.data,'API')
             yield put(ACTION.getListPostUserSuccess(res.data))
         }
     } catch (error) {

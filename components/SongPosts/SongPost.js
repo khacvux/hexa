@@ -18,7 +18,15 @@ const SongPost = ({dispatch, item}) => {
 
     const handlePlaySong = () => {
         dispatch(showlayerBar())
-        dispatch(changeArraySongs('12312312312'))
+        dispatch(changeArraySongs([
+            {
+                image: item.item.image,
+                name: item.item.name,
+                song: item.item.song,
+                songId: item.item.songId,
+            }
+        ]))
+
     }
 
     return (

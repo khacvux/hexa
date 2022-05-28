@@ -32,11 +32,11 @@ const Player = ({}) => {
           >
             <Image 
               style={tw`w-10 h-10 rounded mr-2`}
-              source={require('../../assets/images/default-song-avatar.jpeg')}
+              source={arraySongs[0]?.image ? {uri: arraySongs[0]?.image} : require('../../assets/images/default-song-avatar.jpeg')}
             />
             <View>
-              <Text numberOfLines={1}>helloooo</Text>
-              <Text style={tw`text-xs font-light`}>@Tezt11</Text>
+              <Text numberOfLines={1}>{arraySongs[0].name}</Text>
+              <Text style={tw`text-xs font-light`}>@auther</Text>
             </View>
           </View>
           <View style={tw`flex flex-row items-center`}>
@@ -57,7 +57,7 @@ const Player = ({}) => {
           </View>
         </View>
       </TouchableOpacity>
-      <DetailPlayerModal setShowDetailPlayer={setShowDetailPlayer} showDetailPlayer={showDetailPlayer} />
+      <DetailPlayerModal setShowDetailPlayer={setShowDetailPlayer} showDetailPlayer={showDetailPlayer} arraySongs={arraySongs} />
     </View>
   )
 }

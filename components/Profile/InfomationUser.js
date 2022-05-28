@@ -26,7 +26,7 @@ const InfomationUser = ({isFirstName,
                             )
                         )
                     }
-                    style={[{width: 70, height: 70},tw`rounded-full mr-4 border border-[#5EC2EA]`]}
+                    style={[{width: 75, height: 75},tw`rounded-full mr-4 border-2 border-gray-200`]}
                 />
                 <View style={tw`flex-1 flex flex-row items-center`}>
                     <View style={tw`flex-1 flex items-center`}>
@@ -43,11 +43,11 @@ const InfomationUser = ({isFirstName,
                     </View>
                 </View>
            </View>
-           <View style={tw`mt-2`}>
+           <View style={tw`mt-1`}>
                <Text style={tw`text-gray-500 text-xs`}>
                     {email}
                </Text>
-               <Text style={tw`text-2xl font-bold`}>
+               <Text style={tw`text-2xl font-semibold`}>
                    {
                        isFirstName ? (
                         `${isFirstName} ${isLastName}`
