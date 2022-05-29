@@ -206,16 +206,16 @@ export const deleteSongFromPlaylistSuccess = payload => {
     }
 }
 
-export const findPlaylistById = payload => {
+export const getPlaylistById = payload => {
     return {
-        type: TYPES.FIND_PLAYLIST_BY_ID,
+        type: TYPES.GET_PLAYLIST_BY_LID_SUCCESS,
         payload
     }
 }
 
-export const findPlaylistByIdSuccess = payload => {
+export const getPlaylistByIdSuccess = payload => {
     return {
-        type: TYPES.FIND_PLAYLIST_BY_ID_SUCCESS,
+        type: TYPES.GET_PLAYLIST_BY_LID_SUCCESS,
         payload
     }
 }

@@ -30,7 +30,7 @@ const ListCategoryItem = ({item, dispatch, tabBarHeight}) => {
     >
       <Image
         source={item.item?.image ? {uri: item.item?.image} :require('../../assets/images/default-song-avatar.jpeg')}
-        style={tw`w-full h-40 rounded-xl`}
+        style={tw`w-full h-40 rounded-lg`}
         resizeMode='cover'
       />
       <Text style={tw`text-lg text-center mt-1 font-light `}>

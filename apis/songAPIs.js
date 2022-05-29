@@ -91,9 +91,23 @@ export const uploadSongAPI = async ({token, formData}) => {
 
 export const getLibraryByUIDAPI = async ({token, uid}) => {
     try {
-        const res = await AXIOS.get()
+        const res = await AXIOS.get(`listSong/user/${uid}`, {
+            'Authorization': `Bearer ${token}`,
+        })
+        return res.data
     } catch (error) {
         console.log(error)
+        return error
+    }
+}
+
+export const getPlaylistByLIDAPI = async ({token, lid}) => {
+    try {
+        const res = await AXIOS.get(`listSong/${lid}`, {
+            'Authorization': `Bearer ${token}`,
+        })
+        return res.data
+    } catch (error) {
         return error
     }
 }

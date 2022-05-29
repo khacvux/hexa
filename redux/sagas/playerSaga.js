@@ -1,8 +1,9 @@
 import * as TYPES from '../constants/songs'
 import * as ACTION from '../actions/songsAction'
 import { put, takeLeading, takeEvery, takeLatest, call, delay } from '@redux-saga/core/effects'
-import { getListGenreAPI,
+import { getLibraryByUIDAPI, getListGenreAPI,
     getListSongByCategoryIdAPI, 
+    getPlaylistByLIDAPI, 
     uploadSongAPI 
 } from '../../apis/songAPIs'
 
@@ -61,8 +62,41 @@ function* getListSongByGenreId(data) {
     }
 }
 
+function* getLibraryByUID(data) {
+    try {
+        console.log('GET LIBRARY BY UID RUNNING...')
+        const res = yield call(getLibraryByUIDAPI, {
+            uid: data.payload.userId,
+            token: data.payload.token
+        })
+        if(res.status == 'ok') {
+            yield put(ACTION.getLibraryOfUserByUIDSuccess(res.data))
+        }
+    } catch (error) {
+        yield put(ACTION.actionFailure(error))
+    }
+}
+
+function* getPlaylistByLID(data) {
+    try {
+        console.log('GET PLAYLIST BY LIBRARY ID RUNNING...')
+        const res = yield  call(getPlaylistByLIDAPI, {
+            token: data.payload.token,
+            lid: data.payload.lid
+        })
+        if(res.status == 'ok') {
+            yield put(ACTION.getPlaylistByIdSuccess(res.data))
+        }
+        
+    } catch (error) {
+        yield put(ACTION.actionFailure(error))
+    }
+}
+
 export default playerSaga = [
     takeLeading(TYPES.GET_LIST_CATEGORY_SONG, getGenre),
     takeEvery(TYPES.ADD_SONG, addSong),
     takeLatest(TYPES.GET_LIST_SONG_BY_CATEGORY, getListSongByGenreId),
+    takeLeading(TYPES.GET_LIBRARY_OF_USER_BY_UID, getLibraryByUID),
+    takeLatest(TYPES.GET_PLAYLIST_BY_LID, getPlaylistByLID),
 ]
