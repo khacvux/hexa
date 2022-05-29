@@ -1,7 +1,7 @@
 import * as TYPES from '../constants/songs'
 import * as ACTION from '../actions/songsAction'
 import { put, takeLeading, takeEvery, takeLatest, call, delay } from '@redux-saga/core/effects'
-import { getLibraryByUIDAPI, getListGenreAPI,
+import { addSongToPlaylistAPI, createNewPlaylistAPI, getLibraryByUIDAPI, getListGenreAPI,
     getListSongByCategoryIdAPI, 
     getPlaylistByLIDAPI, 
     uploadSongAPI 
@@ -46,6 +46,22 @@ function* addSong(data) {
     }
 }
 
+function* addPlaylist(data) {
+    try {
+        console.log('ADD PLAYLIST RUNNING...')
+        const res = yield call(createNewPlaylistAPI, {
+            token: data.payload.token,
+            userId: data.payload.userId,
+            name: data.payload.name
+        })
+        if(res.status == 'ok'){
+            console.log('ADD PLAYLIST SUCCESS')
+        }
+    } catch (error) {
+        yield put(ACTION.actionFailure(error))
+    }
+}   
+
 function* getListSongByGenreId(data) {
     try {
         console.log('GET LIST SONG BY CATEGORY ID RUNNING....')
@@ -80,9 +96,9 @@ function* getLibraryByUID(data) {
 function* getPlaylistByLID(data) {
     try {
         console.log('GET PLAYLIST BY LIBRARY ID RUNNING...')
-        const res = yield  call(getPlaylistByLIDAPI, {
+        const res = yield call(getPlaylistByLIDAPI, {
+            lid: data.payload.lid,
             token: data.payload.token,
-            lid: data.payload.lid
         })
         if(res.status == 'ok') {
             yield put(ACTION.getPlaylistByIdSuccess(res.data))
@@ -93,10 +109,28 @@ function* getPlaylistByLID(data) {
     }
 }
 
+function* addSongToPlaylist(data) {
+    try {
+        console.log('ADD SONG TO PLAYLIST RUNINNG...')
+        const res = yield call(addSongToPlaylistAPI, {
+            token: data.payload.token,
+            songId: data.payload.songId,
+            libId: data.payload.libId,
+        })        
+        if(res.status == 'ok') {
+            console.log('ADD SUCCESS')
+        }
+    } catch (error) {
+        return error
+    }
+}
+
 export default playerSaga = [
     takeLeading(TYPES.GET_LIST_CATEGORY_SONG, getGenre),
     takeEvery(TYPES.ADD_SONG, addSong),
     takeLatest(TYPES.GET_LIST_SONG_BY_CATEGORY, getListSongByGenreId),
     takeLeading(TYPES.GET_LIBRARY_OF_USER_BY_UID, getLibraryByUID),
     takeLatest(TYPES.GET_PLAYLIST_BY_LID, getPlaylistByLID),
+    takeEvery(TYPES.ADD_PLAYLIST, addPlaylist),
+    takeEvery(TYPES.ADD_SONG_TO_PLAYLIST, addSongToPlaylist),
 ]

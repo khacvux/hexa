@@ -1,7 +1,7 @@
 import { AntDesign, Entypo, FontAwesome5, Ionicons, SimpleLineIcons } from '@expo/vector-icons'
 import { BlurView } from 'expo-blur'
 import { StatusBar } from 'expo-status-bar'
-import { View, Text, Modal, ImageBackground, SafeAreaView, TouchableOpacity } from 'react-native'
+import { View, Text, Modal, ImageBackground, SafeAreaView, TouchableOpacity, Image } from 'react-native'
 import tw from 'twrnc'
 import Slider from '@react-native-community/slider'
 
@@ -42,8 +42,14 @@ const DetailPlayerModal = ({ showDetailPlayer, setShowDetailPlayer, arraySongs }
                 </View>
 
               </View>
-              <View style={tw`flex-1 justify-end`}>
-                  <View style={tw`flex flex-row items-center my-3 justify-around`}>
+              <View style={tw`flex-1 w-full items-center justify-center`}>
+                <Image 
+                  source={arraySongs[0]?.image ? {uri: arraySongs[0]?.image} : require('../../assets/images/default-song-avatar.jpeg')}
+                  style={tw`h-70 w-70 rounded-xl`}
+                />
+              </View>
+              <View style={tw``}>
+                  <View style={tw`flex flex-row items-center my-1 justify-around`}>
                     <TouchableOpacity
                       style={tw`p-3 rounded-full `}
                       activeOpacity={.5}
@@ -75,7 +81,7 @@ const DetailPlayerModal = ({ showDetailPlayer, setShowDetailPlayer, arraySongs }
 
 
                 {/* SLIDER */}
-                <View style={tw`my-15`}>
+                <View style={tw`mb-15 mt-5`}>
                   <Slider
                     style={tw``}
                     value={0}

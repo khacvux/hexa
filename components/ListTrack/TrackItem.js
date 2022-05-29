@@ -3,19 +3,18 @@ import tw from 'twrnc'
 import { Entypo, Ionicons } from '@expo/vector-icons';
 
 
-const TrackItem = (props) => {
-    const { item } = props;
+const TrackItem = ({item}) => {
   return (
     <TouchableOpacity style={tw`w-full flex flex-row items-center px-3 mb-3`}>
         <Image 
-            source={require('../../assets/images/song_image.jpeg')}
+            source={item.item.song.image ? {uri: item.item.song.image} : require('../../assets/images/default-song-avatar.jpeg')}
             style={tw`w-21 h-21 rounded`}
         />
         <View style={tw`flex-1 flex flex-col ml-4`}>
-            <Text style={tw`text-base font-semibold text-white`}>There's no one at all</Text>
-            <Text style={tw`text-sm text-gray-200`}>Son Tung M-TP</Text>
+            <Text style={tw`text-base font-semibold text-white`}>{item.item.song.name}</Text>
+            <Text style={tw`text-sm text-gray-200`}>{item.item?.song.songUserList[0]?.name}</Text>
             <Text style={[tw`leading-6 text-gray-300`, { fontSize: 11}]} >
-              <Ionicons name='ios-play' size={10}/> 9.3M
+              <Ionicons name='ios-play' size={10}/> none
             </Text>
         </View>
         <View>

@@ -15,22 +15,22 @@ const SongsPostScreen = ({route}) => {
 
   const navigation = useNavigation()
   const { token } = useSelector(state => state.authReducer)
-  const { listSongByCategory } = useSelector(state => state.songReducer)
+  const { listSongByCategory, listLibrary } = useSelector(state => state.songReducer)
   const dispatch = useDispatch()
-  const { genreId } = route.params
+  const { genreId, background, genre } = route.params
 
   useEffect(() => {
-    dispatch(getListSongByCategory({ token, genreId}))
+    dispatch(getListSongByCategory({ token, genreId }))
   }, [])
 
   return (
     <ImageBackground
-      source={require('../assets/images/default-song-avatar.jpeg')}
+      source={ background ? {uri: background} : require('../assets/images/default-song-avatar.jpeg')}
       style={tw`w-full h-full`}
       resizeMode='cover'
     >
       <BlurView 
-        intensity={40}
+        intensity={60}
         style={tw`w-full h-full`}
         tint='dark'
       >
@@ -45,7 +45,7 @@ const SongsPostScreen = ({route}) => {
                 size={20}
               />   
             </TouchableOpacity>
-            <Text style={tw`text-lg font-bold tracking-[.2] text-gray-100`}>Stream</Text>
+            <Text style={tw`text-lg font-bold tracking-[.2] text-gray-100`}>{genre}</Text>
           </View> 
           <ListSongPost listSongByCategory={listSongByCategory} />
         </SafeAreaView>

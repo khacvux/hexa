@@ -16,10 +16,10 @@ function* signIn(data) {
         yield put(onLoadingAuth(true));
 
         const res = yield call(signInAPI, data.payload)
+        
         if(res.status == 'ok'){
             yield put(ACTION.signInSuccess(res.data))
         }
-
     } catch (error) {
         yield put(ACTION.signInFailure(error))
     }
@@ -39,7 +39,6 @@ function* signUp(data) {
             password: data.payload.crPassword
         })
         if(res){
-            // console.log(res.data)
             yield put(ACTION.signUpSuccess(res.data))
         }
     } catch (error) {

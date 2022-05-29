@@ -12,6 +12,19 @@ export const signInAPI = async (data) => {
         return error
     }
 }
+
+
+// export const signInAPI = async (payload) => {
+//     console.log(payload)
+//     try {
+//         const res = await AXIOS.post(`/auth/login`, payload)
+//         return res
+//     } catch (error) {
+//         console.log(error)
+//     }
+// }
+
+
 export const signUpAPI = async (data) => {
     try {
         const res =  await AXIOS.post(`${url}/register`, data);

@@ -1,5 +1,5 @@
 import { View, Text, FlatList, ImageBackground, Image, Dimensions } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useNavigation } from '@react-navigation/native'
 import tw from 'twrnc'
@@ -10,23 +10,37 @@ import TrackItem from '../components/ListTrack/TrackItem'
 import SafeArea from '../components/SafeArea'
 import { BlurView } from 'expo-blur'
 import VirtualizedScrollView from '../components/VitualizedScrollView'
+import { useDispatch, useSelector } from 'react-redux'
+import { getPlaylistById } from '../redux/actions/songsAction'
 
 
 
 
-const PlaylistScreen = () => {
+const PlaylistScreen = ({route}) => {
+
+    const { listSongId } = route.params
     const navigation = useNavigation();
 
     const {width: SCREEN_WIDTH} = Dimensions.get('window');
 
     const FRAMESIZE_W = SCREEN_WIDTH;
     const FRAMESIZE_H = SCREEN_WIDTH*2/3;
+    
+    const dispatch = useDispatch()
+    const { token } = useSelector(state => state.authReducer)
+    const { listSongByLibrary } = useSelector(state => state.songReducer)
+
+    useEffect(() => {
+        dispatch(getPlaylistById({lid: listSongId, token}))
+    }, [listSongId])
+    
+    console.log(listSongByLibrary.image)
 
 
 
     return (
         <ImageBackground
-            source={require('../assets/images/song_image.jpeg')}
+            source={listSongByLibrary.image ? {uri: listSongByLibrary.image } : require('../assets/images/music-background.jpeg')}
             style={tw`w-full h-full`}
         >   
             <BlurView
@@ -62,30 +76,35 @@ const PlaylistScreen = () => {
                             activeOpacity={.9}
                         >
                             <ImageBackground
-                                source={require('../assets/images/song_image.jpeg')}
+                                source={listSongByLibrary.image ? {uri: listSongByLibrary.image } : require('../assets/images/music-background.jpeg')}
                                 style={[tw`w-full mb-3`, { height: FRAMESIZE_H }]}
                                 resizeMode='cover'
                             >
-                                <View style={tw`px-8 py-2 bg-white rounded absolute bottom-3 right-3`}>
-                                    <Text style={tw`text-xs`}>
-                                        Play all
-                                    </Text>
-                                </View>
+                                {
+                                    listSongByLibrary.listSongItemList.length ? (
+                                            <View style={tw`px-8 py-2 bg-white rounded absolute bottom-3 right-3 shadow`}>
+                                                <Text style={tw`text-xs`}>
+                                                    Play all
+                                                </Text>
+                                            </View> 
+                                    ) : <></>
+                                }
+                                
                                 <View style={tw`absolute top-2 left-2`}>
                                     <View style={tw`flex flex-row`}>
-                                        <Text style={tw`bg-black text-white px-2 text-lg`}>There's no one at all</Text>
+                                        <Text style={tw`bg-black text-white px-2 text-lg`}>{listSongByLibrary.nameOfList}</Text>
                                     </View>
                                     <View style={tw`flex flex-row`}>
                                         <Text style={tw`font-light text-gray-300 text-xs bg-black pl-2`}>Created by </Text>
-                                        <Text style={tw`leading-4 text-gray-300 bg-black px-1 pb-[3]`}>@Username</Text>
-                                        <Text style={tw`font-light text-gray-300 text-xs bg-black`}> • 30 tracks </Text>
+                                        <Text style={tw`leading-4 text-gray-300 bg-black px-1 pb-[3]`}>{listSongByLibrary.name}</Text>
+                                        <Text style={tw`font-light text-gray-300 text-xs bg-black`}> • {listSongByLibrary.listSongItemList.length} tracks </Text>
                                     </View>
                                 </View>
                             </ImageBackground>
                         </TouchableOpacity>
                         
                         <FlatList 
-                            data={listTrack}
+                            data={listSongByLibrary.listSongItemList}
                             renderItem={(item) => {
                                 return <TrackItem item={item} />
                             }}
@@ -93,7 +112,7 @@ const PlaylistScreen = () => {
                             showsHorizontalScrollIndicator={false}
                             showsVerticalScrollIndicator={false}
                             pagingEnabled
-                            contentContainerStyle={tw`flex flex-col items-center px-3 h-full`}
+                            contentContainerStyle={tw`flex flex-col items-center px-3`}
                         />
                     </VirtualizedScrollView>
 

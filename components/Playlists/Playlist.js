@@ -12,7 +12,6 @@ const Playlist = ({listLibrary}) => {
   const { tabBarHeight } = useSelector(state => state.songReducer)
   
 
-
   return (
     <View style={tw`w-full py-2 mb-3 shadow-[#5EC2EA]`}>
       <View style={tw`flex flex-row items-center mb-3`}>
@@ -26,7 +25,7 @@ const Playlist = ({listLibrary}) => {
         </View>
       </View>
       <FlatList 
-        data={albums}
+        data={listLibrary}
         renderItem={(item) => 
           <PlaylistItem 
             item={item}
@@ -34,7 +33,7 @@ const Playlist = ({listLibrary}) => {
             tabBarHeight={tabBarHeight} 
           />
         }
-        keyExtractor={item => item.id}
+        keyExtractor={item => item.listSongId}
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
         pagingEnabled

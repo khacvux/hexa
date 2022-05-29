@@ -19,7 +19,9 @@ const ListCategoryItem = ({item, dispatch, tabBarHeight}) => {
       dispatch(setTabBarHeight(isTabBarHeight))
     }
     navigation.navigate('SongsPostStack', {
-      genreId: item.item.songCategoryId
+      genreId: item.item.songCategoryId,
+      background: item.item?.image,
+      genre: item.item.name,
     })
   }
 

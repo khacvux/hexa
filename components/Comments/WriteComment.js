@@ -32,6 +32,7 @@ const WriteComment = ({postId}) => {
         <TextInput
             style={tw`bg-white flex-1 py-3 rounded-xl px-3 border border-gray-200`}
             placeholder='Write your comment...'
+            placeholderTextColor='#ccc'
             value={isComment}
             onChangeText={val => setComment(val)}
             onEndEditing={handleComment}

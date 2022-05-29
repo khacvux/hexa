@@ -4,16 +4,18 @@ import { useState } from 'react';
 import { View, Text, Image, TouchableOpacity, Dimensions } from 'react-native'
 import tw from 'twrnc'
 import { changeArraySongs, showlayerBar } from '../../redux/actions/songsAction';
+import SongPostOptionModal from '../Modal/SongPostOptionModal';
 
 
 
-const SongPost = ({dispatch, item}) => {
+const SongPost = ({ dispatch, item, token }) => {
     const {width: SCREEN_WIDTH} = Dimensions.get('window');
 
     const FRAMESIZE_W = SCREEN_WIDTH;
     const FRAMESIZE_H = SCREEN_WIDTH*2/3;
 
     const [isHeart, setHeart] = useState('');
+    const [isVisible, setVisible] = useState(false);
 
 
     const handlePlaySong = () => {
@@ -24,6 +26,7 @@ const SongPost = ({dispatch, item}) => {
                 name: item.item.name,
                 song: item.item.song,
                 songId: item.item.songId,
+                userName: item.item.userName,
             }
         ]))
 
@@ -45,8 +48,8 @@ const SongPost = ({dispatch, item}) => {
                 <View style={tw` absolute bottom-1 left-1 right-1 flex flex-row items-center p-1`}>
                     <View>
                         <Image
-                            source={require('../../assets/images/defaultAvatar.png')}
-                            style={tw`w-11 h-11 rounded-full`}
+                            source={item.item?.avatar ? {uri: item.item?.avatar} : require('../../assets/images/defaultAvatar.png') }
+                            style={tw`w-12 h-12 rounded-full`}
                         />
                     </View>
                     <View style={tw`ml-2`}>
@@ -54,7 +57,7 @@ const SongPost = ({dispatch, item}) => {
                             <Text style={tw`bg-black text-white px-1 text-lg`}>{item.item.name}</Text>
                         </View>
                         <View style={tw`flex flex-row`}>
-                            <Text style={tw`leading-4 text-gray-300 bg-black px-1 pb-[3]`}>@Username</Text>
+                            <Text style={tw`leading-4 text-gray-300 bg-black px-1 pb-[3]`}>{item.item.userName}</Text>
                         </View>
                         <View style={tw`flex flex-row items-center`}>
                             <Ionicons name='ios-play' size={12} style={tw`text-gray-300 bg-black h-4 pt-[2] pl-1`}/>
@@ -91,14 +94,26 @@ const SongPost = ({dispatch, item}) => {
                         />
                     </TouchableOpacity>
                 </View>
-                <TouchableOpacity>
+
+                {/* CALL OPTION MODAL */}
+
+
+                <TouchableOpacity
+                    onPress={() => setVisible(true)}
+                >
                     <Entypo name="dots-three-horizontal" 
-                        size={16}
-                        style={tw`text-gray-300`}
+                        size={20}
+                        style={tw`text-white`}
                     />    
                 </TouchableOpacity>
 
             </View>
+            <SongPostOptionModal 
+                isVisible={isVisible} 
+                setVisible={setVisible} 
+                songId={item.item.songId} 
+                token={token}
+            />
         </View>
     )
 }

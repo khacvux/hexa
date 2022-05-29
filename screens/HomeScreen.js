@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { FlatList, Animated, View, Platform, Alert, ScrollView } from 'react-native'
+import { FlatList, Animated, View, Platform, Alert, ScrollView, VirtualizedList } from 'react-native'
 import tw, { useDeviceContext } from 'twrnc'
 import Feeds from '../components/Home/Feeds';
 import Header from '../components/Header/Header';
@@ -26,7 +26,7 @@ const HomeScreen = () => {
     const clampedScroll = Animated.diffClamp(
         Animated.add(
             scrollY.interpolate({
-                inputRange: [0 ,1],
+                inputRange: [0, 1],
                 outputRange: [0, 1],
                 extrapolateLeft: 'clamp',
             }),
@@ -43,7 +43,7 @@ const HomeScreen = () => {
 
 
     useEffect(() => {
-        scrollY.addListener(({value}) => {
+        scrollY.addListener(({ value }) => {
             const diff = value - _scrollValue;
             _scrollValue = value;
             _clampedScrollValue = Math.min(
@@ -51,26 +51,26 @@ const HomeScreen = () => {
                 CONTAINER_HEIGHT,
             )
         });
-        offsetAnim.addListener(({value}) => {
+        offsetAnim.addListener(({ value }) => {
             _offsetValue = value;
         })
     }, []);
 
-    if(numberOfFollowing){
+    if (numberOfFollowing) {
         useEffect(() => {
-            dispatch(getPost({token, userId}))
+            dispatch(getPost({ token, userId }))
         }, [])
     }
-    
+
     const onMomentumScrollBegin = () => {
         clearTimeout(scrollEndTimer);
     };
     const onMomentumScrollEnd = () => {
         const toValue = _scrollValue > CONTAINER_HEIGHT && _clampedScrollValue > CONTAINER_HEIGHT / 2
             ? _offsetValue + CONTAINER_HEIGHT : _offsetValue - CONTAINER_HEIGHT;
-        
+
         Animated.timing(offsetAnim, {
-            toValue, 
+            toValue,
             duration: 300,
             useNativeDriver: true
         }).start();
@@ -85,14 +85,17 @@ const HomeScreen = () => {
         extrapolate: 'clamp'
     })
 
-    
+    const getItem = (posts, index) => {
+        return posts[index];
+    }
+
 
     return (
         <View style={[tw`bg-gray-100 h-full`]}>
             <View style={tw`h-full overflow-hidden flex`}>
-                <Animated.View style={[tw`absolute top-0 left-0 right-0 z-50`,{height: CONTAINER_HEIGHT}, {transform: [{translateY: headerTranslate}]}]}>
-                    <Header />
-                </Animated.View>
+                {/* <Animated.View style={[tw`absolute top-0 left-0 right-0 z-50`,{height: CONTAINER_HEIGHT}, {transform: [{translateY: headerTranslate}]}]}> */}
+                <Header />
+                {/* </Animated.View> */}
                 {
                     numberOfFollowing ? (
                         loadingGetPosts ? (
@@ -103,31 +106,34 @@ const HomeScreen = () => {
                                 <SkeletonFeeds />
                             </ScrollView>
                         ) : (
-                            <Animated.FlatList
+                            <VirtualizedList
                                 data={posts}
                                 renderItem={(post) => {
                                     return <Feeds post={post} token={token} userId={userId} />
                                 }}
                                 keyExtractor={post => post.postsId}
-                                contentContainerStyle={[tw`py-2 pt-[${CONTAINER_HEIGHT}]`]}
+                                getItemCount={posts => posts.length}
+                                getItem={getItem}
+                                contentContainerStyle={[tw``]}
+                                // contentContainerStyle={[tw`py-2 pt-[${CONTAINER_HEIGHT}]`]}
                                 showsHorizontalScrollIndicator={false}
                                 showsVerticalScrollIndicator={false}
-                                onScroll={Animated.event(
-                                    [{nativeEvent: {contentOffset: {y: scrollY}}}],
-                                    {useNativeDriver: true}
-                                )}
-                                onMomentumScrollBegin={onMomentumScrollBegin}
-                                onMomentumScrollEnd={onMomentumScrollEnd}
-                                onScrollEndDrag={onScrollEndDrag}
-                                scrollEventThrottle={1}
-                            /> 
+                            // onScroll={Animated.event(
+                            //     [{nativeEvent: {contentOffset: {y: scrollY}}}],
+                            //     {useNativeDriver: true}
+                            // )}
+                            // onMomentumScrollBegin={onMomentumScrollBegin}
+                            // onMomentumScrollEnd={onMomentumScrollEnd}
+                            // onScrollEndDrag={onScrollEndDrag}
+                            // scrollEventThrottle={1}
+                            />
 
                         )
                     ) : (
                         <View style={tw`bg-gray-50`}>
-                            <HiAnimation 
-                                h1={`Welcome to Hexa, ${firstName}!`} 
-                                h5={`When you follow people, you'll see the photos they post here.`}    
+                            <HiAnimation
+                                h1={`Welcome to Hexa, ${firstName}!`}
+                                h5={`When you follow people, you'll see the photos they post here.`}
                             />
                         </View>
                     )

@@ -7,7 +7,7 @@ import { Ionicons } from '@expo/vector-icons'
 import { BlurView } from 'expo-blur'
 import RBSheet from 'react-native-raw-bottom-sheet'
 
-import { useSelector, useDispatch,} from 'react-redux'
+import { useSelector, useDispatch, } from 'react-redux'
 import { signIn, signUp } from '../../redux/actions/authAction'
 import SafeArea from '../SafeArea'
 
@@ -31,36 +31,36 @@ const LoginOptions = () => {
     const [signUpWarn, setSignUpWarn] = useState('')
 
     const dispatch = useDispatch()
-    
+
     const handleSignIn = () => {
-        if(!userName) {
+        if (!userName) {
             setSignInWarn(`Please enter your email!`)
         }
-        else if(!password){
+        else if (!password) {
             setSignInWarn(`Please enter your password!`)
-        }else{
-            dispatch(signIn({userName, password}))
+        } else {
+            dispatch(signIn({ userName, password }))
         }
     }
 
     const handleSignUp = () => {
-        if(!firstName || !lastName) {
+        if (!firstName || !lastName) {
             setSignUpWarn(`Please enter your name!`)
         }
-        else if(!email){
+        else if (!email) {
             setSignUpWarn(`Please enter your email!`)
         }
-        else if(!numberPhone){
+        else if (!numberPhone) {
             setSignUpWarn(`Please enter your number phone!`)
         }
-        else if(crPassword != cfCrPass){
+        else if (crPassword != cfCrPass) {
             setSignUpWarn(`Confirm password doesn't match!`)
         }
-        else{
-            dispatch(signUp({firstName, lastName, email, numberPhone, crPassword}))
+        else {
+            dispatch(signUp({ firstName, lastName, email, numberPhone, crPassword }))
         }
     }
-    
+
     return (
         <ImageBackground
             source={require('../../assets/images/login_background.jpeg')}
@@ -89,7 +89,7 @@ const LoginOptions = () => {
                             onChangeText={val => setUsername(val)}
                             placeholderTextColor="#CCC"
                         />
-                        
+
                         <TextInput
                             style={tw`w-full p-3 rounded-[2] bg-[#F3F0F6] items-center mb-2`}
                             placeholder='Password'
@@ -101,7 +101,7 @@ const LoginOptions = () => {
                         <TouchableOpacity>
                             <Text style={tw`text-xs mb-1 px-2 text-[#00A3EA]`}>Forgot your password?</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity 
+                        <TouchableOpacity
                             style={tw`w-full p-[9] bg-[#5EC2EA] items-center rounded-[2] mt-2`}
                             onPress={handleSignIn}
                         >
@@ -114,7 +114,7 @@ const LoginOptions = () => {
                                 <View style={tw`h-6 justify-center px-3 mb-2`}>
                                     <Text style={tw`font-light tracking-[.20] text-red-600`}>{signInWarn}</Text>
                                 </View>
-                            ) : <></>                        
+                            ) : <></>
                         }
                     </BlurView>
 
@@ -126,7 +126,7 @@ const LoginOptions = () => {
                         style={tw`w-full rounded-xl overflow-hidden px-3 py-3 mt-1`}
                     >
                         <TouchableOpacity style={tw`flex flex-row items-center w-full px-5`}>
-                            <Image 
+                            <Image
                                 style={tw`w-6 h-6`}
                                 source={require('../../assets/icons/google_icon.png')}
                             />
@@ -157,7 +157,7 @@ const LoginOptions = () => {
                         Create account
                     </Text>
                     <View style={tw` flex flex-row items-center overflow-hidden`}>
-                        <TextInput 
+                        <TextInput
                             style={tw`flex-3 mr-1 p-3 rounded-[2] bg-[#F3F0F6] mb-3`}
                             placeholder='First name'
                             placeholderTextColor='#ccc'
@@ -165,7 +165,7 @@ const LoginOptions = () => {
                             onChangeText={val => setFirstName(val)}
 
                         />
-                        <TextInput 
+                        <TextInput
                             style={tw`flex-2 ml-1 p-3 rounded-[2] bg-[#F3F0F6] mb-3`}
                             placeholder='Last name'
                             placeholderTextColor='#ccc'
@@ -174,22 +174,22 @@ const LoginOptions = () => {
                         />
 
                     </View>
-                    <TextInput 
+                    <TextInput
                         placeholder='Email'
                         style={tw`p-3 rounded-[2] bg-[#F3F0F6] mb-3`}
-                        placeholderTextColor='#ccc'                    
+                        placeholderTextColor='#ccc'
                         value={email}
                         onChangeText={val => setEmail(val)}
                     />
-                    <TextInput 
+                    <TextInput
                         placeholder='Number phone'
                         style={tw`p-3 rounded-[2] bg-[#F3F0F6] mb-3`}
-                        placeholderTextColor='#ccc'       
-                        keyboardType="numeric"             
+                        placeholderTextColor='#ccc'
+                        keyboardType="numeric"
                         value={numberPhone}
                         onChangeText={val => setNumberPhone(val)}
                     />
-                    <TextInput 
+                    <TextInput
                         placeholder='Password'
                         style={tw`p-3 rounded-[2] bg-[#F3F0F6] mb-3`}
                         secureTextEntry={true}
@@ -198,7 +198,7 @@ const LoginOptions = () => {
                         onChangeText={val => setCrPassword(val)}
 
                     />
-                    <TextInput 
+                    <TextInput
                         placeholder='Confirm Password'
                         style={tw`p-3 rounded-[2] bg-[#F3F0F6] mb-3`}
                         secureTextEntry={true}
@@ -211,9 +211,9 @@ const LoginOptions = () => {
                             <View style={tw`h-6 justify-center px-3 mb-2`}>
                                 <Text style={tw`font-light tracking-[.20] text-red-600`}>{signUpWarn}</Text>
                             </View>
-                        ) : <></>                        
+                        ) : <></>
                     }
-                    <TouchableOpacity 
+                    <TouchableOpacity
                         style={tw`w-full p-[9] bg-[#5EC2EA] items-center rounded-[2] mt-2`}
                         onPress={handleSignUp}
                     >

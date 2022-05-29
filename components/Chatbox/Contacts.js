@@ -8,9 +8,7 @@ import Contact from './Contact';
 const Contacts = () => {
   return (
     <View style={tw`px-3 my-2 mt-4`}>
-      <Contact />
-      <Contact />
-      <Contact />
+      <Contact name='Thanh sau' messenger='hi' date='3 minutes ago' />
     </View>
   );
 };

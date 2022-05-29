@@ -4,7 +4,6 @@ import tw from 'twrnc'
 import { FlatGrid } from 'react-native-super-grid';
 import ListCategoryItem from './ListCategoryItem';
 import { useDispatch, useSelector } from 'react-redux';
-import { getListCategorySong } from '../../redux/actions/songsAction';
 
 
 

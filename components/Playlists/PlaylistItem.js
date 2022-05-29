@@ -16,22 +16,25 @@ const PlaylistItem = ({item, dispatch, tabBarHeight}) => {
         if(tabBarHeight == false){
             dispatch(setTabBarHeight(isTabBarHeight))
         }
-        navigation.navigate('PlaylistStack')
+        navigation.navigate('PlaylistStack', {
+            listSongId: item.item.listSongId,
+        })
     }
+
     return (
         <TouchableOpacity style={tw`ml-3.5`}
             onPress={ handleOnPress }
         >
             <Image 
-                source={require('../../assets/images/song_image.jpeg')}
-                style={tw`w-32 h-32 rounded-[1]`}
+                source={item.item.image ? {uri: item.item.image} : require('../../assets/images/default-song-avatar.jpeg')}
+                style={tw`w-32 h-32 rounded-lg`}
             />
             <View style={tw`px-1 my-[5] w-32`}>
                 <Text 
                     style={tw`text-base mb-[1]`}
                     numberOfLines={1}
                 >
-                    There's no one at all
+                    {item.item.nameOfList}
                 </Text>
             </View>
         </TouchableOpacity>

@@ -208,7 +208,7 @@ export const deleteSongFromPlaylistSuccess = payload => {
 
 export const getPlaylistById = payload => {
     return {
-        type: TYPES.GET_PLAYLIST_BY_LID_SUCCESS,
+        type: TYPES.GET_PLAYLIST_BY_LID,
         payload
     }
 }

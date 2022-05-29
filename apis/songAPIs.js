@@ -111,3 +111,28 @@ export const getPlaylistByLIDAPI = async ({token, lid}) => {
         return error
     }
 }
+
+export const createNewPlaylistAPI = async ({token, userId, name}) => {
+    try {
+        const res = await AXIOS.post(`listSong/new`, {
+            userId: userId,
+            name: name
+        }, {
+            'Authorization': `Bearer ${token}`,
+        })
+        return res.data
+    } catch (error) {
+        return error
+    }
+}
+
+export const addSongToPlaylistAPI = async ({token, songId, libId}) => {
+    try {
+        const res = await AXIOS.get(`listSong/newItem/${libId}/${songId}`, {
+            'Authorization': `Bearer ${token}`,
+        })   
+        return res.data     
+    } catch (error) {
+        return error
+    }
+}

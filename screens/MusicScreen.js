@@ -8,7 +8,6 @@ import SafeArea from '../components/SafeArea';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import { useDispatch, useSelector } from 'react-redux';
 import { getListCategorySong, hidePlayerBar, showlayerBar, getLibraryOfUserByUID } from '../redux/actions/songsAction';
-import { LinearGradient } from 'expo-linear-gradient';
 import ListCategoryMusic from '../components/ListCategorySong/ListCategoryMusic';
 import VirtualizedScrollView from '../components/VitualizedScrollView';
 import { useEffect } from 'react';
@@ -29,7 +28,7 @@ const MusicScreen = () => {
 
   
     return (
-        <SafeAreaView style={[tw`bg-white h-full`]}>
+        <SafeAreaView style={[tw`bg-gray-50 h-full`]}>
                 <Header />
                 <View style={tw`h-full`}>
                     <VirtualizedScrollView >

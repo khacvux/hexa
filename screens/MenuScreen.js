@@ -1,4 +1,4 @@
-import { AntDesign } from '@expo/vector-icons'
+import { AntDesign, Ionicons } from '@expo/vector-icons'
 import { useState } from 'react'
 import { View, Text, SafeAreaView, TouchableOpacity, ScrollView, Switch  } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
@@ -27,7 +27,15 @@ const MenuScreen = ({navigation}) => {
 
     return (
         <SafeAreaView style={[tw`bg-white h-full`, SafeArea.AndroidSafeArea]}>
-            <Text style={tw`text-center font-bold text-base my-2`}>Menu</Text>
+            <View style={tw`flex flex-row items-center px-3 my-2`}>
+                <Ionicons 
+                    name='menu'
+                    size={29}
+                    style={tw`mx-1`}
+                />
+                <Text style={tw`font-semibold text-2xl`}>Menu</Text>
+
+            </View>
             <ScrollView contentContainerStyle ={tw`px-3 flex flex-col items-center`}>
                 <TouchableOpacity 
                     style={tw`w-full py-3 px-2 flex flex-row justify-between`}
