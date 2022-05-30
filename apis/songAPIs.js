@@ -47,9 +47,12 @@ export const getListSongByCategoryIdAPI = async ({token, categoryId}) => {
 }
 
 
-export const likeSongAPI = async ({token, data}) => {
+export const likeSongAPI = async ({token, tusId, userId}) => {
     try {
-        const res = await AXIOS.post(`${url}like`, data, {
+        const res = await AXIOS.post(`${url}like`, {
+            tusId, 
+            userId
+        }, {
             headers: {
                 'Authorization': `Bearer ${token}`,
             },
@@ -60,9 +63,13 @@ export const likeSongAPI = async ({token, data}) => {
     }
 }
 
-export const commentSongAPI = async ({token, data}) => {
+export const commentSongAPI = async ({token, tusId, userId, comment}) => {
     try {
-        const res = await AXIOS.post(`${url}comment`, data, {
+        const res = await AXIOS.post(`${url}comment`, {
+            tusId,
+            userId,
+            comment,
+        }, {
             headers: {
                 'Authorization': `Bearer ${token}`,
             },

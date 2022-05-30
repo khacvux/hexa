@@ -1,10 +1,11 @@
 import * as TYPES from '../constants/songs'
 import * as ACTION from '../actions/songsAction'
 import { put, takeLeading, takeEvery, takeLatest, call, delay } from '@redux-saga/core/effects'
-import { addSongToPlaylistAPI, createNewPlaylistAPI, deletePlaylistAPI, getLibraryByUIDAPI, getListGenreAPI,
+import { addSongToPlaylistAPI, commentSongAPI, createNewPlaylistAPI, deletePlaylistAPI, getLibraryByUIDAPI, getListGenreAPI,
     getListPostedSongsOfUserAPI,
     getListSongByCategoryIdAPI, 
     getPlaylistByLIDAPI, 
+    likeSongAPI, 
     removeSongFromPlaylistAPI, 
     uploadSongAPI 
 } from '../../apis/songAPIs'
@@ -188,6 +189,44 @@ function* removeSongFromPlaylist(data) {
     }
 }
 
+function* reactSong(data) {
+    try {
+        console.log('REACT SONG RUNNING..')
+        const res = yield call(likeSongAPI, {
+            token: data.payload.token,
+            tusId: data.payload.tusId,
+            userId: data.payload.userId,
+        })
+        if(res.status == 'ok') {
+            console.log('REACT SONG SUCCESS,')
+        }
+    } catch (error) {
+        yield put(ACTION.actionFailure(error))
+    }
+}
+
+function* commentSong(data) {
+    try {
+        console.log('COMMENT SONG RUNNING..')
+        const res = yield call(commentSongAPI, {
+            token: data.payload.token,
+            tusId: data.payload.tusId,
+            userId: data.payload.userId,
+            comment: data.payload.comment,
+        })
+        if(res.status == 'ok') {
+            console.log('COMMENT SUCCESS')
+            yield put(ACTION.commentSongSuccess({
+                tusId: data.payload.tusId,
+                userId: data.payload.userId,
+                comment: data.payload.comment,
+            }))
+        } 
+    } catch (error) {
+        yield put(ACTION.actionFailure(error))
+    }
+}
+
 export default playerSaga = [
     takeLeading(TYPES.GET_LIST_CATEGORY_SONG, getGenre), 
     takeEvery(TYPES.ADD_SONG, addSong),
@@ -200,4 +239,6 @@ export default playerSaga = [
     takeLatest(TYPES.GET_LIST_POSTED_SONGS_OF_USER, getListPostedSongsOfUser),
     takeLeading(TYPES.DELETE_PLAYLIST, deletePlaylist),
     takeEvery(TYPES.DELETE_SONG_FROM_PLAYLIST, removeSongFromPlaylist),
+    takeEvery(TYPES.LIKE_SONG, reactSong),
+    takeEvery(TYPES.COMMENT_SONG, commentSong),
 ]
