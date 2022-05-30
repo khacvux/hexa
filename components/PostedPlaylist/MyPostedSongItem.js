@@ -5,22 +5,22 @@ import SoundWaveAnimation from '../LottieAnimation/SoundWaveAnimation'
 
 
 
-const MyPostedSongItem = () => {
+const MyPostedSongItem = ({item}) => {
   return (
     <View
         style={tw`flex flex-row items-center bg-[#F5F7FA] p-2 rounded-lg my-1 justify-between`}
     >
         <View style={tw`flex flex-row items-center flex-1`}>
             <ImageBackground
-                source={require('../../assets/images/default-song-avatar.jpeg')}
-                style={tw`w-11 h-11 rounded-lg mr-2 overflow-hidden items-center justify-center`}
+                source={item.item.image ? {uri: item.item.image} : require('../../assets/images/default-song-avatar.jpeg')}
+                style={tw`w-11 h-11 rounded mr-2 overflow-hidden items-center justify-center`}
             >
-                <SoundWaveAnimation />
+                {/* <SoundWaveAnimation /> */}
             </ImageBackground>
             <Text style={tw`font-light tracking-[.2]`}
                 numberOfLines={1}
             >
-                Những ngôi sao trên caoo
+                {item.item.name}
             </Text>
         </View>
         <View style={tw`flex flex-row items-center `}>

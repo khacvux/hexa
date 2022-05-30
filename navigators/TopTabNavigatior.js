@@ -79,7 +79,7 @@ export const UpLoadNavigatior = () => {
         </TopBar.Navigator>
     );
 };
-export const TabListNavigator = ({userId, myUserId, numberOfPosts}) => {
+export const TabListNavigator = ({userId, token, numberOfPosts}) => {
     return (
         <TopBar.Navigator
             screenOptions={{
@@ -113,7 +113,7 @@ export const TabListNavigator = ({userId, myUserId, numberOfPosts}) => {
             />
             <TopBar.Screen 
                 name='ListTrackTab' 
-                children={() => <MyPostedPlaylist  />} 
+                children={() => <MyPostedPlaylist token={token} userId={userId} />} 
                 options={{ 
                     tabBarIcon: (({focused}) => 
                         <Foundation name='sound' size={23} style={focused ? tw`text-[#5EC2EA]` : tw`text-gray-500`} />

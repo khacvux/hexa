@@ -1,5 +1,5 @@
 import { View, Text, FlatList, ImageBackground, Image, Dimensions } from 'react-native'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useNavigation } from '@react-navigation/native'
 import tw from 'twrnc'
@@ -12,6 +12,8 @@ import { BlurView } from 'expo-blur'
 import VirtualizedScrollView from '../components/VitualizedScrollView'
 import { useDispatch, useSelector } from 'react-redux'
 import { getPlaylistById } from '../redux/actions/songsAction'
+import InPlaylistModal from '../components/Modal/InPlaylistModal'
+import InPlaylistItemModal from '../components/Modal/InPlaylistItemModal'
 
 
 
@@ -34,7 +36,10 @@ const PlaylistScreen = ({route}) => {
         dispatch(getPlaylistById({lid: listSongId, token}))
     }, [listSongId])
     
-    console.log(listSongByLibrary.image)
+    const [isVisible, setVisible] = useState(false)
+    const [isVisible2, setVisible2] = useState(false)
+    const [isListSongItemId, setListSongItemId] = useState('')
+
 
 
 
@@ -64,7 +69,7 @@ const PlaylistScreen = ({route}) => {
                         <View style={tw`absolute top-0 right-3 h-10 justify-center`} >
                             <TouchableOpacity
                                 style={tw`p-2`}
-                                onPress={() => navigation.goBack()}
+                                onPress={() => setVisible(true)}
                             >
                                 <Entypo name="dots-three-vertical" size={14} style={tw`text-gray-300`} />
                             </TouchableOpacity>
@@ -106,7 +111,7 @@ const PlaylistScreen = ({route}) => {
                         <FlatList 
                             data={listSongByLibrary.listSongItemList}
                             renderItem={(item) => {
-                                return <TrackItem item={item} />
+                                return <TrackItem item={item} setListSongItemId={setListSongItemId} setVisible={setVisible2} />
                             }}
                             keyExtractor={(item, index) => index}
                             showsHorizontalScrollIndicator={false}
@@ -118,7 +123,19 @@ const PlaylistScreen = ({route}) => {
 
                 </SafeAreaView>
             </BlurView>
-            
+            <InPlaylistModal 
+                isVisible={isVisible} 
+                setVisible={setVisible} 
+                listSongId={listSongId} 
+                token={token} 
+            />
+            <InPlaylistItemModal 
+                isVisible={isVisible2}
+                setVisible={setVisible2}
+                isListSongItemId={isListSongItemId}
+                dispatch={dispatch}
+                token={token}
+            />
         </ImageBackground>
         
     )

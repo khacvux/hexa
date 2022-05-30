@@ -33,7 +33,7 @@ const SongPost = ({ dispatch, item, token }) => {
     }
 
     return (
-        <View style={[tw`my-2.5 overflow-hidden w-full`]}>
+        <View style={[tw`mb-3 mt-1 overflow-hidden w-full`]}>
             <TouchableOpacity 
                 style={[tw`shadow-lg`, { height: FRAMESIZE_H}]}
                 activeOpacity={.8}
@@ -41,7 +41,7 @@ const SongPost = ({ dispatch, item, token }) => {
             >
                 <Image 
                     source={item.item.image ? {uri: item.item.image} : require('../../assets/images/default-song-avatar.jpeg')}
-                    style={tw`w-full h-full bg-gray-600`}
+                    style={tw`w-full h-full bg-gray-600 rounded-lg`}
                     resizeMode='cover'
                 />
 

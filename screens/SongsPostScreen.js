@@ -30,7 +30,7 @@ const SongsPostScreen = ({route}) => {
       resizeMode='cover'
     >
       <BlurView 
-        intensity={60}
+        intensity={65}
         style={tw`w-full h-full`}
         tint='dark'
       >

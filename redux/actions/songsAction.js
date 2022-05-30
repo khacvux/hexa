@@ -234,6 +234,34 @@ export const getLibraryOfUserByUIDSuccess = payload => {
     }
 }
 
+export const getMyListPostedSong = payload => {
+    return {
+        type: TYPES.GET_MY_LIST_POSTED_SONGS,
+        payload
+    }
+}
+
+export const getMyListPostedSongSuccess = payload => {
+    return {
+        type: TYPES.GET_MY_LIST_POSTED_SONGS_SUCCESS,
+        payload
+    }
+}
+
+export const getListPostedSongsOfUser = payload => {
+    return {
+        type: TYPES.GET_LIST_POSTED_SONGS_OF_USER,
+        payload
+    }
+}
+
+export const getListPostedSongsOfUserSuccess = payload => {
+    return {
+        type: TYPES.GET_LIST_POSTED_SONGS_OF_USER_SUCCESS,
+        payload
+    }
+}
+
 export const actionFailure = error => {
     return {
         type: TYPES.ACTION_FAILURE,

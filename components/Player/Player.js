@@ -36,7 +36,7 @@ const Player = ({}) => {
             />
             <View>
               <Text numberOfLines={1}>{arraySongs[0].name}</Text>
-              <Text style={tw`text-xs font-light`}>@auther</Text>
+              <Text style={tw`text-xs font-light`}>{arraySongs[0].userName}</Text>
             </View>
           </View>
           <View style={tw`flex flex-row items-center`}>

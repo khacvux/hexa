@@ -136,3 +136,36 @@ export const addSongToPlaylistAPI = async ({token, songId, libId}) => {
         return error
     }
 }
+
+export const removeSongFromPlaylistAPI = async ({token, id}) => {
+    try {
+        const res = await AXIOS.get(`listSong/deleteItem/${id}`, {
+            'Authorization': `Bearer ${token}`,
+        })        
+        return res.data
+    } catch (error) {
+        return error
+    }
+}
+
+export const deletePlaylistAPI = async ({token, libId}) => {
+    try {
+        const res = await AXIOS.get(`listSong/delete/${libId}`, {
+            'Authorization': `Bearer ${token}`,
+        })        
+        return res.data
+    } catch (error) {
+        return error
+    }
+}
+ 
+export const getListPostedSongsOfUserAPI = async ({ token, userId }) => {
+    try {
+        const res = await AXIOS.get(`song/user/${userId}`, {
+            'Authorization': `Bearer ${token}`,
+        })        
+        return res.data
+    } catch (error) {
+        return error
+    }
+}

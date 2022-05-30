@@ -38,7 +38,7 @@ const DetailPlayerModal = ({ showDetailPlayer, setShowDetailPlayer, arraySongs }
                 </TouchableOpacity>
                 <View style={tw`flex-1`}>
                   <Text style={tw`text-2xl font-semibold text-white tracking-[.25]`}>{arraySongs[0].name}</Text>
-                  <Text style={tw`text-white text-base`}>@auther</Text>
+                  <Text style={tw`text-white text-base`}>{arraySongs[0].userName}</Text>
                 </View>
 
               </View>

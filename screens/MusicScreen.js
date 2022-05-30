@@ -28,18 +28,15 @@ const MusicScreen = () => {
 
   
     return (
-        <SafeAreaView style={[tw`bg-gray-50 h-full`]}>
+        <SafeAreaView style={[tw`bg-white h-full`]}>
                 <Header />
                 <View style={tw`h-full`}>
                     <VirtualizedScrollView >
                         {/* Playlists */}
-                        {
-                            listLibrary.length ? (
-                                <Playlist 
-                                    listLibrary={listLibrary}
-                                />
-                            ) : <></>
-                        }
+                        <Playlist 
+                            listLibrary={listLibrary}
+                        />
+                        
                         {/* CATEGORY SONG */}
                         <ListCategoryMusic token={token} /> 
                     </VirtualizedScrollView>

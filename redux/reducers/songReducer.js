@@ -11,6 +11,8 @@ const initialState = {
     listOfSearchResults: [],
     listComments: [],
     arraySongs: [],
+    myListPostedSongs: [],
+    listPostedSongsOfUser: [],
     onAddingSong: false,
     onAddingSongSuccess: false,
     onAddingSongFail: false,
@@ -135,8 +137,13 @@ export default songsReducer = (state = initialState, action) => {
                 ...state
             }
         case TYPES.DELETE_PLAYLIST_SUCCESS:
+            const newListLibrary = [...state.listLibrary]
+            newListLibrary.splice(newListLibrary.findIndex((item) => {
+                return item.listSongId == action.payload.libId
+            }))
             return {
-                ...state
+                ...state,
+                listLibrary: newListLibrary
             }
 
         case TYPES.ADD_SONG_TO_PLAYLIST:
@@ -153,8 +160,13 @@ export default songsReducer = (state = initialState, action) => {
                 ...state
             }
         case TYPES.DELETE_SONG_FROM_PLAYLIST_SUCCESS:
-            return {
-                ...state
+            const newListSongByLibrary = state.listSongByLibrary
+            newListSongByLibrary.listSongItemList.splice(newListSongByLibrary.listSongItemList.findIndex((item) => {
+                return item.listSongItemId == action.payload.id
+            }))
+            return { 
+                ...state,
+                listSongByLibrary: newListSongByLibrary,
             }
 
         case TYPES.GET_PLAYLIST_BY_LID:
@@ -175,6 +187,28 @@ export default songsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 listLibrary: action.payload
+            }
+
+        case TYPES.GET_MY_LIST_POSTED_SONGS:
+            return {
+                ...state
+            }
+        
+        case TYPES.GET_MY_LIST_POSTED_SONGS_SUCCESS:
+            return {
+                ...state,
+                myListPostedSongs: action.payload
+            }
+            
+        case TYPES.GET_LIST_POSTED_SONGS_OF_USER:
+            return {
+                ...state,
+            }
+        
+        case TYPES.GET_LIST_POSTED_SONGS_OF_USER_SUCCESS:
+            return {
+                ...state,
+                listPostedSongsOfUser: action.payload
             }
 
         case TYPES.ACTION_FAILURE:

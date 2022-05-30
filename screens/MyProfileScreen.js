@@ -37,7 +37,7 @@ const MyProfileScreen = () => {
             <EditProfile handleModalVisible={handleModalVisible} />
             <TabListNavigator 
                 userId={userId} 
-                // myUserId={userId}
+                token={token}
                 numberOfPosts={numberOfPosts}    
             />
             <EditProfileModal 

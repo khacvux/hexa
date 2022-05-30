@@ -22,7 +22,7 @@ const PlaylistItem = ({item, dispatch, tabBarHeight}) => {
     }
 
     return (
-        <TouchableOpacity style={tw`ml-3.5`}
+        <TouchableOpacity style={tw`ml-3`}
             onPress={ handleOnPress }
         >
             <Image 

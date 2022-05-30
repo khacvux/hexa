@@ -14,7 +14,7 @@ const ListSongPost = ({ listSongByCategory }) => {
   {
     listSongByCategory.length ? (
       <FlatList
-      contentContainerStyle={tw` w-full pb-10`}
+      contentContainerStyle={tw` w-full pb-10 px-8`}
       data={listSongByCategory}
       renderItem={(item) =>
         <SongPost
@@ -29,7 +29,7 @@ const ListSongPost = ({ listSongByCategory }) => {
     />
     ) : (
       
-      <EmptyList title='No songs yet' />
+      <EmptyList title='No songs yet' dark={true} />
     )
   }
   </>

@@ -22,7 +22,7 @@ const CreatePlaylistScreen = () => {
 
     return (
         <SafeAreaView style={tw`bg-white h-full items-center`}>
-            <View style={tw`w-full bg-gray-200 justify-between flex flex-row items-center`} >
+            <View style={tw`w-full justify-between flex flex-row items-center`} >
                 <View>
                     <TouchableOpacity
                         style={tw`flex flex-row items-center px-3 py-2`}
@@ -31,7 +31,7 @@ const CreatePlaylistScreen = () => {
                         <AntDesign name='left' 
                             size={15}
                         />
-                        <Text style={tw`text-lg font-light`}>Back</Text>
+                        <Text style={tw`text-lg font-light ml-1`}>Back</Text>
                     </TouchableOpacity>
                 </View>
                 {

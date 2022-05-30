@@ -3,7 +3,7 @@ import tw from 'twrnc'
 import { Entypo, Ionicons } from '@expo/vector-icons';
 
 
-const TrackItem = ({item}) => {
+const TrackItem = ({item, setListSongItemId, setVisible}) => {
   return (
     <TouchableOpacity style={tw`w-full flex flex-row items-center px-3 mb-3`}>
         <Image 
@@ -18,7 +18,12 @@ const TrackItem = ({item}) => {
             </Text>
         </View>
         <View>
-          <TouchableOpacity style={tw`p-2`}>
+          <TouchableOpacity style={tw`p-2`}
+            onPress={() => {
+              setListSongItemId(item.item.listSongItemId)
+              setVisible(true)
+            }}
+          >
             <Entypo name="dots-three-horizontal" size={18} style={tw`text-gray-300`} />
           </TouchableOpacity>
         </View>
