@@ -22,7 +22,7 @@ const PostItem = ({item, handleVisibleDeleteModal, setIdPostSelected}) => {
             }}
           >
             {
-              item.item.postsImageList[0].image ? (
+              item.item?.postsImageList[0]?.image ? (
                 <Image 
                     source={{ uri: item.item.postsImageList[0].image }}
                     style={tw`h-full w-full`}

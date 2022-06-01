@@ -1,7 +1,7 @@
 import * as TYPES from '../constants/songs'
 
 
-export const showlayerBar = payload => {
+export const showPlayerBar = payload => {
     return {
         type: TYPES.SHOW_PLAYER_BAR,
         payload,
@@ -29,7 +29,7 @@ export const pauseMusic = payload => {
     }
 }
 
-export const changeArraySongs = payload => {
+export const setArraySongs = payload => {
     return {
         type: TYPES.CHANGE_ARRAY_SONGS,
         payload

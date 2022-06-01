@@ -1,18 +1,104 @@
 import { AntDesign, Entypo, FontAwesome5, Ionicons, SimpleLineIcons } from '@expo/vector-icons'
 import { BlurView } from 'expo-blur'
 import { StatusBar } from 'expo-status-bar'
-import { View, Text, Modal, ImageBackground, SafeAreaView, TouchableOpacity, Image } from 'react-native'
+import { View, Text, Modal, ImageBackground, SafeAreaView, TouchableOpacity, Image, FlatList, Dimensions, Animated } from 'react-native'
 import tw from 'twrnc'
+// import TrackPlayer, {
+//   Capability,
+//   Event,
+//   RepeatMode,
+//   State,
+//   usePlaybackState,
+//   useProgress,
+//   useTrackPlayerEvents,
+// } from 'react-native-track-player'
+
 import Slider from '@react-native-community/slider'
+import { useSelector } from 'react-redux'
+import { useEffect, useRef, useState } from 'react'
 
 
-const DetailPlayerModal = ({ showDetailPlayer, setShowDetailPlayer, arraySongs }) => {
+const DetailPlayerModal = ({ showDetailPlayer, setShowDetailPlayer }) => {
+
+
+  const { width, height } = Dimensions.get('window')
+  // const progress = useProgress()
+  const { arraySongs } = useSelector(state => state.songReducer)
+
+  const [songIndex, setSongIndex] = useState(0)
+  const [repeatMode, setRepeatMode] = useState(false)
+  const [songName, setSongName] = useState('')
+  const [songAuthor, setSongAuthor] = useState('')
+  const [songImage, setSongImage] = useState()
+
+  const scrollX = useRef(new Animated.Value(0)).current
+  const songSlider = useRef(null);
+
+  
+  // console.log(arraySongs)
+
+  // const setupPlayer = async () => {
+  //   try {
+  //     await TrackPlayer.setupPlayer()
+        
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
+
+  const renderSongsImage = ({item, index}) => {
+    return (
+      <Animated.View style={[tw`h-full items-center justify-center`, {width: width}]}>
+        <Image 
+          source={item.song.image ? {uri: item.song.image} : require('../../assets/images/default-song-avatar.jpeg')}
+          style={tw`h-75 w-75 rounded-xl`}
+        />  
+      </Animated.View>
+      
+    )
+  }
+
+  // const skipTo = async songId => {
+  //   await TrackPlayer.skip(songId)
+  // }
+
+  // const skipToNext = () => {
+  //   songSlider.current.scrollToOffset({
+  //     offset: (songIndex + 1) * width,
+  //   });
+  // };
+
+  // const skipToPrevious = () => {
+  //   songSlider.current.scrollToOffset({
+  //     offset: (songIndex - 1) * width,
+  //   });
+  // };
+
+
+
+
+  // useEffect(() => {
+  //   // setupPlayer()
+
+  //   scrollX.addListener((value) => {
+  //     const index = Math.round((value/width))
+  //     skipTo(index)
+  //     setSongIndex(index)
+  //   })
+
+  //   return () => {
+  //     scrollX.removeAllListeners();
+  //     TrackPlayer.destroy();
+  //   }
+  // }, [])
+
+
+
   return (
     <Modal
       visible={showDetailPlayer}
       animationType='slide'
     >
-      <StatusBar hidden={true} />
       <ImageBackground
         source={arraySongs[0]?.image ? {uri: arraySongs[0]?.image} : require('../../assets/images/default-song-avatar.jpeg')}
         style={tw`w-full h-full`}
@@ -24,8 +110,8 @@ const DetailPlayerModal = ({ showDetailPlayer, setShowDetailPlayer, arraySongs }
           tint='dark'
         >
           <SafeAreaView style={tw`h-full`}>
-            <View style={tw`px-5 flex flex-col h-full justify-between`} >
-              <View style={tw`flex flex-row items-center my-5`}>
+            <View style={tw`flex flex-col h-full justify-between`} >
+              <View style={tw`flex flex-row items-center my-3 px-5`}>
                 <TouchableOpacity
                   style={tw`p-2 rounded-full mr-3 border border-white`}
                   onPress={() => setShowDetailPlayer(!showDetailPlayer)}
@@ -42,12 +128,34 @@ const DetailPlayerModal = ({ showDetailPlayer, setShowDetailPlayer, arraySongs }
                 </View>
 
               </View>
-              <View style={tw`flex-1 w-full items-center justify-center`}>
+
+              {/* IMAGE */}
+
+{/* 
+              <View style={tw`flex-1 w-full bg-black items-center justify-center`}>
                 <Image 
                   source={arraySongs[0]?.image ? {uri: arraySongs[0]?.image} : require('../../assets/images/default-song-avatar.jpeg')}
-                  style={tw`h-70 w-70 rounded-xl`}
+                  style={tw`h-75 w-75 rounded-xl`}
+                />
+              </View> */}
+
+
+              <View style={tw`flex-1 w-full items-center justify-center`}>
+                <Animated.FlatList 
+                  data={arraySongs}
+                  renderItem={renderSongsImage}
+                  keyExtractor={item => item.listSongItemId}
+                  horizontal
+                  pagingEnabled
+                  showsHorizontalScrollIndicator={false}
+                  scrollEventThrottle={16}
                 />
               </View>
+
+
+
+
+
               <View style={tw``}>
                   <View style={tw`flex flex-row items-center my-1 justify-around`}>
                     <TouchableOpacity
@@ -55,16 +163,16 @@ const DetailPlayerModal = ({ showDetailPlayer, setShowDetailPlayer, arraySongs }
                       activeOpacity={.5}
                     >
                       <AntDesign name='stepbackward'
-                        size={22}
-                        style={tw`text-white`}
+                        size={23}
+                        style={tw`text-gray-300`}
                       />
                     </TouchableOpacity>
                     <TouchableOpacity
-                      style={tw`p-6 rounded-full`}
+                      style={tw`p-6 rounded-full bg-gray-900`}
                       activeOpacity={.5}
                     >
                       <FontAwesome5 name='pause'
-                        size={28}
+                        size={30}
                         style={tw`text-white`}
                       />
                     </TouchableOpacity>
@@ -73,7 +181,7 @@ const DetailPlayerModal = ({ showDetailPlayer, setShowDetailPlayer, arraySongs }
                       activeOpacity={.5}
                     >
                       <AntDesign name='stepforward'
-                        size={24}
+                        size={23}
                         style={tw`text-white`}
                       />
                     </TouchableOpacity>
@@ -81,19 +189,34 @@ const DetailPlayerModal = ({ showDetailPlayer, setShowDetailPlayer, arraySongs }
 
 
                 {/* SLIDER */}
-                <View style={tw`mb-15 mt-5`}>
+                <View style={tw`mb-15 mt-5 px-5`}>
                   <Slider
                     style={tw``}
                     value={0}
                     minimumValue={0}
-                    maximumValue={100}
+                    maximumValue={10}
                     thumbTintColor='#4b5563'
                     minimumTrackTintColor='#4b5563'
                     maximumTrackTintColor='#F5F7FA'
+                    // onSlidingComplete={async value => {
+                    //   await TrackPlayer.seekTo(value);
+                    // }}
                   />
                   <View style={tw`flex flex-row items-center justify-between`}>
-                    <Text style={tw`font-bold text-white`}>00:00</Text>
-                    <Text style={tw`font-bold text-white`}>03:00</Text>
+                    <Text style={tw`font-bold text-white`}>
+                      {/* {
+                        new Date(progress.position * 1000)
+                        .toLocaleTimeString()
+                        .substring(3)
+                      } */}
+                    </Text>
+                    <Text style={tw`font-bold text-white`}>
+                      {/* {
+                        new Date((progress.duration - progress.position) * 1000)
+                        .toLocaleTimeString()
+                        .substring(3)
+                      } */}
+                    </Text>
                   </View>
                 </View>
 

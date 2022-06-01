@@ -119,7 +119,7 @@ function* deletePostById(data) {
             postsId: data.payload.postsId,
         })
         if (res.status == 'ok') {
-            yield put(ACTION.deletePostSuccess(data.payload.postsId))
+            yield put(ACTION.deletePostSuccess({postsId: data.payload.postsId}))
         }
     } catch (error) {
         yield put(ACTION.consoleError(error))
@@ -208,7 +208,7 @@ export default postsSaga = [
     takeLatest(TYPES.ADD_POST, addPost),
     takeLatest(TYPES.GET_LIST_POST_USER, getListPostUser),
     takeLatest(TYPES.FIND_POST_BY_ID, findPostsById),
-    takeLeading(TYPES.DELETE_POST, deletePostById),
+    takeEvery(TYPES.DELETE_POST, deletePostById),
     takeEvery(TYPES.COMMENT_POST, commentPost),
     takeLatest(TYPES.GET_LIST_COMMENT_POST, getListCommentOfPost),
     takeLeading(TYPES.DELETE_COMMENT_POST, deleteComment),

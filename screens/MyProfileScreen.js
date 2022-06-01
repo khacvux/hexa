@@ -21,6 +21,8 @@ const MyProfileScreen = () => {
         setModalVisible(!modalVisible)
     }
 
+
+    console.log(avatar)
     return (
         <SafeAreaView style={[tw`bg-white h-full `, SafeArea.AndroidSafeArea]}>
             <Text style={tw`my-1 text-lg font-bold text-center`}>Your profile</Text>

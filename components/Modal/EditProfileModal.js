@@ -28,6 +28,7 @@ const EditProfileModal = ({
     const dispatch = useDispatch();
     const [isVisibleChangeAvtModal, setVisibleChangeAvtModal] = useState(false);
 
+    console.log(avatar)
 
     const handleVisibleChangeAvtModal = () => {
         setVisibleChangeAvtModal(!isVisibleChangeAvtModal)

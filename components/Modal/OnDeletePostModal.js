@@ -8,11 +8,10 @@ import { deletePost, getListPostUser } from '../../redux/actions/postsAction';
 const OnDeletePostModal = ({handleVisibleDeleteModal, isVisibleDeleteModal, isIdPostSelected}) => {
 
     const dispatch = useDispatch();
-    const { token, userId } = useSelector(state => state.authReducer)
+    const { token } = useSelector(state => state.authReducer)
 
     const handleDelete = () => {
         dispatch(deletePost({token, postsId: isIdPostSelected}))
-        dispatch(getListPostUser({userId, token}))
         handleVisibleDeleteModal()
     }
 

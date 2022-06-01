@@ -11,7 +11,7 @@ import SafeArea from '../components/SafeArea'
 import { BlurView } from 'expo-blur'
 import VirtualizedScrollView from '../components/VitualizedScrollView'
 import { useDispatch, useSelector } from 'react-redux'
-import { getPlaylistById } from '../redux/actions/songsAction'
+import { getPlaylistById, setArraySongs, showPlayerBar } from '../redux/actions/songsAction'
 import InPlaylistModal from '../components/Modal/InPlaylistModal'
 import InPlaylistItemModal from '../components/Modal/InPlaylistItemModal'
 
@@ -40,7 +40,12 @@ const PlaylistScreen = ({route}) => {
     const [isVisible2, setVisible2] = useState(false)
     const [isListSongItemId, setListSongItemId] = useState('')
 
-
+    const handlePlay = () => {
+        if(listSongByLibrary.listSongItemList.length){
+            dispatch(setArraySongs(listSongByLibrary.listSongItemList))
+            dispatch(showPlayerBar())
+        }
+    }
 
 
     return (
@@ -79,6 +84,7 @@ const PlaylistScreen = ({route}) => {
                     <VirtualizedScrollView>
                         <TouchableOpacity
                             activeOpacity={.9}
+                            onPress={handlePlay}
                         >
                             <ImageBackground
                                 source={listSongByLibrary.image ? {uri: listSongByLibrary.image } : require('../assets/images/music-background.jpeg')}

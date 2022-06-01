@@ -8,7 +8,6 @@ import SelectPicture from '../components/Upload/SelectPicture';
 import SelectAudio from '../components/Upload/SelectAudio';
 import ListPost from '../components/Profile/ListPosts';
 import ListTrack from '../components/Profile/ListTrack';
-import { useNavigation } from '@react-navigation/native';
 import ListPostByUID from '../components/Profile/ListPostsByUID';
 import MyPostedPlaylist from '../components/PostedPlaylist/MyPostedPlaylist';
 

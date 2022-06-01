@@ -4,7 +4,7 @@ import { useRef, useState } from 'react';
 import { View, Text, Image, TouchableOpacity, Dimensions } from 'react-native'
 import RBSheet from 'react-native-raw-bottom-sheet';
 import tw from 'twrnc'
-import { changeArraySongs, likeSong, showlayerBar } from '../../redux/actions/songsAction';
+import { changeArraySongs, likeSong, showPlayerBar } from '../../redux/actions/songsAction';
 import SongPostOptionModal from '../Modal/SongPostOptionModal';
 import ListCommentSongPost from '../SongComments/ListCommentSongPost';
 import WriteCommentSongs from '../SongComments/WriteCommentSongs';
@@ -27,16 +27,16 @@ const SongPost = ({ dispatch, item, token }) => {
 
 
     const handlePlaySong = () => {
-        dispatch(showlayerBar())
-        dispatch(changeArraySongs([
-            {
-                image: item.item.image,
-                name: item.item.name,
-                song: item.item.song,
-                songId: item.item.songId,
-                userName: item.item.userName,
-            }
-        ]))
+        dispatch(showPlayerBar())
+        // dispatch(changeArraySongs([
+        //     {
+        //         image: item.item.image,
+        //         name: item.item.name,
+        //         song: item.item.song,
+        //         songId: item.item.songId,
+        //         userName: item.item.userName,
+        //     }
+        // ]))
     }
 
     const handleHeart = () => {

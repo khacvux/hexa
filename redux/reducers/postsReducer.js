@@ -66,8 +66,14 @@ export default postsReducer = (state = initState, action) => {
             }
         
         case TYPES.DELETE_POST_SUCCESS:
+            const newListPostUser = [...state.listPostUser]
+
+            newListPostUser.splice(newListPostUser.findIndex((item) => {
+                return item.postsId == action.payload.postsId
+            }))
             return {
                 ...state,
+                listPostUser: newListPostUser,
             }
 
         case TYPES.REACT_POST: 
