@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import tw from 'twrnc'
 import { postRequestFollow } from '../../redux/actions/searchsAction'
 import LottieView from 'lottie-react-native'
+import { getPost, setPaginationNumber } from '../../redux/actions/postsAction'
+import { useEffect } from 'react'
 
 
 
@@ -12,9 +14,17 @@ const Contact = ({follow, followerId}) => {
     const { userId, token } = useSelector(state => state.authReducer)
     const { buttonLoading } = useSelector(state => state.onLoadingReducer)
 
+
     const handlePostRequest = () => {
         dispatch(postRequestFollow({userIdRecipient: followerId, token}))
     }
+    useEffect(() => {
+        if(follow == 1) {
+            dispatch(setPaginationNumber(0))
+            dispatch(getPost({ token, paginationNumber: 0 }))
+        }
+    }, [follow])
+   
 
 
     return (

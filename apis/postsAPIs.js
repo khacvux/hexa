@@ -9,7 +9,24 @@ export const getPostsAPI = async ({token}) => {
             headers: {
                 'Authorization': `Bearer ${token}`,
             }
+        })  
+        // console.log(res)  
+        return res 
+    } catch (error) {
+        // console.log(error)
+        return 403;
+    }
+}
+
+export const getPostsByPagingNumberAPI = async ({token, number}) => {
+    // console.log(number)
+    try {
+        const res = await AXIOS.get(`${url}/show/${number}`, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            }
         })    
+        // console.log(res.data)
         return res 
     } catch (error) {
         console.log(error)

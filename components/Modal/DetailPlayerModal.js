@@ -3,15 +3,7 @@ import { BlurView } from 'expo-blur'
 import { StatusBar } from 'expo-status-bar'
 import { View, Text, Modal, ImageBackground, SafeAreaView, TouchableOpacity, Image, FlatList, Dimensions, Animated } from 'react-native'
 import tw from 'twrnc'
-// import TrackPlayer, {
-//   Capability,
-//   Event,
-//   RepeatMode,
-//   State,
-//   usePlaybackState,
-//   useProgress,
-//   useTrackPlayerEvents,
-// } from 'react-native-track-player'
+
 
 import Slider from '@react-native-community/slider'
 import { useSelector } from 'react-redux'
@@ -22,7 +14,6 @@ const DetailPlayerModal = ({ showDetailPlayer, setShowDetailPlayer }) => {
 
 
   const { width, height } = Dimensions.get('window')
-  // const progress = useProgress()
   const { arraySongs } = useSelector(state => state.songReducer)
 
   const [songIndex, setSongIndex] = useState(0)
@@ -35,16 +26,7 @@ const DetailPlayerModal = ({ showDetailPlayer, setShowDetailPlayer }) => {
   const songSlider = useRef(null);
 
   
-  // console.log(arraySongs)
 
-  // const setupPlayer = async () => {
-  //   try {
-  //     await TrackPlayer.setupPlayer()
-        
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
 
   const renderSongsImage = ({item, index}) => {
     return (
@@ -58,39 +40,6 @@ const DetailPlayerModal = ({ showDetailPlayer, setShowDetailPlayer }) => {
     )
   }
 
-  // const skipTo = async songId => {
-  //   await TrackPlayer.skip(songId)
-  // }
-
-  // const skipToNext = () => {
-  //   songSlider.current.scrollToOffset({
-  //     offset: (songIndex + 1) * width,
-  //   });
-  // };
-
-  // const skipToPrevious = () => {
-  //   songSlider.current.scrollToOffset({
-  //     offset: (songIndex - 1) * width,
-  //   });
-  // };
-
-
-
-
-  // useEffect(() => {
-  //   // setupPlayer()
-
-  //   scrollX.addListener((value) => {
-  //     const index = Math.round((value/width))
-  //     skipTo(index)
-  //     setSongIndex(index)
-  //   })
-
-  //   return () => {
-  //     scrollX.removeAllListeners();
-  //     TrackPlayer.destroy();
-  //   }
-  // }, [])
 
 
 
@@ -123,8 +72,8 @@ const DetailPlayerModal = ({ showDetailPlayer, setShowDetailPlayer }) => {
                   />
                 </TouchableOpacity>
                 <View style={tw`flex-1`}>
-                  <Text style={tw`text-2xl font-semibold text-white tracking-[.25]`}>{arraySongs[0].name}</Text>
-                  <Text style={tw`text-white text-base`}>{arraySongs[0].userName}</Text>
+                  <Text style={tw`text-2xl font-semibold text-white tracking-[.25]`}>{arraySongs[0]?.name}</Text>
+                  <Text style={tw`text-white text-base`}>{arraySongs[0]?.userName}</Text>
                 </View>
 
               </View>

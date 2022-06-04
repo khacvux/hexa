@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import tw from 'twrnc'
 import Empty from '../components/LottieAnimation/EmptyAnimation'
 import Follower from '../components/Follows/Follower'
-import { getListFollower } from '../redux/actions/followsAction'
+import { getListFollowing } from '../redux/actions/followsAction'
 import SafeArea from '../components/SafeArea'
 
 
@@ -15,13 +15,15 @@ const FollowersScreen = ({navigation}) => {
 
     const dispatch = useDispatch()
     const { userId, token } = useSelector(state => state.authReducer)
-    const {followers} = useSelector(state => state.followsReducer)
+    const {followings} = useSelector(state => state.followsReducer)
 
     
     
     useEffect(() => {
-        dispatch(getListFollower({token}))
+        dispatch(getListFollowing({token}))
     }, [])
+
+    console.log(followings)
     
 
     return (
@@ -38,11 +40,11 @@ const FollowersScreen = ({navigation}) => {
                 </View>
                 <View style={tw`flex flex-col w-full`}>
                     {
-                        followers == 0 ? (
+                        followings == 0 ? (
                             <Empty />
                         ) : (
                             <FlatList 
-                                data={followers}
+                                data={followings}
                                 renderItem={({item}) => <Follower item={item} />}
                                 keyExtractor={(item, index) => index.toString()}
                             />

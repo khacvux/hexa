@@ -1,7 +1,19 @@
 import * as TYPES from '../constants/posts'
 
 
+export const resetPosts = () => {
+    return {
+        type: TYPES.RESET_POSTS
+    }
+}
 
+export const setPaginationNumber = payload => {
+    return {
+        type: TYPES.SET_PAGINATION_NUMBER,
+        payload
+    }
+}
+ 
 export const getPost = (data) => {
     return {
         type: TYPES.GET_POST,

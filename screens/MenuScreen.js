@@ -17,7 +17,6 @@ const MenuScreen = ({navigation}) => {
     const { followStatus, token, userId } = useSelector(state => state.authReducer)
     const { followStatusLoading } = useSelector(status => status.onLoadingReducer)
     const [ privateAccount, setPrivateAccount] = useState(followStatus);
-    console.log(followStatusLoading)
 
     const handlePressFollowStatus = () => {
         dispatch(setFollowStatus({token, userId}))
@@ -27,12 +26,7 @@ const MenuScreen = ({navigation}) => {
 
     return (
         <SafeAreaView style={[tw`bg-white h-full`, SafeArea.AndroidSafeArea]}>
-            <View style={tw`flex flex-row items-center px-3 my-2`}>
-                <Ionicons 
-                    name='menu'
-                    size={29}
-                    style={tw`mx-1`}
-                />
+            <View style={tw`flex items-center px-3 my-2`}>
                 <Text style={tw`font-semibold text-2xl`}>Menu</Text>
 
             </View>

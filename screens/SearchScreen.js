@@ -21,6 +21,7 @@ const SearchScreen = () => {
   const [input, setInput] = useState('')
 
 
+
   
   useEffect(() => {
     dispatch(findUserByName(input))

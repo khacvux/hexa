@@ -171,7 +171,7 @@ const Feeds = ({post, token, userId}) => {
                         onPress={handleGetProfile}
                         style={tw`flex flex-row items-center px-4 mb-3`}
                     >
-                        <Image source={ post.item.postsUserList[0].image ? {uri: post.item.postsUserList[0].image} : require('../../assets/images/defaultAvatar.png')} 
+                        <Image source={ post.item?.postsUserList[0]?.image ? {uri: post.item?.postsUserList[0]?.image} : require('../../assets/images/defaultAvatar.png')} 
                             style={tw`w-9 h-9 rounded-full mr-2`}
                         />
                         <View>

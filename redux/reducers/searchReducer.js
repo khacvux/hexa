@@ -32,10 +32,20 @@ export default searchReducer = (state = initState, action ) => {
         // case TYPES.GET_LIST_HISTORY_SEARCH:
 
         case TYPES.ADD_HISTORY_SEARCH:
-            return {
-                ...state,
-                listHistorySearch: [...state.listHistorySearch, action.payload]
-            }
+            const newList = state.listHistorySearch.map((item) => {
+                return item.userId === action.payload.userId
+            })
+
+            if(newList[0]) return {
+                    ...state,
+                }
+            else return {
+                    ...state,
+                    listHistorySearch: [...state.listHistorySearch, action.payload]
+                }
+            
+
+           
 
         case TYPES.DELETE_HISTORY_SEARCH:
             const newListHistorySearch = [...state.listHistorySearch]

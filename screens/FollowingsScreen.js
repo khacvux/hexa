@@ -5,9 +5,9 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { useDispatch, useSelector } from 'react-redux'
 import tw from 'twrnc'
 import Empty from '../components/LottieAnimation/EmptyAnimation'
-import Follower from '../components/Follows/Follower'
-import { getListFollowing } from '../redux/actions/followsAction'
+import { getListFollower } from '../redux/actions/followsAction'
 import SafeArea from '../components/SafeArea'
+import Following from '../components/Follows/Following'
 
 
 
@@ -20,7 +20,7 @@ const FollowingsScreen = ({navigation}) => {
     
     
     useEffect(() => {
-        dispatch(getListFollowing({token}))
+        dispatch(getListFollower({token}))
     }, [])
     
 
@@ -34,22 +34,18 @@ const FollowingsScreen = ({navigation}) => {
                     >
                         <AntDesign name='left' size={18} />
                     </TouchableOpacity>
-                    <Text style={tw`w-full text-center text-base font-semibold`}>Followers</Text>
+                    <Text style={tw`w-full text-center text-base font-semibold`}>Followings</Text>
                 </View>
                 <View style={tw`flex flex-col w-full`}>
                     {
-                        followers == 0 ? (
+                        followers.length == 0 ? (
                             <Empty />
                         ) : (
                             <FlatList 
                                 data={followers}
-                                renderItem={({item}) => <Follower item={item} />}
+                                renderItem={({item}) => <Following item={item} />}
                                 keyExtractor={(item, index) => index.toString()}
                             />
-
-                                // <Follower />
-                           
-
                         )
                     }
                 </View>

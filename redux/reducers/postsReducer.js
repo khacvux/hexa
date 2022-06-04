@@ -10,11 +10,22 @@ const initState = {
     onAddingPosts: false,
     onAddingSuccess: false,
     onAddingFail: false,
+    paginationNumber: 0,
 }
 
 export default postsReducer = (state = initState, action) => {
     switch(action.type){
 
+        case TYPES.RESET_POSTS:
+            return {
+                ...state,
+                posts: []
+            }
+        case TYPES.SET_PAGINATION_NUMBER:
+            return {
+                ...state,
+                paginationNumber: action.payload
+            }
         case TYPES.GET_POST:
             return {
                 ...state,
@@ -22,7 +33,8 @@ export default postsReducer = (state = initState, action) => {
         case TYPES.GET_POST_SUCCESS:
             return {
                 ...state,
-                posts: action.payload
+                paginationNumber: state.paginationNumber + 1,
+                posts: [...state.posts, ...action.payload],
             }
 
         case TYPES.SHOW_LOADING_GET_POST:

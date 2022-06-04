@@ -11,7 +11,8 @@ import {
     deleteCommmentAPI,
     getPostsAPI,
     reactPostAPI,
-    getListPostsByUIDAPI
+    getListPostsByUIDAPI,
+    getPostsByPagingNumberAPI
 } from '../../apis/postsAPIs'
 import { onLoadingGetListPost } from '../actions/onLoading'
 import { unauthorized } from '../actions/authAction'
@@ -43,15 +44,21 @@ function* addPost(data) {
 
 function* getPost(data) {
     try {
-        yield put(ACTION.showLoadingGetPost())
         console.log('GET POST RUNNING....')
-        const res = yield call(getPostsAPI, {
+        if(data.payload.paginationNumber == 0) {
+            yield put(ACTION.resetPosts())
+        }
+        const res = yield call(getPostsByPagingNumberAPI, {
             token: data.payload.token,
-            userId: data.payload.userId,
+            number: data.payload.paginationNumber,
         })
 
         if (res.status == 200) {
-            yield put(ACTION.getPostSuccess(res.data.data))
+            if(res.data.data.length){
+                yield put(ACTION.getPostSuccess(res.data.data))
+            }else{
+                yield put(ACTION.setPaginationNumber(-1))
+            }
         } else if (res == 403) {
             yield put(unauthorized(true))
         }
@@ -59,7 +66,6 @@ function* getPost(data) {
     } catch (error) {
         yield put(ACTION.consoleError(error))
     }
-    yield put(ACTION.hideLoadingGetPost())
 }
 
 function* getListPostUser(data) {
