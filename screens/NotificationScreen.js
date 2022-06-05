@@ -3,7 +3,7 @@ import React from 'react';
 import tw from 'twrnc'
 import { Entypo } from '@expo/vector-icons';
 import SortByTime from '../components/Notifications/SortByTime';
-import { notifications } from '../data';
+
 import SafeArea from '../components/SafeArea';
 
 const NotificationScreen = () => {
@@ -18,14 +18,14 @@ const NotificationScreen = () => {
           <ScrollView
             contentContainerStyle={tw`mt-1`}
           >
-            {
+            {/* {
               notifications.map((notification) => (
                 <SortByTime notification={notification} 
                   key={notification.id} 
                   
                 />
               ))
-            }
+            } */}
           </ScrollView>
 
         </ScrollView>

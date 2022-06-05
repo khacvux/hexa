@@ -1,15 +1,15 @@
 import { View, Text, TextInput, FlatList, SafeAreaView } from 'react-native'
 import { useEffect, useState } from 'react'
 import tw from 'twrnc'
-import { AntDesign, EvilIcons } from '@expo/vector-icons'; 
+import { EvilIcons } from '@expo/vector-icons';
 import SearchItem from '../components/Search/SearchItem';
 import FindingAnimation from '../components/LottieAnimation/FindAnimation';
 import LoadingAnimation from '../components/LottieAnimation/LoadingAnimation';
-import { useSelector, useDispatch,} from 'react-redux'
+import { useSelector, useDispatch, } from 'react-redux'
 import { findUserByName } from '../redux/actions/searchsAction';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import OnSearchingSkeletion from '../components/Skeleton/OnSearchingSkeletion';
-import SafeArea from '../components/SafeArea';
+
 
 
 
@@ -22,80 +22,80 @@ const SearchScreen = () => {
 
 
 
-  
+
   useEffect(() => {
     dispatch(findUserByName(input))
   }, [input])
-  
- 
+
+
   return (
     <SafeAreaView style={[tw`bg-white w-full h-full`]}>
       <View style={tw` px-2 flex flex-col items-center`}>
         <View style={tw`bg-gray-100 rounded-md flex flex-row items-center px-2 m-1`}>
-            <EvilIcons name="search" size={24} color="#5EC2EA" />
-            <TextInput
-              value={input}
-              placeholder='Search...'
-              style={tw`mx-2 flex-1 py-3`}
-              onChangeText={val => setInput(val)}
-            />
-            <TouchableOpacity style={tw`p-1`} 
-              onPress={() => setInput('')}
-            >
-                <Text style={tw`text-sm font-light`}>Cancel</Text>
+          <EvilIcons name="search" size={24} color="#5EC2EA" />
+          <TextInput
+            value={input}
+            placeholder='Search...'
+            style={tw`mx-2 flex-1 py-3`}
+            onChangeText={val => setInput(val)}
+          />
+          <TouchableOpacity style={tw`p-1`}
+            onPress={() => setInput('')}
+          >
+            <Text style={tw`text-sm font-light`}>Cancel</Text>
 
-            </TouchableOpacity>
+          </TouchableOpacity>
         </View>
         <View style={tw`w-full h-full px-2`}>
-            {
-              findUserLoading ? (
-                <OnSearchingSkeletion />
-              ) :
-                (
-                  listResult.length ? (
-                    <View>
-                      <Text style={tw`text-base font-light tracking-[.2] mt-3 mb-2`}>Results</Text>
-                      <FlatList 
-                        data={listResult}
-                        renderItem={(item) => (
-                          <SearchItem item={item} times={false}/>
-                        )}
-                        keyExtractor={(item, index) => index.toString()}
-                        showsVerticalScrollIndicator={false}
-                        />
+          {
+            findUserLoading ? (
+              <OnSearchingSkeletion />
+            ) :
+              (
+                listResult.length ? (
+                  <View>
+                    <Text style={tw`text-base font-light tracking-[.2] mt-3 mb-2`}>Results</Text>
+                    <FlatList
+                      data={listResult}
+                      renderItem={(item) => (
+                        <SearchItem item={item} times={false} />
+                      )}
+                      keyExtractor={(item, index) => index.toString()}
+                      showsVerticalScrollIndicator={false}
+                    />
+                  </View>
+                ) : (
+                  input ? (
+                    <View style={tw`px-3 py-5 border-b border-gray-200 `}>
+                      <Text style={tw`font-light tracking-[.2]`}>
+                        No result were found for '{input}'
+                      </Text>
                     </View>
                   ) : (
-                    input ? (
-                      <View style={tw`px-3 py-5 border-b border-gray-200 `}>
-                        <Text style={tw`font-light tracking-[.2]`}>
-                          No result were found for '{input}'
-                        </Text>
+                    listHistorySearch.length ? (
+                      <View>
+                        <Text style={tw`text-base font-light tracking-[.2] mt-3 mb-2`}>History</Text>
+                        <FlatList
+                          data={listHistorySearch}
+                          renderItem={(item) => (
+                            <SearchItem item={item} times={true} />
+                          )}
+                          keyExtractor={(item, index) => index.toString()}
+                        />
                       </View>
                     ) : (
-                      listHistorySearch.length ? (
-                        <View>
-                          <Text style={tw`text-base font-light tracking-[.2] mt-3 mb-2`}>History</Text>
-                          <FlatList 
-                            data={listHistorySearch}
-                            renderItem={(item) => (
-                              <SearchItem item={item} times={true} />
-                            )}
-                            keyExtractor={(item,  index) => index.toString()}
-                          />
-                        </View>
-                      ) : (
-                        <FindingAnimation />
-                      )
+                      <FindingAnimation />
                     )
                   )
+                )
               )
-            }
+          }
         </View>
 
       </View>
     </SafeAreaView>
   )
-} 
+}
 
 export default SearchScreen
 

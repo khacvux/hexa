@@ -3,7 +3,6 @@ import { useNavigation } from '@react-navigation/native'
 import { View, Text, FlatList, TouchableOpacity } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import tw from 'twrnc'
-import { albums } from '../../data'
 import PlaylistItem from './PlaylistItem'
 
 
@@ -68,6 +67,7 @@ const Playlist = ({ listLibrary }) => {
               pagingEnabled
               horizontal
               contentContainerStyle={tw``}
+              
             />
           )
         }

@@ -4,6 +4,7 @@ import { FlatList } from 'react-native-gesture-handler'
 import { useDispatch, useSelector } from 'react-redux'
 import tw from 'twrnc'
 import { getMyListPostedSong } from '../../redux/actions/songsAction'
+import EmptyList from '../Static/EmptyList'
 import MyPostedSongItem from './MyPostedSongItem'
 
 
@@ -29,6 +30,11 @@ const MyPostedPlaylist = ({token, userId}) => {
           keyExtractor={item => item.songId}
           showsHorizontalScrollIndicator={false}
           showsVerticalScrollIndicator={false}
+          ListEmptyComponent={
+            <View style={tw`w-full h-100 items-center justify-center`}>
+              <EmptyList title={'No posts yet!!'} />
+            </View>
+          }
         />
     </View>
   )

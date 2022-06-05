@@ -16,7 +16,7 @@ const HomeScreen = () => {
     useDeviceContext(tw)
 
 
-    const { firstName, token, userId, unauth } = useRef(useSelector(state => state.authReducer)).current
+    const { firstName, token, userId } = useRef(useSelector(state => state.authReducer)).current
     const { posts, paginationNumber } = useSelector(state => state.postsReducer)
     const dispatch = useDispatch()
 

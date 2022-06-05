@@ -38,7 +38,7 @@ const ListPost = ({userId, numberOfPosts}) => {
                     <ListPostSkeleton />
                 ) : (
                     listPostUser.length == 0 ? (
-                        <View style={tw`w-full h-full items-center justify-center`}>
+                        <View style={tw`w-full h-100 items-center justify-center`}>
                             <EmptyList title={'No posts yet!!'} />
                         </View>
                     ) : (

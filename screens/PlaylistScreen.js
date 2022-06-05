@@ -5,7 +5,6 @@ import { useNavigation } from '@react-navigation/native'
 import tw from 'twrnc'
 import { Ionicons, Entypo } from '@expo/vector-icons'; 
 import { TouchableOpacity } from 'react-native-gesture-handler'
-import { listTrack } from '../data'
 import TrackItem from '../components/ListTrack/TrackItem'
 import SafeArea from '../components/SafeArea'
 import { BlurView } from 'expo-blur'
@@ -46,6 +45,7 @@ const PlaylistScreen = ({route}) => {
             dispatch(showPlayerBar())
         }
     }
+
 
 
     return (
@@ -92,7 +92,7 @@ const PlaylistScreen = ({route}) => {
                                 resizeMode='cover'
                             >
                                 {
-                                    listSongByLibrary.listSongItemList.length ? (
+                                    listSongByLibrary.listSongItemList?.length  ? (
                                             <View style={tw`px-8 py-2 bg-white rounded absolute bottom-3 right-3 shadow`}>
                                                 <Text style={tw`text-xs`}>
                                                     Play all
@@ -108,7 +108,7 @@ const PlaylistScreen = ({route}) => {
                                     <View style={tw`flex flex-row`}>
                                         <Text style={tw`font-light text-gray-300 text-xs bg-black pl-2`}>Created by </Text>
                                         <Text style={tw`leading-4 text-gray-300 bg-black px-1 pb-[3]`}>{listSongByLibrary.name}</Text>
-                                        <Text style={tw`font-light text-gray-300 text-xs bg-black`}> • {listSongByLibrary.listSongItemList.length} tracks </Text>
+                                        <Text style={tw`font-light text-gray-300 text-xs bg-black`}> • {listSongByLibrary.listSongItemList?.length} tracks </Text>
                                     </View>
                                 </View>
                             </ImageBackground>

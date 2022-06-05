@@ -54,7 +54,7 @@ const MenuScreen = ({navigation}) => {
                     // onPress={}
                 >
                     <Text style={tw`text-base`}>
-                        Private Account ?                        
+                        Private Account?                        
                     </Text>
                     <Switch
                         trackColor={{ false: "#C6CBD9", true: "#5EC2EA" }}
@@ -80,6 +80,15 @@ const MenuScreen = ({navigation}) => {
 
                         )
                     }
+                <TouchableOpacity 
+                    style={tw`w-full py-3 px-2 flex flex-row justify-between items-center`}
+                    // onPress={}
+                >
+                    <Text style={tw`text-base`}>
+                        Change Password                       
+                    </Text>
+                    <AntDesign name='right' />
+                </TouchableOpacity>
 
 
 
