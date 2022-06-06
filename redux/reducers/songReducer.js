@@ -10,7 +10,13 @@ const initialState = {
     listSongByLibrary: [],
     listOfSearchResults: [],
     listComments: [],
+
     arraySongs: [],
+    songPlaying: {},
+    indexSongPlaying: 0,
+    statusPlayer: 'pause',
+
+
     myListPostedSongs: [],
     listPostedSongsOfUser: [],
     onAddingSong: false,
@@ -20,8 +26,8 @@ const initialState = {
 
 
 export default songsReducer = (state = initialState, action) => {
-    switch(action.type) {
-        case TYPES.PLAYER_BAR: 
+    switch (action.type) {
+        case TYPES.PLAYER_BAR:
             return {
                 ...state
             }
@@ -44,25 +50,67 @@ export default songsReducer = (state = initialState, action) => {
         case TYPES.CHANGE_ARRAY_SONGS:
             return {
                 ...state,
-                arraySongs: action.payload
+                arraySongs: action.payload,
+                indexSongPlaying: 0,
+                songPlaying: action.payload[0],
             }
 
+        case TYPES.PLAY_SONG:
+            return {
+                ...state,
+                statusPlayer: action.payload
+            }
+
+        case TYPES.PAUSE_SONG:
+            return {
+                ...state,
+                statusPlayer: action.payload
+            }
+
+        case TYPES.RESUME_SONG:
+            return {
+                ...state,
+                statusPlayer: action.payload
+            }
+
+        case TYPES.NEXT_SONG:
+            if (state.arraySongs.length > state.indexSongPlaying + 1) {
+                return {
+                    ...state,
+                    songPlaying: state.arraySongs[state.indexSongPlaying + 1],
+                    indexSongPlaying: state.indexSongPlaying + 1,
+                }
+            } else {
+                return state
+            }
+
+        case TYPES.PREV_SONG:
+            if(state.indexSongPlaying > 0) {
+                return {
+                    ...state,
+                    songPlaying: state.arraySongs[state.indexSongPlaying - 1],
+                    indexSongPlaying: state.indexSongPlaying - 1,
+                }
+            } else {
+                return state
+            }
+           
         // case TYPES.ADD_SONG_TO_ARRAY:
         //     return {
         //         ...state,
 
         //     }
-        
-        
+
+
         case TYPES.GET_LIST_CATEGORY_SONG:
             return {
                 ...state
             }
-        case TYPES.GET_LIST_CATEGORY_SONG_SUCCESS: 
+        case TYPES.GET_LIST_CATEGORY_SONG_SUCCESS:
             return {
                 ...state,
                 listCategorySong: action.payload
-            }   
+            }
 
         case TYPES.GET_LIST_SONG_BY_CATEGORY:
             return {
@@ -73,7 +121,7 @@ export default songsReducer = (state = initialState, action) => {
                 ...state,
                 listSongByCategory: action.payload
             }
-            
+
         case TYPES.FIND_SONG_BY_ID:
             return {
                 ...state
@@ -164,7 +212,7 @@ export default songsReducer = (state = initialState, action) => {
             newListSongByLibrary.listSongItemList.splice(newListSongByLibrary.listSongItemList.findIndex((item) => {
                 return item.listSongItemId == action.payload.id
             }))
-            return { 
+            return {
                 ...state,
                 listSongByLibrary: newListSongByLibrary,
             }
@@ -173,7 +221,7 @@ export default songsReducer = (state = initialState, action) => {
             return {
                 ...state
             }
-        case TYPES.GET_PLAYLIST_BY_LID_SUCCESS: 
+        case TYPES.GET_PLAYLIST_BY_LID_SUCCESS:
             return {
                 ...state,
                 listSongByLibrary: action.payload
@@ -193,18 +241,18 @@ export default songsReducer = (state = initialState, action) => {
             return {
                 ...state
             }
-        
+
         case TYPES.GET_MY_LIST_POSTED_SONGS_SUCCESS:
             return {
                 ...state,
                 myListPostedSongs: action.payload
             }
-            
+
         case TYPES.GET_LIST_POSTED_SONGS_OF_USER:
             return {
                 ...state,
             }
-        
+
         case TYPES.GET_LIST_POSTED_SONGS_OF_USER_SUCCESS:
             return {
                 ...state,
@@ -224,7 +272,7 @@ export default songsReducer = (state = initialState, action) => {
             }
 
 
-        default: 
+        default:
             return state;
     }
 }

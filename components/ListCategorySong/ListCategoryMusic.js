@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 const ListCategoryMusic = () => {
 
     const dispatch = useDispatch()
-    const { tabBarHeight, listCategorySong } = useSelector(state => state.songReducer)
+    const { listCategorySong } = useSelector(state => state.songReducer)
 
    
 
@@ -24,28 +24,32 @@ const ListCategoryMusic = () => {
                 </View>
                 <View style={tw`h-9 justify-center`}>
                     <View style={tw`bg-[#5EC2EA] px-.8 py-[2] rounded-xl`}>
-                        <Text style={tw`px-1.3 text-white`}>{listCategorySong.length}</Text>
+                        <Text style={tw`px-1.3 text-white`}>{listCategorySong ? listCategorySong.length : 0}</Text>
                     </View>
                 </View>
             </View>
             <View style={tw`px-1`}>
-                <FlatGrid
-                    data={listCategorySong}
-                    itemDimension={150}
-                    renderItem={(item) =>
-                        <ListCategoryItem
-                            item={item}
-                            dispatch={dispatch}
-                            tabBarHeight={tabBarHeight}
-                        />
-                    }
-                    // keyExtractor={(item, index) => index}
-                    style={tw`pt-2`}
-                    spacing={15}
-                    showsHorizontalScrollIndicator={false}
-                    showsVerticalScrollIndicator={false}
-                    scrollEnabled={false}
-                />
+                {
+                    !listCategorySong ? <></> : (
+                        <FlatGrid
+                        data={listCategorySong}
+                        itemDimension={150}
+                        renderItem={(item) =>
+                            <ListCategoryItem
+                                item={item}
+                                dispatch={dispatch}
+                            />
+                        }
+                        // keyExtractor={(item, index) => index}
+                        style={tw`pt-2`}
+                        spacing={15}
+                        showsHorizontalScrollIndicator={false}
+                        showsVerticalScrollIndicator={false}
+                        scrollEnabled={false}
+                    />
+                    )
+                }
+              
             </View>
 
 

@@ -27,7 +27,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/icon.png",
+        "foregroundImage": "./assets/favicon.png",
         "backgroundColor": "#4EC5F9"
       },
       "package": "com.khacvux254.Hexa"

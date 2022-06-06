@@ -8,16 +8,12 @@ import { setTabBarHeight } from '../../redux/actions/songsAction'
 
 
 
-const ListCategoryItem = ({item, dispatch, tabBarHeight}) => {
+const ListCategoryItem = ({item, dispatch }) => {
 
   const navigation = useNavigation()
-  const isTabBarHeight = useBottomTabBarHeight()
 
 
   const handleOnPress = () => {
-    if(tabBarHeight == false){
-      dispatch(setTabBarHeight(isTabBarHeight))
-    }
     navigation.navigate('SongsPostStack', {
       genreId: item.item.songCategoryId,
       background: item.item?.image,

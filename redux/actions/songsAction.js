@@ -15,16 +15,42 @@ export const hidePlayerBar = payload => {
     }
 }
 
-export const playMusic = payload => {
+export const playSong = () => {
     return {
-        type: TYPES.PLAY_MUSIC,
-        payload
+        type: TYPES.PLAY_SONG,
+        payload: 'playing'
     }
 }
 
-export const pauseMusic = payload => {
+export const pauseSong = () => {
     return {
-        type: TYPES.PAUSE_MUSIC,
+        type: TYPES.PAUSE_SONG,
+        payload: 'pause'
+    }
+}
+
+export const resumeSong = () => {
+    return {
+        type: TYPES.RESUME_SONG,
+        payload: 'resume'
+    }
+}
+
+export const nextSong = () => {
+    return {
+        type: TYPES.NEXT_SONG
+    }
+}
+
+export const prevSong = () => {
+    return {
+        type: TYPES.PREV_SONG
+    }
+}
+
+export const setIndexSongPlaying = payload => {
+    return {
+        type: TYPES.SET_INDEX_SONG_PLAYING,
         payload
     }
 }

@@ -7,7 +7,7 @@ import Header from '../components/Header/Header';
 import SafeArea from '../components/SafeArea';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import { useDispatch, useSelector } from 'react-redux';
-import { getListCategorySong, hidePlayerBar, showlayerBar, getLibraryOfUserByUID } from '../redux/actions/songsAction';
+import { getListCategorySong, hidePlayerBar, showlayerBar, getLibraryOfUserByUID, setTabBarHeight } from '../redux/actions/songsAction';
 import ListCategoryMusic from '../components/ListCategorySong/ListCategoryMusic';
 import VirtualizedScrollView from '../components/VitualizedScrollView';
 import { useEffect } from 'react';
@@ -20,10 +20,16 @@ const MusicScreen = () => {
     const dispatch = useDispatch()
     const { token, userId } = useSelector(state => state.authReducer)
     const { listLibrary } = useSelector(state => state.songReducer)
+    const bottomTabBarHeight = useBottomTabBarHeight()
+
     useEffect(() => {
         dispatch(getListCategorySong({ token }))
         dispatch(getLibraryOfUserByUID({token, userId}))
+        dispatch(setTabBarHeight(bottomTabBarHeight))
     }, [])
+
+
+
 
 
   
@@ -38,7 +44,9 @@ const MusicScreen = () => {
                         />
                         
                         {/* CATEGORY SONG */}
-                        <ListCategoryMusic token={token} /> 
+                        <ListCategoryMusic 
+                            token={token}  
+                        /> 
                     </VirtualizedScrollView>
                 </View>
         </SafeAreaView>  

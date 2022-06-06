@@ -2,13 +2,19 @@ export const PLAYER_BAR = 'PLAYER_BAR'
 export const SHOW_PLAYER_BAR = 'SHOW_PLAYER_BAR'
 export const HIDE_PLAYER_BAR = 'HIDE_PLAYER_BAR'
 
-export const PLAY_MUSIC = 'PLAY_MUSIC'
-export const PAUSE_MUSIC = 'PAUSE_MUSIC'
+export const PLAY_SONG = 'PLAY_SONG'
+export const PAUSE_SONG = 'PAUSE_SONG'
+export const RESUME_SONG = 'RESUME_SONG'
+export const NEXT_SONG = 'NEXT_SONG'
+export const PREV_SONG = 'PREV_SONG'
 
 export const ARRAY_SONGS = 'ARRAY_SONGS'
 export const CHANGE_ARRAY_SONGS = 'CHANGE_ARRAY_SONGS'
 export const ADD_SONG_TO_ARRAY = 'ADD_SONG_TO_ARRAY'
 export const REMOVE_SONG_TO_ARRAY = 'REMOVE_SONG_TO_ARRAY'
+
+export const INDEX_SONG_PLAYING = 'INDEX_SONG_PLAYING'
+export const SET_INDEX_SONG_PLAYING = 'SET_SONG_PLAYING'
 
 
 export const GET_LIST_CATEGORY_SONG = 'GET_LIST_CATEGORY_SONG'

@@ -40,7 +40,7 @@ const PlaylistScreen = ({route}) => {
     const [isListSongItemId, setListSongItemId] = useState('')
 
     const handlePlay = () => {
-        if(listSongByLibrary.listSongItemList.length){
+        if(listSongByLibrary?.listSongItemList.length){
             dispatch(setArraySongs(listSongByLibrary.listSongItemList))
             dispatch(showPlayerBar())
         }
@@ -50,7 +50,7 @@ const PlaylistScreen = ({route}) => {
 
     return (
         <ImageBackground
-            source={listSongByLibrary.image ? {uri: listSongByLibrary.image } : require('../assets/images/music-background.jpeg')}
+            source={listSongByLibrary?.image ? {uri: listSongByLibrary?.image } : require('../assets/images/music-background.jpeg')}
             style={tw`w-full h-full`}
         >   
             <BlurView
@@ -87,12 +87,12 @@ const PlaylistScreen = ({route}) => {
                             onPress={handlePlay}
                         >
                             <ImageBackground
-                                source={listSongByLibrary.image ? {uri: listSongByLibrary.image } : require('../assets/images/music-background.jpeg')}
+                                source={listSongByLibrary?.image ? {uri: listSongByLibrary.image } : require('../assets/images/music-background.jpeg')}
                                 style={[tw`w-full mb-3`, { height: FRAMESIZE_H }]}
                                 resizeMode='cover'
                             >
                                 {
-                                    listSongByLibrary.listSongItemList?.length  ? (
+                                    listSongByLibrary?.listSongItemList?.length  ? (
                                             <View style={tw`px-8 py-2 bg-white rounded absolute bottom-3 right-3 shadow`}>
                                                 <Text style={tw`text-xs`}>
                                                     Play all
@@ -103,19 +103,19 @@ const PlaylistScreen = ({route}) => {
                                 
                                 <View style={tw`absolute top-2 left-2`}>
                                     <View style={tw`flex flex-row`}>
-                                        <Text style={tw`bg-black text-white px-2 text-lg`}>{listSongByLibrary.nameOfList}</Text>
+                                        <Text style={tw`bg-black text-white px-2 text-lg`}>{listSongByLibrary?.nameOfList}</Text>
                                     </View>
                                     <View style={tw`flex flex-row`}>
                                         <Text style={tw`font-light text-gray-300 text-xs bg-black pl-2`}>Created by </Text>
-                                        <Text style={tw`leading-4 text-gray-300 bg-black px-1 pb-[3]`}>{listSongByLibrary.name}</Text>
-                                        <Text style={tw`font-light text-gray-300 text-xs bg-black`}> • {listSongByLibrary.listSongItemList?.length} tracks </Text>
+                                        <Text style={tw`leading-4 text-gray-300 bg-black px-1 pb-[3]`}>{listSongByLibrary?.name}</Text>
+                                        <Text style={tw`font-light text-gray-300 text-xs bg-black`}> • {listSongByLibrary?.listSongItemList?.length} tracks </Text>
                                     </View>
                                 </View>
                             </ImageBackground>
                         </TouchableOpacity>
                         
                         <FlatList 
-                            data={listSongByLibrary.listSongItemList}
+                            data={listSongByLibrary?.listSongItemList}
                             renderItem={(item) => {
                                 return <TrackItem item={item} setListSongItemId={setListSongItemId} setVisible={setVisible2} />
                             }}

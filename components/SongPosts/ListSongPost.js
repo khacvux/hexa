@@ -10,10 +10,8 @@ const ListSongPost = ({ listSongByCategory }) => {
   const { token } = useSelector(state => state.authReducer)
 
   return (
-  <>
-  {
-    listSongByCategory.length ? (
-      <FlatList
+
+    <FlatList
       contentContainerStyle={tw` w-full pb-10 px-8`}
       data={listSongByCategory}
       renderItem={(item) =>
@@ -26,14 +24,13 @@ const ListSongPost = ({ listSongByCategory }) => {
       keyExtractor={item => item.songId}
       showsHorizontalScrollIndicator={false}
       showsVerticalScrollIndicator={false}
+      ListEmptyComponent={
+        <View style={tw`my-50`}>
+          <EmptyList title='No songs yet' dark={true} />
+        </View>
+      }
     />
-    ) : (
-      
-      <EmptyList title='No songs yet' dark={true} />
-    )
-  }
-  </>
-    
+
   )
 }
 

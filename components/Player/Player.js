@@ -3,23 +3,21 @@ import { useState } from 'react';
 import tw from 'twrnc'
 import { EvilIcons, Ionicons } from '@expo/vector-icons'
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigation } from '@react-navigation/native';
 import { hidePlayerBar } from '../../redux/actions/songsAction';
 import DetailPlayerModal from '../Modal/DetailPlayerModal';
 
 
 
 const Player = ({}) => {
-
-  const navigation = useNavigation();
   const dispatch = useDispatch()
-  const { arraySongs, tabBarHeight } = useSelector(state => state.songReducer)
+  const { songPlaying, tabBarHeight, arraySongs } = useSelector(state => state.songReducer)
   const [showDetailPlayer, setShowDetailPlayer] = useState(false)
 
   const handleClose = () => {
     return dispatch(hidePlayerBar())
   }
 
+  // console.log(arraySongs.length)
 
 
   return (
@@ -32,11 +30,11 @@ const Player = ({}) => {
           >
             <Image 
               style={tw`w-10 h-10 rounded mr-2`}
-              source={arraySongs[0]?.image ? {uri: arraySongs[0]?.image} : require('../../assets/images/default-song-avatar.jpeg')}
+              source={songPlaying?.song.image ? {uri: songPlaying?.song.image} : require('../../assets/images/default-song-avatar.jpeg')}
             />
             <View>
-              <Text numberOfLines={1}>{}</Text>
-              <Text style={tw`text-xs font-light`}>{}</Text>
+              <Text numberOfLines={1}>{songPlaying?.song.name}</Text>
+              <Text style={tw`text-xs font-light`}>{songPlaying?.song.songUserList[0].name}</Text>
             </View>
           </View>
           <View style={tw`flex flex-row items-center`}>
@@ -57,7 +55,11 @@ const Player = ({}) => {
           </View>
         </View>
       </TouchableOpacity>
-      <DetailPlayerModal setShowDetailPlayer={setShowDetailPlayer} showDetailPlayer={showDetailPlayer} arraySongs={arraySongs} />
+      <DetailPlayerModal 
+        setShowDetailPlayer={setShowDetailPlayer} 
+        showDetailPlayer={showDetailPlayer} 
+        songPlaying={songPlaying} 
+      />
     </View>
   )
 }

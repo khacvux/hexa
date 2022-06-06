@@ -4,6 +4,7 @@ import { Entypo, Ionicons } from '@expo/vector-icons';
 
 
 const TrackItem = ({item, setListSongItemId, setVisible}) => {
+  // console.log(item)
   return (
     <TouchableOpacity style={tw`w-full flex flex-row items-center px-3 mb-3`}>
         <Image 
