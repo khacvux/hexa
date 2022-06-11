@@ -15,7 +15,7 @@ const SongsPostScreen = ({route}) => {
 
   const navigation = useNavigation()
   const { token } = useSelector(state => state.authReducer)
-  const { listSongByCategory, listLibrary } = useSelector(state => state.songReducer)
+  const { listSongByCategory } = useSelector(state => state.songReducer)
   const dispatch = useDispatch()
   const { genreId, background, genre } = route.params
 

@@ -12,7 +12,7 @@ const ListSongPost = ({ listSongByCategory }) => {
   return (
 
     <FlatList
-      contentContainerStyle={tw` w-full pb-10 px-8`}
+      contentContainerStyle={tw` w-full pb-10 px-2 pt-1`}
       data={listSongByCategory}
       renderItem={(item) =>
         <SongPost

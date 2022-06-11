@@ -9,21 +9,20 @@ import { Entypo, Ionicons } from '@expo/vector-icons'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { useDispatch, useSelector } from 'react-redux'
 import { getProfileUserByID } from '../redux/actions/searchsAction'
-import { TabListNavigator, TabListOfUserNavigator } from '../navigators/TopTabNavigatior'
+import { TabListOfUserNavigator } from '../navigators/TopTabNavigatior'
 import ProfileSkeletion from '../components/Skeleton/ProfileSkeletion'
 import SafeArea from '../components/SafeArea'
 
 
 const ProfileScreen = ({route}) => {
-
-
     const navigation = useNavigation();
     const dispatch = useDispatch();
 
     const { token } = useSelector(state => state.authReducer)
+    const { profileUser } = useSelector(state => state.searchReducer)
+
 
     const handleGoBack = () => {
-        // dispatch(getListPostUser({userId, token}))
         navigation.goBack()
     }
     
@@ -32,7 +31,6 @@ const ProfileScreen = ({route}) => {
     }, [route.params.userId])
     
     
-    const { profileUser } = useSelector(state => state.searchReducer)
 
     return (
         <SafeAreaView style={[tw`bg-white h-full`, SafeArea.AndroidSafeArea]}>

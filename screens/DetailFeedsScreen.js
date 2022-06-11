@@ -153,7 +153,7 @@ const DetailFeedsScreen = ({route}) => {
                                             style={isHeart ? tw`text-2xl text-[#ED4366] mr-2` : tw`text-2xl text-gray-300 mr-2 ml-1` }
                                             size={24}
                                         />
-                                        <Text style={tw`font-semibold text-gray-800 mr-3`}>{isTotalFeel}</Text>
+                                        <Text style={tw`font-semibold text-gray-800 mr-3`}>{isTotalFeel ? isTotalFeel : 0}</Text>
                                     </TouchableOpacity>
 
                                     <TouchableOpacity

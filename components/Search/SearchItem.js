@@ -39,7 +39,7 @@ const SearchItem = ({ item, times }) => {
                 onPress={handleSelect}
             >
                 <Image 
-                    source={require('../../assets/images/defaultAvatar.png')}
+                    source={item.item.avatar ? {uri: item.item.avatar} : require('../../assets/images/defaultAvatar.png')} 
                     style={tw`w-14 h-14 rounded-full border border-blue-300 mr-2`}
                 />
                 <View>

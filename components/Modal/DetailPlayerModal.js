@@ -1,7 +1,7 @@
-import { AntDesign, Entypo, FontAwesome5, Ionicons, SimpleLineIcons } from '@expo/vector-icons'
+import { AntDesign, Entypo, FontAwesome5, Ionicons, SimpleLineIcons, MaterialCommunityIcons } from '@expo/vector-icons'
 import { BlurView } from 'expo-blur'
 import { StatusBar } from 'expo-status-bar'
-import { View, Text, Modal, ImageBackground, SafeAreaView, TouchableOpacity, Image, FlatList, Dimensions, Animated } from 'react-native'
+import { View, Text, Modal, ImageBackground, SafeAreaView, TouchableOpacity, Image, FlatList, Dimensions } from 'react-native'
 import tw from 'twrnc'
 
 
@@ -9,15 +9,19 @@ import Slider from '@react-native-community/slider'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useRef, useState } from 'react'
 import { nextSong, pauseSong, playSong, prevSong } from '../../redux/actions/songsAction'
+import { Audio } from 'expo-av'
 
 
 const DetailPlayerModal = ({ showDetailPlayer, setShowDetailPlayer, songPlaying }) => {
 
     const { statusPlayer, arraySongs, indexSongPlaying } = useSelector(state => state.songReducer)
     const dispatch = useDispatch()
+    const { width: SCREEN_WIDTH } = Dimensions.get('window')
 
-    let canNext;
-    let canPrev;
+    const [canNext, setCanNext] = useState()
+    const [canPrev, setCanPrev] = useState()
+    const [song, setSong] = useState()
+
 
     const handlePause = () => {
         dispatch(pauseSong())
@@ -37,10 +41,43 @@ const DetailPlayerModal = ({ showDetailPlayer, setShowDetailPlayer, songPlaying 
 
 
 
-    if (arraySongs) {
-        (arraySongs.length > indexSongPlaying + 1) ? canNext = true : canNext = false;
-        (indexSongPlaying > 0) ? canPrev = true : canPrev = false;
-    }
+    //LOADING AUDIO
+    useEffect(async () => {
+        console.log('reload sound')
+        const song = new Audio.Sound()
+        await song.loadAsync(
+            // Source
+            { uri: songPlaying.song.song },
+            // Initial status
+            { shouldPlay: false },
+            // Download first
+            true,
+        );
+        setSong(song)
+
+        if (arraySongs) {
+            (arraySongs.length > indexSongPlaying + 1) ? setCanNext(true) : setCanNext(false);
+            (indexSongPlaying > 0) ? setCanPrev(true) : setCanPrev(false);
+        }
+    }, [indexSongPlaying, arraySongs])
+
+    // PLAY - PAUSE
+    useEffect(() => {
+        if(song) {
+            if (statusPlayer == 'playing') {
+                setTimeout(() => song.playAsync(), 1000)
+            } else if (statusPlayer == 'pause' ) {
+                song.pauseAsync()
+            }
+        } else handlePause()
+    }, [statusPlayer])
+
+
+    // CLEAN UP AUDIO
+    useEffect(() => {
+        console.log('clean up')
+        return song ? () => { song.unloadAsync() } : undefined
+    }, [song, arraySongs])
 
 
     return (
@@ -61,38 +98,40 @@ const DetailPlayerModal = ({ showDetailPlayer, setShowDetailPlayer, songPlaying 
                     tint='dark'
                 >
                     <SafeAreaView style={tw`h-full`}>
-                        <View style={tw`flex flex-col h-full justify-between`} >
-                            <View style={tw`flex flex-row items-center my-3 px-5`}>
+                        <View style={tw`flex flex-col h-full justify-end`} >
+                            <View style={tw`items-center my-3 px-5`}>
                                 <TouchableOpacity
-                                    style={tw`p-2 rounded-full mr-3 border border-white`}
+                                    style={tw`p-2 rounded-full`}
                                     onPress={() => setShowDetailPlayer(!showDetailPlayer)}
                                 >
-                                    <AntDesign
-                                        name='down'
-                                        size={20}
+                                    <Entypo
+                                        name='chevron-thin-down'
+                                        size={25}
                                         style={tw`text-white`}
                                     />
                                 </TouchableOpacity>
-                                <View style={tw`flex-1`}>
-                                    <Text style={tw`text-2xl font-semibold text-white tracking-[.25]`}>{songPlaying?.song.name}</Text>
-                                    <Text style={tw`text-white text-base`}>{songPlaying?.song.userName}</Text>
-                                </View>
                             </View>
 
                             {/* IMAGE */}
 
 
-                            <View style={tw`flex-1 w-full items-center justify-center`}>
+                            <View style={tw`flex-1 w-full items-center justify-start my-2`}>
                                 <Image
                                     source={songPlaying?.song.image ? { uri: songPlaying.song.image } : require('../../assets/images/default-song-avatar.jpeg')}
-                                    style={tw`h-75 w-75 rounded-xl`}
+                                    style={[tw`rounded-xl`, { width: SCREEN_WIDTH - 100, height: SCREEN_WIDTH - 100 }]}
                                 />
                             </View>
 
 
                             <View style={tw``}>
-                                <View style={tw`flex flex-row items-center my-1 justify-around`}>
 
+                                <View style={tw`w-full items-center mb-4`}>
+                                    <Text style={tw`text-xl text-white tracking-[.25]`}>{songPlaying?.song.name}</Text>
+                                    <Text style={tw`text-white text-sm font-light`}>{songPlaying?.song.userName}</Text>
+                                </View>
+
+                                {/* PLAYER BUTTON */}
+                                <View style={tw`flex flex-row items-center justify-center`}>
                                     {/* PREV SONG */}
                                     {
                                         canPrev ? (
@@ -101,8 +140,8 @@ const DetailPlayerModal = ({ showDetailPlayer, setShowDetailPlayer, songPlaying 
                                                 activeOpacity={.5}
                                                 onPress={handlePrevSong}
                                             >
-                                                <AntDesign name='stepbackward'
-                                                    size={23}
+                                                <MaterialCommunityIcons name='skip-previous-outline'
+                                                    size={30}
                                                     style={tw`text-white`}
                                                 />
                                             </TouchableOpacity>
@@ -112,10 +151,11 @@ const DetailPlayerModal = ({ showDetailPlayer, setShowDetailPlayer, songPlaying 
                                                 activeOpacity={.5}
                                                 onPress={handlePrevSong}
                                             >
-                                                <AntDesign name='stepbackward'
-                                                    size={23}
+                                                <MaterialCommunityIcons name='skip-previous-outline'
+                                                    size={30}
                                                     style={tw`text-white opacity-20`}
                                                 />
+
                                             </TouchableOpacity>
                                         )
                                     }
@@ -126,23 +166,23 @@ const DetailPlayerModal = ({ showDetailPlayer, setShowDetailPlayer, songPlaying 
                                     {
                                         statusPlayer == 'pause' ? (
                                             <TouchableOpacity
-                                                style={tw`p-6 rounded-full bg-gray-900`}
+                                                style={tw`w-16 h-16 items-center justify-center rounded-full bg-[#1C1D2B] mx-15`}
                                                 activeOpacity={.5}
                                                 onPress={handlePlay}
                                             >
                                                 <FontAwesome5 name='play'
-                                                    size={30}
-                                                    style={tw`text-white`}
+                                                    size={27}
+                                                    style={tw`text-white ml-[5]`}
                                                 />
                                             </TouchableOpacity>
                                         ) : (
                                             <TouchableOpacity
-                                                style={tw`p-6 rounded-full bg-gray-900`}
+                                                style={tw`w-16 h-16 items-center justify-center rounded-full bg-[#1C1D2B] mx-15`}
                                                 activeOpacity={.5}
                                                 onPress={handlePause}
                                             >
                                                 <FontAwesome5 name='pause'
-                                                    size={30}
+                                                    size={27}
                                                     style={tw`text-white`}
                                                 />
                                             </TouchableOpacity>
@@ -156,8 +196,8 @@ const DetailPlayerModal = ({ showDetailPlayer, setShowDetailPlayer, songPlaying 
                                                 activeOpacity={.5}
                                                 onPress={handleNextSong}
                                             >
-                                                <AntDesign name='stepforward'
-                                                    size={23}
+                                                <MaterialCommunityIcons name='skip-next-outline'
+                                                    size={30}
                                                     style={tw`text-white`}
                                                 />
                                             </TouchableOpacity>
@@ -167,8 +207,8 @@ const DetailPlayerModal = ({ showDetailPlayer, setShowDetailPlayer, songPlaying 
                                                 activeOpacity={.5}
                                                 onPress={handleNextSong}
                                             >
-                                                <AntDesign name='stepforward'
-                                                    size={23}
+                                                <MaterialCommunityIcons name='skip-next-outline'
+                                                    size={30}
                                                     style={tw`text-white opacity-20`}
                                                 />
                                             </TouchableOpacity>
@@ -177,16 +217,15 @@ const DetailPlayerModal = ({ showDetailPlayer, setShowDetailPlayer, songPlaying 
 
                                 </View>
 
-
                                 {/* SLIDER */}
-                                <View style={tw`mb-15 mt-5 px-5`}>
+                                <View style={tw`mt-3 px-5`}>
                                     <Slider
                                         style={tw``}
                                         value={0}
                                         minimumValue={0}
                                         maximumValue={10}
-                                        thumbTintColor='#4b5563'
-                                        minimumTrackTintColor='#4b5563'
+                                        thumbTintColor='#1C1D2B'
+                                        minimumTrackTintColor='#1C1D2B'
                                         maximumTrackTintColor='#F5F7FA'
                                     // onSlidingComplete={async value => {
                                     //   await TrackPlayer.seekTo(value);
@@ -215,29 +254,29 @@ const DetailPlayerModal = ({ showDetailPlayer, setShowDetailPlayer, songPlaying 
                             <View style={tw`flex flex-row items-center py-5`}>
                                 <TouchableOpacity
                                     style={tw`flex flex-row flex-1 items-center justify-center`}>
-                                    <Ionicons name='heart-outline' size={33} style={tw`mx-1 text-white`} />
+                                    <Ionicons name='heart-outline' size={25} style={tw`mx-1 text-white`} />
                                     {/* <Text style={tw`font-bold text-white`}>2342</Text> */}
                                 </TouchableOpacity>
                                 <TouchableOpacity
                                     style={tw`flex flex-row flex-1 items-center justify-center`}
                                 >
-                                    <Ionicons name='chatbubble-ellipses-outline' size={30} style={tw`mx-1 text-white`} />
+                                    <Ionicons name='chatbubble-ellipses-outline' size={26} style={tw`mx-1 text-white`} />
                                     {/* <Text style={tw`font-bold text-white`}>2342</Text> */}
                                 </TouchableOpacity>
                                 <TouchableOpacity
                                     style={tw`flex-1 items-center`}
                                 >
-                                    <Ionicons name='md-share-social-outline' size={30} style={tw`mx-1 text-white`} />
+                                    <Ionicons name='md-share-social-outline' size={25} style={tw`mx-1 text-white`} />
                                 </TouchableOpacity>
                                 <TouchableOpacity
                                     style={tw`flex-1 items-center`}
                                 >
-                                    <SimpleLineIcons name='loop' size={30} style={tw`mx-1 text-white`} />
+                                    <SimpleLineIcons name='loop' size={25} style={tw`mx-1 text-white`} />
                                 </TouchableOpacity>
                                 <TouchableOpacity
                                     style={tw`flex-1 items-center`}
                                 >
-                                    <Entypo name='dots-three-horizontal' size={24} style={tw`mx-1 text-white`} />
+                                    <Entypo name='dots-three-horizontal' size={22} style={tw`mx-1 text-white`} />
                                 </TouchableOpacity>
                             </View>
                         </View>

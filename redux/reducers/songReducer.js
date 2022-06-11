@@ -13,9 +13,9 @@ const initialState = {
 
     arraySongs: [],
     songPlaying: {},
+    songSound: '',
     indexSongPlaying: 0,
     statusPlayer: 'pause',
-
 
     myListPostedSongs: [],
     listPostedSongsOfUser: [],

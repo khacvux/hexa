@@ -1,4 +1,4 @@
-import { View, Text, TextInput, FlatList, SafeAreaView } from 'react-native'
+import { View, Text, TextInput, FlatList, SafeAreaView, Keyboard } from 'react-native'
 import { useEffect, useState } from 'react'
 import tw from 'twrnc'
 import { EvilIcons } from '@expo/vector-icons';
@@ -40,7 +40,10 @@ const SearchScreen = () => {
             onChangeText={val => setInput(val)}
           />
           <TouchableOpacity style={tw`p-1`}
-            onPress={() => setInput('')}
+            onPress={() => {
+              setInput('')
+              Keyboard.dismiss()
+            }}
           >
             <Text style={tw`text-sm font-light`}>Cancel</Text>
 

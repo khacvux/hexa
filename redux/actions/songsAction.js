@@ -15,6 +15,7 @@ export const hidePlayerBar = payload => {
     }
 }
 
+
 export const playSong = () => {
     return {
         type: TYPES.PLAY_SONG,

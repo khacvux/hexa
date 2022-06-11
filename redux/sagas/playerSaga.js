@@ -6,9 +6,11 @@ import { addSongToPlaylistAPI, commentSongAPI, createNewPlaylistAPI, deletePlayl
     getListSongByCategoryIdAPI, 
     getPlaylistByLIDAPI, 
     likeSongAPI, 
+    loadSongAPI, 
     removeSongFromPlaylistAPI, 
     uploadSongAPI 
 } from '../../apis/songAPIs'
+// import { Audio } from 'expo-av'
 
 
 
@@ -226,6 +228,8 @@ function* commentSong(data) {
         yield put(ACTION.actionFailure(error))
     }
 }
+
+
 
 export default playerSaga = [
     takeLeading(TYPES.GET_LIST_CATEGORY_SONG, getGenre), 

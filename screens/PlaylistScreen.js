@@ -10,7 +10,7 @@ import SafeArea from '../components/SafeArea'
 import { BlurView } from 'expo-blur'
 import VirtualizedScrollView from '../components/VitualizedScrollView'
 import { useDispatch, useSelector } from 'react-redux'
-import { getPlaylistById, setArraySongs, showPlayerBar } from '../redux/actions/songsAction'
+import { getPlaylistById, playSong, setArraySongs, showPlayerBar } from '../redux/actions/songsAction'
 import InPlaylistModal from '../components/Modal/InPlaylistModal'
 import InPlaylistItemModal from '../components/Modal/InPlaylistItemModal'
 
@@ -43,6 +43,7 @@ const PlaylistScreen = ({route}) => {
         if(listSongByLibrary?.listSongItemList.length){
             dispatch(setArraySongs(listSongByLibrary.listSongItemList))
             dispatch(showPlayerBar())
+            dispatch(playSong())
         }
     }
 

@@ -18,6 +18,7 @@ const initState = {
     numberOfPosts: null,
     numberOfFollower: null,
     numberOfFollowing: null,
+    message: '',
     unauth: false,
 
 }
@@ -51,11 +52,13 @@ export default authReducer = ( state = initState, action ) => {
                 numberOfPosts: action.payload.numberOfPosts,
                 numberOfFollower: action.payload.numberOfFollower,
                 numberOfFollowing: action.payload.numberOfFollowing,
+                message: '',
             }
         case TYPES.SIGN_IN_FAILURE:
             console.log(action.error)
             return {
-                ...state
+                ...state,
+                message: 'Wrong account or password!!'
             }
 
 

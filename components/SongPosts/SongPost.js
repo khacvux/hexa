@@ -4,7 +4,7 @@ import { useRef, useState } from 'react';
 import { View, Text, Image, TouchableOpacity, Dimensions } from 'react-native'
 import RBSheet from 'react-native-raw-bottom-sheet';
 import tw from 'twrnc'
-import { changeArraySongs, likeSong, showPlayerBar } from '../../redux/actions/songsAction';
+import { setArraySongs, likeSong, showPlayerBar, playSong } from '../../redux/actions/songsAction';
 import SongPostOptionModal from '../Modal/SongPostOptionModal';
 import ListCommentSongPost from '../SongComments/ListCommentSongPost';
 import WriteCommentSongs from '../SongComments/WriteCommentSongs';
@@ -15,7 +15,7 @@ const SongPost = ({ dispatch, item, token }) => {
     const {width: SCREEN_WIDTH} = Dimensions.get('window');
 
     const FRAMESIZE_W = SCREEN_WIDTH;
-    const FRAMESIZE_H = SCREEN_WIDTH*2/3;
+    const FRAMESIZE_H = SCREEN_WIDTH*5/9;
 
     const [isTotalHeart, setTotalHeart] = useState(item.item.songFeelList.length);
     const [isHeart, setHeart] = useState(item.item.songFeelList.length);
@@ -27,16 +27,11 @@ const SongPost = ({ dispatch, item, token }) => {
 
 
     const handlePlaySong = () => {
+        dispatch(setArraySongs(
+            [{song: item.item}]
+        ))
         dispatch(showPlayerBar())
-        // dispatch(changeArraySongs([
-        //     {
-        //         image: item.item.image,
-        //         name: item.item.name,
-        //         song: item.item.song,
-        //         songId: item.item.songId,
-        //         userName: item.item.userName,
-        //     }
-        // ]))
+        dispatch(playSong())
     }
 
     const handleHeart = () => {

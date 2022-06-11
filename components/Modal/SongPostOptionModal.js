@@ -36,7 +36,7 @@ const SongPostOptionModal = ({ isVisible, setVisible, songId, token }) => {
                                 <View style={tw`h-55`}>
                                     <FlatGrid
                                         data={listLibrary}
-                                        itemDimension={150}
+                                        itemDimension={120}
                                         renderItem={(item) => <SelectPlaylistitem 
                                             item={item}
                                             songId={songId}

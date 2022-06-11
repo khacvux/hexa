@@ -31,6 +31,7 @@ const LoginOptions = () => {
     const [signUpWarn, setSignUpWarn] = useState('')
 
     const dispatch = useDispatch()
+    const { message } = useSelector(state => state.authReducer)
 
     const handleSignIn = () => {
         if (!userName) {
@@ -110,8 +111,12 @@ const LoginOptions = () => {
                             </Text>
                         </TouchableOpacity>
                         {
-                            signInWarn ? (
-                                <View style={tw`h-6 justify-center px-3 mb-2`}>
+                            message ? (
+                                <View style={tw`h-6 justify-center px-3 mb-2 mt-1`}>
+                                    <Text style={tw`font-light tracking-[.20] text-red-600`}>{message}</Text>
+                                </View>
+                            ) : signInWarn ? (
+                                <View style={tw`h-6 justify-center px-3 mb-2 mt-1`}>
                                     <Text style={tw`font-light tracking-[.20] text-red-600`}>{signInWarn}</Text>
                                 </View>
                             ) : <></>

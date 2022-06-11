@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { FlatList, Animated, View, Platform, Alert, ScrollView, VirtualizedList, Text } from 'react-native'
+import { View, Platform, VirtualizedList, Text } from 'react-native'
 import tw, { useDeviceContext } from 'twrnc'
 import Feeds from '../components/Home/Feeds';
 import Header from '../components/Header/Header';
@@ -26,7 +26,7 @@ const HomeScreen = () => {
     }
 
     const handleLoadmore = () => {
-        if(paginationNumber != -1){
+        if (paginationNumber != -1) {
             dispatch(getPost({ token, paginationNumber }))
         }
     }
@@ -38,43 +38,51 @@ const HomeScreen = () => {
 
 
 
+
     return (
         <View style={[tw`bg-gray-100 h-full`]}>
             <View style={tw`h-full overflow-hidden flex`}>
                 <Header />
 
-                <VirtualizedList
-                    data={posts}
-                    renderItem={(post) => {
-                        return <Feeds post={post} token={token} userId={userId} />
-                    }}
-                    initialNumToRender={3}
-                    keyExtractor={post => post.postsId}
-                    getItemCount={posts => posts.length}
-                    getItem={getItem}
-                    contentContainerStyle={[tw``]}
-                    showsHorizontalScrollIndicator={false}
-                    showsVerticalScrollIndicator={false}
-                    onEndReachedThreshold={0}
-                    onEndReached={handleLoadmore}
-                    ListFooterComponent={
-                        (paginationNumber == -1) ? (
-                            <View style={tw`w-full bg-white rounded-lg justify-center py-5 items-center`}>
-                                <Text style={tw`text-base font-light `}>There no more posts to show right now.</Text>
-                            </View>
-                        ) : (
-                            <SkeletonFeeds />
-                        )
-                    }
-                    ListEmptyComponent={
+                {
+                    !posts.length ? (
                         <View style={tw`bg-gray-50`}>
                             <HiAnimation
                                 h1={`Welcome to Hexa, ${firstName}!`}
                                 h5={`When you follow people, you'll see the photos they post here.`}
                             />
                         </View>
-                    }
-                />
+                    ) : (
+                        <VirtualizedList
+                            data={posts}
+                            renderItem={(post) => {
+                                return <Feeds post={post} token={token} userId={userId} />
+                            }}
+                            initialNumToRender={3}
+                            keyExtractor={post => post.postsId}
+                            getItemCount={posts => posts.length}
+                            getItem={getItem}
+                            contentContainerStyle={[tw``]}
+                            showsHorizontalScrollIndicator={false}
+                            showsVerticalScrollIndicator={false}
+                            maxToRenderPerBatch={4}
+                            removeClippedSubviews
+                            onEndReachedThreshold={.5}
+                            onEndReached={handleLoadmore}
+                            ListFooterComponent={
+                                (paginationNumber == -1) ? (
+                                    <View style={tw`w-full bg-white rounded-lg justify-center py-5 items-center`}>
+                                        <Text style={tw`text-base font-light `}>There no more posts to show right now.</Text>
+                                    </View>
+                                ) : (
+                                    <SkeletonFeeds />
+                                )
+                            }
+
+                        />
+                    )
+                }
+
 
             </View>
         </View>

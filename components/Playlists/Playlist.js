@@ -36,7 +36,7 @@ const Playlist = ({ listLibrary }) => {
         style={tw`flex flex-row`}
       >
         <TouchableOpacity
-          style={tw`bg-gray-50 items-center justify-center w-14 h-32 ml-3.5 rounded`}
+          style={tw`bg-gray-50 items-center justify-center w-18 h-32 ml-3.5 rounded-lg border border-blue-200`}
           onPress={() => navigation.navigate('CreatePlaylistStack')}
         >
           <AntDesign

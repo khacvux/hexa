@@ -16,9 +16,11 @@ function* signIn(data) {
         yield put(onLoadingAuth(true));
 
         const res = yield call(signInAPI, data.payload)
-        
+
         if(res.status == 'ok'){
             yield put(ACTION.signInSuccess(res.data))
+        } else {          
+            yield put(ACTION.signInFailure(res.status))
         }
     } catch (error) {
         yield put(ACTION.signInFailure(error))

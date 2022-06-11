@@ -50,7 +50,7 @@ export const reactPostAPI = async ({token, tusId}) => {
 
 export const uploadPostsAPI = async ({token, formData}) => {
     try {
-        const res = await AXIOS.post(`${url}/uploadFile`, formData, {
+        const res = await AXIOS.post(`${url}/new`, formData, {
             headers: {
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': `multipart/form-data`,
