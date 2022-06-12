@@ -1,5 +1,4 @@
-import { View, Text, TouchableOpacity } from 'react-native'
-import {  } from 'react-native-gesture-handler'
+import { Text, TouchableOpacity } from 'react-native'
 import tw from 'twrnc'
 
 

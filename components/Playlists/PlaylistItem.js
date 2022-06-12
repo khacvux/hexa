@@ -2,7 +2,6 @@ import { View, Text, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
 import tw from 'twrnc';
 import { useNavigation } from '@react-navigation/native';
-import { useDispatch, useSelector } from 'react-redux';
 import { setTabBarHeight } from '../../redux/actions/songsAction';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 

@@ -42,7 +42,7 @@ const HomeScreen = () => {
 
     useEffect(() => {
         dispatch(setPaginationNumber(0))
-        dispatch(getPost({ token, paginationNumber }))
+        dispatch(getPost({ token, paginationNumber: 0 }))
     }, [])
 
 

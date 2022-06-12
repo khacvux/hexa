@@ -6,7 +6,6 @@ import * as ImagePicker from 'expo-image-picker'
 import { Camera } from 'expo-camera';
 import { useState, useEffect, useRef } from 'react'
 import { Entypo, Feather } from '@expo/vector-icons'
-import { BlurView } from 'expo-blur'
 
 
 

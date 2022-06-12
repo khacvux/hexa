@@ -9,21 +9,21 @@ import FormData from 'form-data'
 
 
 const EditProfileModal = ({
-        token,
-        modalVisible, 
-        handleModalVisible, 
-        firstName, 
-        lastName, 
-        avatar, 
-        email, 
-        userId, 
-        setFirstName, 
-        setLastName, 
-        isFirstName, 
-        isLastName,
-        isAvatar,
-        setAvatar,
-    }) => {
+    token,
+    modalVisible,
+    handleModalVisible,
+    firstName,
+    lastName,
+    avatar,
+    email,
+    userId,
+    setFirstName,
+    setLastName,
+    isFirstName,
+    isLastName,
+    isAvatar,
+    setAvatar,
+}) => {
 
     const dispatch = useDispatch();
     const [isVisibleChangeAvtModal, setVisibleChangeAvtModal] = useState(false);
@@ -33,41 +33,44 @@ const EditProfileModal = ({
         setVisibleChangeAvtModal(!isVisibleChangeAvtModal)
     }
 
-    const showConfirmDialog = ({formData}) => {
+    const showConfirmDialog = ({ formData }) => {
         return Alert.alert(
-            "Confirm",
-            "Are you sure you want to change your name?",
+            "Confirm", //TITLE
+            "Are you sure you want to change your name?", //MESSAGE
             [
-              {
-                text: "Yes",
-                onPress: () => {
-                    dispatch(editProfile({ userId, firstName: isFirstName, lastName: isLastName,}))
-                    formData && dispatch(updateAvatar({token, formData}))
-                    handleModalVisible();
-                    return;
+                {
+                    text: "Yes",
+                    onPress: () => {
+                        dispatch(editProfile({ userId, firstName: isFirstName, lastName: isLastName }))
+                        if (formData) {
+                            dispatch(updateAvatar({ token, formData }))
+                        }
+                        handleModalVisible();
+                        return;
+                    },
                 },
-              },
-              {
-                text: "No",
-                onPress: () => {
-                    setFirstName(firstName)
-                    setLastName(lastName)
-                    setAvatar(avatar)
-                    return;
-                }
-              },
+                {
+                    text: "No",
+                    onPress: () => {
+                        setFirstName(firstName)
+                        setLastName(lastName)
+                        setAvatar(avatar)
+                        return;
+                    }
+                },
             ]
         )
     }
 
     const handleSubmit = () => {
-        if(isFirstName != firstName || isLastName != lastName || isAvatar != avatar){
-            if(isAvatar != avatar){
+        if (isFirstName != firstName || isLastName != lastName || isAvatar != avatar) {
+            if (isAvatar != avatar) {
+                console.log('create form data')
                 let formData = new FormData()
                 formData.append('file', isAvatar)
-                showConfirmDialog({formData})
-            }else{
-                showConfirmDialog()
+                showConfirmDialog({ formData })
+            } else {
+                showConfirmDialog({})
             }
         }
         else handleModalVisible()
@@ -107,16 +110,16 @@ const EditProfileModal = ({
                     </View>
                     <View style={tw`flex items-center my-5`}>
                         <Image
-                                source={
-                                    isAvatar ? {uri: isAvatar.uri} : (
-                                        avatar ? {uri: avatar} : 
-                                            require('../../assets/images/defaultAvatar.png'
+                            source={
+                                isAvatar ? { uri: isAvatar.uri } : (
+                                    avatar ? { uri: avatar } :
+                                        require('../../assets/images/defaultAvatar.png'
                                         )
-                                    )
-                                }
-                                style={tw`w-21 h-21 border-2 border-[#F5F7FA] rounded-full`}
+                                )
+                            }
+                            style={tw`w-21 h-21 border-2 border-[#F5F7FA] rounded-full`}
                         />
-                        <TouchableOpacity 
+                        <TouchableOpacity
                             onPress={handleVisibleChangeAvtModal}
                         >
                             <Text style={tw`mt-2 font-bold text-[#5EC2EA]`}>Change your avatar</Text>
@@ -127,7 +130,7 @@ const EditProfileModal = ({
                             <Text style={tw`font-semibold flex-1`}>
                                 First name
                             </Text>
-                            <TextInput 
+                            <TextInput
                                 placeholder='First name'
                                 style={tw`border-b border-[#CCC] flex-3 py-4`}
                                 value={isFirstName}
@@ -138,7 +141,7 @@ const EditProfileModal = ({
                             <Text style={tw`font-semibold flex-1`}>
                                 Last name
                             </Text>
-                            <TextInput 
+                            <TextInput
                                 placeholder='Last name'
                                 style={tw`border-b border-[#CCC] flex-3 py-4`}
                                 value={isLastName}
@@ -151,10 +154,10 @@ const EditProfileModal = ({
                                 User name
                             </Text>
                             <View style={tw`border-b border-[#CCC] flex-3`}>
-                                <Text 
+                                <Text
                                     style={tw`py-4 text-black`}
                                 >
-                                    @{email}  
+                                    @{email}
                                 </Text>
                             </View>
                         </View>
@@ -162,7 +165,7 @@ const EditProfileModal = ({
                             <Text style={tw`font-semibold flex-1`}>
                                 Bio
                             </Text>
-                            <TextInput 
+                            <TextInput
                                 placeholder='Bio'
                                 style={tw`flex-3 py-4`}
                             />
@@ -171,7 +174,7 @@ const EditProfileModal = ({
                     </View>
                 </SafeAreaView>
             </View>
-            <ChangeAvatarModal 
+            <ChangeAvatarModal
                 isVisibleChangeAvtModal={isVisibleChangeAvtModal}
                 handleVisibleChangeAvtModal={handleVisibleChangeAvtModal}
                 setAvatar={setAvatar}
@@ -179,6 +182,6 @@ const EditProfileModal = ({
             />
         </Modal>
     )
-    }
+}
 
 export default EditProfileModal

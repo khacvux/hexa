@@ -111,13 +111,22 @@ const UpLoadPictureScreen = ({ route }) => {
                                 value={isEnabled}
                             />
                         </View>
-                        <TouchableOpacity
-                            onPress={handleSubmit}
-                            style={tw`items-center justify-center bg-[#5EC2EA] py-4 rounded-lg my-2`}
-                        >
-                            <Text style={tw`font-bold text-white`}>Create Post</Text>
-                        </TouchableOpacity>
-
+                        {
+                            !isCaption ? (
+                                <View
+                                    style={tw`items-center justify-center border border-gray-300 py-4 rounded-lg my-2`}
+                                >
+                                    <Text style={tw`font-bold text-gray-300`}>Create Post</Text>
+                                </View>
+                            ) : (
+                                <TouchableOpacity
+                                    onPress={handleSubmit}
+                                    style={tw`items-center justify-center bg-[#5EC2EA] py-4 rounded-lg my-2`}
+                                >
+                                    <Text style={tw`font-bold text-white`}>Create Post</Text>
+                                </TouchableOpacity>
+                            )
+                        }
                     </View>
                 </View>
 

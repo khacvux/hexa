@@ -76,7 +76,7 @@ const UploadAudioScreen = ({route}) => {
                         numberOfLines={1}>{audioFiles.name}</Text>
                     </View>
                     {
-                        isTitle && isGenre.idGenre ? (
+                        isImage && isTitle && isGenre.idGenre ? (
                             <TouchableOpacity
                                 style={tw`p-1`}
                                 onPress={handleSubmit}

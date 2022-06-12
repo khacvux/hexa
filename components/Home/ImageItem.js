@@ -1,8 +1,8 @@
-import { StyleSheet, Image, Dimensions, PixelRatio, View, Text } from 'react-native';
+import { StyleSheet, Image, Dimensions, PixelRatio, View } from 'react-native';
 import React from 'react';
 import tw from 'twrnc'
 
-const { width, height } = Dimensions.get('window')
+const { width } = Dimensions.get('window')
 
 
 const ImageItem = ({image}) => {

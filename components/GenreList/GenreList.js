@@ -1,4 +1,4 @@
-import { View, Text, FlatList } from 'react-native'
+import { FlatList } from 'react-native'
 import React, { useEffect } from 'react'
 import GenreItem from './GenreItem'
 import tw from 'twrnc'

@@ -82,7 +82,7 @@ export default postsReducer = (state = initState, action) => {
 
             newListPostUser.splice(newListPostUser.findIndex((item) => {
                 return item.postsId == action.payload.postsId
-            }))
+            }), 1)
             return {
                 ...state,
                 listPostUser: newListPostUser,

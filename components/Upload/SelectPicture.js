@@ -7,7 +7,7 @@ import { Video } from 'expo-av';
 
 
 
-import { EvilIcons, FontAwesome, Ionicons, MaterialIcons } from '@expo/vector-icons';
+import { EvilIcons, Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { BlurView } from 'expo-blur';
 
 
@@ -91,12 +91,15 @@ const SelectPicture = () => {
               }
             </View>
           ) : (
-            <View style={tw`flex items-center`}>
+            <TouchableOpacity 
+              style={tw`flex items-center`}
+              onPress={selectPicture}
+              >
               <View style={tw`flex items-center justify-center border-2 rounded-full w-25 h-25 my-6 border-[#5EC2EA]`}>
                 <EvilIcons name="camera" size={65} color="#5EC2EA" />
               </View>
               <Text style={tw`text-lg tracking-[.3] text-[#5EC2EA]`}>Photo, video will be displayed here</Text>
-            </View>
+            </TouchableOpacity>
           )
         }
       </View>

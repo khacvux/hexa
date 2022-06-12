@@ -1,5 +1,4 @@
 import { View, Text } from 'react-native'
-import { useEffect } from 'react'
 import tw from 'twrnc'
 import { FlatGrid } from 'react-native-super-grid';
 import ListCategoryItem from './ListCategoryItem';
