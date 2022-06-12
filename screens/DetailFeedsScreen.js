@@ -28,6 +28,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { findPostsById, getListCommentOfPost, reactPost } from '../redux/actions/postsAction'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import DeleteCommentModal from '../components/Modal/DeleteCommentModal'
+import Videos from '../components/Videos/Videos'
 
 
 
@@ -76,6 +77,7 @@ const DetailFeedsScreen = ({route}) => {
         isHeart ? setTotalFeel(isTotalFeel - 1) : setTotalFeel(isTotalFeel + 1)
     }
 
+
     return (
         <SafeAreaView edges={['bottom']} >
             <View style={tw`bg-white h-full`}>
@@ -96,22 +98,31 @@ const DetailFeedsScreen = ({route}) => {
                 >
                     <StatusBar hidden={true} />
                     <View style={tw`h-140 w-full bg-gray-100`}>
-                        <FlatList
-                            data={post.postsImageList}
-                            renderItem={ (image) => <ImageItem image={image} /> }
-                            keyExtractor={image => image.postsImageId}
-                            pagingEnabled
-                            horizontal
-                            showsHorizontalScrollIndicator={false}
-                            bounces={false} 
-                            onScroll={Animated.event([{nativeEvent: {contentOffset: {x: scrollX}}}],{
-                                useNativeDriver: false,
-                            })}
-                            scrollEventThrottle={32}
-                            onViewableItemsChanged={viewableItemsChanged}
-                            viewabilityConfig={viewConfig}
-                            ref={slidesRef}
-                        />
+                        {
+                            post.type == 'video' ? (
+                                <Videos
+                                    uri={post.postsImageList[0].image}
+                                />
+                            ) : (
+                                <FlatList
+                                data={post.postsImageList}
+                                renderItem={ (image) => <ImageItem image={image} /> }
+                                keyExtractor={image => image.postsImageId}
+                                pagingEnabled
+                                horizontal
+                                showsHorizontalScrollIndicator={false}
+                                bounces={false} 
+                                onScroll={Animated.event([{nativeEvent: {contentOffset: {x: scrollX}}}],{
+                                    useNativeDriver: false,
+                                })}
+                                scrollEventThrottle={32}
+                                onViewableItemsChanged={viewableItemsChanged}
+                                viewabilityConfig={viewConfig}
+                                ref={slidesRef}
+                            />
+                            )
+                        }
+                       
                         <LinearGradient
                             colors={['rgba(0, 0, 0, 0.0003)', 'rgba(0, 0, 0, 0.2)']}
                             style={tw`w-full h-15 py-3 absolute bottom-0 right-0 left-0 flex flex-col justify-end z-0`}

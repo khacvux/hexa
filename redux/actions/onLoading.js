@@ -35,3 +35,31 @@ export const buttonLoading = payload => {
         payload
     }
 }
+
+export const onLoadingGetMyListPostedSong = payload => {
+    return {
+        type: TYPES.ON_LOADING_GET_MY_LIST_POSTED_SONG,
+        payload
+    }
+}
+
+export const onLoadingGetListPostedSong = payload => {
+    return {
+        type: TYPES.ON_LOADING_GET_LIST_POSTED_SONG,
+        payload
+    }
+}
+
+export const onLoadingGetListSongPost = payload => {
+    return {
+        type: TYPES.ON_LOADING_GET_LIST_SONG_POST,
+        payload
+    }
+}
+
+export const onLoadingGetPlaylist = payload => {
+    return {
+        type: TYPES.ON_LOADING_GET_PLAYLIST,
+        payload
+    }
+}

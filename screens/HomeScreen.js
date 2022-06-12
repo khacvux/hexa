@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { View, Platform, VirtualizedList, Text } from 'react-native'
+import { View, Platform, VirtualizedList, Text, Animated } from 'react-native'
 import tw, { useDeviceContext } from 'twrnc'
 import Feeds from '../components/Home/Feeds';
 import Header from '../components/Header/Header';
@@ -20,6 +20,15 @@ const HomeScreen = () => {
     const { posts, paginationNumber } = useSelector(state => state.postsReducer)
     const dispatch = useDispatch()
 
+    const scrollY = useRef(new Animated.Value(0)).current;
+    const [currentVisibleIndex, setCurrentVisibleIndex] = useState(0);
+
+
+    const viewableItemsChanged = useRef(({ viewableItems }) => {
+        setCurrentVisibleIndex(viewableItems[0]?.index);
+    }).current;
+    const viewConfig = useRef({ viewAreaCoveragePercentThreshold: 80 }).current;
+
 
     const getItem = (posts, index) => {
         return posts[index];
@@ -35,8 +44,6 @@ const HomeScreen = () => {
         dispatch(setPaginationNumber(0))
         dispatch(getPost({ token, paginationNumber }))
     }, [])
-
-
 
 
     return (
@@ -55,19 +62,28 @@ const HomeScreen = () => {
                     ) : (
                         <VirtualizedList
                             data={posts}
-                            renderItem={(post) => {
-                                return <Feeds post={post} token={token} userId={userId} />
-                            }}
+                            renderItem={({ item, index }) =>
+                                <Feeds
+                                    post={item}
+                                    token={token}
+                                    userId={userId}
+                                    currentIndex={index}
+                                    currentVisibleIndex={currentVisibleIndex}
+                                />
+                            }
                             initialNumToRender={3}
                             keyExtractor={post => post.postsId}
-                            getItemCount={posts => posts.length}
+                            getItemCount={posts => {
+                                if(posts) return posts.length
+                                else return 0;
+                            }}
                             getItem={getItem}
                             contentContainerStyle={[tw``]}
                             showsHorizontalScrollIndicator={false}
                             showsVerticalScrollIndicator={false}
                             maxToRenderPerBatch={4}
                             removeClippedSubviews
-                            onEndReachedThreshold={.5}
+                            onEndReachedThreshold={0}
                             onEndReached={handleLoadmore}
                             ListFooterComponent={
                                 (paginationNumber == -1) ? (
@@ -78,7 +94,12 @@ const HomeScreen = () => {
                                     <SkeletonFeeds />
                                 )
                             }
-
+                            viewabilityConfig={viewConfig}
+                            onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: scrollY } } }], {
+                                useNativeDriver: false
+                            })}
+                            onViewableItemsChanged={viewableItemsChanged}
+                            windowSize={11}
                         />
                     )
                 }

@@ -11,7 +11,7 @@ import ListPostSkeleton from '../Skeleton/ListPostSkeleton';
 import OnDeletePostModal from '../Modal/OnDeletePostModal';
 
 
-const ListPost = ({userId, numberOfPosts}) => {
+const ListPost = ({ userId, numberOfPosts }) => {
 
     const dispatch = useDispatch()
     const { listPostUser } = useSelector(state => state.postsReducer)
@@ -26,8 +26,8 @@ const ListPost = ({userId, numberOfPosts}) => {
     }
 
     useEffect(() => {
-        if(numberOfPosts && userId) {
-            dispatch(getListPostUser({userId, token}))
+        if (numberOfPosts && userId) {
+            dispatch(getListPostUser({ userId, token }))
         }
     }, [])
 
@@ -37,31 +37,31 @@ const ListPost = ({userId, numberOfPosts}) => {
                 getListPostLoading ? (
                     <ListPostSkeleton />
                 ) : (
-                    listPostUser.length == 0 ? (
-                        <View style={tw`w-full h-100 items-center justify-center`}>
-                            <EmptyList title={'No posts yet!!'} />
-                        </View>
-                    ) : (
-                        <FlatGrid
-                                data={listPostUser}
-                                itemDimension={100}
-                                renderItem={(item) => 
-                                    <PostItem item={item} 
-                                        handleVisibleDeleteModal={handleVisibleDeleteModal} 
-                                        setIdPostSelected={setIdPostSelected}
-                                    />
-                                }   
-                                style={tw`pt-2`}
-                                keyExtractor={item => item.postsId} 
-                                spacing={5} 
-                                showsHorizontalScrollIndicator={false}
-                                showsVerticalScrollIndicator={false}
+                    <FlatGrid
+                        data={listPostUser}
+                        itemDimension={100}
+                        renderItem={(item) =>
+                            <PostItem item={item}
+                                handleVisibleDeleteModal={handleVisibleDeleteModal}
+                                setIdPostSelected={setIdPostSelected}
                             />
-                    )
+                        }
+                        style={tw`pt-2`}
+                        keyExtractor={item => item.postsId}
+                        spacing={5}
+                        showsHorizontalScrollIndicator={false}
+                        showsVerticalScrollIndicator={false}
+                        ListEmptyComponent={
+                            <View style={tw`w-full h-100 items-center justify-center`}>
+                                <EmptyList title={'No posts yet!!'} />
+                            </View>
+                        }
+                    />
+
                 )
             }
 
-            <OnDeletePostModal 
+            <OnDeletePostModal
                 handleVisibleDeleteModal={handleVisibleDeleteModal}
                 isVisibleDeleteModal={isVisibleDeleteModal}
                 isIdPostSelected={isIdPostSelected}

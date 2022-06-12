@@ -10,7 +10,7 @@ import OnAddingPosts from '../LottieAnimation/OnAddingPosts';
 import OnAddingFail from '../LottieAnimation/OnAddingFail';
 import OnAddingSuccess from '../LottieAnimation/OnAddingSuccess';
 import { getListPostUser } from '../../redux/actions/postsAction';
-import { getListPostedSongsOfUser } from '../../redux/actions/songsAction';
+import { getMyListPostedSong } from '../../redux/actions/songsAction';
 
 
 
@@ -24,16 +24,17 @@ const Header = () => {
     const navigation = useNavigation();
 
     useEffect(() => {
-        if(onAddingSuccess){
-            setTimeout(() => {
-                dispatch(getListPostUser({userId, token}))
-                dispatch(getListPostedSongsOfUser({userId, token}))
-            }, 2000)
-        }
-    }, [onAddingSuccess])  
+        if(onAddingSuccess )
+            setTimeout(() => dispatch(getListPostUser({userId, token})), 2000)
+    
+        if(onAddingSongSuccess) 
+            setTimeout(() => dispatch(getMyListPostedSong({userId, token})), 2000)
+        
+    }, [onAddingSuccess, onAddingSongSuccess])  
 
 
     return (
+
         <View
             style={tw`flex flex-row justify-between items-center pt-1 pb-2 px-2 bg-white`}
         >

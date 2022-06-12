@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getPlaylistById, playSong, setArraySongs, showPlayerBar } from '../redux/actions/songsAction'
 import InPlaylistModal from '../components/Modal/InPlaylistModal'
 import InPlaylistItemModal from '../components/Modal/InPlaylistItemModal'
+import PlaylistSkeletion from '../components/Skeleton/PlaylistSkeletion'
 
 
 
@@ -25,11 +26,12 @@ const PlaylistScreen = ({route}) => {
     const {width: SCREEN_WIDTH} = Dimensions.get('window');
 
     const FRAMESIZE_W = SCREEN_WIDTH;
-    const FRAMESIZE_H = SCREEN_WIDTH*2/3;
+    const FRAMESIZE_H = SCREEN_WIDTH*0.5;
     
     const dispatch = useDispatch()
     const { token } = useSelector(state => state.authReducer)
     const { listSongByLibrary } = useSelector(state => state.songReducer)
+    const { getPlaylistLoading } = useSelector(state => state.onLoadingReducer)
 
     useEffect(() => {
         dispatch(getPlaylistById({lid: listSongId, token}))
@@ -51,7 +53,9 @@ const PlaylistScreen = ({route}) => {
 
     return (
         <ImageBackground
-            source={listSongByLibrary?.image ? {uri: listSongByLibrary?.image } : require('../assets/images/music-background.jpeg')}
+            source={listSongByLibrary?.image 
+                ? {uri: listSongByLibrary?.image } 
+                : require('../assets/images/default-song-avatar.jpeg')}
             style={tw`w-full h-full`}
         >   
             <BlurView
@@ -83,13 +87,16 @@ const PlaylistScreen = ({route}) => {
                         </View>
                     </View>   
                     <VirtualizedScrollView>
+                       
                         <TouchableOpacity
                             activeOpacity={.9}
                             onPress={handlePlay}
                         >
                             <ImageBackground
-                                source={listSongByLibrary?.image ? {uri: listSongByLibrary.image } : require('../assets/images/music-background.jpeg')}
-                                style={[tw`w-full mb-3`, { height: FRAMESIZE_H }]}
+                                source={listSongByLibrary?.image 
+                                    ? {uri: listSongByLibrary.image } 
+                                    : require('../assets/images/default-song-avatar.jpeg')}
+                                style={[tw`w-full mb-3 bg-gray-200`, { height: FRAMESIZE_H }]}
                                 resizeMode='cover'
                             >
                                 {
@@ -115,17 +122,29 @@ const PlaylistScreen = ({route}) => {
                             </ImageBackground>
                         </TouchableOpacity>
                         
-                        <FlatList 
-                            data={listSongByLibrary?.listSongItemList}
-                            renderItem={(item) => {
-                                return <TrackItem item={item} setListSongItemId={setListSongItemId} setVisible={setVisible2} />
-                            }}
-                            keyExtractor={(item, index) => index}
-                            showsHorizontalScrollIndicator={false}
-                            showsVerticalScrollIndicator={false}
-                            pagingEnabled
-                            contentContainerStyle={tw`flex flex-col items-center px-3`}
-                        />
+                        {
+                            getPlaylistLoading ? (
+                                <View>
+                                    <PlaylistSkeletion />
+                                    <PlaylistSkeletion />
+                                    <PlaylistSkeletion />
+                                </View>
+                            ) : (
+                                <FlatList 
+                                    data={listSongByLibrary?.listSongItemList}
+                                    renderItem={(item) => {
+                                        return <TrackItem item={item} setListSongItemId={setListSongItemId} setVisible={setVisible2} />
+                                    }}
+                                    keyExtractor={(item, index) => index}
+                                    showsHorizontalScrollIndicator={false}
+                                    showsVerticalScrollIndicator={false}
+                                    pagingEnabled
+                                    contentContainerStyle={tw`flex flex-col items-center px-3`}
+                                />
+                            )
+                        }
+                        
+                       
                     </VirtualizedScrollView>
 
                 </SafeAreaView>

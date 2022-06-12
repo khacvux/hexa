@@ -6,6 +6,11 @@ const initState = {
     findUserLoading: false,
     buttonLoading:  false,
     getListPostLoading: false,
+
+    getMyListPostedSongLoading: false,
+    getListPostedSongLoading: false,
+    getListSongPostLoading: false,
+    getPlaylistLoading: false
 }
 
 export default onLoadingReducer = ( state = initState, action ) => {
@@ -35,7 +40,29 @@ export default onLoadingReducer = ( state = initState, action ) => {
                 ...state,
                 buttonLoading: action.payload
             }
-       
+        case TYPES.ON_LOADING_GET_MY_LIST_POSTED_SONG:
+            return {
+                ...state,
+                getMyListPostedSongLoading: action.payload
+            }
+        
+        case TYPES.ON_LOADING_GET_LIST_POSTED_SONG:
+            return {
+                ...state,
+                getListPostedSongLoading: action.payload
+            }
+        
+        case TYPES.ON_LOADING_GET_LIST_SONG_POST:
+            return {
+                ...state,
+                getListSongPostLoading: action.payload
+            }
+
+        case TYPES.ON_LOADING_GET_PLAYLIST:
+            return {
+                ...state,
+                getPlaylistLoading: action.payload
+            }
         
         default:
             return state;

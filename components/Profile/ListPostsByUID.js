@@ -43,7 +43,7 @@ const ListPostByUID = ({userId, numberOfPosts}) => {
                             }   
                             style={tw`pt-2`}
                             keyExtractor={item => item.postsId} 
-                            spacing={5} 
+                            spacing={2} 
                             showsHorizontalScrollIndicator={false}
                             showsVerticalScrollIndicator={false}
                         />

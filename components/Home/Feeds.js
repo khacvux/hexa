@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { View, Text, TouchableOpacity, Touchable, Image, Animated, FlatList, Dimensions } from 'react-native'
-import tw, { useDeviceContext } from 'twrnc'
+import { View, Text, TouchableOpacity, Image, FlatList, Dimensions } from 'react-native'
+import tw from 'twrnc'
 import { Ionicons, FontAwesome } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { BlurView } from 'expo-blur';
@@ -20,11 +20,10 @@ import Videos from '../Videos/Videos';
 
 
 
-const Feeds = ({ post, token, userId }) => {
+const Feeds = ({ post, token, userId, currentIndex, currentVisibleIndex }) => {
 
     const dispatch = useDispatch();
 
-    useDeviceContext(tw);
     const { width: SCREEN_WIDTH } = Dimensions.get('window');
     // frame size 3:2
     const FRAMESIZE_W = SCREEN_WIDTH;
@@ -33,16 +32,15 @@ const Feeds = ({ post, token, userId }) => {
     const refRBSheet = useRef();
     const navigation = useNavigation();
 
-    const [isHeart, setHeart] = useState(post.item.feel);
-    const [isTotalFeel, setTotalFeel] = useState(post.item.totalFeel)
+    const [isHeart, setHeart] = useState(post.feel);
+    const [isTotalFeel, setTotalFeel] = useState(post.totalFeel)
     const [sound, setSound] = useState();
 
-   
 
-    const scrollX = useRef(new Animated.Value(0)).current;
-    const [currentIndex, setCurrentIndex] = useState(0);
+    // const scrollX = useRef(new Animated.Value(0)).current;
+    // const [currentIndex, setCurrentIndex] = useState(0);
     const slidesRef = useRef(null);
-    const date = new Date(Date.parse(post.item.dateCreate));
+    const date = new Date(Date.parse(post.dateCreate));
 
     const lastTap = useRef(0)
 
@@ -53,25 +51,8 @@ const Feeds = ({ post, token, userId }) => {
             handlePressHeart()
         } else {
             lastTap.current = now
-            // if (post.item.type == 'image') {
-            //     navigation.navigate('DetailFeedsStack', {
-            //         postsId: post.item.postsId
-            //     })
-            // } else {
-            //     console.log(post.item)
-            // }
         }
     }
-
-
-    const viewableItemsChanged = useRef(({ viewableItems }) => {
-        setCurrentIndex(viewableItems[0].index);
-    }).current;
-    const viewConfig = useRef({ viewAreaCoveragePercentThreshold: 50 }).current;
-
-
-
-
     async function playSound() {
         const { sound } = await Audio.Sound.createAsync(
             require('../../assets/soundEffects/likeSound.mp3')
@@ -89,7 +70,7 @@ const Feeds = ({ post, token, userId }) => {
         setHeart(!isHeart);
         dispatch(reactPost({
             token,
-            tusId: post.item.postsId,
+            tusId: post.postsId,
             userId
         }))
         isHeart ? setTotalFeel(isTotalFeel - 1) : setTotalFeel(isTotalFeel + 1)
@@ -98,7 +79,7 @@ const Feeds = ({ post, token, userId }) => {
     const handlePressComment = () => {
         refRBSheet.current.open()
         dispatch(getListCommentOfPost({
-            postsId: post.item.postsId,
+            postsId: post.postsId,
             token,
         }))
     }
@@ -106,7 +87,7 @@ const Feeds = ({ post, token, userId }) => {
     const handleGetProfile = () => {
         navigation.navigate('ProfileStack', {
             myUserId: userId,
-            userId: post.item.postsUserList[0].userId
+            userId: post.postsUserList[0].userId
         })
     }
 
@@ -123,13 +104,15 @@ const Feeds = ({ post, token, userId }) => {
                     activeOpacity={.9}
                 >
                     {
-                        post.item?.type == 'video' ? (
+                        post?.type == 'video' ? (
                             <Videos 
-                                uri={post.item.postsImageList[0].image}   
+                                uri={post.postsImageList[0].image}   
+                                currentIndex={currentIndex}
+                                currentVisibleIndex={currentVisibleIndex}
                             />
                         ) : (
                             <FlatList
-                                data={post.item.postsImageList}
+                                data={post.postsImageList}
                                 renderItem={({ item }) => {
                                     return <ImageItem image={item} />
                                 }}
@@ -138,17 +121,15 @@ const Feeds = ({ post, token, userId }) => {
                                 horizontal
                                 showsHorizontalScrollIndicator={false}
                                 bounces={false}
-                                onScroll={Animated.event([{ nativeEvent: { contentOffset: { x: scrollX } } }], {
-                                    useNativeDriver: false,
-                                })}
-                                scrollEventThrottle={32}
-                                onViewableItemsChanged={viewableItemsChanged}
-                                viewabilityConfig={viewConfig}
+                                // onScroll={Animated.event([{ nativeEvent: { contentOffset: { x: scrollX } } }], {
+                                //     useNativeDriver: false,
+                                // })}
+                                // scrollEventThrottle={32}
+                                // onViewableItemsChanged={viewableItemsChanged}
+                                // viewabilityConfig={viewConfig}
                                 ref={slidesRef}
                             />
                         )
-
-
                     }
 
                 </TouchableOpacity>
@@ -175,7 +156,7 @@ const Feeds = ({ post, token, userId }) => {
                         <Ionicons name="chatbubble-ellipses"
                             style={tw`text-2xl text-[#FEFEFD] my-2`}
                         />
-                        <Text style={tw`text-white text-center`}>{post.item.totalComment}</Text>
+                        <Text style={tw`text-white text-center`}>{post.totalComment}</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                         activeOpacity={.7}
@@ -198,14 +179,14 @@ const Feeds = ({ post, token, userId }) => {
                     >
                         <Image
                             source={
-                                post.item?.postsUserList[0]?.image
-                                    ? { uri: post.item?.postsUserList[0]?.image }
+                                post?.postsUserList[0]?.image
+                                    ? { uri: post?.postsUserList[0]?.image }
                                     : require('../../assets/images/defaultAvatar.png')
                             }
                             style={tw`w-9 h-9 rounded-full mr-2`}
                         />
                         <View>
-                            <Text style={tw`font-bold text-white text-base`}>{post.item.postsUserList[0].name}</Text>
+                            <Text style={tw`font-bold text-white text-base`}>{post.postsUserList[0].name}</Text>
                             <Text style={[{ fontSize: 11 }, tw`text-gray-200 mb-1 mx-1 font-light`]}>{date.toLocaleDateString()}</Text>
                         </View>
                     </TouchableOpacity>
@@ -214,7 +195,7 @@ const Feeds = ({ post, token, userId }) => {
                     <Text style={[tw`text-white px-5 w-95/100`]}
                         numberOfLines={3}
                     >
-                        {post.item.caption}
+                        {post.caption}
                     </Text>
                 </TouchableOpacity>
                 {/* 
@@ -244,7 +225,7 @@ const Feeds = ({ post, token, userId }) => {
                 </View>
 
                 <View style={tw`mb-2 w-full`} >
-                    <WriteComment postId={post.item.postsId} />
+                    <WriteComment postId={post.postsId} />
                 </View>
             </RBSheet>
         </View>

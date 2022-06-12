@@ -60,6 +60,7 @@ function* getPost(data) {
                 yield put(ACTION.setPaginationNumber(-1))
             }
         } else if (res == 403) {
+            console.log(res)
             yield put(unauthorized(true))
         }
 

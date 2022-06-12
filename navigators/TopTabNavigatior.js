@@ -7,9 +7,9 @@ import { Foundation, Ionicons, MaterialIcons } from '@expo/vector-icons';
 import SelectPicture from '../components/Upload/SelectPicture';
 import SelectAudio from '../components/Upload/SelectAudio';
 import ListPost from '../components/Profile/ListPosts';
-import ListTrack from '../components/Profile/ListTrack';
 import ListPostByUID from '../components/Profile/ListPostsByUID';
 import MyPostedPlaylist from '../components/PostedPlaylist/MyPostedPlaylist';
+import PostedSongList from '../components/PostedPlaylist/PostedSongList';
 
 
 const TopBar = createMaterialTopTabNavigator();
@@ -157,7 +157,7 @@ export const TabListOfUserNavigator  = ({userId, numberOfPosts}) => {
             />
             <TopBar.Screen 
                 name='ListTrackTab' 
-                children={() => <ListTrack userId={userId} />} 
+                children={() => <PostedSongList userId={userId} />} 
                 options={{ 
                     tabBarIcon: (({focused}) => 
                         <Foundation name='sound' size={23} style={focused ? tw`text-[#5EC2EA]` : tw`text-gray-500`} />

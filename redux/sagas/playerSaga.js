@@ -1,16 +1,16 @@
 import * as TYPES from '../constants/songs'
 import * as ACTION from '../actions/songsAction'
+import * as LOADING_ACTION from '../actions/onLoading'
 import { put, takeLeading, takeEvery, takeLatest, call, delay } from '@redux-saga/core/effects'
 import { addSongToPlaylistAPI, commentSongAPI, createNewPlaylistAPI, deletePlaylistAPI, getLibraryByUIDAPI, getListGenreAPI,
     getListPostedSongsOfUserAPI,
     getListSongByCategoryIdAPI, 
     getPlaylistByLIDAPI, 
-    likeSongAPI, 
-    loadSongAPI, 
+    likeSongAPI,  
     removeSongFromPlaylistAPI, 
     uploadSongAPI 
 } from '../../apis/songAPIs'
-// import { Audio } from 'expo-av'
+
 
 
 
@@ -69,8 +69,8 @@ function* addPlaylist(data) {
 
 function* getListSongByGenreId(data) {
     try {
+        yield put(LOADING_ACTION.onLoadingGetListSongPost(true))
         console.log('GET LIST SONG BY CATEGORY ID RUNNING....')
-
         const res = yield call(getListSongByCategoryIdAPI, {
             token: data.payload.token,
             categoryId: data.payload.genreId,
@@ -81,6 +81,7 @@ function* getListSongByGenreId(data) {
     } catch (error) {
         yield put(ACTION.actionFailure(error))
     }
+    yield put(LOADING_ACTION.onLoadingGetListSongPost(false))
 }
 
 function* getLibraryByUID(data) {
@@ -100,6 +101,7 @@ function* getLibraryByUID(data) {
 
 function* getPlaylistByLID(data) {
     try {
+        yield put(LOADING_ACTION.onLoadingGetPlaylist(true))
         console.log('GET PLAYLIST BY LIBRARY ID RUNNING...')
         const res = yield call(getPlaylistByLIDAPI, {
             lid: data.payload.lid,
@@ -112,6 +114,7 @@ function* getPlaylistByLID(data) {
     } catch (error) {
         yield put(ACTION.actionFailure(error))
     }
+    yield put(LOADING_ACTION.onLoadingGetPlaylist(false))
 }
 
 function* addSongToPlaylist(data) {
@@ -133,6 +136,7 @@ function* addSongToPlaylist(data) {
 function* getMyListPostedSongs(data) {
     try {
         console.log('GET MY LIST POSTED SONGS RUNINNG...')
+        yield put(LOADING_ACTION.onLoadingGetMyListPostedSong(true))
         const res = yield call(getListPostedSongsOfUserAPI, {
             token: data.payload.token,
             userId: data.payload.userId
@@ -143,21 +147,25 @@ function* getMyListPostedSongs(data) {
     } catch (error) {
         yield put(ACTION.actionFailure(error))
     }
+    yield put(LOADING_ACTION.onLoadingGetMyListPostedSong(false))
+
 }
 
 function* getListPostedSongsOfUser(data) {
     try {
+        yield put(LOADING_ACTION.onLoadingGetListPostedSong(true))
         console.log('GET LIST POSTED OF USER SONGS RUNINNG...')
         const res = yield call(getListPostedSongsOfUserAPI, {
             token: data.payload.token,
             userId: data.payload.userId
         })
         if(res.status == 'ok'){
-            yield put(ACTION.getListPostedSongsOfUser(res.data))
+            yield put(ACTION.getListPostedSongsOfUserSuccess(res.data))
         }
     } catch (error) {
         yield put(ACTION.actionFailure(error))
     }
+    yield put(LOADING_ACTION.onLoadingGetListPostedSong(false))
 }
 
 function* deletePlaylist(data) {
@@ -228,6 +236,7 @@ function* commentSong(data) {
         yield put(ACTION.actionFailure(error))
     }
 }
+
 
 
 
