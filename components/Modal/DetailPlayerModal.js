@@ -1,44 +1,50 @@
-import { AntDesign, Entypo, FontAwesome5, Ionicons, SimpleLineIcons, MaterialCommunityIcons } from '@expo/vector-icons'
+import { Entypo, FontAwesome5, MaterialCommunityIcons } from '@expo/vector-icons'
 import { BlurView } from 'expo-blur'
-import { StatusBar } from 'expo-status-bar'
-import { View, Text, Modal, ImageBackground, SafeAreaView, TouchableOpacity, Image, FlatList, Dimensions } from 'react-native'
+import { View, Text, Modal, ImageBackground, SafeAreaView, TouchableOpacity } from 'react-native'
 import tw from 'twrnc'
-
-
-import Slider from '@react-native-community/slider'
-import { useDispatch, useSelector } from 'react-redux'
-import { useEffect, useRef, useState } from 'react'
-import { nextSong, pauseSong, playSong, prevSong } from '../../redux/actions/songsAction'
 import { Audio } from 'expo-av'
+
+
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect, useState } from 'react'
+import { convertTime } from '../../misc/helper'
+import Slider from '@react-native-community/slider'
+import { nextSong, pauseSong, playSong, prevSong } from '../../redux/actions/songsAction'
+import ImagePlayer from '../Player/ImagePlayer'
+import ButtonPlayer from '../Player/ButtonPlayer'
+
 
 
 const DetailPlayerModal = ({ showDetailPlayer, setShowDetailPlayer, songPlaying }) => {
 
-    const { statusPlayer, arraySongs, indexSongPlaying } = useSelector(state => state.songReducer)
     const dispatch = useDispatch()
-    const { width: SCREEN_WIDTH } = Dimensions.get('window')
+
+    const { statusPlayer, arraySongs, indexSongPlaying } = useSelector(state => state.songReducer)
+
+
+    const [song, setSong] = useState()
+    const [statusSong, setStatusSong] = useState(0)
+    const [currentPosition, setCurrentPosition] = useState(0);
 
     const [canNext, setCanNext] = useState()
     const [canPrev, setCanPrev] = useState()
-    const [song, setSong] = useState()
 
 
-    const handlePause = () => {
-        dispatch(pauseSong())
-    }
+    const calculateSeekBar = () => {
+        if (!isNaN(statusSong.positionMillis)) {
+            if (Math.floor(statusSong.positionMillis / 100)
+                == Math.floor(statusSong.durationMillis / 100)) {
+                if (canNext) setTimeout(() => dispatch(nextSong()), 3000)
+            }
+            return statusSong.positionMillis / statusSong.durationMillis;
+        }
+        return 0;
+    };
 
-    const handlePlay = () => {
-        dispatch(playSong())
-    }
-
-    const handleNextSong = () => {
-        dispatch(nextSong())
-    }
-
-    const handlePrevSong = () => {
-        dispatch(prevSong())
-    }
-
+    const handlePause = () => dispatch(pauseSong())
+    const handlePlay = () => dispatch(playSong())
+    const handleNextSong = () => dispatch(nextSong())
+    const handlePrevSong = () => dispatch(prevSong())
 
 
     //LOADING AUDIO
@@ -49,24 +55,32 @@ const DetailPlayerModal = ({ showDetailPlayer, setShowDetailPlayer, songPlaying 
             // Source
             { uri: songPlaying.song.song },
             // Initial status
-            { shouldPlay: false },
+            { shouldPlay: true, progressUpdateIntervalMillis: 500 },
             // Download first
             true,
         );
-        setSong(song)
+        song.setStatusAsync({ progressUpdateIntervalMillis: 500 });
+        song.setOnPlaybackStatusUpdate((playbackStatus) => {
+            // console.log(playbackStatus)
+            if (playbackStatus) {
+                setStatusSong(playbackStatus)
+            }
+        });
 
+        setSong(song)
         if (arraySongs) {
             (arraySongs.length > indexSongPlaying + 1) ? setCanNext(true) : setCanNext(false);
             (indexSongPlaying > 0) ? setCanPrev(true) : setCanPrev(false);
         }
     }, [indexSongPlaying, arraySongs])
 
+
     // PLAY - PAUSE
     useEffect(() => {
-        if(song) {
+        if (song?._loaded) {
             if (statusPlayer == 'playing') {
-                setTimeout(() => song.playAsync(), 1000)
-            } else if (statusPlayer == 'pause' ) {
+                song.playAsync()
+            } else if (statusPlayer == 'pause') {
                 song.pauseAsync()
             }
         } else handlePause()
@@ -93,7 +107,7 @@ const DetailPlayerModal = ({ showDetailPlayer, setShowDetailPlayer, songPlaying 
                 resizeMode='cover'
             >
                 <BlurView
-                    intensity={40}
+                    intensity={80}
                     style={tw`w-full h-full`}
                     tint='dark'
                 >
@@ -113,30 +127,28 @@ const DetailPlayerModal = ({ showDetailPlayer, setShowDetailPlayer, songPlaying 
                             </View>
 
                             {/* IMAGE */}
+                            <ImagePlayer
+                                songPlaying={songPlaying}
+                            />
 
-
-                            <View style={tw`flex-1 w-full items-center justify-start my-2`}>
-                                <Image
-                                    source={songPlaying?.song.image ? { uri: songPlaying.song.image } : require('../../assets/images/default-song-avatar.jpeg')}
-                                    style={[tw`rounded-xl`, { width: SCREEN_WIDTH - 100, height: SCREEN_WIDTH - 100 }]}
-                                />
-                            </View>
 
 
                             <View style={tw``}>
-
                                 <View style={tw`w-full items-center mb-4`}>
                                     <Text style={tw`text-xl text-white tracking-[.25]`}>{songPlaying?.song.name}</Text>
                                     <Text style={tw`text-white text-sm font-light`}>{songPlaying?.song.userName}</Text>
                                 </View>
 
                                 {/* PLAYER BUTTON */}
-                                <View style={tw`flex flex-row items-center justify-center`}>
+                                <View style={tw`flex flex-row items-center justify-between px-8`}>
+                                    <Text style={tw`text-white mx-3 w-10`}>
+                                        {statusSong && !isNaN(statusSong.positionMillis) ? convertTime(statusSong.positionMillis) : '00:00'}
+                                    </Text>
                                     {/* PREV SONG */}
                                     {
                                         canPrev ? (
                                             <TouchableOpacity
-                                                style={tw`p-3 rounded-full `}
+                                                style={tw`p-1 rounded-full `}
                                                 activeOpacity={.5}
                                                 onPress={handlePrevSong}
                                             >
@@ -147,7 +159,7 @@ const DetailPlayerModal = ({ showDetailPlayer, setShowDetailPlayer, songPlaying 
                                             </TouchableOpacity>
                                         ) : (
                                             <TouchableOpacity
-                                                style={tw`p-3 rounded-full `}
+                                                style={tw`p-1 rounded-full `}
                                                 activeOpacity={.5}
                                                 onPress={handlePrevSong}
                                             >
@@ -160,39 +172,39 @@ const DetailPlayerModal = ({ showDetailPlayer, setShowDetailPlayer, songPlaying 
                                         )
                                     }
 
-
                                     {/* PLAY - PAUSE */}
-
                                     {
                                         statusPlayer == 'pause' ? (
                                             <TouchableOpacity
-                                                style={tw`w-16 h-16 items-center justify-center rounded-full bg-[#1C1D2B] mx-15`}
+                                                style={tw`w-13 h-13 items-center justify-center rounded-full border border-white mx-7`}
                                                 activeOpacity={.5}
                                                 onPress={handlePlay}
                                             >
                                                 <FontAwesome5 name='play'
-                                                    size={27}
+                                                    size={20}
                                                     style={tw`text-white ml-[5]`}
                                                 />
                                             </TouchableOpacity>
                                         ) : (
                                             <TouchableOpacity
-                                                style={tw`w-16 h-16 items-center justify-center rounded-full bg-[#1C1D2B] mx-15`}
+                                                style={tw`w-13 h-13 items-center justify-center rounded-full border border-white mx-7`}
                                                 activeOpacity={.5}
                                                 onPress={handlePause}
                                             >
                                                 <FontAwesome5 name='pause'
-                                                    size={27}
+                                                    size={20}
                                                     style={tw`text-white`}
                                                 />
                                             </TouchableOpacity>
                                         )
                                     }
+
+
                                     {/* NEXT SONG */}
                                     {
                                         canNext ? (
                                             <TouchableOpacity
-                                                style={tw`p-3 rounded-full`}
+                                                style={tw`p-1 rounded-full`}
                                                 activeOpacity={.5}
                                                 onPress={handleNextSong}
                                             >
@@ -203,7 +215,7 @@ const DetailPlayerModal = ({ showDetailPlayer, setShowDetailPlayer, songPlaying 
                                             </TouchableOpacity>
                                         ) : (
                                             <TouchableOpacity
-                                                style={tw`p-3 rounded-full`}
+                                                style={tw`p-1 rounded-full`}
                                                 activeOpacity={.5}
                                                 onPress={handleNextSong}
                                             >
@@ -214,71 +226,36 @@ const DetailPlayerModal = ({ showDetailPlayer, setShowDetailPlayer, songPlaying 
                                             </TouchableOpacity>
                                         )
                                     }
+                                    <Text style={tw`text-white mx-3 w-10`}>
+                                        {statusSong && !isNaN(statusSong.durationMillis) ? convertTime(statusSong.durationMillis) : '00:00'}
+                                    </Text>
 
                                 </View>
 
                                 {/* SLIDER */}
+
                                 <View style={tw`mt-3 px-5`}>
                                     <Slider
                                         style={tw``}
-                                        value={0}
+                                        value={calculateSeekBar()}
                                         minimumValue={0}
-                                        maximumValue={10}
+                                        maximumValue={1}
                                         thumbTintColor='#1C1D2B'
                                         minimumTrackTintColor='#1C1D2B'
                                         maximumTrackTintColor='#F5F7FA'
-                                    // onSlidingComplete={async value => {
-                                    //   await TrackPlayer.seekTo(value);
-                                    // }}
+                                        onValueChange={value => setCurrentPosition(value * statusSong.durationMillis)}
+                                        onSlidingComplete={() =>
+                                            song.setPositionAsync(currentPosition)
+                                        }
                                     />
-                                    <View style={tw`flex flex-row items-center justify-between`}>
-                                        <Text style={tw`font-bold text-white`}>
-                                            {/* {
-                        new Date(progress.position * 1000)
-                        .toLocaleTimeString()
-                        .substring(3)
-                      } */}
-                                        </Text>
-                                        <Text style={tw`font-bold text-white`}>
-                                            {/* {
-                        new Date((progress.duration - progress.position) * 1000)
-                        .toLocaleTimeString()
-                        .substring(3)
-                      } */}
-                                        </Text>
-                                    </View>
+
                                 </View>
+                            </View>
 
 
-                            </View>
-                            <View style={tw`flex flex-row items-center py-5`}>
-                                <TouchableOpacity
-                                    style={tw`flex flex-row flex-1 items-center justify-center`}>
-                                    <Ionicons name='heart-outline' size={25} style={tw`mx-1 text-white`} />
-                                    {/* <Text style={tw`font-bold text-white`}>2342</Text> */}
-                                </TouchableOpacity>
-                                <TouchableOpacity
-                                    style={tw`flex flex-row flex-1 items-center justify-center`}
-                                >
-                                    <Ionicons name='chatbubble-ellipses-outline' size={26} style={tw`mx-1 text-white`} />
-                                    {/* <Text style={tw`font-bold text-white`}>2342</Text> */}
-                                </TouchableOpacity>
-                                <TouchableOpacity
-                                    style={tw`flex-1 items-center`}
-                                >
-                                    <Ionicons name='md-share-social-outline' size={25} style={tw`mx-1 text-white`} />
-                                </TouchableOpacity>
-                                <TouchableOpacity
-                                    style={tw`flex-1 items-center`}
-                                >
-                                    <SimpleLineIcons name='loop' size={25} style={tw`mx-1 text-white`} />
-                                </TouchableOpacity>
-                                <TouchableOpacity
-                                    style={tw`flex-1 items-center`}
-                                >
-                                    <Entypo name='dots-three-horizontal' size={22} style={tw`mx-1 text-white`} />
-                                </TouchableOpacity>
-                            </View>
+                            {/* ------------------------------ */}
+
+                            <ButtonPlayer />
                         </View>
 
                     </SafeAreaView>

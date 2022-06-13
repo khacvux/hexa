@@ -44,7 +44,7 @@ const SearchItem = ({ item, times }) => {
                 />
                 <View>
                     <Text style={tw`text-base font-semibold`}>{item.item.name}</Text>
-                    <Text style={tw`text-xs font-light`}>@{item.item.email}</Text>
+                    <Text style={tw`text-xs font-light`}>{item.item.email}</Text>
                 </View>
             </TouchableOpacity>
             {

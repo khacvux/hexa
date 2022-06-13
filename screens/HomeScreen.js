@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import HiAnimation from '../components/LottieAnimation/HiAnimation';
 import { getPost, setPaginationNumber } from '../redux/actions/postsAction';
 import SkeletonFeeds from '../components/Skeleton/FeedsSkeleton'
+import { StatusBar } from 'expo-status-bar';
 
 
 
@@ -49,6 +50,7 @@ const HomeScreen = () => {
     return (
         <View style={[tw`bg-gray-100 h-full`]}>
             <View style={tw`h-full overflow-hidden flex`}>
+                <StatusBar hidden={false} />
                 <Header />
 
                 {

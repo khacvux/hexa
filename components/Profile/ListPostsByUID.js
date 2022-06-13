@@ -19,9 +19,7 @@ const ListPostByUID = ({userId, numberOfPosts}) => {
 
 
     useEffect(() => {
-        if(numberOfPosts && userId) {
-            dispatch(getListPostsByUID({uid: userId, token}))
-        }
+        dispatch(getListPostsByUID({uid: userId, token}))
     }, [userId])
 
     return (

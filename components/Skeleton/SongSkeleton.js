@@ -11,8 +11,8 @@ const SongSkeleton = () => {
     style={tw`flex flex-row items-center bg-[#F5F7FA] p-2 rounded-lg my-1 justify-between`}
 >
     <View style={tw`flex flex-row items-center flex-1`}>
-        <Skeleton twrnc={'h-11 w-11'} rounded={2} bg={'#B4D8E0'} />
-        <Skeleton twrnc={'h-5 w-40 ml-1'} bg={'#B4D8E0'} rounded={1} />
+        <Skeleton twrnc={'h-11 w-11'} rounded={3} bg={'#B4D8E0'} />
+        <Skeleton twrnc={'h-5 w-40 ml-2'} bg={'#B4D8E0'} rounded={3} />
     </View>
     <View style={tw`flex flex-row items-center `}>
         {/* <TouchableOpacity>
@@ -29,7 +29,8 @@ const SongSkeleton = () => {
                 style={tw`text-gray-300 mr-4 ml-3`}
             />
         </TouchableOpacity> */}
-        <Skeleton twrnc={'h-6 w-10 mr-3'} bg={'#B4D8E0'} rounded={1} />
+        <Skeleton twrnc={'h-6 w-6 mr-2'} bg={'#B4D8E0'} rounded={99} />
+        <Skeleton twrnc={'h-6 w-6 mr-3'} bg={'#B4D8E0'} rounded={99} />
        
     </View>
 
