@@ -19,7 +19,7 @@ const DetailPlayerModal = ({ showDetailPlayer, setShowDetailPlayer, songPlaying 
 
     const dispatch = useDispatch()
 
-    const { statusPlayer, arraySongs, indexSongPlaying } = useSelector(state => state.songReducer)
+    const { statusPlayer, arraySongs, indexSongPlaying, loopSong } = useSelector(state => state.songReducer)
 
 
     const [song, setSong] = useState()
@@ -32,8 +32,8 @@ const DetailPlayerModal = ({ showDetailPlayer, setShowDetailPlayer, songPlaying 
 
     const calculateSeekBar = () => {
         if (!isNaN(statusSong.positionMillis)) {
-            if (Math.floor(statusSong.positionMillis / 100)
-                == Math.floor(statusSong.durationMillis / 100)) {
+            if ((Math.floor(statusSong.positionMillis / 100)
+                == Math.floor(statusSong.durationMillis / 100) && !loopSong)) {
                 if (canNext) setTimeout(() => dispatch(nextSong()), 3000)
             }
             return statusSong.positionMillis / statusSong.durationMillis;
@@ -55,19 +55,18 @@ const DetailPlayerModal = ({ showDetailPlayer, setShowDetailPlayer, songPlaying 
             // Source
             { uri: songPlaying.song.song },
             // Initial status
-            { shouldPlay: true, progressUpdateIntervalMillis: 500 },
+            { shouldPlay: false, progressUpdateIntervalMillis: 500 },
             // Download first
             true,
         );
         song.setStatusAsync({ progressUpdateIntervalMillis: 500 });
         song.setOnPlaybackStatusUpdate((playbackStatus) => {
-            // console.log(playbackStatus)
             if (playbackStatus) {
                 setStatusSong(playbackStatus)
             }
         });
-
         setSong(song)
+
         if (arraySongs) {
             (arraySongs.length > indexSongPlaying + 1) ? setCanNext(true) : setCanNext(false);
             (indexSongPlaying > 0) ? setCanPrev(true) : setCanPrev(false);
@@ -92,6 +91,15 @@ const DetailPlayerModal = ({ showDetailPlayer, setShowDetailPlayer, songPlaying 
         console.log('clean up')
         return song ? () => { song.unloadAsync() } : undefined
     }, [song, arraySongs])
+
+
+    //LOOP SONG
+    useEffect(() => {
+        if(song) song.setIsLoopingAsync(loopSong)
+        return 0;
+    }, [loopSong])
+
+
 
 
     return (
@@ -255,7 +263,7 @@ const DetailPlayerModal = ({ showDetailPlayer, setShowDetailPlayer, songPlaying 
 
                             {/* ------------------------------ */}
 
-                            <ButtonPlayer />
+                            <ButtonPlayer songId={songPlaying?.song.songId} />
                         </View>
 
                     </SafeAreaView>

@@ -16,6 +16,7 @@ const initialState = {
     songSound: '',
     indexSongPlaying: 0,
     statusPlayer: 'pause',
+    loopSong: false,
 
     myListPostedSongs: [],
     listPostedSongsOfUser: [],
@@ -93,6 +94,12 @@ export default songsReducer = (state = initialState, action) => {
                 }
             } else {
                 return state
+            }
+
+        case TYPES.LOOP_SONG:
+            return {
+                ...state,
+                loopSong: action.payload
             }
            
         // case TYPES.ADD_SONG_TO_ARRAY:

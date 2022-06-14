@@ -8,14 +8,14 @@ const initState = {
 }
 
 
-export default searchReducer = (state = initState, action ) => {
-    switch(action.type) {
-            
+export default searchReducer = (state = initState, action) => {
+    switch (action.type) {
+
         case TYPES.FIND_USER:
             return {
                 ...state
             }
-        
+
         case TYPES.FIND_USER_SUCCESS:
             return {
                 ...state,
@@ -28,24 +28,20 @@ export default searchReducer = (state = initState, action ) => {
                 ...state,
                 listResult: []
             }
-        
+
         // case TYPES.GET_LIST_HISTORY_SEARCH:
 
         case TYPES.ADD_HISTORY_SEARCH:
-            const newList = state.listHistorySearch.map((item) => {
-                return item.userId === action.payload.userId
+            const newList = state.listHistorySearch.filter((item) => {
+                return item.userId !== action.payload.userId
             })
+            return {
+                ...state,
+                listHistorySearch: [...newList, action.payload]
+            }
 
-            if(newList[0]) return {
-                    ...state,
-                }
-            else return {
-                    ...state,
-                    listHistorySearch: [...state.listHistorySearch, action.payload]
-                }
-            
 
-           
+
 
         case TYPES.DELETE_HISTORY_SEARCH:
             const newListHistorySearch = [...state.listHistorySearch]
@@ -58,13 +54,13 @@ export default searchReducer = (state = initState, action ) => {
                 listHistorySearch: newListHistorySearch,
             }
 
-        case TYPES.GET_PROFILE_USER_BY_ID: 
+        case TYPES.GET_PROFILE_USER_BY_ID:
             return {
                 ...state,
             }
 
 
-        
+
         case TYPES.GET_PROFILE_USER_BY_ID_SUCCESS:
             return {
                 ...state,
@@ -75,33 +71,33 @@ export default searchReducer = (state = initState, action ) => {
                 ...state,
                 profileUser: null,
             }
-        
 
-        case TYPES.POST_REQUEST_FOLLOW: 
+
+        case TYPES.POST_REQUEST_FOLLOW:
             return {
                 ...state,
             }
-        case TYPES.POST_REQUEST_FOLLOW_SUCCESS: 
-            if(state.profileUser.follow == -1 && state.profileUser.followStatus == false){
+        case TYPES.POST_REQUEST_FOLLOW_SUCCESS:
+            if (state.profileUser.follow == -1 && state.profileUser.followStatus == false) {
                 return {
                     ...state,
-                    profileUser: {...state.profileUser, follow: 0}
+                    profileUser: { ...state.profileUser, follow: 0 }
                 }
-            } else if(state.profileUser.follow == 0 && state.profileUser.followStatus == false
-                || state.profileUser.follow == 1 && state.profileUser.followStatus == false){
+            } else if (state.profileUser.follow == 0 && state.profileUser.followStatus == false
+                || state.profileUser.follow == 1 && state.profileUser.followStatus == false) {
                 return {
                     ...state,
-                    profileUser: {...state.profileUser, follow: -1}
+                    profileUser: { ...state.profileUser, follow: -1 }
                 }
-            } else if(state.profileUser.follow == 1){
+            } else if (state.profileUser.follow == 1) {
                 return {
                     ...state,
-                    profileUser: {...state.profileUser, follow: -1}
+                    profileUser: { ...state.profileUser, follow: -1 }
                 }
-            } else if(state.profileUser.follow == -1){
+            } else if (state.profileUser.follow == -1) {
                 return {
                     ...state,
-                    profileUser: {...state.profileUser, follow: 1}
+                    profileUser: { ...state.profileUser, follow: 1 }
                 }
             }
             else console.log('else')
@@ -119,7 +115,7 @@ export default searchReducer = (state = initState, action ) => {
         case TYPES.ACCEPT_REQUEST_FOLLOW_SUCCESS:
             return {
                 ...state,
-                profileUser: {...state.profileUser, follow: 1}
+                profileUser: { ...state.profileUser, follow: 1 }
             }
         case TYPES.ACCEPT_REQUEST_FOLLOW_FAILURE:
             console.log(action.error)
@@ -141,7 +137,7 @@ export default searchReducer = (state = initState, action ) => {
             return {
                 ...state,
             }
-    
+
 
 
         default:

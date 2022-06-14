@@ -49,6 +49,13 @@ export const prevSong = () => {
     }
 }
 
+export const isLoopSong = payload => {
+    return {
+        type: TYPES.LOOP_SONG,
+        payload
+    }
+}
+
 export const setIndexSongPlaying = payload => {
     return {
         type: TYPES.SET_INDEX_SONG_PLAYING,

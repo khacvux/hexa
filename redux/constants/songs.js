@@ -7,6 +7,7 @@ export const PAUSE_SONG = 'PAUSE_SONG'
 export const RESUME_SONG = 'RESUME_SONG'
 export const NEXT_SONG = 'NEXT_SONG'
 export const PREV_SONG = 'PREV_SONG'
+export const LOOP_SONG = 'LOOP_SONG'
 
 export const ARRAY_SONGS = 'ARRAY_SONGS'
 export const CHANGE_ARRAY_SONGS = 'CHANGE_ARRAY_SONGS'
