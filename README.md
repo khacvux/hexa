@@ -18,7 +18,7 @@ https://github.com/khacvux/Source/raw/main/Hexa-simulator.tar.gz
 
 ## Screenshots
 </br>
-<div align="center">
+<!-- <div align="center">
    <table align="center" border="0" >
   <tr>
     <td>
@@ -56,7 +56,7 @@ src="https://user-images.githubusercontent.com/33343210/61611516-2d78d700-ac86-1
 src="https://user-images.githubusercontent.com/33343210/61764970-4eb40180-ae05-11e9-9903-241fa144582b.png"/></td>
   </tr>
 </table>
-  </div>
+  </div> -->
 </br>
 
 
