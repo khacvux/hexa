@@ -16,6 +16,12 @@ Download app file here [Hexa](https://github.com/khacvux/Source/raw/main/Hexa-si
 https://github.com/khacvux/Source/raw/main/Hexa-simulator.tar.gz
 ```
 
+## APK
+Download apk file here [Hexa](https://github.com/khacvux/Source/blob/main/Hexa.apk)
+```
+https://github.com/khacvux/Source/blob/main/Hexa.apk
+```
+
 ## Screenshots
 </br>
 <div align="center">
