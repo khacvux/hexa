@@ -18,29 +18,30 @@ https://github.com/khacvux/Source/raw/main/Hexa-simulator.tar.gz
 
 ## Screenshots
 </br>
-<!-- <div align="center">
+<div align="center">
    <table align="center" border="0" >
   <tr>
     <td>
 <img width="360"
-src="https://user-images.githubusercontent.com/33343210/61610738-2c46aa80-ac84-11e9-80fa-bbe8c6d4119a.png"/>
+src="https://user-images.githubusercontent.com/89198872/173567581-a908ff7c-2d52-4edc-bcbd-329b470349cd.png"/>
        <td><img width="360"
-src="https://user-images.githubusercontent.com/33343210/61610968-c3abfd80-ac84-11e9-9c8a-7ac5c9e257ff.jpg"/>
+src="https://user-images.githubusercontent.com/89198872/173567716-017ecfa1-2ad9-4d53-82b0-7e41d18b6b29.png"/>
     </td>
      <td> <img width="360"
-src="https://user-images.githubusercontent.com/33343210/61610657-edb0f000-ac83-11e9-8b89-eb205d8ac518.png"/></td>
+src="https://user-images.githubusercontent.com/89198872/173567790-1535b891-bddc-45eb-b4ef-49e879f518d8.png"/></td>
   </table>
   </div>
 </br>
+
 <div align="center">
   <table align="center" border="0" >
   <tr>
     <td> <img width="360"
-src="https://user-images.githubusercontent.com/33343210/61611561-45e8f180-ac86-11e9-932a-d0cbcd388048.png"/></td>
+src="https://user-images.githubusercontent.com/89198872/173567874-f92212f6-17eb-4662-9c25-3eacb27c7e70.png"/></td>
      <td> <img width="360"
-src="https://user-images.githubusercontent.com/33343210/61611407-e38ff100-ac85-11e9-8b70-f083436cf3d4.png"/></td>
+src="https://user-images.githubusercontent.com/89198872/173567966-f11a821b-0e12-4835-8142-3fa4f3ec90a0.png"/></td>
      <td> <img width="360"
-src="https://user-images.githubusercontent.com/33343210/61611355-c6f3b900-ac85-11e9-9b0c-c3c3a4734474.png"/></td>
+src="https://user-images.githubusercontent.com/89198872/173568057-d2a6d72a-9c4b-4d86-b1af-8a95b15ba1ad.png"/></td>
   </tr>
 </table>
   </div>
@@ -49,14 +50,14 @@ src="https://user-images.githubusercontent.com/33343210/61611355-c6f3b900-ac85-1
   <table align="center" border="0" >
   <tr>
     <td> <img width="360"
-src="https://user-images.githubusercontent.com/33343210/61610594-c3f7c900-ac83-11e9-8ccf-1a6d989631d2.png"/></td>
+src="https://user-images.githubusercontent.com/89198872/173568164-4c8d6618-2d80-49fc-85d1-d145f164ce48.png"/></td>
     <td> <img width="360"
-src="https://user-images.githubusercontent.com/33343210/61611516-2d78d700-ac86-11e9-9187-c53e91a2b891.png"/></td>
+src="https://user-images.githubusercontent.com/89198872/173568214-59bf4087-b4bc-4777-8322-9af16f0a976b.png"/></td>
      <td> <img width="360"
-src="https://user-images.githubusercontent.com/33343210/61764970-4eb40180-ae05-11e9-9903-241fa144582b.png"/></td>
+src="https://user-images.githubusercontent.com/89198872/173568590-6fa07572-c3f5-433e-8f5c-840427420028.png"/></td>
   </tr>
 </table>
-  </div> -->
+  </div>
 </br>
 
 
