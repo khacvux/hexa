@@ -30,7 +30,7 @@ const MyPostedSongItem = ({ item, arraySongs, statusPlayer }) => {
                     style={tw`w-11 h-11 rounded mr-2 overflow-hidden items-center justify-center`}
                 >
                     {
-                        (arraySongs[0].song.songId == item.item.songId && statusPlayer == 'playing') ? (
+                        ( arraySongs && arraySongs[0]?.song.songId == item.item.songId && statusPlayer == 'playing') ? (
                             <SoundWaveAnimation />
                         ) : <></>
                     }
@@ -43,7 +43,7 @@ const MyPostedSongItem = ({ item, arraySongs, statusPlayer }) => {
             </View>
             <View style={tw`flex flex-row items-center `}>
                 {
-                    (arraySongs[0].song.songId == item.item.songId && statusPlayer == 'playing') ? (
+                    (arraySongs && arraySongs[0]?.song.songId == item.item.songId && statusPlayer == 'playing') ? (
                         <TouchableOpacity>
                             <Ionicons
                                 name='pause'

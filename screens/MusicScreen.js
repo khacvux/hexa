@@ -20,12 +20,11 @@ const MusicScreen = () => {
     const dispatch = useDispatch()
     const { token, userId } = useSelector(state => state.authReducer)
     const { listLibrary } = useSelector(state => state.songReducer)
-    const bottomTabBarHeight = useBottomTabBarHeight()
 
+    
     useEffect(() => {
         dispatch(getListCategorySong({ token }))
         dispatch(getLibraryOfUserByUID({token, userId}))
-        dispatch(setTabBarHeight(bottomTabBarHeight))
     }, [])
 
 

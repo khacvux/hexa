@@ -55,7 +55,7 @@ const DetailPlayerModal = ({ showDetailPlayer, setShowDetailPlayer, songPlaying 
             // Source
             { uri: songPlaying.song.song },
             // Initial status
-            { shouldPlay: false, progressUpdateIntervalMillis: 500 },
+            { shouldPlay: true, progressUpdateIntervalMillis: 500 },
             // Download first
             true,
         );

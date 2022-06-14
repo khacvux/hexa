@@ -2,6 +2,10 @@ export const SIGN_IN = "SIGN_IN";
 export const SIGN_IN_SUCCESS = "SIGN_IN_SUCCESS";
 export const SIGN_IN_FAILURE = "SIGN_IN_FAILURE";
 
+export const POST_PLUS_1 = 'POST_PLUS_1'
+export const POST_MINUS_1 = 'POST_MINUS_1'
+export const FOLLOWING_PLUS_1 = 'FOLLOWING_PLUS_1'
+export const FOLLOWING_MINUS_1 = 'FOLLOWING_MINUS_1'
 
 export const SIGN_UP = "SIGN_UP";
 export const SIGN_UP_SUCCESS = "SIGN_UP_SUCCESS";

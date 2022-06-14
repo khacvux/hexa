@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, memo } from 'react'
 import { View, Text, TouchableOpacity, Image, FlatList, Dimensions } from 'react-native'
 import tw from 'twrnc'
 import { Ionicons, FontAwesome } from '@expo/vector-icons';
@@ -35,7 +35,6 @@ const Feeds = ({ post, token, userId, currentIndex, currentVisibleIndex }) => {
     const [isHeart, setHeart] = useState(post.feel);
     const [isTotalFeel, setTotalFeel] = useState(post.totalFeel)
     const [sound, setSound] = useState();
-
 
     // const scrollX = useRef(new Animated.Value(0)).current;
     // const [currentIndex, setCurrentIndex] = useState(0);
@@ -232,4 +231,4 @@ const Feeds = ({ post, token, userId, currentIndex, currentVisibleIndex }) => {
     )
 }
 
-export default Feeds
+export default memo(Feeds)

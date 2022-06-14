@@ -1,6 +1,7 @@
 import { View, Text, Modal, TouchableOpacity } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import tw from 'twrnc'
+import { postMinus1 } from '../../redux/actions/authAction';
 import { deletePost, getListPostUser } from '../../redux/actions/postsAction';
 
 
@@ -12,6 +13,7 @@ const OnDeletePostModal = ({handleVisibleDeleteModal, isVisibleDeleteModal, isId
 
     const handleDelete = () => {
         dispatch(deletePost({token, postsId: isIdPostSelected}))
+        dispatch(postMinus1())
         handleVisibleDeleteModal()
     }
 

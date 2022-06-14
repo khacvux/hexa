@@ -68,6 +68,8 @@ export const setFollowStatusFailure = (error) => {
 }
 
 
+
+
 export const editProfile = (data) => {
     return {
         type: TYPES.EDIT_PROFILE,
@@ -149,5 +151,29 @@ export const unauthorized = payload => {
     return {
         type: TYPES.UNAUTHORIZED,
         payload: payload
+    }
+}
+
+export const PostPlus1 = () => {
+    return {
+        type: TYPES.POST_PLUS_1
+    }
+}
+
+export const postMinus1 = () => {
+    return {
+        type: TYPES.POST_MINUS_1
+    }
+}
+
+export const followingPlus1 = () => {
+    return {
+        type: TYPES.FOLLOWING_PLUS_1
+    }
+}
+
+export const followingMinus1 = () => {
+    return {
+        type: TYPES.FOLLOWING_MINUS_1
     }
 }

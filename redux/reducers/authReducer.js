@@ -15,16 +15,16 @@ const initState = {
     userRecipient: null,
     songList: null,
     listSongInfoList: null,
-    numberOfPosts: null,
-    numberOfFollower: null,
-    numberOfFollowing: null,
+    numberOfPosts: 0,
+    numberOfFollower: 0,
+    numberOfFollowing: 0,
     message: '',
     unauth: false,
 
 }
 
-export default authReducer = ( state = initState, action ) => {
-    switch(action.type) {
+export default authReducer = (state = initState, action) => {
+    switch (action.type) {
 
         // SIGN IN ACTION
         case TYPES.SIGN_IN:
@@ -120,7 +120,7 @@ export default authReducer = ( state = initState, action ) => {
             return {
                 ...state,
             }
-        
+
 
 
         case TYPES.EDIT_PROFILE:
@@ -143,7 +143,7 @@ export default authReducer = ( state = initState, action ) => {
             return {
                 ...state
             }
-        
+
         case TYPES.UPDATE_AVATAR_SUCCESS:
             return {
                 ...state
@@ -172,12 +172,38 @@ export default authReducer = ( state = initState, action ) => {
                 ...state
             }
 
-        
+
         case TYPES.UNAUTHORIZED:
             return {
                 ...state,
                 unauth: action.payload
             }
+
+        case TYPES.POST_PLUS_1:
+            return {
+                ...state,
+                numberOfPosts: (state.numberOfPosts) + 1
+            }
+
+        case TYPES.POST_MINUS_1:
+            return {
+                ...state,
+                numberOfPosts: (state.numberOfPosts) - 1
+            }
+
+        case TYPES.FOLLOWING_PLUS_1:
+            return {
+                ...state,
+                numberOfFollowing: state.numberOfFollowing + 1
+            }
+
+        case TYPES.FOLLOWING_MINUS_1:
+            return {
+                ...state,
+                numberOfFollowing: state.numberOfFollowing - 1
+            }
+
+
 
         //DEFAULT
         default:

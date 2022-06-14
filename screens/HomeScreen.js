@@ -9,6 +9,8 @@ import HiAnimation from '../components/LottieAnimation/HiAnimation';
 import { getPost, setPaginationNumber } from '../redux/actions/postsAction';
 import SkeletonFeeds from '../components/Skeleton/FeedsSkeleton'
 import { StatusBar } from 'expo-status-bar';
+import { setTabBarHeight } from '../redux/actions/songsAction';
+import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 
 
 
@@ -20,6 +22,7 @@ const HomeScreen = () => {
     const { firstName, token, userId } = useRef(useSelector(state => state.authReducer)).current
     const { posts, paginationNumber } = useSelector(state => state.postsReducer)
     const dispatch = useDispatch()
+    const bottomTabBarHeight = useBottomTabBarHeight()
 
     const scrollY = useRef(new Animated.Value(0)).current;
     const [currentVisibleIndex, setCurrentVisibleIndex] = useState(0);
@@ -44,6 +47,7 @@ const HomeScreen = () => {
     useEffect(() => {
         dispatch(setPaginationNumber(0))
         dispatch(getPost({ token, paginationNumber: 0 }))
+        dispatch(setTabBarHeight(bottomTabBarHeight))
     }, [])
 
 

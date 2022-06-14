@@ -11,6 +11,7 @@ import OnAddingFail from '../LottieAnimation/OnAddingFail';
 import OnAddingSuccess from '../LottieAnimation/OnAddingSuccess';
 import { getListPostUser } from '../../redux/actions/postsAction';
 import { getMyListPostedSong } from '../../redux/actions/songsAction';
+import { PostPlus1 } from '../../redux/actions/authAction';
 
 
 
@@ -25,7 +26,10 @@ const Header = () => {
 
     useEffect(() => {
         if(onAddingSuccess )
-            setTimeout(() => dispatch(getListPostUser({userId, token})), 2000)
+            setTimeout(() => {
+                dispatch(getListPostUser({userId, token}))
+                dispatch(PostPlus1())
+            }, 2000)
     
         if(onAddingSongSuccess) 
             setTimeout(() => dispatch(getMyListPostedSong({userId, token})), 2000)
