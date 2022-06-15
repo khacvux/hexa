@@ -203,7 +203,7 @@ export const deletePlaylist = payload => {
         type: TYPES.DELETE_PLAYLIST,
         payload
     }
-} 
+}
 
 export const deletePlaylistSuccess = payload => {
     return {
@@ -306,6 +306,13 @@ export const actionFailure = error => {
 export const setTabBarHeight = payload => {
     return {
         type: TYPES.SET_TAB_BAR_HEIGHT,
+        payload
+    }
+}
+
+export const autoNextSong = payload => {
+    return {
+        type: TYPES.AUTO_NEXT_SONG,
         payload
     }
 }

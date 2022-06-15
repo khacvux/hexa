@@ -237,6 +237,17 @@ function* commentSong(data) {
     }
 }
 
+function* autoNext(data) {
+    try {
+        console.log('call auto next')
+        yield delay(3000)
+        yield put(ACTION.nextSong())
+        console.log('auto next success')
+
+    } catch (error) {
+        yield put(ACTION.actionFailure(error))
+    }
+}
 
 
 
@@ -254,4 +265,5 @@ export default playerSaga = [
     takeEvery(TYPES.DELETE_SONG_FROM_PLAYLIST, removeSongFromPlaylist),
     takeEvery(TYPES.LIKE_SONG, reactSong),
     takeEvery(TYPES.COMMENT_SONG, commentSong),
+    takeLatest(TYPES.AUTO_NEXT_SONG, autoNext),
 ]

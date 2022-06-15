@@ -9,9 +9,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { convertTime } from '../../misc/helper'
 import Slider from '@react-native-community/slider'
-import { nextSong, pauseSong, playSong, prevSong } from '../../redux/actions/songsAction'
+import { autoNextSong, nextSong, pauseSong, playSong, prevSong } from '../../redux/actions/songsAction'
 import ImagePlayer from '../Player/ImagePlayer'
 import ButtonPlayer from '../Player/ButtonPlayer'
+import { useDebounce } from '../../hooks/index'
 
 
 
@@ -30,21 +31,21 @@ const DetailPlayerModal = ({ showDetailPlayer, setShowDetailPlayer, songPlaying 
     const [canPrev, setCanPrev] = useState()
 
 
+    const handlePause = () => dispatch(pauseSong())
+    const handlePlay = () => dispatch(playSong())
+    const handleNextSong = () => dispatch(nextSong())
+    const handlePrevSong = () => dispatch(prevSong())
+
+
+
     const calculateSeekBar = () => {
         if (!isNaN(statusSong.positionMillis)) {
-            if ((Math.floor(statusSong.positionMillis / 100)
-                == Math.floor(statusSong.durationMillis / 100) && !loopSong)) {
-                if (canNext) setTimeout(() => dispatch(nextSong()), 3000)
-            }
             return statusSong.positionMillis / statusSong.durationMillis;
         }
         return 0;
     };
 
-    const handlePause = () => dispatch(pauseSong())
-    const handlePlay = () => dispatch(playSong())
-    const handleNextSong = () => dispatch(nextSong())
-    const handlePrevSong = () => dispatch(prevSong())
+
 
 
     //LOADING AUDIO
@@ -55,7 +56,7 @@ const DetailPlayerModal = ({ showDetailPlayer, setShowDetailPlayer, songPlaying 
             // Source
             { uri: songPlaying.song.song },
             // Initial status
-            { shouldPlay: true, progressUpdateIntervalMillis: 500 },
+            { shouldPlay: true, progressUpdateIntervalMillis: 100 },
             // Download first
             true,
         );
@@ -63,6 +64,9 @@ const DetailPlayerModal = ({ showDetailPlayer, setShowDetailPlayer, songPlaying 
         song.setOnPlaybackStatusUpdate((playbackStatus) => {
             if (playbackStatus) {
                 setStatusSong(playbackStatus)
+                if(playbackStatus.didJustFinish && canNext){
+                    dispatch(autoNextSong())
+                }
             }
         });
         setSong(song)
@@ -95,7 +99,7 @@ const DetailPlayerModal = ({ showDetailPlayer, setShowDetailPlayer, songPlaying 
 
     //LOOP SONG
     useEffect(() => {
-        if(song) song.setIsLoopingAsync(loopSong)
+        if (song) song.setIsLoopingAsync(loopSong)
         return 0;
     }, [loopSong])
 

@@ -86,7 +86,7 @@ export default songsReducer = (state = initialState, action) => {
             }
 
         case TYPES.PREV_SONG:
-            if(state.indexSongPlaying > 0) {
+            if (state.indexSongPlaying > 0) {
                 return {
                     ...state,
                     songPlaying: state.arraySongs[state.indexSongPlaying - 1],
@@ -101,7 +101,7 @@ export default songsReducer = (state = initialState, action) => {
                 ...state,
                 loopSong: action.payload
             }
-           
+
         // case TYPES.ADD_SONG_TO_ARRAY:
         //     return {
         //         ...state,
@@ -277,6 +277,9 @@ export default songsReducer = (state = initialState, action) => {
                 ...state,
                 tabBarHeight: action.payload
             }
+
+        case TYPES.AUTO_NEXT_SONG:
+            return state
 
 
         default:
