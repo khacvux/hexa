@@ -22,7 +22,6 @@ const DetailPlayerModal = ({ showDetailPlayer, setShowDetailPlayer, songPlaying 
 
     const { statusPlayer, arraySongs, indexSongPlaying, loopSong } = useSelector(state => state.songReducer)
 
-
     const [song, setSong] = useState()
     const [statusSong, setStatusSong] = useState(0)
     const [currentPosition, setCurrentPosition] = useState(0);
@@ -30,13 +29,10 @@ const DetailPlayerModal = ({ showDetailPlayer, setShowDetailPlayer, songPlaying 
     const [canNext, setCanNext] = useState()
     const [canPrev, setCanPrev] = useState()
 
-
     const handlePause = () => dispatch(pauseSong())
     const handlePlay = () => dispatch(playSong())
     const handleNextSong = () => dispatch(nextSong())
     const handlePrevSong = () => dispatch(prevSong())
-
-
 
     const calculateSeekBar = () => {
         if (!isNaN(statusSong.positionMillis)) {
@@ -44,9 +40,6 @@ const DetailPlayerModal = ({ showDetailPlayer, setShowDetailPlayer, songPlaying 
         }
         return 0;
     };
-
-
-
 
     //LOADING AUDIO
     useEffect(async () => {
@@ -77,7 +70,6 @@ const DetailPlayerModal = ({ showDetailPlayer, setShowDetailPlayer, songPlaying 
         }
     }, [indexSongPlaying, arraySongs])
 
-
     // PLAY - PAUSE
     useEffect(() => {
         if (song?._loaded) {
@@ -89,22 +81,17 @@ const DetailPlayerModal = ({ showDetailPlayer, setShowDetailPlayer, songPlaying 
         } else handlePause()
     }, [statusPlayer])
 
-
     // CLEAN UP AUDIO
     useEffect(() => {
         console.log('clean up')
         return song ? () => { song.unloadAsync() } : undefined
     }, [song, arraySongs])
 
-
     //LOOP SONG
     useEffect(() => {
         if (song) song.setIsLoopingAsync(loopSong)
         return 0;
     }, [loopSong])
-
-
-
 
     return (
         <Modal
