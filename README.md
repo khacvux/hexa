@@ -4,23 +4,12 @@
 ## Features
 * etc
 
-## Installing
-The app will be available in App Store and Google Play Store soon.
- ```
-Comming soon
- ```
-
-## IOS Simulator
+## Installing - IOS Simulator
 Download app file here [Hexa](https://github.com/khacvux/Source/raw/main/Hexa-simulator.tar.gz)
 ```
 https://github.com/khacvux/Source/raw/main/Hexa-simulator.tar.gz
 ```
 
-## APK
-Download apk file here [Hexa](https://github.com/khacvux/Source/raw/main/Hexa.apk)
-```
-https://github.com/khacvux/Source/raw/main/Hexa.apk
-```
 
 ## Screenshots
 </br>
