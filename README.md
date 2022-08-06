@@ -1,16 +1,3 @@
-# Hexa
-**A social app**
-
-## Features
-* etc
-
-## Installing - IOS Simulator
-Download app file here [Hexa](https://github.com/khacvux/Source/raw/main/Hexa-simulator.tar.gz)
-```
-https://github.com/khacvux/Source/raw/main/Hexa-simulator.tar.gz
-```
-
-
 ## Screenshots
 </br>
 <div align="center">
@@ -54,7 +41,6 @@ src="https://user-images.githubusercontent.com/89198872/173568590-6fa07572-c3f5-
 </table>
   </div>
 </br>
-
 
 
 ## Authors
